@@ -10,6 +10,7 @@
 | Creative Strategist (Idea) | **סוכן AI** | חשיבה יצירתית ושיפוט |
 | Copywriter | **סוכן AI** | שפה, טון ותובנה |
 | Producer / Director | **סוכן AI** | תרגום רעיון לתוכנית הפקה מובנית |
+| Post Designer / Art Director | **סוכן AI** (`post-designer.md`) | עיצוב פוסטים: בחירת פורמט, חיתוכים, טיפוגרפיה, פלטה מהצילום, ביקורת Anti-slop |
 | Creator | **שירותי תוכנה דטרמיניסטיים** (FFmpeg, HyperFrames, מעבד פוסטים) + ספקי AI מחליפים | ההפקה צריכה להיות מדויקת, חוזרת וזולה. ה-AI מחליט, הכלים מבצעים |
 | QA | **בדיקות אוטומטיות** + **סוכן שופט ויזואלי** | הפרדה בין מה שניתן למדידה לבין שיפוט יצירתי |
 | Learning | **סוכן AI במצב הצעות בלבד** | לא משנה כללים בלי אישור |
@@ -20,6 +21,7 @@
 - [`creative-strategist.md`](creative-strategist.md)
 - [`copywriter.md`](copywriter.md)
 - [`producer-director.md`](producer-director.md)
+- [`post-designer.md`](post-designer.md): ארט-דיירקטור לפוסטים
 - [`creator.md`](creator.md)
 - [`qa.md`](qa.md)
 - [`learning.md`](learning.md)

@@ -5,7 +5,7 @@
 ## לפני שמתחילים פרויקט, קרא (חובה)
 1. `knowledge/brand/brand-memory.md`: מי העסק, טון, נכסים, ומה אסור להמציא.
 2. `knowledge/learning/preferences.md`: **מה היא אהבה ומה לא, כולל מטא-לקחים.** אלה כללים מחייבים.
-3. `agents/` (README וכל קובץ סוכן): התפקידים ושיטות העבודה.
+3. `agents/` (README וכל קובץ סוכן): התפקידים ושיטות העבודה. **לכל פוסט: `agents/post-designer.md` מחייב.**
 4. `knowledge/inspiration/reference-videos-analysis.md`: עקרונות ולא תבניות. אסור להעתיק.
 5. `docs/decisions.md`: תוצרים, אפס עלות, תמונות AI ומנוע רינדור.
 6. פרויקט קודם לדוגמה מלאה: `projects/2026-10-kids-closet/` (`PROJECT.md`, `reel/index.html`, `carousel/slides.html`).
@@ -28,6 +28,7 @@
 ## כלים (אפס עלות)
 - **וידאו:** HyperFrames (`npx --yes hyperframes@0.8.141 render -o out.mp4` בתוך תיקיית `reel/`, עם `hyperframes.json`). נכסים משותפים ב-`studio/assets/` (GSAP, גופנים Heebo ו-Frank Ruhl Libre, לוגו): **להעתיק לתוך `reel/assets/`**, כי CDN חסום.
   - ⚠️ אסור `dir="rtl"` על `<html>` (יוצא סרטון שחור). מגדירים `direction: rtl` על אלמנטי הטקסט.
+- **פונטים:** IBM Plex Sans Hebrew (`studio/assets/plex-*.ttf`, OFL) לפוסטים. Heebo ו-Frank Ruhl זמינים, אבל Serif דרמטי לא כברירת מחדל.
 - **קרוסלה:** HTML, ואז צילום מסך עם `/opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell --no-sandbox --allow-file-access-from-files --virtual-time-budget=3000 --window-size=1080,<5×1350> --screenshot=...`, וחיתוך לשקפים.
 - **עיבוד תמונה** (`studio/tools/`, מריצים עם `python3 -I`):
   - `align.py`: יישור תמונה לתמונה (זוג סגור/פתוח, או מקור מול הרחבת AI).

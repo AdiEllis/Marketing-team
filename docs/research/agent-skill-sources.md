@@ -13,6 +13,14 @@
 | Meta research, [Decoding the Hook](https://arxiv.org/abs/2602.22299) | ניתוח 3 השניות הראשונות במודל מולטימודלי | מאמר | QA, Strategist | ה-Hook כיחידת הערכה נפרדת (ויזואל, אודיו, טקסט) |
 | G-Eval / LLM-as-Judge ([Fora Soft guide](https://www.forasoft.com/learn/ai-for-video-engineering/articles-ai/eval-rigs-llm-as-judge-for-video)) | שיטת שיפוט מבוססת רובריקה | — | QA | שלבי הערכה לפני ציון, סולם קטן, כיול מול אדם |
 
+## מקורות עיצוב (נוסף: סוכן Post Designer)
+| מקור | רישיון | מה לוקחים |
+|---|---|---|
+| [pbakaus/impeccable](https://github.com/pbakaus/impeccable) | Apache-2.0 ✅ | Craft floor, רשימת Refuse (קרם עם Serif וקווים דקים; Eyebrow; מספור), אסטרטגיות צבע, "פנים מעולם הנושא", מצב Experience, Squint test |
+| [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | MIT ✅ | אילוצים שליליים, ניגוד טיפוגרפי, טיפול בצילום |
+| anthropics/skills, `canvas-design` | Apache-2.0 ✅ | פילוסופיה ויזואלית לפני ביצוע, ‏90/10 ויזואל/טקסט, מלאכה |
+| IBM Plex Sans Hebrew (Google Fonts) | OFL ✅ | פונט הפוסטים |
+
 ## כלים: ממצאי היתכנות ורישוי
 
 | כלי | ממצא | השלכה |
