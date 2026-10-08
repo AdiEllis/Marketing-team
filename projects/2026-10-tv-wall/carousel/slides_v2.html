@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<style>
+@font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
+@font-face{font-family:"Frank Ruhl Libre";src:url(assets/frank.ttf);font-weight:300 900}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--espresso:#1f1813;--latte:#ece2d4;--gold:#b8936a;--ink:#2a2520}
+body{width:1080px;background:var(--espresso);direction:rtl}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--espresso)}
+img{display:block;image-rendering:auto}
+
+/* 1 — the whole wall, frontal; a slim espresso band carries the name */
+#s1 img{width:1080px;height:1235px;object-fit:cover}
+#s1 .band{position:absolute;left:0;right:0;bottom:0;height:115px;display:flex;align-items:center;justify-content:space-between;padding:0 64px}
+#s1 .title{font-family:"Frank Ruhl Libre";font-weight:500;font-size:46px;color:var(--latte)}
+#s1 .mat{font-family:"Heebo";font-weight:300;font-size:30px;letter-spacing:.06em;color:var(--gold)}
+
+/* 2 — everything open, full bleed; two short lines sit on the ceiling */
+#s2 img{width:1080px;height:1350px;object-fit:cover}
+#s2 .tag{position:absolute;top:40px;left:40px;width:340px;text-align:right}
+#s2 .tag div{font-family:"Frank Ruhl Libre";font-weight:600;font-size:52px;line-height:1.12;color:var(--ink)}
+
+/* 3 — detail board on espresso */
+#s3 .niche{position:absolute;top:50px;right:70px;width:270px;height:1227px;object-fit:cover;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+#s3 .col{position:absolute;top:120px;right:400px;left:70px;text-align:right}
+#s3 .s{font-family:"Heebo";font-weight:400;font-size:40px;color:var(--gold)}
+#s3 .b{font-family:"Frank Ruhl Libre";font-weight:500;font-size:104px;line-height:1.02;color:var(--latte);margin-top:6px}
+#s3 .base{width:610px;height:227px;object-fit:cover;margin-top:70px;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+#s3 .p{font-family:"Heebo";font-weight:300;font-size:32px;line-height:1.5;color:var(--latte);opacity:.85;margin-top:30px}
+#s3 .chip{position:absolute;left:70px;bottom:70px;width:200px;height:250px;background:var(--latte);display:flex;align-items:center;justify-content:center}
+#s3 .chip img{width:150px;mix-blend-mode:multiply}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <img src="assets/v2_front.png" alt="" />
+  <div class="band">
+    <div class="title">קיר טלוויזיה בהתאמה אישית</div>
+    <div class="mat">לאטה מט · אגוז מוסקט</div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <img src="assets/v2_open.png" alt="" />
+  <div class="tag"><div>הכול במקום.</div><div>שום דבר בעין.</div></div>
+</section>
+
+<section class="slide" id="s3">
+  <img class="niche" src="assets/v2_niche.png" alt="" />
+  <div class="col">
+    <div class="s">ומה שבוחרים להציג —</div>
+    <div class="b">מקבל אור.</div>
+    <img class="base" src="assets/v2_base.png" alt="" />
+    <div class="p">נישות בגב מרופף, פסי LED לאורך הקיר, ובסיס אגוז שמרחף על אור.</div>
+  </div>
+  <div class="chip"><img src="assets/logo_on_white.png" alt="אבן ועץ" /></div>
+</section>
+
+</body>
+</html>

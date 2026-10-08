@@ -35,24 +35,24 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#ece6de}
 
   <div id="win" class="clip" data-start="0" data-duration="18" data-track-index="0">
     <div id="wC" class="lay" data-layout-allow-overflow><div id="sC" class="lay"><img src="assets/closed.jpg" alt="" /></div></div>
-    <div id="wB" class="lay" data-layout-allow-overflow><div id="sB" class="lay"><img src="assets/open.jpg" alt="" /></div></div>
+    <div id="wB" class="lay" data-layout-allow-overflow><div id="sB" class="lay"><img src="assets/open.png" alt="" /></div></div>
   </div>
 
   <div id="t1" class="copy clip" data-start="0.3" data-duration="2.9" data-track-index="1">
-    <span class="s"><span class="w">שאלה</span> <span class="w">קטנה:</span></span>
-    <span class="b"><span class="w">כמה</span> <span class="w">ארונות</span> <span class="w">יש</span> <span class="w">כאן?</span></span>
+    <span class="s"><span class="w">הקיר</span> <span class="w">הזה</span></span>
+    <span class="b"><span class="w">לא</span> <span class="w">מספר</span> <span class="w">הכול.</span></span>
   </div>
   <div id="t2" class="copy clip" data-start="3.4" data-duration="2.6" data-track-index="1">
-    <span class="s"><span class="w">רמז:</span></span>
-    <span class="b"><span class="w">יותר</span> <span class="w">ממה</span> <span class="w">שנראה.</span></span>
+    <span class="s"><span class="w">חזיתות</span> <span class="w">נקיות,</span></span>
+    <span class="b"><span class="w">בלי</span> <span class="w">ידית</span> <span class="w">אחת.</span></span>
   </div>
   <div id="t3" class="copy clip" style="top:1500px;left:56px;right:auto;width:560px" data-start="6.6" data-duration="3.2" data-track-index="1">
     <span class="s" style="color:#2a2520"><span class="w">קיר</span> <span class="w">שיודע</span></span>
     <span class="b"><span class="w">לשמור</span> <span class="w">סודות.</span></span>
   </div>
   <div id="t5" class="copy clip" data-start="13.2" data-duration="1.9" data-track-index="1">
-    <span class="s"><span class="w">לאטה</span> <span class="w">מט.</span></span>
-    <span class="b"><span class="w">אגוז</span> <span class="w">מוסקט.</span></span>
+    <span class="s"><span class="w">לאטה</span> <span class="w">מט,</span></span>
+    <span class="b"><span class="w">אגוז</span> <span class="w">מוסקט</span> <span class="w">ואור.</span></span>
   </div>
 
   <div id="veilwrap" class="clip" data-start="0" data-duration="18" data-track-index="2" style="position:absolute;inset:0"><div id="veil"></div></div>
@@ -79,8 +79,8 @@ tl.fromTo("#sC", view(609, 736, 1.0), { ...view(609, 760, 1.07), duration: 3.2, 
 words("#t1 .s .w", 0.35, 0.12); words("#t1 .b .w", 0.8, 0.14); out("#t1 .w", 2.9);
 
 // B2 3.2–6.0  glide along the closed latte fronts
-tl.to("#sC", { ...view(520, 700, 1.3), duration: 0.9, ease: "power2.inOut" }, 3.2);
-tl.to("#sC", { ...view(700, 700, 1.3), duration: 1.9, ease: "sine.inOut" }, 4.1);
+tl.to("#sC", { ...view(560, 700, 1.15), duration: 0.9, ease: "power2.inOut" }, 3.2);
+tl.to("#sC", { ...view(660, 700, 1.15), duration: 1.9, ease: "sine.inOut" }, 4.1);
 words("#t2 .s .w", 3.5, 0.1); words("#t2 .b .w", 3.9, 0.14); out("#t2 .w", 5.75);
 
 // whip pan 6.0–6.5  (camera swings left: the open wall, seen from its side)
@@ -94,8 +94,8 @@ tl.fromTo("#sB", view(600, 736, 1.06), { ...view(575, 736, 1.0), duration: 3.3, 
 words("#t3 .s .w", 6.75, 0.12); words("#t3 .b .w", 7.2, 0.16); out("#t3 .w", 9.5);
 
 // B4 9.6–12.6  into the lit display niche, tilting down its shelves
-tl.to("#sB", { ...view(860, 520, 1.6), duration: 1.2, ease: "power2.inOut" }, 9.6);
-tl.to("#sB", { ...view(860, 880, 1.6), duration: 1.8, ease: "sine.inOut" }, 10.8);
+tl.to("#sB", { ...view(860, 560, 1.35), duration: 1.2, ease: "power2.inOut" }, 9.6);
+tl.to("#sB", { ...view(860, 790, 1.35), duration: 1.8, ease: "sine.inOut" }, 10.8);
 
 
 // whip back 12.6–13.1  to the closed wall
