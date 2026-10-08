@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- Art direction (agents/post-designer.md):
+     lead = the open wall; colour = restrained, sampled from the photos (latte fronts, walnut);
+     formats = full-bleed hero / photo + material board / full-bleed angle; one family, IBM Plex Sans Hebrew. -->
+<style>
+@font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
+@font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
+@font-face{font-family:"Plex";src:url(plex-Medium.ttf);font-weight:500}
+@font-face{font-family:"Plex";src:url(plex-SemiBold.ttf);font-weight:600}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--walnut:#3f332f;--latte:#c9c1b4;--latte-deep:#968c79}
+body{width:1080px;direction:rtl;font-family:"Plex";color:var(--walnut)}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden}
+.slide > img.full{position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover;display:block}
+
+/* 1 — the open wall carries the slide; a quiet name on the ceiling */
+#s1 .name{position:absolute;top:58px;left:52px;width:420px;text-align:right}
+#s1 .t{font-weight:600;font-size:50px;letter-spacing:-.01em;line-height:1.1}
+#s1 .m{font-weight:400;font-size:27px;margin-top:12px;opacity:.85}
+
+/* 2 — the closed wall above, a studio sample board below */
+#s2{background:var(--latte)}
+#s2 .photo{position:absolute;top:0;left:0;width:1080px;height:839px;object-fit:cover;display:block}
+#s2 .board{position:absolute;top:839px;left:0;right:0;bottom:0;padding:62px 64px 0}
+#s2 .t{font-weight:600;font-size:56px;letter-spacing:-.01em;line-height:1.1}
+#s2 .chips{display:flex;gap:44px;margin-top:46px}
+#s2 .chip img{width:228px;height:180px;object-fit:cover;display:block;box-shadow:0 10px 26px rgba(40,30,25,.22)}
+#s2 .chip span{display:block;font-weight:400;font-size:26px;margin-top:16px}
+
+/* 3 — the floating base, full bleed; the mark sits on the ceiling */
+#s3 .mark{position:absolute;top:70px;right:70px;width:120px;mix-blend-mode:multiply;opacity:.92}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <img class="full" src="hero_open.png" alt="" />
+  <div class="name">
+    <div class="t">קיר טלוויזיה</div>
+    <div class="m">לאטה מט · אגוז מוסקט</div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <img class="photo" src="front.png" alt="" />
+  <div class="board">
+    <div class="t">שלושה חומרים. קיר אחד.</div>
+    <div class="chips">
+      <div class="chip"><img src="sw_latte.png" alt="" /><span>לאטה מט</span></div>
+      <div class="chip"><img src="sw_walnut.png" alt="" /><span>אגוז מוסקט</span></div>
+      <div class="chip"><img src="sw_led.png" alt="" /><span>פס תאורה</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <img class="full" src="angle.png" alt="" />
+  <img class="mark" src="logo_on_white.png" alt="אבן ועץ" />
+</section>
+
+</body>
+</html>
