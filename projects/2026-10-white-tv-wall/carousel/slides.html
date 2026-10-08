@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- agents/post-designer.md v2: bold two-tone headline, graded full-bleed photo, logo + CTA on every slide.
+     White photos -> white/gold headline over a soft dark gradient at the top (ceiling), so the slide is not "all white". -->
+<style>
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#1f1a17;--bronze:#a8763e;--gold:#d8b878;--pill:#1c1816}
+body{width:1080px;direction:rtl;font-family:"Heebo"}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:#eee}
+.slide > img.photo{position:absolute;inset:0;width:1080px;height:1350px;display:block}
+.haze{position:absolute;left:0;right:0;top:0;height:640px;background:linear-gradient(180deg,rgba(18,14,12,.70) 0%,rgba(18,14,12,.45) 45%,rgba(18,14,12,0) 100%)}
+.foot{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(0deg,rgba(18,14,12,.55) 0%,rgba(18,14,12,0) 100%)}
+.head{position:absolute;top:70px;right:64px;left:64px;text-align:right}
+.h1{font-weight:850;font-size:98px;line-height:1.02;letter-spacing:-.01em;color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.h2{font-weight:850;font-size:98px;line-height:1.02;letter-spacing:-.01em;color:var(--gold);margin-top:4px;text-shadow:0 2px 18px rgba(0,0,0,.25)}
+.sub{display:flex;align-items:center;gap:22px;margin-top:26px;font-weight:500;font-size:37px;color:#f4eee6}
+.sub i{display:block;width:70px;height:3px;background:var(--gold);border-radius:2px}
+.logo{position:absolute;left:52px;bottom:44px;width:150px}
+.cta{position:absolute;right:56px;bottom:62px;height:96px;padding:0 44px;border-radius:48px;display:flex;align-items:center;font-weight:700;font-size:38px;color:#1c1714;background:linear-gradient(180deg,#d9b97c,#b98c4f);box-shadow:0 14px 34px rgba(0,0,0,.22)}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <img class="photo" src="lit.png" alt="" />
+  <div class="haze"></div><div class="foot"></div>
+  <div class="head">
+    <div class="h1">לבן מט.</div>
+    <div class="h2">אור חם בזכוכית.</div>
+    <div class="sub"><span>תאורת LED שקועה בוויטרינה ובנישת המסך</span><i></i></div>
+  </div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+  <div class="cta">דברו איתנו בוואטסאפ</div>
+</section>
+
+<section class="slide" id="s2">
+  <img class="photo" src="open.png" alt="" />
+  <div class="haze"></div><div class="foot"></div>
+  <div class="head">
+    <div class="h1">חזית חלקה.</div>
+    <div class="h2">מדפים מאחוריה.</div>
+    <div class="sub"><span>פתרונות אחסון נסתרים בתוך הקיר</span><i></i></div>
+  </div>
+  <!-- logo on the dark base (right), CTA on the left: keeps the logo off the open shelves -->
+  <img class="logo" style="left:auto;right:52px" src="logo_light.png" alt="אבן ועץ" />
+  <div class="cta" style="right:auto;left:56px">דברו איתנו בוואטסאפ</div>
+</section>
+
+<section class="slide" id="s3">
+  <img class="photo" src="front.png" alt="" />
+  <div class="haze"></div><div class="foot"></div>
+  <div class="head">
+    <div class="h1">קווים ישרים.</div>
+    <div class="h2">חיבורים נקיים.</div>
+    <div class="sub"><span>קיר טלוויזיה מעוצב, בגימור קפדני</span><i></i></div>
+  </div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+  <div class="cta">דברו איתנו בוואטסאפ</div>
+</section>
+
+</body>
+</html>
