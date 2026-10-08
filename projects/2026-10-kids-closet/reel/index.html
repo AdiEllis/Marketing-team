@@ -8,39 +8,40 @@
 @font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
 @font-face{font-family:"Frank Ruhl Libre";src:url(assets/frank.ttf);font-weight:300 900}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
-#root{width:100%;height:100%;position:relative;overflow:hidden}
-#paper{position:absolute;inset:0;background:#efe9e1}
-#dark{position:absolute;inset:0;background:#14100d}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
+#root{width:100%;height:100%;position:relative;overflow:hidden;background:#0d0a08}
 
-/* the photo sits in a clean frame — nothing is ever drawn over the closet */
-#frame{position:absolute;left:60px;top:400px;width:960px;height:1487px;overflow:hidden;background:#14100d}
-#stage{position:absolute;left:0;top:0;width:1284px;height:1587px;perspective:2600px;perspective-origin:660px 760px}
-.door{position:absolute;top:0;height:1432px;transform-style:preserve-3d}
-.door .face{position:absolute;inset:0;background-image:url(assets/closed.jpg);background-size:1284px 1587px;backface-visibility:hidden}
+/* stage = the room (AI set extension) with the real closet pixels composited in; 1357x2411 */
+#cam{position:absolute;inset:0;overflow:hidden}
+#stage{position:absolute;left:0;top:0;width:1357px;height:2411px;perspective:3000px;perspective-origin:690px 1100px}
+#stage img{position:absolute;left:0;top:0;width:1357px;height:2411px;display:block}
+
+/* real door faces (from the real closed photo), hinge sides taken from the real open photo */
+.door{position:absolute;top:282px;height:1491px;transform-style:preserve-3d}
+.door .face{position:absolute;inset:0;background-image:url(assets/room_closed.jpg);background-size:1357px 2411px;backface-visibility:hidden}
 .door .shade{position:absolute;inset:0;background:#2a2018;opacity:0}
 .door .edge{position:absolute;top:0;width:22px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#cfc5b7,#b4a998)}
-#d1{left:11px;width:265px;transform-origin:0 50%}   #d1 .face{background-position:-11px 0}  #d1 .edge{left:100%}
-#d2{left:276px;width:275px;transform-origin:100% 50%} #d2 .face{background-position:-276px 0} #d2 .edge{left:0}
-#d3{left:746px;width:266px;transform-origin:0 50%}  #d3 .face{background-position:-746px 0} #d3 .edge{left:100%}
-#d4{left:1012px;width:272px;transform-origin:100% 50%} #d4 .face{background-position:-1012px 0} #d4 .edge{left:0}
-.cast{position:absolute;top:0;height:1432px;width:220px;opacity:0}
-#sh2{left:331px;background:linear-gradient(270deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
-#sh3{left:746px;background:linear-gradient(90deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
-#floor{position:absolute;left:0;top:1424px;width:1284px;height:163px;background:url(assets/closed.jpg) 0 -1424px/1284px 1587px}
-#stage img{position:absolute;left:0;top:0;width:1284px;height:1587px;display:block}
-#night{position:absolute;left:556px;top:384px;width:190px;height:700px;box-shadow:0 0 70px 1800px rgba(12,9,7,.9);border-radius:6px}
-#spill{position:absolute;inset:0;background:radial-gradient(ellipse 260px 520px at 650px 735px,rgba(255,170,85,.2),rgba(255,170,85,0) 75%);mix-blend-mode:screen}
+#d1{left:41px;width:265px;transform-origin:0 50%}    #d1 .face{background-position:-41px -282px}   #d1 .edge{left:100%}
+#d2{left:306px;width:275px;transform-origin:100% 50%} #d2 .face{background-position:-306px -282px}  #d2 .edge{left:0}
+#d3{left:776px;width:266px;transform-origin:0 50%}   #d3 .face{background-position:-776px -282px}  #d3 .edge{left:100%}
+#d4{left:1042px;width:272px;transform-origin:100% 50%} #d4 .face{background-position:-1042px -282px} #d4 .edge{left:0}
+.cast{position:absolute;top:282px;height:1491px;width:220px;opacity:0}
+#sh2{left:361px;background:linear-gradient(270deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
+#sh3{left:776px;background:linear-gradient(90deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
 
-/* copy lives in the band above the photo */
-.copy{position:absolute;top:168px;right:60px;left:60px;height:220px;display:flex;flex-direction:column;justify-content:flex-end;text-align:right;direction:rtl}
+/* night: the room is dark, only the real LED niche glows */
+#night{position:absolute;left:586px;top:725px;width:190px;height:700px;box-shadow:0 0 80px 2600px rgba(10,8,6,.9);border-radius:6px}
+#spill{position:absolute;inset:0;background:radial-gradient(ellipse 280px 560px at 680px 1076px,rgba(255,170,85,.2),rgba(255,170,85,0) 75%);mix-blend-mode:screen}
+
+/* copy — plain type, nothing laid over the closet */
+.copy{position:absolute;top:250px;right:72px;left:72px;text-align:right;direction:rtl}
 .copy .s{display:block;font-family:"Heebo";font-weight:400;font-size:54px;line-height:1.2}
-.copy .b{display:block;font-family:"Frank Ruhl Libre";font-weight:500;font-size:108px;line-height:1.05}
+.copy .b{display:block;font-family:"Frank Ruhl Libre";font-weight:500;font-size:104px;line-height:1.05}
 .copy .w{display:inline-block}
 .night{color:#f3e7d6}
 .night .s{color:#d9b98f}
-.day{color:#2f2a25}
-.day .s{color:#7a5a36}
+.day{color:#2a2520;top:1450px}
+.day .s{color:#6e5032}
 
 #veil{position:absolute;inset:0;background:#efe9e1;opacity:0}
 #end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
@@ -53,15 +54,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
 <body>
 <div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
 
-  <div id="bg" class="clip" data-start="0" data-duration="18" data-track-index="0" style="position:absolute;inset:0">
-    <div id="paper"></div><div id="dark"></div>
-  </div>
-
-  <div id="frame" class="clip" data-start="0" data-duration="18" data-track-index="1">
+  <div id="cam" class="clip" data-start="0" data-duration="18" data-track-index="0">
     <div id="stage" data-layout-allow-overflow>
-      <img id="imgOpen" src="assets/open.jpg" alt="" />
+      <img src="assets/room_open.jpg" alt="" />
       <div class="cast" id="sh2"></div><div class="cast" id="sh3"></div>
-      <div id="floor"></div>
       <div class="door" id="d1"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
       <div class="door" id="d2"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
       <div class="door" id="d3"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
@@ -71,22 +67,22 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
     </div>
   </div>
 
-  <div id="c1" class="copy night clip" data-start="0.3" data-duration="3.0" data-track-index="2">
+  <div id="c1" class="copy night clip" data-start="0.3" data-duration="3.0" data-track-index="1">
     <span class="s"><span class="w">בחדר</span> <span class="w">הזה</span></span>
     <span class="b"><span class="w">יש</span> <span class="w">דיירים</span> <span class="w">קבועים.</span></span>
   </div>
-  <div id="c2" class="copy day clip" data-start="4.2" data-duration="2.6" data-track-index="2">
+  <div id="c2" class="copy day clip" data-start="4.6" data-duration="2.3" data-track-index="1">
     <span class="s"><span class="w">אז</span> <span class="w">נתנו</span> <span class="w">להם</span></span>
-    <span class="b" style="font-size:96px"><span class="w">פינה</span> <span class="w">מוארת</span> <span class="w">משלהם.</span></span>
+    <span class="b" style="font-size:92px"><span class="w">פינה</span> <span class="w">מוארת</span> <span class="w">משלהם.</span></span>
   </div>
-  <div id="c3" class="copy day clip" data-start="7.0" data-duration="5.3" data-track-index="2">
+  <div id="c3" class="copy day clip" data-start="7.0" data-duration="3.2" data-track-index="1">
     <span class="s"><span class="w">ולכל</span> <span class="w">השאר</span> <span class="w">—</span></span>
     <span class="b"><span class="w">מקום</span> <span class="w">לגדול.</span></span>
   </div>
 
-  <div id="veilwrap" class="clip" data-start="0" data-duration="18" data-track-index="3" style="position:absolute;inset:0"><div id="veil"></div></div>
+  <div id="veilwrap" class="clip" data-start="0" data-duration="18" data-track-index="2" style="position:absolute;inset:0"><div id="veil"></div></div>
 
-  <div id="end" class="clip" data-start="14.4" data-duration="3.6" data-track-index="4">
+  <div id="end" class="clip" data-start="14.4" data-duration="3.6" data-track-index="3">
     <img class="logo" src="assets/logo_on_white.png" alt="אבן ועץ" />
     <div class="rule"></div>
     <div class="l1">ארון ילדים בהתאמה אישית</div>
@@ -96,61 +92,60 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
 
 <script>
 const tl = gsap.timeline({ paused: true });
-// visible crop of the real photos: x 215–1125, y 60–1470 (keeps Instagram UI and the old watermark out of frame)
-const CX = 670, CY = 765, S0 = 960 / 910;
-const view = (cx, cy, z) => { const s = S0 * z; return { scale: s, x: 480 - cx * s, y: 743.5 - cy * s }; };
+const S0 = 1080 / 1357;                        // full room fits the frame at z = 1
+const view = (cx, cy, z) => { const s = S0 * z; return { scale: s, x: 540 - cx * s, y: 960 - cy * s }; };
+const ROOM = [678.5, 1205.5];
 const st = "#stage";
 gsap.set(st, { transformOrigin: "0 0" });
 const words = (sel, at, gap) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, stagger: gap, ease: "power2.out" }, at);
 
-// B1 0–3.4  night: only the real LED niche is lit
-tl.fromTo(st, view(CX, CY, 1.0), { ...view(650, 720, 1.28), duration: 3.6, ease: "sine.inOut" }, 0);
+// B1 0–3.4  night, close on the lit niche
+tl.fromTo(st, view(680, 1090, 1.7), { ...view(680, 1060, 1.85), duration: 3.6, ease: "sine.inOut" }, 0);
 words("#c1 .s .w", 0.4, 0.14);
 words("#c1 .b .w", 1.0, 0.18);
 tl.to("#c1 .w", { opacity: 0, duration: 0.35 }, 2.9);
 
-// B2 3.4–6.6  the room lights up, pull back to the whole closet
-tl.to("#night", { opacity: 0, duration: 1.3, ease: "power1.inOut" }, 3.4);
-tl.to("#spill", { opacity: 0.3, duration: 1.3 }, 3.4);
-tl.to("#dark", { opacity: 0, duration: 1.3, ease: "power1.inOut" }, 3.4);
-tl.to(st, { ...view(CX, CY, 1.0), duration: 2.4, ease: "power2.inOut" }, 3.5);
-words("#c2 .s .w", 4.3, 0.12);
-words("#c2 .b .w", 4.8, 0.16);
-tl.to("#c2 .w", { opacity: 0, duration: 0.3 }, 6.45);
+// B2 3.4–6.6  lights up and the camera pulls all the way out — the whole room
+tl.to("#night", { opacity: 0, duration: 1.4, ease: "power1.inOut" }, 3.4);
+tl.to("#spill", { opacity: 0.3, duration: 1.4 }, 3.4);
+tl.to(st, { ...view(...ROOM, 1.0), duration: 3.0, ease: "power2.inOut" }, 3.4);
+words("#c2 .s .w", 4.7, 0.12);
+words("#c2 .b .w", 5.2, 0.16);
+tl.to("#c2 .w", { opacity: 0, duration: 0.3 }, 6.55);
 
-// B3 6.8–7.7  anticipation: slow push on the closed doors
-tl.to(st, { ...view(CX, CY, 1.06), duration: 0.9, ease: "power1.in" }, 6.8);
+// B3 6.5–9.5  a slow step toward the closet
+tl.to(st, { ...view(680, 1150, 1.1), duration: 3.0, ease: "sine.inOut" }, 6.5);
 words("#c3 .s .w", 7.05, 0.12);
 
-// B4 7.6–9.6  the doors swing open: real door faces, real hinge sides, real interior behind
-const swing = (id, sign, at, dur, opening) => {
+// B4 7.5–9.7  the doors swing open
+const swing = (id, sign, at, dur, opening, fade) => {
   const from = opening ? 0 : sign * 91, to = opening ? sign * 91 : 0;
-  if (!opening) tl.set(id, { opacity: 1 }, at);
+  if (!opening && fade) tl.set(id, { opacity: 1 }, at);
   tl.fromTo(id, { rotationY: from }, { rotationY: to, duration: dur, ease: "sine.inOut", immediateRender: false }, at);
   tl.fromTo(id + " .shade", { opacity: opening ? 0 : 0.42 }, { opacity: opening ? 0.42 : 0, duration: dur, ease: "sine.inOut", immediateRender: false }, at);
-  if (opening) tl.to(id, { opacity: 0, duration: 0.15 }, at + dur - 0.15);
+  if (opening && fade) tl.to(id, { opacity: 0, duration: 0.15 }, at + dur - 0.15);   // hand over to the same door in the real open photo
 };
 const cast = (id, at, dur) => { tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dur * 0.5, ease: "sine.out", immediateRender: false }, at);
   tl.to(id, { opacity: 0, duration: dur * 0.5, ease: "sine.in" }, at + dur * 0.5); };
 tl.set(["#d1", "#d2", "#d3", "#d4"], { rotationY: 0, opacity: 1 }, 0);
-swing("#d2", 1, 7.5, 2.2, true);  swing("#d3", -1, 7.5, 2.2, true);
-swing("#d1", -1, 7.8, 2.1, true); swing("#d4", 1, 7.8, 2.1, true);
+swing("#d2", 1, 7.5, 2.2, true, true);   swing("#d3", -1, 7.5, 2.2, true, true);
+swing("#d1", -1, 7.8, 2.1, true, false); swing("#d4", 1, 7.8, 2.1, true, false);
 cast("#sh2", 7.5, 2.2); cast("#sh3", 7.5, 2.2);
-tl.to("#floor", { opacity: 0, duration: 0.5 }, 9.3);
-tl.to(st, { ...view(CX, CY, 1.03), duration: 2.0, ease: "sine.inOut" }, 7.6);
 words("#c3 .b .w", 8.6, 0.2);
-tl.to(st, { ...view(650, 560, 1.3), duration: 1.2, ease: "power2.inOut" }, 9.7);
-tl.to(st, { ...view(650, 970, 1.3), duration: 1.9, ease: "sine.inOut" }, 10.9);
-tl.to("#c3 .w", { opacity: 0, duration: 0.35 }, 11.9);
+tl.to("#c3 .w", { opacity: 0, duration: 0.35 }, 9.75);
 
-// B5 12.4–14.2  pull back and the doors close again
-tl.to(st, { ...view(CX, CY, 1.0), duration: 1.4, ease: "power2.inOut" }, 12.3);
-tl.to("#floor", { opacity: 1, duration: 0.3 }, 12.75);
-swing("#d1", -1, 12.4, 1.4, false); swing("#d4", 1, 12.4, 1.4, false);
-swing("#d2", 1, 12.7, 1.4, false);  swing("#d3", -1, 12.7, 1.4, false);
+// B5 9.8–12.2  into the shelves
+tl.to(st, { ...view(680, 950, 1.55), duration: 1.0, ease: "power2.inOut" }, 9.8);
+tl.to(st, { ...view(680, 1420, 1.55), duration: 1.5, ease: "sine.inOut" }, 10.8);
+
+
+// B6 12.3–14  pull back out to the room while the doors close
+tl.to(st, { ...view(...ROOM, 1.0), duration: 1.6, ease: "power2.inOut" }, 12.3);
+swing("#d1", -1, 12.4, 1.4, false, false); swing("#d4", 1, 12.4, 1.4, false, false);
+swing("#d2", 1, 12.7, 1.4, false, true);   swing("#d3", -1, 12.7, 1.4, false, true);
 cast("#sh2", 12.7, 1.4); cast("#sh3", 12.7, 1.4);
 
-// B6 14.2–18  end card
+// B7 14–18  end card
 tl.to("#veil", { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 14.0);
 tl.fromTo("#end .logo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 14.5);
 tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 15.0);
