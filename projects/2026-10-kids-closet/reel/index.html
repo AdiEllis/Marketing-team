@@ -8,39 +8,30 @@
 @font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
 @font-face{font-family:"Frank Ruhl Libre";src:url(assets/frank.ttf);font-weight:300 900}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:1080px;height:1920px;overflow:hidden;background:#1a1512}
-#root{width:100%;height:100%;position:relative;overflow:hidden;background:#1a1512}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
+#root{width:100%;height:100%;position:relative;overflow:hidden}
+#paper{position:absolute;inset:0;background:#efe9e1}
+#dark{position:absolute;inset:0;background:#14100d}
 
-/* ---- stage: real photos in their native pixel space (1284x1587) ---- */
-#cam{position:absolute;inset:0;overflow:hidden}
-#stage{position:absolute;left:0;top:0;width:1284px;height:1587px;perspective:2400px;perspective-origin:650px 760px}
-#stage img.base{position:absolute;left:0;top:0;width:1284px;height:1587px;display:block}
-.door{position:absolute;top:0;height:1432px;background-image:url(assets/closed.jpg);background-size:1284px 1587px;backface-visibility:hidden}
-.door .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(40,30,22,.55),rgba(40,30,22,.15));opacity:0}
-#d1{left:11px;width:265px;background-position:-11px 0;transform-origin:0 50%}
-#d2{left:276px;width:275px;background-position:-276px 0;transform-origin:100% 50%}
-#d3{left:746px;width:266px;background-position:-746px 0;transform-origin:0 50%}
-#d4{left:1012px;width:272px;background-position:-1012px 0;transform-origin:100% 50%}
-
-/* night: everything dark except the lit niche (real LED) */
+/* the photo sits in a clean frame — nothing is ever drawn over the closet */
+#frame{position:absolute;left:60px;top:400px;width:960px;height:1487px;overflow:hidden;background:#14100d}
+#stage{position:absolute;left:0;top:0;width:1284px;height:1587px}
+#stage img{position:absolute;left:0;top:0;width:1284px;height:1587px;display:block}
 #night{position:absolute;left:556px;top:384px;width:190px;height:700px;box-shadow:0 0 70px 1800px rgba(12,9,7,.9);border-radius:6px}
-#spill{position:absolute;inset:0;background:radial-gradient(ellipse 260px 520px at 650px 735px,rgba(255,170,85,.22),rgba(255,170,85,0) 75%);mix-blend-mode:screen}
-#floor{position:absolute;left:0;top:1424px;width:1284px;height:163px;background:url(assets/closed.jpg) 0 -1424px/1284px 1587px}
-#veil{position:absolute;inset:0;background:#f1ebe3;opacity:0}
+#spill{position:absolute;inset:0;background:radial-gradient(ellipse 260px 520px at 650px 735px,rgba(255,170,85,.2),rgba(255,170,85,0) 75%);mix-blend-mode:screen}
 
-/* ---- copy ---- */
-.copy{position:absolute;top:220px;right:96px;left:96px;text-align:right;direction:rtl}
-.copy .s{display:block;font-family:"Heebo";font-weight:400;font-size:60px;line-height:1.25;letter-spacing:.01em}
-.copy .b{display:block;font-family:"Frank Ruhl Libre";font-weight:500;font-size:128px;line-height:1.05;margin-top:6px}
+/* copy lives in the band above the photo */
+.copy{position:absolute;top:168px;right:60px;left:60px;height:220px;display:flex;flex-direction:column;justify-content:flex-end;text-align:right;direction:rtl}
+.copy .s{display:block;font-family:"Heebo";font-weight:400;font-size:54px;line-height:1.2}
+.copy .b{display:block;font-family:"Frank Ruhl Libre";font-weight:500;font-size:108px;line-height:1.05}
 .copy .w{display:inline-block}
 .night{color:#f3e7d6}
-#c2 .b{font-size:104px}
+.night .s{color:#d9b98f}
 .day{color:#2f2a25}
 .day .s{color:#7a5a36}
-#scrim{position:absolute;left:0;right:0;top:0;height:760px;background:linear-gradient(180deg,rgba(244,238,230,.92) 0%,rgba(244,238,230,.75) 45%,rgba(244,238,230,0) 100%);opacity:0}
 
-/* ---- end card ---- */
-#end{position:absolute;inset:0;direction:rtl;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+#veil{position:absolute;inset:0;background:#efe9e1;opacity:0}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
 #end .logo{width:300px;height:auto;display:block;mix-blend-mode:multiply}
 #end .rule{width:120px;height:2px;background:#b39572;margin:64px 0 40px}
 #end .l1{font-family:"Frank Ruhl Libre";font-weight:500;font-size:64px;color:#2f2a25;text-align:center}
@@ -48,40 +39,37 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1a1512}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
 
-  <div id="cam" class="clip" data-start="0" data-duration="20" data-track-index="0">
+  <div id="bg" class="clip" data-start="0" data-duration="18" data-track-index="0" style="position:absolute;inset:0">
+    <div id="paper"></div><div id="dark"></div>
+  </div>
+
+  <div id="frame" class="clip" data-start="0" data-duration="18" data-track-index="1">
     <div id="stage" data-layout-allow-overflow>
-      <img class="base" src="assets/open.jpg" alt="" />
-      <div id="floor"></div>
-      <div class="door" id="d1"><div class="shade"></div></div>
-      <div class="door" id="d2"><div class="shade"></div></div>
-      <div class="door" id="d3"><div class="shade"></div></div>
-      <div class="door" id="d4"><div class="shade"></div></div>
+      <img id="imgOpen" src="assets/open.jpg" alt="" />
+      <img id="imgClosed" src="assets/closed.jpg" alt="" />
       <div id="night"></div>
       <div id="spill"></div>
-      <div id="veil"></div>
     </div>
   </div>
 
-  <div id="scrimwrap" class="clip" data-start="0" data-duration="20" data-track-index="3" style="position:absolute;inset:0"><div id="scrim"></div></div>
-
-  <div id="c1" class="copy night clip" data-start="0.3" data-duration="3.0" data-track-index="1">
+  <div id="c1" class="copy night clip" data-start="0.3" data-duration="3.0" data-track-index="2">
     <span class="s"><span class="w">בחדר</span> <span class="w">הזה</span></span>
     <span class="b"><span class="w">יש</span> <span class="w">דיירים</span> <span class="w">קבועים.</span></span>
   </div>
-
-  <div id="c2" class="copy day clip" data-start="4.3" data-duration="2.3" data-track-index="1">
+  <div id="c2" class="copy day clip" data-start="4.2" data-duration="2.6" data-track-index="2">
     <span class="s"><span class="w">אז</span> <span class="w">נתנו</span> <span class="w">להם</span></span>
-    <span class="b"><span class="w">פינה</span> <span class="w">מוארת</span> <span class="w">משלהם.</span></span>
+    <span class="b" style="font-size:96px"><span class="w">פינה</span> <span class="w">מוארת</span> <span class="w">משלהם.</span></span>
   </div>
-
-  <div id="c3" class="copy day clip" data-start="8.4" data-duration="5.5" data-track-index="1">
+  <div id="c3" class="copy day clip" data-start="7.0" data-duration="5.2" data-track-index="2">
     <span class="s"><span class="w">ולכל</span> <span class="w">השאר</span> <span class="w">—</span></span>
-    <span class="b" id="c3b"><span class="w">מקום</span> <span class="w">לגדול.</span></span>
+    <span class="b"><span class="w">מקום</span> <span class="w">לגדול.</span></span>
   </div>
 
-  <div id="end" class="clip" data-start="16.4" data-duration="3.6" data-track-index="2">
+  <div id="veilwrap" class="clip" data-start="0" data-duration="18" data-track-index="3" style="position:absolute;inset:0"><div id="veil"></div></div>
+
+  <div id="end" class="clip" data-start="14.4" data-duration="3.6" data-track-index="4">
     <img class="logo" src="assets/logo_on_white.png" alt="אבן ועץ" />
     <div class="rule"></div>
     <div class="l1">ארון ילדים בהתאמה אישית</div>
@@ -91,68 +79,50 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1a1512}
 
 <script>
 const tl = gsap.timeline({ paused: true });
-const BASE = 1920 / 1587;
-// camera: centre a stage point (cx,cy) in the frame at a zoom relative to "fit height"
-const view = (cx, cy, z) => { const s = BASE * z; return { scale: s, x: 540 - cx * s, y: 960 - cy * s }; };
-const stage = "#stage";
-gsap.set(stage, { transformOrigin: "0 0" });
+// visible crop of the real photos: x 215–1125, y 60–1470 (keeps Instagram UI and the old watermark out of frame)
+const CX = 670, CY = 765, S0 = 960 / 910;
+const view = (cx, cy, z) => { const s = S0 * z; return { scale: s, x: 480 - cx * s, y: 743.5 - cy * s }; };
+const st = "#stage";
+gsap.set(st, { transformOrigin: "0 0" });
+const words = (sel, at, gap) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.55, stagger: gap, ease: "power2.out" }, at);
 
-// B1 0–3.4  night: only the real LED niche glows, slow push toward it
-tl.fromTo(stage, view(650, 770, 1.0), { ...view(650, 700, 1.32), duration: 3.6, ease: "sine.inOut" }, 0);
-tl.fromTo("#c1 .s .w", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.14, ease: "power2.out" }, 0.4);
-tl.fromTo("#c1 .b .w", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.18, ease: "power2.out" }, 1.0);
+// B1 0–3.4  night: only the real LED niche is lit
+tl.fromTo(st, view(CX, CY, 1.0), { ...view(650, 720, 1.28), duration: 3.6, ease: "sine.inOut" }, 0);
+words("#c1 .s .w", 0.4, 0.14);
+words("#c1 .b .w", 1.0, 0.18);
 tl.to("#c1 .w", { opacity: 0, duration: 0.35 }, 2.9);
 
-// B2 3.4–6.6  lights come up, pull back to the quiet wall
+// B2 3.4–6.6  the room lights up, pull back to the whole closet
 tl.to("#night", { opacity: 0, duration: 1.3, ease: "power1.inOut" }, 3.4);
-tl.to("#spill", { opacity: 0.35, duration: 1.3 }, 3.4);
-tl.to(stage, { ...view(650, 790, 1.0), duration: 2.4, ease: "power2.inOut" }, 3.5);
-tl.fromTo("#c2 .s .w", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, ease: "power2.out" }, 4.4);
-tl.fromTo("#c2 .b .w", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.6, stagger: 0.16, ease: "power2.out" }, 4.9);
-tl.to("#c2 .w", { opacity: 0, duration: 0.3 }, 6.25);
+tl.to("#spill", { opacity: 0.3, duration: 1.3 }, 3.4);
+tl.to("#dark", { opacity: 0, duration: 1.3, ease: "power1.inOut" }, 3.4);
+tl.to(st, { ...view(CX, CY, 1.0), duration: 2.4, ease: "power2.inOut" }, 3.5);
+words("#c2 .s .w", 4.3, 0.12);
+words("#c2 .b .w", 4.8, 0.16);
+tl.to("#c2 .w", { opacity: 0, duration: 0.3 }, 6.45);
 
-tl.to("#scrim", { opacity: 1, duration: 0.8 }, 3.9);
+// B3 6.8–7.7  anticipation: slow push on the closed doors
+tl.to(st, { ...view(CX, CY, 1.06), duration: 0.9, ease: "power1.in" }, 6.8);
+words("#c3 .s .w", 7.05, 0.12);
 
-// B3 6.6–10  the doors open — real door faces swinging over the real "open" photo
-const open = (id, sign, at, dur) => {
-  tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * 92, duration: dur, ease: "power2.inOut" }, at);
-  tl.fromTo(id + " .shade", { opacity: 0 }, { opacity: 1, duration: dur, ease: "power1.in" }, at);
-  tl.to(id, { opacity: 0, duration: 0.18 }, at + dur - 0.18);
-};
-open("#d2", 1, 6.8, 1.7);
-open("#d3", -1, 6.8, 1.7);
-open("#d1", -1, 7.15, 1.6);
-open("#d4", 1, 7.15, 1.6);
-tl.to("#floor", { opacity: 0, duration: 0.6 }, 7.95);
-tl.to(stage, { ...view(650, 780, 1.06), duration: 3.2, ease: "sine.inOut" }, 6.8);
-tl.fromTo("#c3 .s .w", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.14, ease: "power2.out" }, 8.6);
+// B4 7.7  HARD CUT to the real open photo (same frame) — no simulated door motion
+tl.set("#imgClosed", { opacity: 0 }, 7.7);
+tl.fromTo(st, view(CX, CY, 1.1), { ...view(CX, CY, 1.04), duration: 0.6, ease: "power3.out", immediateRender: false }, 7.7);
+words("#c3 .b .w", 7.9, 0.2);
+tl.to(st, { ...view(650, 560, 1.3), duration: 1.4, ease: "power2.inOut" }, 8.4);
+tl.to(st, { ...view(650, 970, 1.3), duration: 2.6, ease: "sine.inOut" }, 9.8);
+tl.to("#c3 .w", { opacity: 0, duration: 0.35 }, 11.8);
 
-// B4 10–14  slow tilt down the shelves (room to grow)
-tl.to(stage, { ...view(650, 640, 1.3), duration: 1.0, ease: "power2.inOut" }, 10.0);
-tl.to(stage, { ...view(650, 960, 1.3), duration: 3.0, ease: "sine.inOut" }, 11.0);
-tl.fromTo("#c3 .b .w", { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.2, ease: "power2.out" }, 10.4);
-tl.to("#c3 .w", { opacity: 0, duration: 0.35 }, 13.5);
+// B5 12.4  cut back to the quiet closed wall, slow pull out
+tl.set("#imgClosed", { opacity: 1 }, 12.4);
+tl.fromTo(st, view(CX, CY, 1.12), { ...view(CX, CY, 1.0), duration: 2.2, ease: "power2.out", immediateRender: false }, 12.4);
 
-// B5 14–16.4  doors close again, back to the quiet wall
-const close = (id, sign, at, dur) => {
-  tl.set(id, { opacity: 1 }, at);
-  tl.fromTo(id, { rotationY: sign * 92 }, { rotationY: 0, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
-  tl.fromTo(id + " .shade", { opacity: 1 }, { opacity: 0, duration: dur, ease: "power1.out", immediateRender: false }, at);
-};
-tl.to(stage, { ...view(650, 790, 1.0), duration: 1.6, ease: "power2.inOut" }, 14.0);
-tl.to("#floor", { opacity: 1, duration: 0.35 }, 14.62);
-tl.to("#scrim", { opacity: 0, duration: 0.5 }, 13.8);
-close("#d1", -1, 14.3, 1.3);
-close("#d4", 1, 14.3, 1.3);
-close("#d2", 1, 14.6, 1.3);
-close("#d3", -1, 14.6, 1.3);
-
-// B6 16.4–20  end card
-tl.to("#veil", { opacity: 0.93, duration: 0.8, ease: "power1.inOut" }, 16.2);
-tl.fromTo("#end .logo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 16.6);
-tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 17.1);
-tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 17.3);
-tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 17.6);
+// B6 14.2–18  end card
+tl.to("#veil", { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 14.0);
+tl.fromTo("#end .logo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 14.5);
+tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 15.0);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 15.2);
+tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 15.5);
 
 window.__timelines["main"] = tl;
 </script>
