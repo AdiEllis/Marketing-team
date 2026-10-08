@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<style>
+@font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
+@font-face{font-family:"Frank Ruhl Libre";src:url(assets/frank.ttf);font-weight:300 900}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--paper:#efe9e1;--ink:#2f2a25;--tan:#a8875f;--muted:#6f5a42}
+body{width:1080px;background:var(--paper);direction:rtl}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--paper)}
+.bleed{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.idx{position:absolute;top:56px;left:64px;font-family:"Heebo";font-weight:300;font-size:30px;letter-spacing:.12em;color:var(--muted);direction:ltr}
+.s{font-family:"Heebo";font-weight:400;font-size:40px;color:var(--muted);line-height:1.3}
+.b{font-family:"Frank Ruhl Libre";font-weight:500;font-size:96px;color:var(--ink);line-height:1.05}
+.p{font-family:"Heebo";font-weight:300;font-size:36px;color:var(--ink);line-height:1.45;margin-top:28px;max-width:420px}
+.rule{width:90px;height:2px;background:var(--tan);margin:34px 0}
+
+/* 1 — closed wall */
+#s1 .txt{position:absolute;right:80px;bottom:120px;text-align:right}
+#s1 .scrim{position:absolute;left:0;right:0;bottom:0;height:520px;background:linear-gradient(0deg,rgba(239,233,225,.85),rgba(239,233,225,0))}
+#s1 .hint{font-family:"Heebo";font-weight:400;font-size:34px;color:var(--muted);margin-top:22px;letter-spacing:.02em}
+
+/* 2 — the same frame, open */
+#s2 .scrim{position:absolute;left:0;right:0;bottom:0;height:380px;background:linear-gradient(0deg,rgba(239,233,225,.9),rgba(239,233,225,0))}
+#s2 .txt{position:absolute;right:80px;bottom:110px;text-align:right}
+
+/* 3, 4 — editorial insets */
+.ed{display:flex;align-items:center;gap:64px;padding:0 80px;height:100%}
+.ed img{width:470px;height:812px;object-fit:cover;display:block;box-shadow:0 30px 60px rgba(60,45,30,.18)}
+.ed .col{flex:1}
+.ed .b{font-size:84px}
+
+/* 5 — close */
+#s5{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+#s5 .logo{width:330px;mix-blend-mode:multiply;display:block}
+#s5 .rule{margin:64px auto 44px}
+#s5 .b{font-size:72px}
+#s5 .p{max-width:900px;margin:30px auto 0;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <img class="bleed" src="assets/closed_45.jpg" alt="" />
+  <div class="scrim"></div>
+  <div class="txt">
+    <div class="b">נראה כמו קיר.</div>
+    <div class="hint">החליקו כדי לפתוח</div>
+  </div>
+</section>
+
+<section class="slide" id="s2">
+  <img class="bleed" src="assets/open_45.jpg" alt="" />
+  <div class="scrim"></div>
+  <div class="txt">
+    <div class="b" style="font-size:84px">ומאחוריו — ארון שלם.</div>
+  </div>
+</section>
+
+<section class="slide" id="s3">
+  <div class="ed">
+    <img src="assets/niche.jpg" alt="" />
+    <div class="col">
+      <div class="s">לדיירים הקבועים</div>
+      <div class="b">פינה מוארת משלהם.</div>
+      <div class="rule"></div>
+      <div class="p">נישה פתוחה עם תאורה חמה, בדיוק באמצע הקיר — במקום שבו רואים אותה מכל החדר.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s4">
+  <div class="ed">
+    <img src="assets/shelves.jpg" alt="" />
+    <div class="col">
+      <div class="s">ולכל השאר —</div>
+      <div class="b">מקום לגדול.</div>
+      <div class="rule"></div>
+      <div class="p">מדפים לכל הגובה, משני צידי הנישה. מאחורי דלתות נקיות, בלי ידיות.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="s5">
+  <img class="logo" src="assets/logo_on_white.png" alt="אבן ועץ" />
+  <div class="rule"></div>
+  <div class="b">ארון ילדים בהתאמה אישית</div>
+  <div class="p">שלחו לנו תמונה של החדר בוואטסאפ, ונתכנן אותו יחד.</div>
+</section>
+
+</body>
+</html>
