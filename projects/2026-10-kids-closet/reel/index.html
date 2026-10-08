@@ -15,7 +15,19 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
 
 /* the photo sits in a clean frame — nothing is ever drawn over the closet */
 #frame{position:absolute;left:60px;top:400px;width:960px;height:1487px;overflow:hidden;background:#14100d}
-#stage{position:absolute;left:0;top:0;width:1284px;height:1587px}
+#stage{position:absolute;left:0;top:0;width:1284px;height:1587px;perspective:2600px;perspective-origin:660px 760px}
+.door{position:absolute;top:0;height:1432px;transform-style:preserve-3d}
+.door .face{position:absolute;inset:0;background-image:url(assets/closed.jpg);background-size:1284px 1587px;backface-visibility:hidden}
+.door .shade{position:absolute;inset:0;background:#2a2018;opacity:0}
+.door .edge{position:absolute;top:0;width:22px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#cfc5b7,#b4a998)}
+#d1{left:11px;width:265px;transform-origin:0 50%}   #d1 .face{background-position:-11px 0}  #d1 .edge{left:100%}
+#d2{left:276px;width:275px;transform-origin:100% 50%} #d2 .face{background-position:-276px 0} #d2 .edge{left:0}
+#d3{left:746px;width:266px;transform-origin:0 50%}  #d3 .face{background-position:-746px 0} #d3 .edge{left:100%}
+#d4{left:1012px;width:272px;transform-origin:100% 50%} #d4 .face{background-position:-1012px 0} #d4 .edge{left:0}
+.cast{position:absolute;top:0;height:1432px;width:220px;opacity:0}
+#sh2{left:331px;background:linear-gradient(270deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
+#sh3{left:746px;background:linear-gradient(90deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
+#floor{position:absolute;left:0;top:1424px;width:1284px;height:163px;background:url(assets/closed.jpg) 0 -1424px/1284px 1587px}
 #stage img{position:absolute;left:0;top:0;width:1284px;height:1587px;display:block}
 #night{position:absolute;left:556px;top:384px;width:190px;height:700px;box-shadow:0 0 70px 1800px rgba(12,9,7,.9);border-radius:6px}
 #spill{position:absolute;inset:0;background:radial-gradient(ellipse 260px 520px at 650px 735px,rgba(255,170,85,.2),rgba(255,170,85,0) 75%);mix-blend-mode:screen}
@@ -48,7 +60,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
   <div id="frame" class="clip" data-start="0" data-duration="18" data-track-index="1">
     <div id="stage" data-layout-allow-overflow>
       <img id="imgOpen" src="assets/open.jpg" alt="" />
-      <img id="imgClosed" src="assets/closed.jpg" alt="" />
+      <div class="cast" id="sh2"></div><div class="cast" id="sh3"></div>
+      <div id="floor"></div>
+      <div class="door" id="d1"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
+      <div class="door" id="d2"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
+      <div class="door" id="d3"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
+      <div class="door" id="d4"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
       <div id="night"></div>
       <div id="spill"></div>
     </div>
@@ -62,7 +79,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#14100d}
     <span class="s"><span class="w">אז</span> <span class="w">נתנו</span> <span class="w">להם</span></span>
     <span class="b" style="font-size:96px"><span class="w">פינה</span> <span class="w">מוארת</span> <span class="w">משלהם.</span></span>
   </div>
-  <div id="c3" class="copy day clip" data-start="7.0" data-duration="5.2" data-track-index="2">
+  <div id="c3" class="copy day clip" data-start="7.0" data-duration="5.3" data-track-index="2">
     <span class="s"><span class="w">ולכל</span> <span class="w">השאר</span> <span class="w">—</span></span>
     <span class="b"><span class="w">מקום</span> <span class="w">לגדול.</span></span>
   </div>
@@ -105,17 +122,33 @@ tl.to("#c2 .w", { opacity: 0, duration: 0.3 }, 6.45);
 tl.to(st, { ...view(CX, CY, 1.06), duration: 0.9, ease: "power1.in" }, 6.8);
 words("#c3 .s .w", 7.05, 0.12);
 
-// B4 7.7  HARD CUT to the real open photo (same frame) — no simulated door motion
-tl.set("#imgClosed", { opacity: 0 }, 7.7);
-tl.fromTo(st, view(CX, CY, 1.1), { ...view(CX, CY, 1.04), duration: 0.6, ease: "power3.out", immediateRender: false }, 7.7);
-words("#c3 .b .w", 7.9, 0.2);
-tl.to(st, { ...view(650, 560, 1.3), duration: 1.4, ease: "power2.inOut" }, 8.4);
-tl.to(st, { ...view(650, 970, 1.3), duration: 2.6, ease: "sine.inOut" }, 9.8);
-tl.to("#c3 .w", { opacity: 0, duration: 0.35 }, 11.8);
+// B4 7.6–9.6  the doors swing open: real door faces, real hinge sides, real interior behind
+const swing = (id, sign, at, dur, opening) => {
+  const from = opening ? 0 : sign * 91, to = opening ? sign * 91 : 0;
+  if (!opening) tl.set(id, { opacity: 1 }, at);
+  tl.fromTo(id, { rotationY: from }, { rotationY: to, duration: dur, ease: "sine.inOut", immediateRender: false }, at);
+  tl.fromTo(id + " .shade", { opacity: opening ? 0 : 0.42 }, { opacity: opening ? 0.42 : 0, duration: dur, ease: "sine.inOut", immediateRender: false }, at);
+  if (opening) tl.to(id, { opacity: 0, duration: 0.15 }, at + dur - 0.15);
+};
+const cast = (id, at, dur) => { tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dur * 0.5, ease: "sine.out", immediateRender: false }, at);
+  tl.to(id, { opacity: 0, duration: dur * 0.5, ease: "sine.in" }, at + dur * 0.5); };
+tl.set(["#d1", "#d2", "#d3", "#d4"], { rotationY: 0, opacity: 1 }, 0);
+swing("#d2", 1, 7.5, 2.2, true);  swing("#d3", -1, 7.5, 2.2, true);
+swing("#d1", -1, 7.8, 2.1, true); swing("#d4", 1, 7.8, 2.1, true);
+cast("#sh2", 7.5, 2.2); cast("#sh3", 7.5, 2.2);
+tl.to("#floor", { opacity: 0, duration: 0.5 }, 9.3);
+tl.to(st, { ...view(CX, CY, 1.03), duration: 2.0, ease: "sine.inOut" }, 7.6);
+words("#c3 .b .w", 8.6, 0.2);
+tl.to(st, { ...view(650, 560, 1.3), duration: 1.2, ease: "power2.inOut" }, 9.7);
+tl.to(st, { ...view(650, 970, 1.3), duration: 1.9, ease: "sine.inOut" }, 10.9);
+tl.to("#c3 .w", { opacity: 0, duration: 0.35 }, 11.9);
 
-// B5 12.4  cut back to the quiet closed wall, slow pull out
-tl.set("#imgClosed", { opacity: 1 }, 12.4);
-tl.fromTo(st, view(CX, CY, 1.12), { ...view(CX, CY, 1.0), duration: 2.2, ease: "power2.out", immediateRender: false }, 12.4);
+// B5 12.4–14.2  pull back and the doors close again
+tl.to(st, { ...view(CX, CY, 1.0), duration: 1.4, ease: "power2.inOut" }, 12.3);
+tl.to("#floor", { opacity: 1, duration: 0.3 }, 12.75);
+swing("#d1", -1, 12.4, 1.4, false); swing("#d4", 1, 12.4, 1.4, false);
+swing("#d2", 1, 12.7, 1.4, false);  swing("#d3", -1, 12.7, 1.4, false);
+cast("#sh2", 12.7, 1.4); cast("#sh3", 12.7, 1.4);
 
 // B6 14.2–18  end card
 tl.to("#veil", { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 14.0);
