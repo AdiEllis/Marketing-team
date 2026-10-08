@@ -4,130 +4,174 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" />
 <script src="assets/gsap.min.js"></script>
+<!-- Reel v2 "לבן. שחור. ואור." — signature: the wall assembles from its real front panels (slices on the real joints),
+     portal through the black screen, the vitrine fills with light (real unlit/lit pair, rising mask),
+     door-fold to the hidden shelves, detail burst, hard stop on the hero. ~13 words on screen. -->
 <style>
 @font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{width:1080px;height:1920px;overflow:hidden;background:#ece6de}
-#root{width:100%;height:100%;position:relative;overflow:hidden;background:#ece6de}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
+#root{width:100%;height:100%;position:relative;overflow:hidden;background:#1c1816}
+.lay{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:hidden}
+.st{position:absolute;left:0;top:0;width:1178px}
+.st img{display:block;width:1178px}
+#wO,#wU,#wL,#wF,.dump{opacity:0}
+#wL{-webkit-mask-image:linear-gradient(to top,#000 -20%,transparent -5%);mask-image:linear-gradient(to top,#000 -20%,transparent -5%)}
 
-#win{position:absolute;left:0;top:400px;width:1080px;height:1520px;overflow:hidden;background:#ece6de}
-.lay{position:absolute;left:0;top:0;width:1178px}
-.lay img{position:absolute;left:0;top:0;width:1178px;display:block}
-#wL,#wF,#wO{opacity:0}
-
-.copy{position:absolute;top:0;height:400px;padding-bottom:44px;display:flex;flex-direction:column;justify-content:flex-end;right:64px;left:64px;text-align:right;direction:rtl;color:#1f1a17}
-.copy .s{display:block;font-family:"Heebo";font-weight:500;font-size:50px;line-height:1.2;color:#7a5530}
-.copy .b{display:block;font-family:"Heebo";font-weight:800;font-size:88px;line-height:1.06;letter-spacing:-.01em}
-.copy .w{display:inline-block}
-
-#veil{position:absolute;inset:0;background:#ece6de;opacity:0}
-#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
-#end .logo{width:320px;height:auto;display:block;mix-blend-mode:multiply}
-#end .rule{width:120px;height:3px;background:#a8763e;margin:64px 0 44px}
-#end .l1{font-family:"Heebo";font-weight:800;font-size:60px;color:#1f1a17;text-align:center;line-height:1.15}
-#end .l2{font-family:"Heebo";font-weight:400;font-size:42px;color:#5a3e2a;margin-top:26px;text-align:center}
-#end .pill{margin-top:56px;height:96px;padding:0 48px;border-radius:48px;display:flex;align-items:center;font-family:"Heebo";font-weight:700;font-size:40px;color:#fff;background:#1c1816}
+.t{position:absolute;direction:rtl;text-align:right;font-family:"Heebo";font-weight:900;letter-spacing:-.02em;line-height:1}
+.t .ln{display:block;overflow:hidden;padding:0 6px 14px}
+.t span{display:inline-block}
+.ink{color:#1f1a17}
+.gold{color:#a8763e}
+.wht{color:#fff}
+#sweep{position:absolute;top:-400px;left:0;width:520px;height:2800px;background:linear-gradient(90deg,rgba(255,250,240,0) 0%,rgba(255,250,240,.55) 50%,rgba(255,250,240,0) 100%);mix-blend-mode:screen;opacity:0;transform:rotate(18deg)}
+#flash{position:absolute;inset:0;background:#fff;opacity:0}
+#blk{position:absolute;inset:0;background:#000;opacity:0}
+#mark{position:absolute;left:64px;top:1410px;width:140px;opacity:0}
+#curtain{position:absolute;inset:0;background:#1c1816}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl;opacity:0}
+#end .logo{width:300px}
+#end .rule{width:110px;height:3px;background:#d8b878;margin:58px 0 40px}
+#end .l1{font-family:"Heebo";font-weight:800;font-size:62px;line-height:1.15;color:#f4eee6;text-align:center}
+#end .pill{margin-top:60px;height:96px;padding:0 50px;border-radius:48px;display:flex;align-items:center;font-family:"Heebo";font-weight:700;font-size:40px;color:#1c1714;background:linear-gradient(180deg,#d9b97c,#b98c4f)}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="18.5" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1080" data-height="1920">
 
-  <div id="win" class="clip" data-start="0" data-duration="18.5" data-track-index="0">
-    <div id="wU" class="lay" data-layout-allow-overflow><div id="sU" class="lay"><img src="assets/unlit.png" alt="" /></div></div>
-    <div id="wL" class="lay" data-layout-allow-overflow><div id="sL" class="lay"><img src="assets/lit.jpg" alt="" /></div></div>
-    <div id="wF" class="lay" data-layout-allow-overflow><div id="sF" class="lay"><img src="assets/front.jpg" alt="" /></div></div>
-    <div id="wO" class="lay" data-layout-allow-overflow><div id="sO" class="lay"><img src="assets/open.jpg" alt="" /></div></div>
-  </div>
-
-  <div id="t1" class="copy clip" data-start="0.3" data-duration="3.0" data-track-index="1">
-    <span class="s"><span class="w">קיר</span> <span class="w">טלוויזיה</span></span>
-    <span class="b"><span class="w">בלבן</span> <span class="w">מט</span> <span class="w">ושחור.</span></span>
-  </div>
-  <div id="t2" class="copy clip" data-start="3.6" data-duration="2.7" data-track-index="1">
-    <span class="s"><span class="w">תאורת</span> <span class="w">LED</span></span>
-    <span class="b"><span class="w">בתוך</span> <span class="w">הוויטרינה</span></span>
-    <span class="b"><span class="w">ומעל</span> <span class="w">המסך.</span></span>
-  </div>
-  <div id="t3" class="copy clip" data-start="7.0" data-duration="2.8" data-track-index="1">
-    <span class="s"><span class="w">נישה</span> <span class="w">למסך,</span></span>
-    <span class="b"><span class="w">במידה</span> <span class="w">מדויקת.</span></span>
-  </div>
-  <div id="t4" class="copy clip" data-start="10.6" data-duration="2.8" data-track-index="1">
-    <span class="s"><span class="w">בלי</span> <span class="w">ידיות,</span> <span class="w">בלי</span> <span class="w">רמזים.</span></span>
-    <span class="b"><span class="w">אחסון</span> <span class="w">נסתר</span></span>
-    <span class="b"><span class="w">מאחורי</span> <span class="w">החזיתות.</span></span>
-  </div>
-  <div id="t5" class="copy clip" data-start="14.0" data-duration="1.9" data-track-index="1">
-    <span class="s"><span class="w">מרווחים</span> <span class="w">שווים</span> <span class="w">בין</span> <span class="w">החזיתות.</span></span>
-    <span class="b"><span class="w">גימור</span> <span class="w">מוקפד.</span></span>
+  <div id="scene" class="clip" data-start="0" data-duration="16" data-track-index="0" style="position:absolute;inset:0;perspective:1600px">
+    <div id="wO" class="lay"><div id="sO" class="st"><img src="assets/open.jpg" alt="" /></div></div>
+    <div id="wU" class="lay"><div id="sU" class="st"><img src="assets/unlit.png" alt="" /></div></div>
+    <div id="wL" class="lay"><div id="sL" class="st"><img src="assets/lit.jpg" alt="" /></div></div>
+    <div id="wF" class="lay"><div id="sF" class="st"><img src="assets/front.jpg" alt="" /></div></div>
+    <!-- the wall assembling from its four real front panels (clip edges = real joints) -->
+    <div id="k0" class="lay" style="clip-path:inset(0 754px 0 0)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="k1" class="lay" style="clip-path:inset(0 455px 0 325px)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="k2" class="lay" style="clip-path:inset(0 179px 0 624px)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="k3" class="lay" style="clip-path:inset(0 0 0 900px)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <!-- detail burst -->
+    <div id="d1" class="lay dump"><div class="st"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="d2" class="lay dump"><div class="st"><img src="assets/lit.jpg" alt="" /></div></div>
+    <div id="d3" class="lay dump"><div class="st"><img src="assets/lit.jpg" alt="" /></div></div>
+    <div id="d4" class="lay dump"><div class="st"><img src="assets/open.jpg" alt="" /></div></div>
+    <div id="d5" class="lay dump"><div class="st"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="sweep"></div>
+    <div id="blk"></div>
+    <div id="flash"></div>
   </div>
 
-  <div id="veilwrap" class="clip" data-start="0" data-duration="18.5" data-track-index="2" style="position:absolute;inset:0"><div id="veil"></div></div>
+  <div id="txt" class="clip" data-start="0" data-duration="16" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t ink" style="right:72px;top:330px;font-size:250px"><div class="ln"><span>לבן.</span></div></div>
+    <div id="t2" class="t wht" style="right:150px;top:880px;font-size:230px"><div class="ln"><span>שחור.</span></div></div>
+    <div id="t3" class="t gold" style="right:560px;top:470px;font-size:250px"><div class="ln"><span>ואור.</span></div></div>
+    <div id="t4" class="t wht" style="right:60px;top:1060px;font-size:130px;line-height:1.02"><div class="ln"><span>אחסון</span></div><div class="ln"><span>נסתר.</span></div></div>
+    <div id="t5" class="t ink" style="right:330px;top:330px;font-size:120px;line-height:1.02"><div class="ln"><span>גימור</span></div><div class="ln"><span>מוקפד.</span></div></div>
+    <img id="mark" src="assets/logo_light.png" alt="אבן ועץ" />
+  </div>
 
-  <div id="end" class="clip" data-start="15.8" data-duration="2.7" data-track-index="3">
-    <img class="logo" src="assets/logo_on_white.png" alt="אבן ועץ" />
-    <div class="rule"></div>
-    <div class="l1">קיר טלוויזיה מעוצב<br />בהתאמה אישית</div>
-    <div class="l2">פגישת ייעוץ והדמיה ללא עלות</div>
-    <div class="pill">דברו איתנו בוואטסאפ</div>
+  <div id="endwrap" class="clip" data-start="0" data-duration="16" data-track-index="2" style="position:absolute;inset:0">
+    <div id="curtain"></div>
+    <div id="end">
+      <img class="logo" src="assets/logo_light.png" alt="אבן ועץ" />
+      <div class="rule"></div>
+      <div class="l1">קיר טלוויזיה מעוצב,<br />בהתאמה אישית.</div>
+      <div class="pill">דברו איתנו בוואטסאפ</div>
+    </div>
   </div>
 </div>
 
 <script>
 const tl = gsap.timeline({ paused: true });
-// each photo is 1178px wide; S0 fits its height to 1920. Views stay inside the area free of Instagram marks
-// (old logo x<240 bottom-left, mute icon bottom-right, page badge top-right).
-// photo window is 1080x1520 under a 400px text band; s = absolute scale (kept <= 1.75)
-const view = (k, cx, cy, s) => ({ scale: s, x: 540 - cx * s, y: 760 - cy * s });
-gsap.set(["#sU", "#sL", "#sF", "#sO"], { transformOrigin: "0 0" });
-const words = (sel, at, gap) => tl.fromTo(sel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: gap, ease: "power2.out" }, at);
-const out = (sel, at) => tl.to(sel, { opacity: 0, duration: 0.3 }, at);
+// all views keep the Instagram UI marks of the source screenshots out of frame and upscale <= ~1.75x
+const H = { F: 1467, U: 1475, L: 1475, O: 1453 };
+const view = (k, cx, cy, z) => { const s = (1920 / H[k]) * z; return { scale: s, x: 540 - cx * s, y: 960 - cy * s }; };
+gsap.set(".st", { transformOrigin: "0 0" });
+const showText = (sel, at, out) => {
+  tl.fromTo(sel + " span", { yPercent: 110 }, { yPercent: 0, duration: 0.45, stagger: 0.08, ease: "power4.out" }, at);
+  tl.to(sel + " span", { yPercent: -110, duration: 0.3, stagger: 0.05, ease: "power3.in" }, out);
+};
 
-// B1 0–3.5  the wall with the vitrine dark, slow push
-tl.fromTo("#sU", view("U", 690, 690, 1.46), { ...view("U", 700, 680, 1.52), duration: 3.5, ease: "none" }, 0);
-words("#t1 .s .w", 0.35, 0.12); words("#t1 .b .w", 0.8, 0.14); out("#t1 .w", 3.0);
+// ── B1 0–1.2  HOOK: the wall assembles from its real front panels (motion from frame 0)
+const F0 = view("F", 650, 733, 1.03);
+gsap.set(["#sF", ".sk"], F0);
+["#k0", "#k1", "#k2", "#k3"].forEach((k, i) => {
+  tl.fromTo(k, { y: i % 2 ? 1300 : -1300 }, { y: 0, duration: 0.85, ease: "expo.out" }, i * 0.08);
+});
+tl.set("#wF", { opacity: 1 }, 1.2);
+tl.set(["#k0", "#k1", "#k2", "#k3"], { opacity: 0 }, 1.2);
+showText("#t1", 0.45, 1.45);
+tl.fromTo("#mark", { opacity: 0 }, { opacity: 0.95, duration: 0.4 }, 0.6);
+tl.to("#mark", { opacity: 0, duration: 0.25 }, 2.05);
 
-// B2 3.5  lights on: same camera, the lit photo (aligned) takes over in a blink; push continues
-tl.set("#wL", { opacity: 0 }, 0);
-tl.to("#wL", { opacity: 1, duration: 0.12, ease: "none" }, 3.5);
-tl.fromTo("#sL", view("L", 700, 680, 1.52), { ...view("L", 720, 660, 1.62), duration: 3.0, ease: "sine.out", immediateRender: false }, 3.5);
-words("#t2 .s .w", 3.75, 0.1); words("#t2 .b .w", 4.1, 0.12); out("#t2 .w", 6.1);
+// ── B2 1.2–2.3  punch toward the black screen
+tl.fromTo("#sF", F0, { ...view("F", 560, 800, 1.18), duration: 0.35, ease: "power4.out", immediateRender: false }, 1.45);
+showText("#t2", 1.6, 2.15);
+// portal: dive into the black screen
+tl.to("#sF", { ...view("F", 520, 840, 7), duration: 0.55, ease: "power3.in" }, 2.2);
+tl.to("#blk", { opacity: 1, duration: 0.2 }, 2.55);
 
-// zoom-through 6.5–7.0 into the frontal view
-tl.to("#sL", { ...view("L", 600, 620, 1.9), filter: "blur(14px)", duration: 0.3, ease: "power3.in" }, 6.5);
-tl.set("#wF", { opacity: 1 }, 6.8);
-tl.fromTo("#sF", { ...view("F", 589, 600, 1.7), filter: "blur(14px)" }, { ...view("F", 600, 620, 1.42), filter: "blur(0px)", duration: 0.5, ease: "power3.out", immediateRender: false }, 6.8);
-// B3 7.3–10.0  slow push towards the screen niche
-tl.to("#sF", { ...view("F", 600, 640, 1.55), duration: 2.7, ease: "sine.inOut" }, 7.3);
-words("#t3 .s .w", 7.1, 0.12); words("#t3 .b .w", 7.5, 0.14); out("#t3 .w", 9.6);
+// ── B3 2.75–4.9  out of the dark: the vitrine fills with light (real unlit -> lit, rising mask)
+tl.set(["#wU", "#wL"], { opacity: 1 }, 2.75);
+tl.set("#wF", { opacity: 0 }, 2.75);
+tl.fromTo(["#sU", "#sL"], view("U", 860, 720, 1.33), { ...view("U", 830, 760, 1.25), duration: 2.2, ease: "sine.out", immediateRender: false }, 2.75);
+tl.to("#blk", { opacity: 0, duration: 0.35 }, 2.75);
+const fill = { p: -20 };
+const setMask = () => {
+  const m = fill.p >= 118 ? "none" : `linear-gradient(to top,#000 ${fill.p}%,transparent ${fill.p + 15}%)`;
+  const el = document.getElementById("wL");
+  el.style.webkitMaskImage = m; el.style.maskImage = m;
+};
+tl.fromTo(fill, { p: -20 }, { p: 120, duration: 1.5, ease: "power2.inOut", onUpdate: setMask }, 3.2);
+showText("#t3", 3.75, 4.75);
 
-// whip pan 10.0–10.5  to the open door
-tl.to("#wF", { x: 520, filter: "blur(16px)", duration: 0.26, ease: "power3.in" }, 10.0);
-tl.set("#wF", { opacity: 0 }, 10.26);
-tl.set("#wO", { opacity: 1 }, 10.26);
-tl.fromTo("#wO", { x: -520, filter: "blur(16px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", immediateRender: false }, 10.26);
-// B4 10.3–13.5  open door: along the hidden shelves
-tl.fromTo("#sO", view("O", 640, 640, 1.45), { ...view("O", 610, 700, 1.5), duration: 3.2, ease: "sine.inOut", immediateRender: false }, 10.26);
-words("#t4 .s .w", 10.7, 0.08); words("#t4 .b .w", 11.1, 0.12); out("#t4 .w", 13.2);
+// ── B4 4.9–6.3  HERO hold (no text): pull back to the whole wall, a sheen crosses the glass
+tl.to(["#sU", "#sL"], { ...view("L", 685, 775, 1.12), duration: 1.3, ease: "power2.inOut" }, 4.9);
+tl.fromTo("#sweep", { x: -700, opacity: 0.0 }, { x: 1300, opacity: 0.0, duration: 0.9, ease: "power1.inOut",
+  keyframes: { opacity: [0, 0.45, 0.45, 0] } }, 5.4);
 
-// whip back 13.5–14.0  to the front, close on the fronts' joints
-tl.to("#wO", { x: -520, filter: "blur(16px)", duration: 0.26, ease: "power3.in" }, 13.5);
-tl.set("#wO", { opacity: 0 }, 13.76);
-tl.set("#wF", { x: 0 }, 13.5);
-tl.set("#sF", { filter: "blur(0px)" }, 13.5);
-tl.set("#wF", { opacity: 1 }, 13.76);
-tl.fromTo("#wF", { x: 520, filter: "blur(16px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", immediateRender: false }, 13.76);
-tl.fromTo("#sF", view("F", 640, 560, 1.65), { ...view("F", 600, 620, 1.42), duration: 2.2, ease: "sine.out", immediateRender: false }, 13.76);
-words("#t5 .s .w", 14.1, 0.08); words("#t5 .b .w", 14.5, 0.14); out("#t5 .w", 15.6);
+// ── B5 6.3–7.0  the wall swings open like a door -> hidden shelves behind it
+tl.set("#wO", { opacity: 1 }, 6.3);
+tl.set("#wU", { opacity: 0 }, 6.3);
+tl.fromTo("#sO", view("O", 640, 640, 1.18), { ...view("O", 610, 640, 1.2), duration: 0.8, ease: "power2.out", immediateRender: false }, 6.3);
+tl.fromTo("#wL", { rotationY: 0, transformOrigin: "100% 50%" }, { rotationY: -100, duration: 0.7, ease: "power2.in", transformOrigin: "100% 50%" }, 6.3);
+tl.fromTo("#wL", { filter: "brightness(1)" }, { filter: "brightness(0.55)", duration: 0.7, ease: "power2.in", immediateRender: false }, 6.3);
+tl.set("#wL", { opacity: 0 }, 7.0);
 
-// B6 15.8–18.5  end card
-tl.to("#veil", { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 15.7);
-tl.fromTo("#end .logo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 16.1);
-tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 16.5);
-tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 16.6);
-tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 16.9);
-tl.fromTo("#end .pill", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 17.1);
+// ── B6 7.0–9.8  speed-ramp tilt down the hidden shelves
+tl.to("#sO", { ...view("O", 575, 660, 1.27), duration: 0.5, ease: "power4.out" }, 7.1);
+tl.to("#sO", { ...view("O", 560, 720, 1.3), duration: 2.1, ease: "sine.inOut" }, 7.6);
+showText("#t4", 7.5, 9.45);
 
+// ── B7 9.8–11.1  detail burst (5 real crops, 0.26s each)
+const dumps = [["#d1", "F", 330, 600], ["#d2", "L", 855, 700], ["#d3", "L", 560, 600], ["#d4", "O", 560, 700], ["#d5", "F", 860, 600]];
+dumps.forEach(([id, k, cx, cy], i) => {
+  const t = 9.8 + i * 0.26;
+  tl.set(id + " .st", view(k, cx, cy, 1.36), 0);
+  tl.set(id, { opacity: 1 }, t);
+  tl.fromTo(id + " .st", view(k, cx, cy, 1.36), { ...view(k, cx, cy, 1.3), duration: 0.26, ease: "none", immediateRender: false }, t);
+  tl.fromTo("#flash", { opacity: 0.35 }, { opacity: 0, duration: 0.12, immediateRender: false }, t);
+  if (i > 0) tl.set(dumps[i - 1][0], { opacity: 0 }, t);
+});
+tl.set("#wO", { opacity: 0 }, 9.8);
+
+// ── B8 11.1–13.2  hard stop on the whole wall, lit
+tl.set("#wL", { opacity: 1, rotationY: 0, filter: "brightness(1)" }, 11.1);
+tl.set("#d5", { opacity: 0 }, 11.1);
+tl.fromTo("#sL", view("L", 685, 775, 1.2), { ...view("L", 685, 775, 1.12), duration: 0.5, ease: "power4.out", immediateRender: false }, 11.1);
+tl.to("#sL", { ...view("L", 690, 770, 1.15), duration: 1.6, ease: "sine.inOut" }, 11.6);
+showText("#t5", 11.35, 12.95);
+tl.fromTo("#sweep", { x: -700, opacity: 0 }, { x: 1300, duration: 1.0, ease: "power1.inOut",
+  keyframes: { opacity: [0, 0.35, 0.35, 0] }, immediateRender: false }, 11.9);
+
+// ── B9 13.2–16  curtain in the brand dark, end card
+tl.fromTo("#curtain", { scaleX: 0, transformOrigin: "100% 50%" }, { scaleX: 1, duration: 0.45, ease: "power3.inOut", transformOrigin: "100% 50%" }, 13.2);
+tl.to("#end", { opacity: 1, duration: 0.01 }, 13.65);
+tl.fromTo("#end .logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.7);
+tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.0);
+tl.fromTo("#end .l1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 14.15);
+tl.fromTo("#end .pill", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 14.4);
+
+window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
 </script>
 </body>
