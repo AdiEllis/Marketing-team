@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#ece6de}
+#root{width:100%;height:100%;position:relative;overflow:hidden;background:#ece6de}
+
+#win{position:absolute;left:0;top:400px;width:1080px;height:1520px;overflow:hidden;background:#ece6de}
+.lay{position:absolute;left:0;top:0;width:1178px}
+.lay img{position:absolute;left:0;top:0;width:1178px;display:block}
+#wL,#wF,#wO{opacity:0}
+
+.copy{position:absolute;top:0;height:400px;padding-bottom:44px;display:flex;flex-direction:column;justify-content:flex-end;right:64px;left:64px;text-align:right;direction:rtl;color:#1f1a17}
+.copy .s{display:block;font-family:"Heebo";font-weight:500;font-size:50px;line-height:1.2;color:#7a5530}
+.copy .b{display:block;font-family:"Heebo";font-weight:800;font-size:88px;line-height:1.06;letter-spacing:-.01em}
+.copy .w{display:inline-block}
+
+#veil{position:absolute;inset:0;background:#ece6de;opacity:0}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+#end .logo{width:320px;height:auto;display:block;mix-blend-mode:multiply}
+#end .rule{width:120px;height:3px;background:#a8763e;margin:64px 0 44px}
+#end .l1{font-family:"Heebo";font-weight:800;font-size:60px;color:#1f1a17;text-align:center;line-height:1.15}
+#end .l2{font-family:"Heebo";font-weight:400;font-size:42px;color:#5a3e2a;margin-top:26px;text-align:center}
+#end .pill{margin-top:56px;height:96px;padding:0 48px;border-radius:48px;display:flex;align-items:center;font-family:"Heebo";font-weight:700;font-size:40px;color:#fff;background:#1c1816}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="18.5" data-width="1080" data-height="1920">
+
+  <div id="win" class="clip" data-start="0" data-duration="18.5" data-track-index="0">
+    <div id="wU" class="lay" data-layout-allow-overflow><div id="sU" class="lay"><img src="assets/unlit.png" alt="" /></div></div>
+    <div id="wL" class="lay" data-layout-allow-overflow><div id="sL" class="lay"><img src="assets/lit.jpg" alt="" /></div></div>
+    <div id="wF" class="lay" data-layout-allow-overflow><div id="sF" class="lay"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="wO" class="lay" data-layout-allow-overflow><div id="sO" class="lay"><img src="assets/open.jpg" alt="" /></div></div>
+  </div>
+
+  <div id="t1" class="copy clip" data-start="0.3" data-duration="3.0" data-track-index="1">
+    <span class="s"><span class="w">קיר</span> <span class="w">טלוויזיה</span></span>
+    <span class="b"><span class="w">בלבן</span> <span class="w">מט</span> <span class="w">ושחור.</span></span>
+  </div>
+  <div id="t2" class="copy clip" data-start="3.6" data-duration="2.7" data-track-index="1">
+    <span class="s"><span class="w">תאורת</span> <span class="w">LED</span></span>
+    <span class="b"><span class="w">בתוך</span> <span class="w">הוויטרינה</span></span>
+    <span class="b"><span class="w">ומעל</span> <span class="w">המסך.</span></span>
+  </div>
+  <div id="t3" class="copy clip" data-start="7.0" data-duration="2.8" data-track-index="1">
+    <span class="s"><span class="w">נישה</span> <span class="w">למסך,</span></span>
+    <span class="b"><span class="w">במידה</span> <span class="w">מדויקת.</span></span>
+  </div>
+  <div id="t4" class="copy clip" data-start="10.6" data-duration="2.8" data-track-index="1">
+    <span class="s"><span class="w">בלי</span> <span class="w">ידיות,</span> <span class="w">בלי</span> <span class="w">רמזים.</span></span>
+    <span class="b"><span class="w">אחסון</span> <span class="w">נסתר</span></span>
+    <span class="b"><span class="w">מאחורי</span> <span class="w">החזיתות.</span></span>
+  </div>
+  <div id="t5" class="copy clip" data-start="14.0" data-duration="1.9" data-track-index="1">
+    <span class="s"><span class="w">מרווחים</span> <span class="w">שווים</span> <span class="w">בין</span> <span class="w">החזיתות.</span></span>
+    <span class="b"><span class="w">גימור</span> <span class="w">מוקפד.</span></span>
+  </div>
+
+  <div id="veilwrap" class="clip" data-start="0" data-duration="18.5" data-track-index="2" style="position:absolute;inset:0"><div id="veil"></div></div>
+
+  <div id="end" class="clip" data-start="15.8" data-duration="2.7" data-track-index="3">
+    <img class="logo" src="assets/logo_on_white.png" alt="אבן ועץ" />
+    <div class="rule"></div>
+    <div class="l1">קיר טלוויזיה מעוצב<br />בהתאמה אישית</div>
+    <div class="l2">פגישת ייעוץ והדמיה ללא עלות</div>
+    <div class="pill">דברו איתנו בוואטסאפ</div>
+  </div>
+</div>
+
+<script>
+const tl = gsap.timeline({ paused: true });
+// each photo is 1178px wide; S0 fits its height to 1920. Views stay inside the area free of Instagram marks
+// (old logo x<240 bottom-left, mute icon bottom-right, page badge top-right).
+// photo window is 1080x1520 under a 400px text band; s = absolute scale (kept <= 1.75)
+const view = (k, cx, cy, s) => ({ scale: s, x: 540 - cx * s, y: 760 - cy * s });
+gsap.set(["#sU", "#sL", "#sF", "#sO"], { transformOrigin: "0 0" });
+const words = (sel, at, gap) => tl.fromTo(sel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: gap, ease: "power2.out" }, at);
+const out = (sel, at) => tl.to(sel, { opacity: 0, duration: 0.3 }, at);
+
+// B1 0–3.5  the wall with the vitrine dark, slow push
+tl.fromTo("#sU", view("U", 690, 690, 1.46), { ...view("U", 700, 680, 1.52), duration: 3.5, ease: "none" }, 0);
+words("#t1 .s .w", 0.35, 0.12); words("#t1 .b .w", 0.8, 0.14); out("#t1 .w", 3.0);
+
+// B2 3.5  lights on: same camera, the lit photo (aligned) takes over in a blink; push continues
+tl.set("#wL", { opacity: 0 }, 0);
+tl.to("#wL", { opacity: 1, duration: 0.12, ease: "none" }, 3.5);
+tl.fromTo("#sL", view("L", 700, 680, 1.52), { ...view("L", 720, 660, 1.62), duration: 3.0, ease: "sine.out", immediateRender: false }, 3.5);
+words("#t2 .s .w", 3.75, 0.1); words("#t2 .b .w", 4.1, 0.12); out("#t2 .w", 6.1);
+
+// zoom-through 6.5–7.0 into the frontal view
+tl.to("#sL", { ...view("L", 600, 620, 1.9), filter: "blur(14px)", duration: 0.3, ease: "power3.in" }, 6.5);
+tl.set("#wF", { opacity: 1 }, 6.8);
+tl.fromTo("#sF", { ...view("F", 589, 600, 1.7), filter: "blur(14px)" }, { ...view("F", 600, 620, 1.42), filter: "blur(0px)", duration: 0.5, ease: "power3.out", immediateRender: false }, 6.8);
+// B3 7.3–10.0  slow push towards the screen niche
+tl.to("#sF", { ...view("F", 600, 640, 1.55), duration: 2.7, ease: "sine.inOut" }, 7.3);
+words("#t3 .s .w", 7.1, 0.12); words("#t3 .b .w", 7.5, 0.14); out("#t3 .w", 9.6);
+
+// whip pan 10.0–10.5  to the open door
+tl.to("#wF", { x: 520, filter: "blur(16px)", duration: 0.26, ease: "power3.in" }, 10.0);
+tl.set("#wF", { opacity: 0 }, 10.26);
+tl.set("#wO", { opacity: 1 }, 10.26);
+tl.fromTo("#wO", { x: -520, filter: "blur(16px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", immediateRender: false }, 10.26);
+// B4 10.3–13.5  open door: along the hidden shelves
+tl.fromTo("#sO", view("O", 640, 640, 1.45), { ...view("O", 610, 700, 1.5), duration: 3.2, ease: "sine.inOut", immediateRender: false }, 10.26);
+words("#t4 .s .w", 10.7, 0.08); words("#t4 .b .w", 11.1, 0.12); out("#t4 .w", 13.2);
+
+// whip back 13.5–14.0  to the front, close on the fronts' joints
+tl.to("#wO", { x: -520, filter: "blur(16px)", duration: 0.26, ease: "power3.in" }, 13.5);
+tl.set("#wO", { opacity: 0 }, 13.76);
+tl.set("#wF", { x: 0 }, 13.5);
+tl.set("#sF", { filter: "blur(0px)" }, 13.5);
+tl.set("#wF", { opacity: 1 }, 13.76);
+tl.fromTo("#wF", { x: 520, filter: "blur(16px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", immediateRender: false }, 13.76);
+tl.fromTo("#sF", view("F", 640, 560, 1.65), { ...view("F", 600, 620, 1.42), duration: 2.2, ease: "sine.out", immediateRender: false }, 13.76);
+words("#t5 .s .w", 14.1, 0.08); words("#t5 .b .w", 14.5, 0.14); out("#t5 .w", 15.6);
+
+// B6 15.8–18.5  end card
+tl.to("#veil", { opacity: 1, duration: 0.6, ease: "power1.inOut" }, 15.7);
+tl.fromTo("#end .logo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 16.1);
+tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 16.5);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 16.6);
+tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 16.9);
+tl.fromTo("#end .pill", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 17.1);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
