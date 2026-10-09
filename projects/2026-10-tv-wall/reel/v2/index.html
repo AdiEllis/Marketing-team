@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="../assets/gsap.min.js"></script>
+<style>
+@font-face{font-family:"Heebo";src:url(../assets/heebo.ttf);font-weight:100 900}
+@font-face{font-family:"Frank Ruhl Libre";src:url(../assets/frank.ttf);font-weight:300 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#ece6de}
+#root{width:100%;height:100%;position:relative;overflow:hidden;background:#ece6de}
+
+/* photo window under a clean text band — nothing is drawn over the product */
+#win{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:hidden;background:#ece6de}
+.lay{position:absolute;left:0;top:0;width:1178px;height:1473px}
+.lay img{position:absolute;left:0;top:0;width:1178px;height:1473px;display:block}
+#wB{opacity:0}
+
+.copy{position:absolute;top:190px;right:64px;left:64px;height:230px;display:flex;flex-direction:column;justify-content:flex-end;text-align:right;direction:rtl;color:#2a2520}
+.copy .s{display:block;font-family:"Heebo";font-weight:500;font-size:50px;line-height:1.2;color:#5a3e2a}
+.copy .b{display:block;font-family:"Frank Ruhl Libre";font-weight:600;font-size:92px;line-height:1.08}
+.copy .w{display:inline-block}
+
+#veil{position:absolute;inset:0;background:#ece6de;opacity:0}
+#end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+#end .logo{width:300px;height:auto;display:block;mix-blend-mode:multiply}
+#end .rule{width:120px;height:2px;background:#8a6a4c;margin:64px 0 40px}
+#end .l1{font-family:"Frank Ruhl Libre";font-weight:500;font-size:64px;color:#2f2a25;text-align:center}
+#end .l2{font-family:"Heebo";font-weight:300;font-size:44px;color:#6a4a33;margin-top:22px;text-align:center}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+
+  <div id="win" class="clip" data-start="0" data-duration="18" data-track-index="0">
+    <div id="wC" class="lay" data-layout-allow-overflow><div id="sC" class="lay"><img src="../assets/closed.jpg" alt="" /></div></div>
+    <div id="wB" class="lay" data-layout-allow-overflow><div id="sB" class="lay"><img src="../assets/open.png" alt="" /></div></div>
+  </div>
+
+  <div id="t1" class="copy clip" data-start="0.3" data-duration="2.9" data-track-index="1">
+    <span class="s"><span class="w">הקיר</span> <span class="w">הזה</span></span>
+    <span class="b"><span class="w">לא</span> <span class="w">מספר</span> <span class="w">הכול.</span></span>
+  </div>
+  <div id="t2" class="copy clip" data-start="3.4" data-duration="2.6" data-track-index="1">
+    <span class="s"><span class="w">חזיתות</span> <span class="w">נקיות,</span></span>
+    <span class="b"><span class="w">בלי</span> <span class="w">ידית</span> <span class="w">אחת.</span></span>
+  </div>
+  <div id="t3" class="copy clip" style="top:1500px;left:56px;right:auto;width:560px" data-start="6.6" data-duration="3.2" data-track-index="1">
+    <span class="s" style="color:#2a2520"><span class="w">קיר</span> <span class="w">שיודע</span></span>
+    <span class="b"><span class="w">לשמור</span> <span class="w">סודות.</span></span>
+  </div>
+  <div id="t5" class="copy clip" data-start="13.2" data-duration="1.9" data-track-index="1">
+    <span class="s"><span class="w">לאטה</span> <span class="w">מט,</span></span>
+    <span class="b"><span class="w">אגוז</span> <span class="w">מוסקט</span> <span class="w">ואור.</span></span>
+  </div>
+
+  <div id="veilwrap" class="clip" data-start="0" data-duration="18" data-track-index="2" style="position:absolute;inset:0"><div id="veil"></div></div>
+
+  <div id="end" class="clip" data-start="15.0" data-duration="3.0" data-track-index="3">
+    <img class="logo" src="../assets/logo_on_white.png" alt="אבן ועץ" />
+    <div class="rule"></div>
+    <div class="l1">קיר טלוויזיה בהתאמה אישית</div>
+    <div class="l2">דברו איתנו בוואטסאפ</div>
+  </div>
+</div>
+
+<script>
+const tl = gsap.timeline({ paused: true });
+// window 1080x1500; base view shows source x 150–1023 (keeps Instagram UI marks out of frame)
+const S0 = 1920 / 1473;
+const view = (cx, cy, z) => { const s = S0 * z; return { scale: s, x: 540 - cx * s, y: 960 - cy * s }; };
+gsap.set(["#sC", "#sB"], { transformOrigin: "0 0" });
+const words = (sel, at, gap) => tl.fromTo(sel, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: gap, ease: "power2.out" }, at);
+const out = (sel, at) => tl.to(sel, { opacity: 0, duration: 0.3 }, at);
+
+// B1 0–3.2  the quiet wall, slow push — the question
+tl.fromTo("#sC", view(609, 736, 1.0), { ...view(609, 760, 1.07), duration: 3.2, ease: "sine.inOut" }, 0);
+words("#t1 .s .w", 0.35, 0.12); words("#t1 .b .w", 0.8, 0.14); out("#t1 .w", 2.9);
+
+// B2 3.2–6.0  glide along the closed latte fronts
+tl.to("#sC", { ...view(560, 700, 1.15), duration: 0.9, ease: "power2.inOut" }, 3.2);
+tl.to("#sC", { ...view(660, 700, 1.15), duration: 1.9, ease: "sine.inOut" }, 4.1);
+words("#t2 .s .w", 3.5, 0.1); words("#t2 .b .w", 3.9, 0.14); out("#t2 .w", 5.75);
+
+// whip pan 6.0–6.5  (camera swings left: the open wall, seen from its side)
+tl.to("#wC", { x: 520, filter: "blur(16px)", duration: 0.26, ease: "power3.in" }, 6.0);
+tl.set("#wC", { opacity: 0 }, 6.26);
+tl.set("#wB", { opacity: 1 }, 6.26);
+tl.fromTo("#wB", { x: -520, filter: "blur(16px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", immediateRender: false }, 6.26);
+
+// B3 6.3–9.6  everything open
+tl.fromTo("#sB", view(600, 736, 1.06), { ...view(575, 736, 1.0), duration: 3.3, ease: "sine.out", immediateRender: false }, 6.26);
+words("#t3 .s .w", 6.75, 0.12); words("#t3 .b .w", 7.2, 0.16); out("#t3 .w", 9.5);
+
+// B4 9.6–12.6  into the lit display niche, tilting down its shelves
+tl.to("#sB", { ...view(860, 560, 1.35), duration: 1.2, ease: "power2.inOut" }, 9.6);
+tl.to("#sB", { ...view(860, 790, 1.35), duration: 1.8, ease: "sine.inOut" }, 10.8);
+
+
+// whip back 12.6–13.1  to the closed wall
+tl.to("#wB", { x: -520, filter: "blur(16px)", duration: 0.26, ease: "power3.in" }, 12.6);
+tl.set("#wB", { opacity: 0 }, 12.86);
+tl.set("#wC", { opacity: 1 }, 12.86);
+tl.fromTo("#wC", { x: 520, filter: "blur(16px)" }, { x: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", immediateRender: false }, 12.86);
+tl.fromTo("#sC", view(609, 760, 1.15), { ...view(609, 736, 1.0), duration: 2.3, ease: "sine.out", immediateRender: false }, 12.86);
+words("#t5 .s .w", 13.3, 0.12); words("#t5 .b .w", 13.7, 0.16); out("#t5 .w", 14.8);
+
+// B6 15–18  end card
+tl.to("#veil", { opacity: 1, duration: 0.7, ease: "power1.inOut" }, 14.9);
+tl.fromTo("#end .logo", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 15.3);
+tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 15.8);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 16.0);
+tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6 }, 16.3);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
