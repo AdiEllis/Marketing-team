@@ -29,7 +29,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 #sweep{position:absolute;top:-400px;left:0;width:520px;height:2800px;background:linear-gradient(90deg,rgba(255,250,240,0) 0%,rgba(255,250,240,.55) 50%,rgba(255,250,240,0) 100%);mix-blend-mode:screen;opacity:0;transform:rotate(18deg)}
 #flash{position:absolute;inset:0;background:#fff;opacity:0}
 #blk{position:absolute;inset:0;background:#000;opacity:0}
-#mark{position:absolute;left:64px;top:1410px;width:140px;opacity:0}
+#mark{position:absolute;left:64px;top:1365px;width:110px;opacity:0}
 #curtain{position:absolute;inset:0;background:#1c1816}
 #end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl;opacity:0}
 #end .logo{width:300px}
@@ -60,7 +60,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
   <div id="txt" class="clip" data-start="0" data-duration="16" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t ink" style="right:72px;top:330px;font-size:250px"><div class="ln"><span>לבן.</span></div></div>
     <div id="t2" class="t wht" style="right:150px;top:880px;font-size:230px"><div class="ln"><span>שחור.</span></div></div>
-    <div id="t3" class="t gold" style="right:560px;top:470px;font-size:250px"><div class="ln"><span>ואור.</span></div></div>
+    <div id="t3" class="t gold" style="right:560px;top:490px;font-size:210px"><div class="ln"><span>ואור.</span></div></div>
     <div id="t4" class="t wht" style="right:60px;top:1060px;font-size:130px;line-height:1.02"><div class="ln"><span>אחסון</span></div><div class="ln"><span>נסתר.</span></div></div>
     <div id="t5" class="t ink" style="right:330px;top:330px;font-size:120px;line-height:1.02"><div class="ln"><span>גימור</span></div><div class="ln"><span>מוקפד.</span></div></div>
     <img id="mark" src="assets/logo_light.png" alt="אבן ועץ" />
@@ -110,7 +110,7 @@ gsap.set(["#wU", "#wL"], { opacity: 0 });
 tl.set(["#wU", "#wL"], { opacity: 1 }, 2.72);
 tl.set("#wF", { opacity: 0 }, 2.72);
 tl.fromTo("#blk", { opacity: 0.85 }, { opacity: 0, duration: 0.28, ease: "power1.out", immediateRender: false }, 2.72);
-tl.fromTo(["#sU", "#sL"], view("U", 870, 720, 1.45), { ...view("U", 830, 760, 1.24), duration: 3.0, ease: "power2.out", immediateRender: false }, 2.72);
+gsap.set(["#sU", "#sL"], view("U", 870, 720, 1.45));   // camera for 2.72–6.3 is the single path `cam` below
 const fill = { p: -20 };
 const setMask = () => {
   const m = fill.p >= 118 ? "none" : `linear-gradient(to top,#000 ${fill.p}%,transparent ${fill.p + 15}%)`;
@@ -121,7 +121,20 @@ tl.fromTo(fill, { p: -20 }, { p: 120, duration: 1.5, ease: "power2.inOut", onUpd
 showText("#t3", 3.75, 4.75);
 
 // ── B4 4.9–6.3  HERO hold (no text): pull back to the whole wall, a sheen crosses the glass
-tl.to(["#sU", "#sL"], { ...view("L", 685, 775, 1.12), duration: 1.4, ease: "sine.out" }, 4.9);
+// ONE camera path for 2.72–6.3 (no competing tweens): burst out of the dark (power2.out), then the hero
+// pull-back on a computed arc — pan left first (power3.out), zoom out on sine.inOut, lift 20px mid-way — so the
+// source screenshot's mute icon (bottom-right) and n/6 badge (top-right) never enter the frame
+const p2o = t => 1 - Math.pow(1 - t, 2), p3o = t => 1 - Math.pow(1 - t, 3), sio = t => -(Math.cos(Math.PI * t) - 1) / 2;
+const outOfDark = T => { const a = p2o(Math.min(1, (T - 2.72) / 3.0)); return { cx: 870 - 40 * a, cy: 720 + 40 * a, z: 1.45 - 0.21 * a }; };
+const HS = outOfDark(4.9), HE = { cx: 660, cy: 785, z: 1.12 };
+const cam = { T: 2.72 };
+tl.fromTo(cam, { T: 2.72 }, { T: 6.3, duration: 3.58, ease: "none", immediateRender: false, onUpdate: () => {
+  const T = cam.T;
+  let c;
+  if (T < 4.9) c = outOfDark(T);
+  else { const u = (T - 4.9) / 1.4; c = { cx: HS.cx + (HE.cx - HS.cx) * p3o(u), cy: HS.cy + (HE.cy - HS.cy) * sio(u) - 20 * Math.sin(Math.PI * u), z: HS.z + (HE.z - HS.z) * sio(u) }; }
+  gsap.set(["#sU", "#sL"], view("U", c.cx, c.cy, c.z));
+} }, 2.72);
 tl.fromTo("#sweep", { x: -700, opacity: 0.0 }, { x: 1300, opacity: 0.0, duration: 0.9, ease: "power1.inOut",
   keyframes: { opacity: [0, 0.45, 0.45, 0] } }, 5.4);
 
@@ -161,8 +174,8 @@ tl.fromTo("#sweep", { x: -700, opacity: 0 }, { x: 1300, duration: 1.0, ease: "po
 
 // ── B9 13.2–16  curtain in the brand dark, end card
 tl.fromTo("#curtain", { scaleX: 0, transformOrigin: "100% 50%" }, { scaleX: 1, duration: 0.45, ease: "power3.inOut", transformOrigin: "100% 50%" }, 13.2);
-tl.to("#end", { opacity: 1, duration: 0.01 }, 13.65);
-tl.fromTo("#end .logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.7);
+tl.to("#end", { opacity: 1, duration: 0.01 }, 13.6);
+tl.fromTo("#end .logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.6);
 tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.0);
 tl.fromTo("#end .l1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 14.15);
 tl.fromTo("#end .pill", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 14.4);
