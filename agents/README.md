@@ -7,7 +7,8 @@
 | רכיב | סוג | למה |
 |---|---|---|
 | Orchestrator | **מכונת מצבים דטרמיניסטית** + Skill קטן של LLM לסיווג בקשות תיקון | תזמור, ניסיונות חוזרים ואישורים צריכים להיות צפויים, לא "יצירתיים" |
-| Creative Strategist (Idea) | **סוכן AI** | חשיבה יצירתית ושיפוט |
+| **מנכ"ל (CEO)** (`ceo.md`) | **סוכן AI נפרד** (הקשר נקי) | שומר המטרות העסקיות והטעם שלה. מאשר או מחזיר רעיונות ותוכניות לפני הפקה |
+| Creative Strategist (Idea) | **סוכן AI** | חשיבה יצירתית: רעיונות וקונספטים. מגיש למנכ"ל |
 | Copywriter | **סוכן AI** | שפה, טון ותובנה |
 | Producer / Director | **סוכן AI** | תרגום רעיון לתוכנית הפקה מובנית |
 | Post Designer / Art Director | **סוכן AI** (`post-designer.md`) | עיצוב פוסטים: בחירת פורמט, חיתוכים, טיפוגרפיה, פלטה מהצילום, ביקורת Anti-slop |
@@ -17,7 +18,8 @@
 
 ## קבצים
 
-- [`orchestrator.md`](orchestrator.md)
+- [`ceo.md`](ceo.md): המנכ"ל, שער רעיון ושער תוכנית
+- [`orchestrator.md`](orchestrator.md): הזרימה המלאה
 - [`creative-strategist.md`](creative-strategist.md)
 - [`copywriter.md`](copywriter.md)
 - [`producer-director.md`](producer-director.md)
@@ -27,6 +29,8 @@
 - [`learning.md`](learning.md)
 
 ## ידע משותף שכל סוכן קורא
+
+0. `knowledge/brand/business-goals.md`: המטרות והייחודיות של העסק.
 
 1. `knowledge/brand/` — זיכרון המותג (ערכים, קהל, טון, לוגו, כללי נאמנות למוצר).
 2. `knowledge/inspiration/reference-videos-analysis.md` — **עקרונות** מסרטוני ההשראה וכללי אנטי-העתקה.
