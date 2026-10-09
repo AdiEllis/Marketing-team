@@ -4,7 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" />
 <script src="assets/gsap.min.js"></script>
-<!-- Latte/walnut reel v4 (rebuilt after her feedback "frame 0 broken, flow not smooth, transitions mediocre").
+<!-- Latte/walnut reel v5 (after CEO gate: soft light dissolve instead of a hard cut, pull-out to the whole open storage, no repeat of frame 0)
+     Latte/walnut reel v4 (rebuilt after her feedback "frame 0 broken, flow not smooth, transitions mediocre").
      One continuous camera: frame 0 is the full graded wall already moving; motion dissolves; one light-motivated
      match cut (niche LED strip -> niche LED strip at the same screen x); real bloom only from the photo's own LEDs.
      Views keep the Instagram marks (n/4 badge, old logo, mute) out of frame; upscale <= 1.75. -->
@@ -22,8 +23,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 .t span{display:inline-block}
 #t1{top:300px;right:64px;font-size:84px;color:#33221a}
 #t1 em{font-style:normal;color:#7a5228}
-#t2{top:1630px;left:40px;width:560px;text-align:left;font-size:80px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+#t2{top:1308px;left:40px;width:560px;text-align:left;font-size:72px;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.35)}
 #t2 em{font-style:normal;color:#ffd99a}
+#glow{position:absolute;inset:0;mix-blend-mode:screen;opacity:0;transform-origin:450px 50%;background:radial-gradient(42% 70% at 450px 50%,rgba(255,240,214,1) 0%,rgba(255,222,170,.9) 30%,rgba(255,205,135,.45) 60%,rgba(255,200,120,0) 100%)}
 #end{position:absolute;inset:0;background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
 #end img{width:290px}
 #end .l1{margin-top:56px;font-family:"Heebo";font-weight:800;font-size:60px;color:#fff;text-align:center}
@@ -31,21 +33,21 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="16" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
 
-  <div id="scene" class="clip" data-start="0" data-duration="16" data-track-index="0" style="position:absolute;inset:0">
+  <div id="scene" class="clip" data-start="0" data-duration="15" data-track-index="0" style="position:absolute;inset:0">
     <div id="LA" class="lay"><div class="st" id="sA"><img src="assets/front_g.png" alt="" /><img class="bl" id="bA" src="assets/front_bloom.jpg" alt="" /></div></div>
-    <div id="LB" class="lay"><div class="st" id="sB"><img src="assets/wide_g.png" alt="" /><img class="bl" id="bB" src="assets/wide_bloom.jpg" alt="" /><img class="bl" id="bB2" src="assets/wide_bloom.jpg" alt="" /></div></div>
-    <div id="LC" class="lay"><div class="st" id="sC"><img src="assets/open_g.png" alt="" /><img class="bl" id="bC" src="assets/open_bloom.jpg" alt="" /><img class="bl" id="bC2" src="assets/open_bloom.jpg" alt="" /></div></div>
-    <div id="LD" class="lay"><div class="st" id="sD"><img src="assets/front_g.png" alt="" /><img class="bl" id="bD" src="assets/front_bloom.jpg" alt="" /></div></div>
+    <div id="LB" class="lay"><div class="st" id="sB"><img src="assets/wide_g.png" alt="" /><img class="bl" id="bB" src="assets/wide_bloom.jpg" alt="" /><img class="bl" id="bB2" src="assets/wide_bloom.jpg" alt="" /><img class="bl" id="xB" src="assets/wide_g.png" alt="" /><img class="bl" id="xB2" src="assets/wide_g.png" alt="" /></div></div>
+    <div id="LC" class="lay"><div class="st" id="sC"><img src="assets/open_g.png" alt="" /><img class="bl" id="bC" src="assets/open_bloom.jpg" alt="" /><img class="bl" id="bC2" src="assets/open_bloom.jpg" alt="" /><img class="bl" id="xC" src="assets/open_g.png" alt="" /><img class="bl" id="xC2" src="assets/open_g.png" alt="" /></div></div>
+        <div id="glow"></div>
   </div>
 
-  <div id="txt" class="clip" data-start="0" data-duration="16" data-track-index="1" style="position:absolute;inset:0">
+  <div id="txt" class="clip" data-start="0" data-duration="15" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t"><div class="ln"><span>מה</span> <span>שאוהבים</span></div><div class="ln"><span><em>בחוץ.</em></span></div></div>
     <div id="t2" class="t"><div class="ln"><span>מה</span> <span>שצריך</span></div><div class="ln"><span><em>בפנים.</em></span></div></div>
   </div>
 
-  <div id="endwrap" class="clip" data-start="0" data-duration="16" data-track-index="2" style="position:absolute;inset:0">
+  <div id="endwrap" class="clip" data-start="0" data-duration="15" data-track-index="2" style="position:absolute;inset:0">
     <div id="end"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">קיר טלוויזיה בהתאמה אישית.</div><div class="l2">לאטה מט ואגוז מוסקט.</div></div>
   </div>
 </div>
@@ -63,47 +65,50 @@ const card = (sel, at, out) => {
   tl.fromTo(sel + " span", { yPercent: 115 }, { yPercent: 0, duration: 0.5, stagger: 0.08, ease: "power3.out", immediateRender: false }, at);
   tl.to(sel + " span", { yPercent: -115, duration: 0.32, stagger: 0.04, ease: "power2.in" }, out);
 };
-gsap.set(["#LB", "#LC", "#LD"], { opacity: 0 });
+gsap.set(["#LB", "#LC"], { opacity: 0 });
 gsap.set(".t span", { yPercent: 115 });
 
-// A 0–3.45  frame 0: the whole centre of the wall under the wave light, already pushing in, drifting left
-gsap.set("#sA", v(640, 667, 1.44));
-move("#sA", v(640, 667, 1.44), v(610, 630, 1.53), 0, 3.45);
-gsap.set("#bA", { opacity: 0.12 });
-tl.to("#bA", { opacity: 0.5, duration: 1.1, ease: "sine.inOut" }, 0.4);      // the LEDs "breathe" in
-tl.to("#bA", { opacity: 0.2, duration: 1.3, ease: "sine.inOut" }, 1.5);
+// A 0–3.15  frame 0: the whole centre of the wall under the wave light, already pushing in (felt from second 0)
+gsap.set("#sA", v(642, 686, 1.40));
+move("#sA", v(642, 686, 1.40), v(615, 640, 1.58), 0, 3.15);
+gsap.set("#bA", { opacity: 0.1 });
+tl.to("#bA", { opacity: 0.85, duration: 1.0, ease: "sine.inOut" }, 0.3);      // the real LEDs breathe in
+tl.to("#bA", { opacity: 0.25, duration: 1.2, ease: "sine.inOut" }, 1.4);
 
-// B 3.0–6.3  motion dissolve to the lit left niche (wide view); the same slow push + left drift
+// B 2.7–6.2  motion dissolve to the lit left niche; same push, tilt up the niche
 gsap.set("#sB", v(336, 625, 1.67));
-move("#sB", v(336, 625, 1.67), v(318, 552, 1.75), 3.0, 3.55);   // tilt up the niche
-fadeIn("#LB", 3.0);
+move("#sB", v(336, 625, 1.67), v(318, 552, 1.75), 2.7, 3.5);
+fadeIn("#LB", 2.7);
 gsap.set("#bB", { opacity: 0.15 });
-card("#t1", 3.75, 5.75);
-// light-motivated match cut: the niche LED blooms up, cut at the peak to the open view's niche LED (same screen x)
-tl.to(["#bB", "#bB2"], { opacity: 1, duration: 0.3, ease: "power2.in" }, 6.0);
+card("#t1", 3.4, 5.3);
+// light dissolve: the niche LED blooms and the exposure lifts (real pixels screened on themselves),
+// the open view fades in at the peak, then the light settles
+tl.to(["#bB", "#bB2"], { opacity: 1, duration: 0.5, ease: "power2.in" }, 5.45);
+tl.to(["#xB", "#xB2"], { opacity: 0.5, duration: 0.5, ease: "power2.in" }, 5.45);
+// the niche LED's own light spreads across the frame (centred on the strip at screen x 450)...
+tl.fromTo("#glow", { opacity: 0, scaleX: 0.06 }, { opacity: 0.96, scaleX: 2.4, duration: 0.5, ease: "power2.in", immediateRender: false }, 5.45);
 
-// C 6.3–10.65  open view: storage behind the doors; continuous pan left from the niche to the TV
-tl.set("#LC", { opacity: 1 }, 6.3);
-tl.set("#LB", { opacity: 0 }, 6.3);
+// C 5.9–11.2  open view, handed over under the light peak; the light pulls back into the open view's
+// niche LED at the same screen x, then the camera eases out to the whole open storage
 gsap.set("#sC", v(857, 600, 1.75));
-move("#sC", v(857, 600, 1.75), v(640, 610, 1.75), 6.3, 4.35);
-tl.set(["#bC", "#bC2"], { opacity: 1 }, 6.3);
-tl.to("#bC2", { opacity: 0, duration: 0.45, ease: "power2.out" }, 6.3);
-tl.to("#bC", { opacity: 0.18, duration: 0.6, ease: "power2.out" }, 6.3);
-card("#t2", 8.6, 10.0);   // on the walnut base, once the open cabinets are in view
+tl.set(["#bC", "#bC2"], { opacity: 1 }, 5.88);
+tl.set(["#xC", "#xC2"], { opacity: 0.5 }, 5.88);
+fadeIn("#LC", 5.9, 0.067);
+tl.set("#LB", { opacity: 0 }, 5.97);
+tl.to("#glow", { opacity: 0, scaleX: 0.06, duration: 0.65, ease: "power2.out" }, 5.98);
+tl.to(["#xC", "#xC2"], { opacity: 0, duration: 0.6, ease: "power2.out" }, 5.98);
+tl.to("#bC2", { opacity: 0, duration: 0.6, ease: "power2.out" }, 5.98);
+tl.to("#bC", { opacity: 0.2, duration: 0.8, ease: "sine.out" }, 5.98);
+move("#sC", v(857, 600, 1.75), v(656, 733, 1.347), 5.88, 3.47, "sine.inOut");
+move("#sC", v(656, 733, 1.347), v(650, 728, 1.39), 9.35, 1.85, "none");     // keeps breathing, never stops
+card("#t2", 8.4, 10.4);
+tl.to("#bC", { opacity: 0.75, duration: 0.8, ease: "sine.inOut" }, 9.6);     // the open wall's LEDs glow
 
-// D 10.2–13.6  dissolve back to the closed wall, easing out into the full centre (detail -> whole), lights up
-gsap.set("#sD", v(640, 610, 1.75));
-move("#sD", v(640, 610, 1.75), v(632, 667, 1.44), 10.2, 3.4, "sine.out");
-fadeIn("#LD", 10.2);
-gsap.set("#bD", { opacity: 0.15 });
-tl.to("#bD", { opacity: 0.6, duration: 0.8, ease: "sine.inOut" }, 12.2);
-
-// E 13.6–16  end card
-tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 13.6);
-tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 13.8);
-tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 14.1);
-tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 14.35);
+// E 11.0–15  end card
+tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 11.0);
+tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 11.2);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 11.5);
+tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 11.75);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
