@@ -19,7 +19,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
 
 /* real door faces (from the real closed photo); hinge sides from the real open photo */
 .door{position:absolute;top:282px;height:1491px;transform-style:preserve-3d}
-.door .face{position:absolute;inset:0;background-image:url(assets/room_closed.jpg);background-size:1357px 2411px;backface-visibility:hidden}
+.door .face{position:absolute;inset:0;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;backface-visibility:hidden}
 .door .shade{position:absolute;inset:0;background:#2a2018;opacity:0}
 .door .edge{position:absolute;top:0;width:22px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#cfc5b7,#b4a998)}
 #d1{left:41px;width:265px;transform-origin:0 50%}    #d1 .face{background-position:-41px -282px}   #d1 .edge{left:100%}
@@ -31,7 +31,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
 #sh3{left:776px;background:linear-gradient(90deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
 
 /* soft rectangular dimming around the real LED niche (max ~45%, fronts stay readable) */
-#night{position:absolute;left:586px;top:725px;width:190px;height:700px;box-shadow:0 0 120px 2600px rgba(14,10,7,.45);border-radius:6px}
+#night{position:absolute;left:586px;top:725px;width:190px;height:700px;box-shadow:0 0 120px 2600px rgba(42,27,14,.40);border-radius:6px}
 #spill{position:absolute;inset:0;background:radial-gradient(ellipse 280px 560px at 680px 1076px,rgba(255,170,85,.22),rgba(255,170,85,0) 75%);mix-blend-mode:screen}
 
 .t{position:absolute;direction:rtl;text-align:right;right:72px;left:72px;font-family:"Heebo";font-weight:850;letter-spacing:-.01em;line-height:1.04}
@@ -40,9 +40,10 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
 .lite{color:#fff;text-shadow:0 2px 22px rgba(0,0,0,.35)}
 .ink{color:#2a211b}
 #topshade{position:absolute;left:0;right:0;top:0;height:640px;background:linear-gradient(180deg,rgba(20,15,11,.6),rgba(20,15,11,0));opacity:0}
-#sign{position:absolute;left:0;right:0;top:1380px;display:flex;flex-direction:column;align-items:center;opacity:0}
-#sign img{width:170px}
-#sign div{margin-top:22px;font-family:"Heebo";font-weight:700;font-size:46px;color:#fff;direction:rtl;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+#endc{position:absolute;inset:0;background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+#endc img{width:290px}
+#endc .l1{margin-top:56px;font-family:"Heebo";font-weight:800;font-size:60px;color:#fff}
+#endc .l2{margin-top:18px;font-family:"Heebo";font-weight:400;font-size:40px;color:#e3d3bf}
 </style>
 </head>
 <body>
@@ -67,7 +68,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
     <div id="c2" class="t ink" style="top:1440px;font-size:96px"><div class="ln"><span>בין</span> <span>דלתות</span> <span>חלקות.</span></div></div>
     <div id="c3" class="t ink" style="top:1500px;font-size:96px"><div class="ln"><span>ומאחורי</span> <span>הדלתות,</span></div></div>
     <div id="c4" class="t lite" style="top:250px;font-size:110px"><div class="ln"><span>מקום</span> <span>לכל</span> <span>השאר.</span></div></div>
-    <div id="sign"><img src="assets/logo_light.png" alt="אבן ועץ" /><div>ארון ילדים בהתאמה אישית</div></div>
+    <div id="endc"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">ארון ילדים בהתאמה אישית</div><div class="l2">דברו איתנו בוואטסאפ</div></div>
   </div>
 </div>
 
@@ -132,13 +133,16 @@ swing("#d1", -1, 9.85, 0.75, false, false); swing("#d4", 1, 9.85, 0.75, false, f
 swing("#d2", 1, 9.85, 0.75, false, true);   swing("#d3", -1, 9.85, 0.75, false, true);
 cast("#sh2", 9.85, 0.75); cast("#sh3", 9.85, 0.75);
 
-// B9 10.6–15  wide, dimming returns, logo on the floor; slow push back to frame 0 (loop)
-tl.to(st, { ...view(680, 1205, 1.0), duration: 0.8, ease: "power2.out" }, 10.6);
+// B9 10.6–12.6  wide, dimming returns, slow push toward the glowing niche
+tl.to(st, { ...view(680, 1205, 1.0), duration: 0.7, ease: "power2.out" }, 10.6);
 tl.to("#night", { opacity: 1, duration: 0.9, ease: "power1.inOut" }, 10.7);
 tl.to("#spill", { opacity: 1, duration: 0.9 }, 10.7);
-tl.fromTo("#sign", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 11.1);
-tl.to("#sign", { opacity: 0, duration: 0.5 }, 13.7);
-tl.to(st, { ...NICHE, duration: 3.4, ease: "sine.inOut" }, 11.6);
+tl.to(st, { ...NICHE, duration: 2.3, ease: "sine.inOut" }, 11.3);
+// B10 12.7–15  end card on warm espresso
+tl.fromTo("#endc", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 12.7);
+tl.fromTo("#endc img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 12.9);
+tl.fromTo("#endc .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 13.2);
+tl.fromTo("#endc .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5 }, 13.45);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
