@@ -48,7 +48,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
   </div>
 
   <div id="endwrap" class="clip" data-start="0" data-duration="15" data-track-index="2" style="position:absolute;inset:0">
-    <div id="end"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">קיר טלוויזיה בהתאמה אישית.</div><div class="l2">לאטה מט ואגוז מוסקט.</div></div>
+    <div id="end"><div id="endin" style="display:flex;flex-direction:column;align-items:center"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">קיר טלוויזיה בהתאמה אישית.</div><div class="l2">לאטה מט ואגוז מוסקט.</div></div></div>
   </div>
 </div>
 
@@ -93,15 +93,15 @@ tl.fromTo("#glow", { opacity: 0, scaleX: 0.06 }, { opacity: 0.96, scaleX: 2.4, d
 gsap.set("#sC", v(857, 600, 1.75));
 tl.set(["#bC", "#bC2"], { opacity: 1 }, 5.88);
 tl.set(["#xC", "#xC2"], { opacity: 0.5 }, 5.88);
-fadeIn("#LC", 5.9, 0.067);
-tl.set("#LB", { opacity: 0 }, 5.97);
+fadeIn("#LC", 5.935, 0.033);   // swap lands on the brightest frame
+tl.set("#LB", { opacity: 0 }, 5.975);
 tl.to("#glow", { opacity: 0, scaleX: 0.06, duration: 0.65, ease: "power2.out" }, 5.98);
 tl.to(["#xC", "#xC2"], { opacity: 0, duration: 0.6, ease: "power2.out" }, 5.98);
 tl.to("#bC2", { opacity: 0, duration: 0.6, ease: "power2.out" }, 5.98);
 tl.to("#bC", { opacity: 0.2, duration: 0.8, ease: "sine.out" }, 5.98);
 move("#sC", v(857, 600, 1.75), v(656, 733, 1.347), 5.88, 3.47, "sine.inOut");
 move("#sC", v(656, 733, 1.347), v(650, 728, 1.39), 9.35, 1.85, "none");     // keeps breathing, never stops
-card("#t2", 8.4, 10.4);
+card("#t2", 9.2, 10.75);   // once the pull-out has settled: on the walnut base, clear of the TV
 tl.to("#bC", { opacity: 0.75, duration: 0.8, ease: "sine.inOut" }, 9.6);     // the open wall's LEDs glow
 
 // E 11.0–15  end card
@@ -109,6 +109,7 @@ tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut
 tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 11.2);
 tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 11.5);
 tl.fromTo("#end .l2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 11.75);
+tl.fromTo("#endin", { scale: 1 }, { scale: 1.045, duration: 4.0, ease: "none", immediateRender: false }, 11.0);   // the end card keeps breathing
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
