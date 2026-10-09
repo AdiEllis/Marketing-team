@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- Latte/walnut TV wall post (flow 2, CEO direction "material hierarchy"):
+     S1 frame-in-frame on brand dark with the headline on the field · S2 the wall from an angle, quiet · S3 open, payoff line + soft CTA -->
+<style>
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#d8b878;--dark:#1c1816}
+body{width:1080px;font-family:"Heebo"}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--dark)}
+.full{position:absolute;inset:0;width:1080px;height:1350px}
+.h{position:absolute;right:60px;direction:rtl;text-align:right;font:850 74px/1.08 "Heebo";letter-spacing:-.01em;color:#fff}
+.h em{font-style:normal;color:var(--gold)}
+.sub{position:absolute;right:60px;direction:rtl;font:500 34px "Heebo";color:#e6dccf}
+
+#s1 .pic{position:absolute;left:60px;top:296px;width:960px;height:823px}
+#s1 .h{top:62px}
+#s1 .sub{top:236px}
+#s1 .logo{position:absolute;left:50%;bottom:20px;width:112px;transform:translateX(-50%)}
+
+#s2 .logo{position:absolute;left:56px;bottom:46px;width:130px;opacity:.95}
+
+#s3 .shade{display:none}
+#s3 .h{top:auto;bottom:230px;font-size:84px}
+#s3 .sub{top:auto;bottom:178px}
+#s3 .foot{position:absolute;left:0;right:0;bottom:0;height:560px;background:linear-gradient(0deg,rgba(20,15,12,.88) 0%,rgba(20,15,12,.7) 55%,rgba(20,15,12,0))}
+#s3 .cta{position:absolute;right:60px;bottom:70px;direction:rtl;font:500 34px "Heebo";color:#d8b878}
+#s3 .logo{position:absolute;left:56px;bottom:46px;width:140px}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <div class="h">אגוז מוסקט במוקד.<br /><em>לאטה מט לכל השאר.</em></div>
+  <div class="sub">קיר טלוויזיה בהתאמה אישית</div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+  <img class="pic" src="s1.png" alt="" />
+</section>
+
+<section class="slide" id="s2">
+  <img class="full" src="s2.png" alt="" />
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+</section>
+
+<section class="slide" id="s3">
+  <img class="full" src="s3.png" alt="" />
+  <div class="foot"></div>
+  <div class="h">וכל השאר,<br /><em>מאחורי הדלתות.</em></div>
+  <div class="sub">אחסון נסתר מעל המסך ומצדיו</div>
+  <div class="cta">ספרו לנו מה אצלכם מוצג, ומה נסתר.</div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+</section>
+
+</body>
+</html>
