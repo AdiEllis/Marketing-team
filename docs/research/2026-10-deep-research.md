@@ -159,3 +159,5 @@
 - תמונות לפני/אחרי (ASA): https://www.asa.org.uk/advice-online/before-and-after-photos.html
 - Benchmarks של אינסטגרם 2025 (Socialinsider): https://www.socialinsider.io/data-geeks/instagram_benchmarks_2025.pdf
 - מדדי ביצועי קריאייטיב (Motion): https://motionapp.com/blog/key-creative-performance-metrics
+
+> **תיקון אחרי משוב:** המלצות מהמחקר על "Folio / מספור 1/5" ו"חץ החלקה" **נפסלו אצלנו.** הן נראות כמו ממשק אינסטגרם.
