@@ -22,18 +22,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
 .door .face{position:absolute;inset:0;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;backface-visibility:hidden}
 .door .back{position:absolute;inset:0;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;transform:rotateY(180deg) translateZ(1px);backface-visibility:hidden;filter:brightness(.86)}
 .door .shade{position:absolute;inset:0;opacity:0}
-.door .fs{position:absolute;left:4%;top:100%;width:92%;height:90px;transform-origin:50% 0;transform:rotateX(90deg);background:radial-gradient(ellipse 60% 100% at 50% 0,rgba(28,20,13,.45),rgba(28,20,13,0) 80%);filter:blur(10px);opacity:0}
+.door .fs{position:absolute;left:0;top:100%;width:100%;height:70px;transform-origin:50% 0;transform:rotateX(90deg);background:linear-gradient(180deg,rgba(20,14,9,.7) 0,rgba(20,14,9,.35) 10px,rgba(20,14,9,0) 100%);filter:blur(4px);opacity:0}
+.door .refl{position:absolute;left:0;top:100%;width:100%;height:420px;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;transform:scaleY(-1);transform-origin:50% 0;filter:blur(6px);opacity:0;-webkit-mask-image:linear-gradient(0deg,#000 0,transparent 100%)}
+.door .bot{position:absolute;left:0;bottom:0;width:100%;height:22px;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;opacity:0}
 .bay{position:absolute;top:282px;height:1491px;opacity:0}
-.door .edge{position:absolute;top:0;width:20px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#d9d0c3,#bfb4a4)}
-#d1{left:41px;width:265px;transform-origin:0 50%}    #d1 .face,#d1 .back{background-position:-41px -282px}   #d1 .edge{left:100%}   #d1 .shade{background:linear-gradient(90deg,rgba(40,30,22,1),rgba(40,30,22,.45))}
-#d2{left:306px;width:275px;transform-origin:100% 50%} #d2 .face,#d2 .back{background-position:-306px -282px}  #d2 .edge{left:0}   #d2 .shade{background:linear-gradient(270deg,rgba(40,30,22,1),rgba(40,30,22,.45))}
-#d3{left:776px;width:266px;transform-origin:0 50%}   #d3 .face,#d3 .back{background-position:-776px -282px}  #d3 .edge{left:100%}   #d3 .shade{background:linear-gradient(90deg,rgba(40,30,22,1),rgba(40,30,22,.45))}
-#d4{left:1042px;width:272px;transform-origin:100% 50%} #d4 .face,#d4 .back{background-position:-1042px -282px} #d4 .edge{left:0}   #d4 .shade{background:linear-gradient(270deg,rgba(40,30,22,1),rgba(40,30,22,.45))}
+.door .edge{position:absolute;top:0;width:11px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#8f8476 0,#8f8476 1px,#ddd4c7 2px,#c6bbab)}
+#d1{left:41px;width:265px;transform-origin:0 50%}    #d1 .face,#d1 .back{background-position:-41px -282px} #d1 .refl{background-position:-41px -1353px} #d1 .bot{background-position:-41px -1727px}   #d1 .edge{left:100%}   #d1 .shade{background:linear-gradient(90deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#d2{left:306px;width:275px;transform-origin:100% 50%} #d2 .face,#d2 .back{background-position:-306px -282px} #d2 .refl{background-position:-306px -1353px} #d2 .bot{background-position:-306px -1727px}  #d2 .edge{left:0}   #d2 .shade{background:linear-gradient(270deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#d3{left:776px;width:266px;transform-origin:0 50%}   #d3 .face,#d3 .back{background-position:-776px -282px} #d3 .refl{background-position:-776px -1353px} #d3 .bot{background-position:-776px -1727px}  #d3 .edge{left:100%}   #d3 .shade{background:linear-gradient(90deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#d4{left:1042px;width:272px;transform-origin:100% 50%} #d4 .face,#d4 .back{background-position:-1042px -282px} #d4 .refl{background-position:-1042px -1353px} #d4 .bot{background-position:-1042px -1727px} #d4 .edge{left:0}   #d4 .shade{background:linear-gradient(270deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
 /* interior is in the door's shadow until it swings away (darker toward the hinge) */
-#b1{left:41px;width:265px;background:linear-gradient(90deg,rgba(24,17,11,.75),rgba(24,17,11,.35))}
-#b2{left:306px;width:275px;background:linear-gradient(270deg,rgba(24,17,11,.75),rgba(24,17,11,.35))}
-#b3{left:776px;width:266px;background:linear-gradient(90deg,rgba(24,17,11,.75),rgba(24,17,11,.35))}
-#b4{left:1042px;width:272px;background:linear-gradient(270deg,rgba(24,17,11,.75),rgba(24,17,11,.35))}
+#bL{left:41px;width:540px;background:rgba(24,17,11,.62);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 60px,#000 480px,transparent 540px)}
+#bR{left:776px;width:538px;background:rgba(24,17,11,.62);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 60px,#000 478px,transparent 538px)}
 /* center column (small doors + niche) always from the closed photo: the open photo carries the open door's shadow on it */
 #col{position:absolute;left:583px;top:282px;width:191px;height:1491px;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;background-position:-583px -282px}
 .cast{position:absolute;top:282px;height:1491px;width:220px;opacity:0}
@@ -63,12 +63,12 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
     <div id="stage" data-layout-allow-overflow>
       <img src="assets/room_open.jpg" alt="" />
       <div id="col"></div>
-      <div class="bay" id="b1"></div><div class="bay" id="b2"></div><div class="bay" id="b3"></div><div class="bay" id="b4"></div>
+      <div class="bay" id="bL"></div><div class="bay" id="bR"></div>
       <div class="cast" id="sh2"></div><div class="cast" id="sh3"></div>
-      <div class="door" id="d1"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
-      <div class="door" id="d2"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
-      <div class="door" id="d3"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
-      <div class="door" id="d4"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
+      <div class="door" id="d1"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div class="door" id="d2"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div class="door" id="d3"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div class="door" id="d4"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
       <div id="night"></div>
       <div id="spill"></div>
     </div>
@@ -110,27 +110,28 @@ card("#c2", 2.0, 3.45);
 tl.to(st, { ...view(680, 1150, 1.12), duration: 0.35, ease: "power4.out" }, 3.6);
 
 // B4 4.0–6.6  signature: the doors open in a cascade on the beat (right to left), realistic swing
-const swing = (id, sign, at, dur, opening, fade) => {
+const swing = (id, sign, at, dur, opening, handover) => {
   const from = opening ? 0 : sign * 92, to = opening ? sign * 92 : 0;
-  const bay = "#b" + id.slice(2), ease = "power2.inOut";
-  if (!opening && fade) tl.set(id, { opacity: 1 }, at);
+  const ease = opening ? "power2.inOut" : "power2.in";
+  if (!opening && handover) tl.set(id, { opacity: 1 }, at);
   tl.fromTo(id, { rotationY: from }, { rotationY: to, duration: dur, ease, immediateRender: false }, at);
-  // the face turns away from the room light; the opening reveals an interior that starts in the door's shadow
-  tl.fromTo(id + " .shade", { opacity: opening ? 0 : 0.5 }, { opacity: opening ? 0.5 : 0, duration: dur, ease, immediateRender: false }, at);
-  tl.fromTo(id + " .fs", { opacity: opening ? 0 : 0.8 }, { opacity: opening ? 0.8 : 0, duration: dur, ease, immediateRender: false }, at);
-  if (opening) {
-    tl.set(bay, { opacity: 1 }, at);
-    tl.to(bay, { opacity: 0, duration: dur * 0.9, ease: "power1.in" }, at + dur * 0.15);
-  } else {
-    tl.fromTo(bay, { opacity: 0 }, { opacity: 1, duration: dur * 0.85, ease: "power1.out", immediateRender: false }, at);
-    tl.set(bay, { opacity: 0 }, at + dur);
-  }
-  if (opening && fade) tl.to(id, { opacity: 0, duration: 0.25 }, at + dur - 0.2);   // hand over to the same door in the real open photo
+  // face turns away from the room light (warm, max .28); contact shadow, faint floor reflection; baked floor line hidden while swinging
+  const on = { ".shade": 0.28, ".fs": 0.5, ".bot": 1 };
+  for (const [el, v] of Object.entries(on))
+    tl.fromTo(id + " " + el, { opacity: opening ? 0 : v }, { opacity: opening ? v : 0, duration: el === ".bot" ? 0.12 : dur, ease, immediateRender: false }, el === ".bot" && !opening ? at + dur - 0.12 : at);
+  if (opening && handover) tl.set(id, { opacity: 0 }, at + dur);   // one-frame hand-over to the same door in the real open photo (no ghost)
+};
+// interior of each bay sits in the doors' shadow until both its doors swing away (soft-edged, one layer per bay)
+const bayLight = (bay, from, to, opening) => {
+  if (opening) { tl.set(bay, { opacity: 1 }, from); tl.to(bay, { opacity: 0, duration: to - from, ease: "power1.inOut" }, from); }
+  else { tl.fromTo(bay, { opacity: 0 }, { opacity: 1, duration: to - from, ease: "power1.in", immediateRender: false }, from); tl.set(bay, { opacity: 0 }, to + 0.02); }
 };
 const cast = (id, at, dur) => { tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dur * 0.5, ease: "sine.out", immediateRender: false }, at);
   tl.to(id, { opacity: 0, duration: dur * 0.5, ease: "sine.in" }, at + dur * 0.5); };
 tl.set(["#d1", "#d2", "#d3", "#d4"], { rotationY: 0, opacity: 1 }, 0);
 swing("#d4", 1, 4.0, 1.3, true, false);
+bayLight("#bR", 4.0, 5.85, true);
+bayLight("#bL", 5.1, 6.95, true);
 swing("#d3", -1, 4.55, 1.3, true, true);  cast("#sh3", 4.55, 1.3);
 swing("#d2", 1, 5.1, 1.3, true, true);    cast("#sh2", 5.1, 1.3);
 swing("#d1", -1, 5.65, 1.3, true, false);
@@ -151,15 +152,17 @@ tl.to(st, { ...view(890, 1380, 1.62), duration: 1.4, ease: "sine.inOut" }, 8.05)
 
 // B8 9.4–10.6  back out, all doors close together (pattern break)
 tl.to(st, { ...view(680, 1150, 1.12), duration: 0.55, ease: "power3.inOut" }, 9.4);
-swing("#d1", -1, 10.05, 0.75, false, false); swing("#d4", 1, 10.05, 0.75, false, false);
-swing("#d2", 1, 10.05, 0.75, false, true);   swing("#d3", -1, 10.05, 0.75, false, true);
-cast("#sh2", 10.05, 0.75); cast("#sh3", 10.05, 0.75);
+// slightly staggered like real hands, soft-close landing ~11.15 (on the beat)
+swing("#d4", 1, 10.05, 1.05, false, false);  swing("#d3", -1, 10.1, 1.05, false, true);
+swing("#d2", 1, 10.13, 1.02, false, true);   swing("#d1", -1, 10.08, 1.07, false, false);
+cast("#sh2", 10.13, 1.02); cast("#sh3", 10.1, 1.05);
+bayLight("#bL", 10.1, 11.15, false); bayLight("#bR", 10.1, 11.15, false);
 
 // B9 10.6–12.6  wide, dimming returns, slow push toward the glowing niche
-tl.to(st, { ...view(680, 1205, 1.0), duration: 0.7, ease: "power2.out" }, 10.6);
-tl.to("#night", { opacity: 1, duration: 0.9, ease: "power1.inOut" }, 10.7);
-tl.to("#spill", { opacity: 1, duration: 0.9 }, 10.7);
-tl.to(st, { ...NICHE, duration: 2.3, ease: "sine.inOut" }, 11.3);
+tl.to(st, { ...view(680, 1205, 1.0), duration: 0.5, ease: "power2.out" }, 11.2);
+tl.to("#night", { opacity: 1, duration: 0.8, ease: "power1.inOut" }, 11.25);
+tl.to("#spill", { opacity: 1, duration: 0.8 }, 11.25);
+tl.to(st, { ...NICHE, duration: 1.1, ease: "sine.inOut" }, 11.65);
 // B10 12.7–15  end card on warm espresso
 tl.fromTo("#endc", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.inOut" }, 12.7);
 tl.fromTo("#endc img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 12.9);
