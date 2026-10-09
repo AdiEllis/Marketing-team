@@ -4,9 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" />
 <script src="assets/gsap.min.js"></script>
-<!-- Reel v3 (after the latte lessons): frame 0 is the complete wall already moving (no assembly on dark), no motion stops,
-     out of the dark screen by dissolve instead of a black frame. Everything she loved in v2 kept.
-     Reel v2 "לבן. שחור. ואור." — signature: the wall assembles from its real front panels (slices on the real joints),
+<!-- Reel v2 "לבן. שחור. ואור." — signature: the wall assembles from its real front panels (slices on the real joints),
      portal through the black screen, the vitrine fills with light (real unlit/lit pair, rising mask),
      door-fold to the hidden shelves, detail burst, hard stop on the hero. ~13 words on screen. -->
 <style>
@@ -29,7 +27,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 #sweep{position:absolute;top:-400px;left:0;width:520px;height:2800px;background:linear-gradient(90deg,rgba(255,250,240,0) 0%,rgba(255,250,240,.55) 50%,rgba(255,250,240,0) 100%);mix-blend-mode:screen;opacity:0;transform:rotate(18deg)}
 #flash{position:absolute;inset:0;background:#fff;opacity:0}
 #blk{position:absolute;inset:0;background:#000;opacity:0}
-#mark{position:absolute;left:64px;top:1365px;width:110px;opacity:0}
+#mark{position:absolute;left:64px;top:1410px;width:140px;opacity:0}
 #curtain{position:absolute;inset:0;background:#1c1816}
 #end{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl;opacity:0}
 #end .logo{width:300px}
@@ -46,6 +44,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
     <div id="wU" class="lay"><div id="sU" class="st"><img src="assets/unlit.png" alt="" /></div></div>
     <div id="wL" class="lay"><div id="sL" class="st"><img src="assets/lit.jpg" alt="" /></div></div>
     <div id="wF" class="lay"><div id="sF" class="st"><img src="assets/front.jpg" alt="" /></div></div>
+    <!-- the wall assembling from its four real front panels (clip edges = real joints) -->
+    <div id="k0" class="lay" style="clip-path:inset(0 754px 0 0)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="k1" class="lay" style="clip-path:inset(0 455px 0 325px)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="k2" class="lay" style="clip-path:inset(0 179px 0 624px)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
+    <div id="k3" class="lay" style="clip-path:inset(0 0 0 900px)"><div class="st sk"><img src="assets/front.jpg" alt="" /></div></div>
     <!-- detail burst -->
     <div id="d1" class="lay dump"><div class="st"><img src="assets/front.jpg" alt="" /></div></div>
     <div id="d2" class="lay dump"><div class="st"><img src="assets/lit.jpg" alt="" /></div></div>
@@ -60,8 +63,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
   <div id="txt" class="clip" data-start="0" data-duration="16" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t ink" style="right:72px;top:330px;font-size:250px"><div class="ln"><span>לבן.</span></div></div>
     <div id="t2" class="t wht" style="right:150px;top:880px;font-size:230px"><div class="ln"><span>שחור.</span></div></div>
-    <div id="t3" class="t gold" style="right:560px;top:490px;font-size:210px"><div class="ln"><span>ואור.</span></div></div>
-    <div id="t4" class="t wht" style="right:112px;top:1070px;font-size:112px;line-height:1.02"><div class="ln"><span>אחסון</span></div><div class="ln"><span>נסתר.</span></div></div>
+    <div id="t3" class="t gold" style="right:560px;top:470px;font-size:250px"><div class="ln"><span>ואור.</span></div></div>
+    <div id="t4" class="t wht" style="right:60px;top:1060px;font-size:130px;line-height:1.02"><div class="ln"><span>אחסון</span></div><div class="ln"><span>נסתר.</span></div></div>
     <div id="t5" class="t ink" style="right:330px;top:330px;font-size:120px;line-height:1.02"><div class="ln"><span>גימור</span></div><div class="ln"><span>מוקפד.</span></div></div>
     <img id="mark" src="assets/logo_light.png" alt="אבן ועץ" />
   </div>
@@ -88,68 +91,55 @@ const showText = (sel, at, out) => {
   tl.to(sel + " span", { yPercent: -110, duration: 0.3, stagger: 0.05, ease: "power3.in" }, out);
 };
 
-// ── B1 0–1.45  frame 0: the whole white wall, already pushing in (complete photo, no assembly on dark)
-// frame 0 and the push keep the source's old logo (bottom-left, x<255) and mute icon (bottom-right, x>1057) out of frame
-const F0 = view("F", 656, 733, 1.06);
-gsap.set("#wF", { opacity: 1 });
-gsap.set("#sF", F0);
-tl.fromTo("#sF", F0, { ...view("F", 640, 760, 1.1), duration: 1.45, ease: "none", immediateRender: false }, 0);
-showText("#t1", 0.3, 1.4);
-tl.fromTo("#mark", { opacity: 0 }, { opacity: 0.95, duration: 0.4, immediateRender: false }, 0.5);
+// ── B1 0–1.2  HOOK: the wall assembles from its real front panels (motion from frame 0)
+const F0 = view("F", 650, 733, 1.03);
+gsap.set(["#sF", ".sk"], F0);
+["#k0", "#k1", "#k2", "#k3"].forEach((k, i) => {
+  tl.fromTo(k, { y: i % 2 ? 1300 : -1300 }, { y: 0, duration: 0.85, ease: "expo.out" }, i * 0.08);
+});
+tl.set("#wF", { opacity: 1 }, 1.2);
+tl.set(["#k0", "#k1", "#k2", "#k3"], { opacity: 0 }, 1.2);
+showText("#t1", 0.45, 1.45);
+tl.fromTo("#mark", { opacity: 0 }, { opacity: 0.95, duration: 0.4 }, 0.6);
 tl.to("#mark", { opacity: 0, duration: 0.25 }, 2.05);
 
-// ── B2 1.45–2.8  punch toward the black screen on the beat, keep drifting, then dive into it
-tl.to("#sF", { ...view("F", 620, 795, 1.18), duration: 0.35, ease: "power3.out" }, 1.45);
-tl.to("#sF", { ...view("F", 610, 805, 1.24), duration: 0.4, ease: "none" }, 1.8);
+// ── B2 1.2–2.3  punch toward the black screen
+tl.fromTo("#sF", F0, { ...view("F", 560, 800, 1.18), duration: 0.35, ease: "power4.out", immediateRender: false }, 1.45);
 showText("#t2", 1.6, 2.15);
-tl.to("#sF", { ...view("F", 560, 820, 6), duration: 0.52, ease: "power2.in" }, 2.2);
+// portal: dive into the black screen
+tl.to("#sF", { ...view("F", 520, 840, 7), duration: 0.55, ease: "power3.in" }, 2.2);
+tl.to("#blk", { opacity: 1, duration: 0.2 }, 2.55);
 
-// ── B3 2.6–4.9  out of the dark screen: dissolve into the unlit wall (pulling out of the dark), the vitrine fills with light
-gsap.set(["#wU", "#wL"], { opacity: 0 });
-// zoom-through the real dark screen (power2.in into the cut, power2.out after): cut at peak speed when the
-// screen glass fills the frame, burst out of the dark onto the unlit wall; the camera never stops
-tl.set(["#wU", "#wL"], { opacity: 1 }, 2.72);
-tl.set("#wF", { opacity: 0 }, 2.72);
-tl.fromTo("#blk", { opacity: 0.85 }, { opacity: 0, duration: 0.28, ease: "power1.out", immediateRender: false }, 2.72);
-gsap.set(["#sU", "#sL"], view("U", 870, 720, 1.45));   // camera for 2.72–6.3 is the single path `cam` below
+// ── B3 2.75–4.9  out of the dark: the vitrine fills with light (real unlit -> lit, rising mask)
+tl.set(["#wU", "#wL"], { opacity: 1 }, 2.75);
+tl.set("#wF", { opacity: 0 }, 2.75);
+tl.fromTo(["#sU", "#sL"], view("U", 860, 720, 1.33), { ...view("U", 830, 760, 1.25), duration: 2.2, ease: "sine.out", immediateRender: false }, 2.75);
+tl.to("#blk", { opacity: 0, duration: 0.35 }, 2.75);
 const fill = { p: -20 };
 const setMask = () => {
   const m = fill.p >= 118 ? "none" : `linear-gradient(to top,#000 ${fill.p}%,transparent ${fill.p + 15}%)`;
   const el = document.getElementById("wL");
   el.style.webkitMaskImage = m; el.style.maskImage = m;
 };
-tl.fromTo(fill, { p: -20 }, { p: 120, duration: 1.5, ease: "power2.inOut", onUpdate: setMask, immediateRender: false }, 3.2);
+tl.fromTo(fill, { p: -20 }, { p: 120, duration: 1.5, ease: "power2.inOut", onUpdate: setMask }, 3.2);
 showText("#t3", 3.75, 4.75);
 
 // ── B4 4.9–6.3  HERO hold (no text): pull back to the whole wall, a sheen crosses the glass
-// ONE camera path for 2.72–6.3 (no competing tweens): burst out of the dark (power2.out), then the hero
-// pull-back on a computed arc — pan left first (power3.out), zoom out on sine.inOut, lift 20px mid-way — so the
-// source screenshot's mute icon (bottom-right) and n/6 badge (top-right) never enter the frame
-const p2o = t => 1 - Math.pow(1 - t, 2), p3o = t => 1 - Math.pow(1 - t, 3), sio = t => -(Math.cos(Math.PI * t) - 1) / 2;
-const outOfDark = T => { const a = p2o(Math.min(1, (T - 2.72) / 3.0)); return { cx: 870 - 40 * a, cy: 720 + 40 * a, z: 1.45 - 0.21 * a }; };
-const HS = outOfDark(4.9), HE = { cx: 660, cy: 785, z: 1.12 };
-const cam = { T: 2.72 };
-tl.fromTo(cam, { T: 2.72 }, { T: 6.3, duration: 3.58, ease: "none", immediateRender: false, onUpdate: () => {
-  const T = cam.T;
-  let c;
-  if (T < 4.9) c = outOfDark(T);
-  else { const u = (T - 4.9) / 1.4; c = { cx: HS.cx + (HE.cx - HS.cx) * p3o(u), cy: HS.cy + (HE.cy - HS.cy) * sio(u) - 20 * Math.sin(Math.PI * u), z: HS.z + (HE.z - HS.z) * sio(u) }; }
-  gsap.set(["#sU", "#sL"], view("U", c.cx, c.cy, c.z));
-} }, 2.72);
+tl.to(["#sU", "#sL"], { ...view("L", 685, 775, 1.12), duration: 1.3, ease: "power2.inOut" }, 4.9);
 tl.fromTo("#sweep", { x: -700, opacity: 0.0 }, { x: 1300, opacity: 0.0, duration: 0.9, ease: "power1.inOut",
   keyframes: { opacity: [0, 0.45, 0.45, 0] } }, 5.4);
 
 // ── B5 6.3–7.0  the wall swings open like a door -> hidden shelves behind it
 tl.set("#wO", { opacity: 1 }, 6.3);
 tl.set("#wU", { opacity: 0 }, 6.3);
-tl.fromTo("#sO", view("O", 640, 640, 1.18), { ...view("O", 612, 645, 1.21), duration: 0.75, ease: "none", immediateRender: false }, 6.3);
+tl.fromTo("#sO", view("O", 640, 640, 1.18), { ...view("O", 610, 640, 1.2), duration: 0.8, ease: "power2.out", immediateRender: false }, 6.3);
 tl.fromTo("#wL", { rotationY: 0, transformOrigin: "100% 50%" }, { rotationY: -100, duration: 0.7, ease: "power2.in", transformOrigin: "100% 50%" }, 6.3);
 tl.fromTo("#wL", { filter: "brightness(1)" }, { filter: "brightness(0.55)", duration: 0.7, ease: "power2.in", immediateRender: false }, 6.3);
 tl.set("#wL", { opacity: 0 }, 7.0);
 
 // ── B6 7.0–9.8  speed-ramp tilt down the hidden shelves
-tl.to("#sO", { ...view("O", 575, 660, 1.27), duration: 0.5, ease: "power3.out" }, 7.05);
-tl.to("#sO", { ...view("O", 560, 720, 1.31), duration: 2.25, ease: "none" }, 7.55);
+tl.to("#sO", { ...view("O", 575, 660, 1.27), duration: 0.5, ease: "power4.out" }, 7.1);
+tl.to("#sO", { ...view("O", 560, 720, 1.3), duration: 2.1, ease: "sine.inOut" }, 7.6);
 showText("#t4", 7.5, 9.45);
 
 // ── B7 9.8–11.1  detail burst (5 real crops, 0.26s each)
@@ -159,7 +149,7 @@ dumps.forEach(([id, k, cx, cy], i) => {
   tl.set(id + " .st", view(k, cx, cy, 1.36), 0);
   tl.set(id, { opacity: 1 }, t);
   tl.fromTo(id + " .st", view(k, cx, cy, 1.36), { ...view(k, cx, cy, 1.3), duration: 0.26, ease: "none", immediateRender: false }, t);
-  tl.fromTo("#flash", { opacity: i === 4 ? 0.4 : 0.22 }, { opacity: 0, duration: 0.12, immediateRender: false }, t);
+  tl.fromTo("#flash", { opacity: 0.35 }, { opacity: 0, duration: 0.12, immediateRender: false }, t);
   if (i > 0) tl.set(dumps[i - 1][0], { opacity: 0 }, t);
 });
 tl.set("#wO", { opacity: 0 }, 9.8);
@@ -168,19 +158,18 @@ tl.set("#wO", { opacity: 0 }, 9.8);
 tl.set("#wL", { opacity: 1, rotationY: 0, filter: "brightness(1)" }, 11.1);
 tl.set("#d5", { opacity: 0 }, 11.1);
 tl.fromTo("#sL", view("L", 685, 775, 1.2), { ...view("L", 685, 775, 1.12), duration: 0.5, ease: "power4.out", immediateRender: false }, 11.1);
-tl.to("#sL", { ...view("L", 690, 770, 1.16), duration: 1.6, ease: "none" }, 11.6);
+tl.to("#sL", { ...view("L", 690, 770, 1.15), duration: 1.6, ease: "sine.inOut" }, 11.6);
 showText("#t5", 11.35, 12.95);
 tl.fromTo("#sweep", { x: -700, opacity: 0 }, { x: 1300, duration: 1.0, ease: "power1.inOut",
   keyframes: { opacity: [0, 0.35, 0.35, 0] }, immediateRender: false }, 11.9);
 
 // ── B9 13.2–16  curtain in the brand dark, end card
 tl.fromTo("#curtain", { scaleX: 0, transformOrigin: "100% 50%" }, { scaleX: 1, duration: 0.45, ease: "power3.inOut", transformOrigin: "100% 50%" }, 13.2);
-tl.to("#end", { opacity: 1, duration: 0.01 }, 13.6);
-tl.fromTo("#end .logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.6);
+tl.to("#end", { opacity: 1, duration: 0.01 }, 13.65);
+tl.fromTo("#end .logo", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 13.7);
 tl.fromTo("#end .rule", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.0);
 tl.fromTo("#end .l1", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 14.15);
 tl.fromTo("#end .pill", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5 }, 14.4);
-tl.fromTo("#end", { scale: 1 }, { scale: 1.04, duration: 2.35, ease: "none", immediateRender: false }, 13.65);   // the end card keeps breathing
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;

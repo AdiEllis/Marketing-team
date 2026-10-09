@@ -41,6 +41,8 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--planned-cuts", default="")
     ap.add_argument("--rest-from", type=float, default=None, help="time after which static frames are allowed (end card / final rest)")
+    ap.add_argument("--dark-ok", default="", help="planned dark windows, e.g. 2.4-2.8 (zoom-through a REAL dark element such as a TV screen); must be named in the plan")
+    ap.add_argument("--frame0-dark-is-product", action="store_true", help="the dark area touching the edge in frame 0 is real product (e.g. a black base); QA must confirm on first.png")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     cap = cv2.VideoCapture(a.video)
@@ -65,14 +67,19 @@ def main():
         cv2.imwrite(os.path.join(a.out, "last.png"), fl)
     e0 = empty_fraction(f0)
     lines.append(f"frame0 empty fraction: {e0:.3f}")
-    if e0 > 0.02:
+    if e0 > 0.02 and a.frame0_dark_is_product:
+        lines.append("frame0: dark edge area declared as real product - QA must confirm on first.png")
+    elif e0 > 0.02:
         fails.append(f"FRAME 0 NOT COMPLETE: {e0*100:.1f}% empty/dark-flat")
 
     # black / empty frames
+    dark_ok = [tuple(map(float, w.split("-"))) for w in a.dark_ok.split(",") if w.strip()]
     for i, f in enumerate(frames):
         e = empty_fraction(f)
         if e > 0.35:
             t = i / fps
+            if any(lo <= t <= hi for lo, hi in dark_ok):
+                continue
             if t < rest:
                 fails.append(f"empty/black frame at {t:.2f}s ({e*100:.0f}%)")
                 break
