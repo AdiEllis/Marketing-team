@@ -10,6 +10,8 @@
 body{width:1080px;font-family:"Heebo"}
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:#1c1816}
 .full{position:absolute;inset:0;width:1080px;height:1350px}
+.band{position:absolute;left:0;bottom:0;width:1080px;display:block}
+.blend{position:absolute;left:0;right:0;height:200px;background:linear-gradient(180deg,#1c1816 0%,rgba(28,24,22,.75) 45%,rgba(28,24,22,0) 100%)}
 .shade{position:absolute;left:0;right:0;top:0;height:560px;background:linear-gradient(180deg,rgba(18,14,12,.68) 0%,rgba(18,14,12,.42) 48%,rgba(18,14,12,0) 100%)}
 .foot{position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(0deg,rgba(18,14,12,.6) 0%,rgba(18,14,12,.3) 50%,rgba(18,14,12,0) 100%)}
 .head{position:absolute;top:70px;right:64px;left:64px;text-align:right;direction:rtl}
@@ -26,7 +28,7 @@ body{width:1080px;font-family:"Heebo"}
 <body>
 
 <section class="slide">
-  <img class="full" src="front.png" alt="" /><div class="shade"></div><div class="foot"></div>
+  <img class="band" src="front.png" alt="" style="height:1114px" /><div class="blend" style="top:236px"></div><div class="foot"></div>
   <div class="head"><div class="h1">עץ חם לטלוויזיה.</div><div class="h2">חזיתות שקטות מסביב.</div>
     <div class="sub">קיר טלוויזיה בלאטה מט ואגוז מוסקט</div></div>
   <div class="vig"></div><img class="logo" src="logo_light.png" alt="אבן ועץ" />
@@ -39,7 +41,7 @@ body{width:1080px;font-family:"Heebo"}
 </section>
 
 <section class="slide">
-  <img class="full" src="wide.png" alt="" /><div class="foot"></div>
+  <img class="band" src="wide.png" alt="" style="height:1175px" /><div class="blend" style="top:175px"></div><div class="foot"></div>
   
   <div class="vig"></div><img class="logo" src="logo_light.png" alt="אבן ועץ" />
   <div class="cta"><div class="a">לתכנון קיר משלכם</div><div class="b">דברו איתנו בוואטסאפ</div></div>
