@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- Kids closet post (flow 2, after CEO idea gate): quiet cover (real photo) -> open, bold line -> dark amber niche slide -> logo end with a project-specific CTA -->
+<style>
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#1f1a17;--gold:#d8b878;--amber:#c08a4e}
+body{width:1080px;font-family:"Heebo"}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden}
+.rtl{direction:rtl;text-align:right}
+.full{position:absolute;inset:0;width:1080px;height:1350px}
+
+/* S1 quiet luxury cover */
+#s1 .foot{position:absolute;left:0;right:0;bottom:0;height:340px;background:linear-gradient(0deg,rgba(24,18,14,.62),rgba(24,18,14,0))}
+#s1 .cap{position:absolute;right:64px;bottom:64px;font:700 50px "Heebo";letter-spacing:.02em;color:#fff;direction:rtl}
+#s1 .cap i{display:inline-block;width:46px;height:2px;background:var(--gold);vertical-align:middle;margin-left:16px}
+#s1 .logo{position:absolute;left:56px;bottom:46px;width:156px}
+
+/* S2 open, bold line */
+#s2 .shade{position:absolute;left:0;right:0;top:0;height:560px;background:linear-gradient(180deg,rgba(24,18,14,.78),rgba(24,18,14,.72) 40%,rgba(24,18,14,0))}
+#s2 .h{position:absolute;right:64px;top:70px;font:850 86px/1.06 "Heebo";letter-spacing:-.01em;color:#fff;direction:rtl}
+#s2 .h em{font-style:normal;color:var(--gold)}
+
+/* S3 dark amber + big niche */
+#s3{background:radial-gradient(120% 90% at 50% 70%,#3a2516 0%,#21150d 70%)}
+#s3 .h{position:absolute;right:64px;top:84px;font:850 92px/1.04 "Heebo";color:#fff;direction:rtl}
+#s3 .h em{font-style:normal;color:var(--gold)}
+#s3 .pic{position:absolute;left:199px;top:360px;width:682px;height:943px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+
+/* S4 logo end */
+#s4{background:linear-gradient(180deg,#4a3323,#2b1d13)}
+#s4 .logo{position:absolute;left:50%;top:280px;width:260px;transform:translateX(-50%)}
+#s4 .rule{display:none}
+#s4 .q{position:absolute;left:0;right:0;top:790px;text-align:center;font:800 60px "Heebo";color:#fff;direction:rtl}
+#s4 .a{position:absolute;left:0;right:0;top:885px;text-align:center;font:400 44px "Heebo";color:#e9dccb;direction:rtl}
+#s4 .w{position:absolute;left:0;right:0;top:965px;text-align:center;font:500 34px "Heebo";color:#d8b878;direction:rtl}
+</style>
+</head>
+<body>
+
+<section class="slide" id="s1">
+  <img class="full" src="s1.png" alt="" />
+  <div class="foot"></div>
+  <div class="cap">תכנון אישי לחדר ילדים</div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+</section>
+
+<section class="slide" id="s3">
+  <img class="full" src="full.png" alt="" />
+</section>
+
+<section class="slide" id="s2">
+  <img class="full" src="s2.png" alt="" />
+  <div class="shade"></div>
+  <div class="h">מבחוץ, חזית נקייה.<br /><em>מבפנים, מדף אחרי מדף.</em></div>
+</section>
+
+<section class="slide" id="s4">
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+  <div class="rule"></div>
+  <div class="q">מתכננים חדר ילדים?</div>
+  <div class="a">פגישת ייעוץ והדמיה ללא עלות</div>
+  <div class="w">דברו איתנו בוואטסאפ</div>
+</section>
+
+</body>
+</html>
