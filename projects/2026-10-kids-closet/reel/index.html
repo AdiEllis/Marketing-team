@@ -26,6 +26,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
 #d2{left:306px;width:275px;transform-origin:100% 50%} #d2 .face{background-position:-306px -282px}  #d2 .edge{left:0}
 #d3{left:776px;width:266px;transform-origin:0 50%}   #d3 .face{background-position:-776px -282px}  #d3 .edge{left:100%}
 #d4{left:1042px;width:272px;transform-origin:100% 50%} #d4 .face{background-position:-1042px -282px} #d4 .edge{left:0}
+/* center column (small doors + niche) always from the closed photo: the open photo carries the open door's shadow on it */
+#col{position:absolute;left:583px;top:282px;width:191px;height:1491px;background-image:url(assets/room_closed_fix.jpg);background-size:1357px 2411px;background-position:-583px -282px}
 .cast{position:absolute;top:282px;height:1491px;width:220px;opacity:0}
 #sh2{left:361px;background:linear-gradient(270deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
 #sh3{left:776px;background:linear-gradient(90deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
@@ -52,6 +54,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#0d0a08}
   <div id="cam" class="clip" data-start="0" data-duration="15" data-track-index="0">
     <div id="stage" data-layout-allow-overflow>
       <img src="assets/room_open.jpg" alt="" />
+      <div id="col"></div>
       <div class="cast" id="sh2"></div><div class="cast" id="sh3"></div>
       <div class="door" id="d1"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
       <div class="door" id="d2"><div class="face"></div><div class="shade"></div><div class="edge"></div></div>
@@ -129,9 +132,9 @@ tl.to(st, { ...view(890, 1380, 1.62), duration: 1.4, ease: "sine.inOut" }, 8.05)
 
 // B8 9.4–10.6  back out, all doors close together (pattern break)
 tl.to(st, { ...view(680, 1150, 1.12), duration: 0.55, ease: "power3.inOut" }, 9.4);
-swing("#d1", -1, 9.85, 0.75, false, false); swing("#d4", 1, 9.85, 0.75, false, false);
-swing("#d2", 1, 9.85, 0.75, false, true);   swing("#d3", -1, 9.85, 0.75, false, true);
-cast("#sh2", 9.85, 0.75); cast("#sh3", 9.85, 0.75);
+swing("#d1", -1, 10.05, 0.75, false, false); swing("#d4", 1, 10.05, 0.75, false, false);
+swing("#d2", 1, 10.05, 0.75, false, true);   swing("#d3", -1, 10.05, 0.75, false, true);
+cast("#sh2", 10.05, 0.75); cast("#sh3", 10.05, 0.75);
 
 // B9 10.6–12.6  wide, dimming returns, slow push toward the glowing niche
 tl.to(st, { ...view(680, 1205, 1.0), duration: 0.7, ease: "power2.out" }, 10.6);
