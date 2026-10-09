@@ -25,7 +25,14 @@ def empty_fraction(frame):
     # flat regions: low local variance AND very dark or uniform brand-dark (#1c1816 ~ 24)
     lap = np.abs(cv2.Laplacian(g, cv2.CV_32F, ksize=3))
     flat = cv2.blur((lap < 2).astype(np.float32), (25, 25)) > 0.97
-    return float((dark | (flat & (g < 40))).mean())
+    m = (dark | (flat & (g < 40))).astype(np.uint8)
+    # empty canvas reaches the frame edge (bento gaps, half-open masks, black frames); a dark TV screen
+    # inside the photo does not, so only border-connected dark-flat regions count
+    n, lab = cv2.connectedComponents(m)
+    edge = set(np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))) - {0}
+    if not edge:
+        return 0.0
+    return float(np.isin(lab, list(edge)).mean())
 
 
 def main():
