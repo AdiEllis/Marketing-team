@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <!-- Walnut + slat wall post v2. IDEA: "some of the lines in this wall are doors". S1 the closed wall with the REAL door
      seams traced in fine gold + "שימו לב לקווים. / חלק מהם נפתחים."; S2 swipe: the same wall open, the SAME gold lines now trace the doors/drawer that opened (no text);
-     Lines = thin dashed bronze marking (no glow, so they never read as LED). S2 lines on the opened doors = the concept itself (documented exception to "no layers on a text-free slide"). S3 the lit close-up: "ובין הקווים, / עץ ואור." + logo. Whole photos, no bands. CTA in the caption. -->
+     Lines = thin dashed bronze marking (no glow, so they never read as LED). Only what really opens is marked (upper door, tall door, drawer 2). Lines = thin solid bronze hairline, no glow (never reads as LED), clipped 8px inside the edges. S2 lines on the opened doors = the concept itself (documented exception to "no layers on a text-free slide"). S3 the lit close-up: "ובין הקווים, / עץ ואור." + logo. Whole photos, no bands. CTA in the caption. -->
 <style>
 @font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -12,11 +12,11 @@ body{width:1080px;font-family:"Heebo"}
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden}
 .full{position:absolute;inset:0;width:1080px;height:1350px}
 svg.lines{position:absolute;inset:0;width:1080px;height:1350px}
-svg.lines polygon{fill:none;stroke:#b8862f;stroke-width:3;stroke-dasharray:16 10;stroke-linecap:round;stroke-linejoin:round}
+svg.lines polygon{fill:none;stroke:#b8862f;stroke-width:3;stroke-linejoin:round}
 .h{position:absolute;direction:rtl;text-align:right;font:850 78px/1.08 "Heebo";letter-spacing:-.01em;color:#24170f}
-.h em{display:block;font-style:normal;color:#4a2e12}
+.h em{display:block;font-style:normal;color:#3d240c}
 #s1 .h{right:64px;top:1108px}
-#s3 .h{right:150px;top:150px;font-size:76px}
+#s3 .h{right:150px;top:172px;font-size:76px}
 #s3 .h em{color:#4a2e12}
 #s3 .logo{position:absolute;left:52px;bottom:30px;width:100px}
 </style>
@@ -24,17 +24,16 @@ svg.lines polygon{fill:none;stroke:#b8862f;stroke-width:3;stroke-dasharray:16 10
 <body>
 <section class="slide" id="s1">
   <img class="full" src="p_closed.png" alt="" />
-  <svg class="lines" viewBox="0 0 1080 1350"><polygon points="36.6,71.5 248.2,163.1 248.2,316.0 36.6,255.6" />
+  <svg class="lines" viewBox="0 0 1080 1350"><defs><clipPath id="in"><rect x="8" y="8" width="1064" height="1334"/></clipPath></defs><g clip-path="url(#in)"><polygon points="36.6,71.5 248.2,163.1 248.2,316.0 36.6,255.6" />
 <polygon points="370.1,216.2 477.3,257.4 477.3,999.4 370.1,1031.5" />
-<polygon points="0.0,806.1 249.2,787.8 249.2,856.5 0.0,893.1" />
 <polygon points="0.0,893.1 249.2,856.5 249.2,964.6 0.0,1019.5" />
-<polygon points="0.0,1019.5 249.2,964.6 249.2,1069.0 0.0,1140.5" /></svg>
+</g></svg>
   <div class="h">שימו לב לקווים.<em>חלק מהם נפתחים.</em></div>
 </section>
 <section class="slide" id="s2"><img class="full" src="p_open.png" alt="" />
-  <svg class="lines" viewBox="0 0 1080 1350"><polygon points="245.5,144.7 343.5,76.0 343.5,252.8 245.5,298.6" />
+  <svg class="lines" viewBox="0 0 1080 1350"><defs><clipPath id="in"><rect x="8" y="8" width="1064" height="1334"/></clipPath></defs><g clip-path="url(#in)"><polygon points="245.5,144.7 343.5,76.0 343.5,252.8 245.5,298.6" />
 <polygon points="510.2,250.1 610.1,213.4 610.1,1014.0 510.2,981.1" />
-<polygon points="52.2,903.2 320.6,862.0 320.6,955.4 52.2,1018.6" /></svg>
+<polygon points="52.2,903.2 320.6,862.0 320.6,955.4 52.2,1018.6" /></g></svg>
 </section>
 <section class="slide" id="s3">
   <img class="full" src="p_detail.png" alt="" />
