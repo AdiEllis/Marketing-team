@@ -4,95 +4,189 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" />
 <script src="assets/gsap.min.js"></script>
-<!-- Walnut + slat wall reel v1 "נראה כמו קיר. / עובד כמו ארון." Signature: the wall-trick — three hard cuts ON THE BEAT
-     between the real closed and open photos (same angle, aligned) while ONE camera keeps pushing (never restarts),
-     each switch faster; long look on the open tall cabinet; motion dissolve to the real close-up, its LEDs breathe;
-     end card with her own line. (3D door animation rejected: the two photos have parallax at the near cabinets.) -->
+<!-- Walnut + slat wall reel v2 — "נראה כמו קיר. / עובד כמו ארון."
+     Signature: the REAL doors swing open in true 3D (calibrated camera: f=1100px, wall vanishing point; each door rotates
+     about its real hinge and is projected per frame with matrix3d), revealing the REAL interior; the drawer slides out;
+     then everything closes again in reverse and the wall is "just a wall"; one whip to the lit close-up; end card. -->
 <style>
 @font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 #root{width:100%;height:100%;position:relative;overflow:hidden;background:#1c1816}
 .lay{position:absolute;inset:0;overflow:hidden}
-.st{position:absolute;left:0;top:0;width:1179px}
-.st img{position:absolute;left:0;top:0;display:block;width:1179px}
-.st img.bl{mix-blend-mode:screen;opacity:0}
+.st{position:absolute;left:0;top:0;width:1179px;height:1473px}
+.st img.ph{position:absolute;left:0;top:0;display:block;width:1179px}
+.st img.bl{position:absolute;left:0;top:0;width:1179px;mix-blend-mode:screen;opacity:0}
+.q{position:absolute;left:0;top:0;transform-origin:0 0;backface-visibility:visible}
 .t{position:absolute;direction:rtl;text-align:right;font-family:"Heebo";font-weight:850;line-height:1.02;letter-spacing:-.01em;white-space:nowrap;color:#24170f}
 .t .ln{display:block;overflow:hidden;padding:0 6px 12px}
 .t span{display:inline-block}
 .t em{font-style:normal;color:#3d2410}
 #end{position:absolute;inset:0;background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
-#endin{display:flex;flex-direction:column;align-items:center}
+#endglow{position:absolute;left:190px;top:470px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%);opacity:0}
+#endin{position:relative;display:flex;flex-direction:column;align-items:center}
 #end img{width:280px}
 #end .l1{margin-top:60px;font-family:"Heebo";font-weight:800;font-size:64px;line-height:1.15;color:#fff;text-align:center}
 #end .l1 em{font-style:normal;color:#d8b878}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="16.5" data-width="1080" data-height="1920">
 
-  <div id="scene" class="clip" data-start="0" data-duration="15" data-track-index="0" style="position:absolute;inset:0">
-    <div id="LC" class="lay"><div class="st" id="sC"><img src="assets/closed.png" alt="" /><img class="bl" id="bC" src="assets/closed_bloom.jpg" alt="" /></div></div>
-    <div id="LO" class="lay"><div class="st" id="sO"><img src="assets/open.png" alt="" /><img class="bl" id="bO" src="assets/open_bloom.jpg" alt="" /></div></div>
-    <div id="LD" class="lay"><div class="st" id="sD"><img src="assets/detail.png" alt="" /><img class="bl" id="bD" src="assets/detail_bloom.jpg" alt="" /></div></div>
+  <div id="scene" class="clip" data-start="0" data-duration="16.5" data-track-index="0" style="position:absolute;inset:0">
+    <div id="LC" class="lay"><div class="st" id="sC">
+      <img class="ph" src="assets/closed.png" alt="" />
+      <img class="bl" id="bC" src="assets/closed_bloom.jpg" alt="" />
+      <img class="ph" id="in_upper" src="assets/interior_upper.png" alt="" style="opacity:0" />
+      <img class="ph" id="in_ward" src="assets/interior_ward.png" alt="" style="opacity:0" />
+      <div class="q" id="sh_upper" style="width:100px;height:100px;background:#0e0b09"></div>
+      <div class="q" id="sh_ward" style="width:100px;height:100px;background:#0e0b09"></div>
+      <div class="q" id="dr_cav" style="width:100px;height:100px;background:#151312;opacity:0"></div>
+      <img class="q" id="dr_side" src="assets/drawer_side.png" alt="" style="opacity:0" />
+      <img class="q" id="dr_top" src="assets/drawer_top.png" alt="" style="opacity:0" />
+      <img class="q" id="dr_front" src="assets/drawer_front.png" alt="" />
+      <div class="q" id="ed_upper" style="width:10px;height:100px;background:linear-gradient(90deg,#a59c90,#bdb4a7)"></div>
+      <div class="q" id="ed_ward" style="width:10px;height:100px;background:linear-gradient(90deg,#a59c90,#bdb4a7)"></div>
+      <img class="q" id="f_upper" src="assets/door_upper_front.png" alt="" />
+      <img class="q" id="k_upper" src="assets/door_upper_back.png" alt="" />
+      <div class="q" id="s_upper" style="width:400px;height:274px;background:#120d09"></div>
+      <img class="q" id="f_ward" src="assets/door_ward_front.png" alt="" />
+      <img class="q" id="k_ward" src="assets/door_ward_back.png" alt="" />
+      <div class="q" id="s_ward" style="width:260px;height:1496px;background:#120d09"></div>
+    </div></div>
+    <div id="LD" class="lay"><div class="st" id="sD"><img class="ph" src="assets/detail.png" alt="" /><img class="bl" id="bD" src="assets/detail_bloom.jpg" alt="" /></div></div>
   </div>
 
-  <div id="txt" class="clip" data-start="0" data-duration="15" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t" style="right:40px;top:1440px;font-size:80px"><div class="ln"><span>נראה</span> <span>כמו</span> <span><em>קיר.</em></span></div></div>
-    <div id="t2" class="t" style="left:385px;width:240px;text-align:center;top:930px;font-size:86px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)"><div class="ln"><span>עובד</span></div><div class="ln"><span>כמו</span></div><div class="ln"><span style="color:#ffd99a">ארון.</span></div></div>
+  <div id="txt" class="clip" data-start="0" data-duration="16.5" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t" style="right:150px;top:1440px;font-size:80px"><div class="ln"><span>נראה</span> <span>כמו</span> <span><em>קיר.</em></span></div></div>
+    <div id="t2" class="t" style="left:416px;width:180px;text-align:center;top:780px;font-size:74px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)"><div class="ln"><span>עובד</span></div><div class="ln"><span>כמו</span></div><div class="ln"><span style="color:#ffd99a">ארון.</span></div></div>
   </div>
 
-  <div id="endwrap" class="clip" data-start="0" data-duration="15" data-track-index="2" style="position:absolute;inset:0">
-    <div id="end"><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">כל קיר יכול לעשות<br /><em>הרבה יותר.</em></div></div></div>
+  <div id="endwrap" class="clip" data-start="0" data-duration="16.5" data-track-index="2" style="position:absolute;inset:0">
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">כל קיר יכול לעשות<br /><em>הרבה יותר.</em></div></div></div>
   </div>
 </div>
 
 <script>
+const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-416.09243192286596, 10.496939450417477, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-415.31386732213537, 138.0697890334754, 0.0]], "tw": 400, "th": 308, "open": 102}, "ward": {"P": [[-131.1014522695481, 15.003054598103201, 0.0], [0.07212386249824772, 11.817961737798113, 0.0], [4.5659952950813985, 748.1678854006075, 0.0], [-126.63356864238304, 747.0947081205998, 0.0]], "tw": 260, "th": 1455, "open": 98}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
 const tl = gsap.timeline({ paused: true });
 const v = (cx, cy, s) => ({ scale: s, x: 540 - cx * s, y: 960 - cy * s });
 gsap.set(".st", { transformOrigin: "0 0" });
+
+// ---------- true-3D projection (calibrated camera of the closed photo) ----------
+const Kf = RIG.K[0][0], Kcx = RIG.K[0][2], Kcy = RIG.K[1][2];
+const proj = P => { const c = [0, 1, 2].map(i => RIG.O[i] + P[0] * RIG.rx[i] + P[1] * RIG.ry[i] + P[2] * RIG.rz[i]);
+  return [Kf * c[0] / c[2] + Kcx, Kf * c[1] / c[2] + Kcy]; };
+function homog(w, ht, q) {              // rect (0,0)(w,0)(w,ht)(0,ht) -> quad q
+  const src = [[0, 0], [w, 0], [w, ht], [0, ht]], A = [], b = [];
+  for (let i = 0; i < 4; i++) { const [x, y] = src[i], [X, Y] = q[i];
+    A.push([x, y, 1, 0, 0, 0, -x * X, -y * X]); b.push(X); A.push([0, 0, 0, x, y, 1, -x * Y, -y * Y]); b.push(Y); }
+  for (let c = 0; c < 8; c++) { let p = c; for (let r = c + 1; r < 8; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
+    [A[c], A[p]] = [A[p], A[c]]; [b[c], b[p]] = [b[p], b[c]];
+    for (let r = 0; r < 8; r++) if (r !== c) { const f = A[r][c] / A[c][c]; for (let k = c; k < 8; k++) A[r][k] -= f * A[c][k]; b[r] -= f * b[c]; } }
+  const h = b.map((v, i) => v / A[i][i]); return [h[0], h[1], h[2], h[3], h[4], h[5], h[6], h[7], 1];
+}
+const m3d = H => `matrix3d(${H[0]},${H[3]},0,${H[6]},${H[1]},${H[4]},0,${H[7]},0,0,1,0,${H[2]},${H[5]},0,${H[8]})`;
+const put = (el, w, h, q) => { el.style.transform = m3d(homog(w, h, q)); };
+const $ = id => document.getElementById(id);
+const add = (P, d) => [P[0] + d[0], P[1] + d[1], P[2] + d[2]];
+const T = 3.2;                                   // door thickness (world units, ~1.8 cm)
+
+function door(name, phi) {
+  const D = RIG.doors[name], P = D.P, hx = P[1][0];
+  const rot = p => { const dx = p[0] - hx; return [hx + dx * Math.cos(phi), p[1], -dx * Math.sin(phi)]; };
+  const R = P.map(rot), q = R.map(proj);
+  const n = [Math.sin(phi), 0, Math.cos(phi)];          // face normal (toward the camera when closed)
+  const f = $("f_" + name), k = $("k_" + name), s = $("s_" + name), e = $("ed_" + name);
+  // which face the camera sees = sign of the projected area (not the angle): no wrong-face frames, no pop
+  const area = q2 => { let a = 0; for (let i = 0; i < 4; i++) { const p = q2[i], r = q2[(i + 1) % 4]; a += p[0] * r[1] - r[0] * p[1]; } return a; };
+  const s0 = Math.sign(area(P.map(proj)));
+  if (Math.sign(area(q)) === s0) {
+    put(f, D.tw, D.th, q); f.style.opacity = 1; k.style.opacity = 0;
+    put(s, D.tw, D.th, q); s.style.opacity = 0.22 * Math.sin(Math.min(phi, 1.4));
+  } else {
+    const qb = [q[1], q[0], q[3], q[2]];
+    put(k, D.tw, D.th, qb); k.style.opacity = 1; f.style.opacity = 0;
+    put(s, D.tw, D.th, qb); s.style.opacity = 0.12 * Math.max(0, 1 - phi / 1.9);
+  }
+  $("in_" + name).style.opacity = phi > 0.004 ? 1 : 0;
+  // the free edge shows the door's real thickness while it swings
+  const e0 = R[0], e3 = R[3], back = [-T * n[0], 0, -T * n[2]];
+  put(e, 10, 100, [proj(e0), proj(add(e0, back)), proj(add(e3, back)), proj(e3)]);
+  e.style.opacity = phi > 0.02 ? 1 : 0;
+  // the revealed interior sits in the door's shadow until it swings away
+  const qi = P.map(proj); put($("sh_" + name), 100, 100, qi);
+  $("sh_" + name).style.opacity = phi < 0.004 ? 0 : 0.6 * Math.max(0, 1 - phi / 1.25);
+}
+function drawer(d) {
+  const D = RIG.drawer, P = D.P, z = [0, 0, d];
+  const F = P.map(p => add(p, z));
+  put($("dr_front"), D.tw, D.th, F.map(proj));
+  const on = Math.min(1, d / 10);
+  put($("dr_cav"), 100, 100, P.map(proj)); $("dr_cav").style.opacity = on;
+  put($("dr_top"), 400, 120, [P[0], P[1], F[1], F[0]].map(proj)); $("dr_top").style.opacity = on;
+  put($("dr_side"), 60, 160, [P[0], F[0], F[3], P[3]].map(proj)); $("dr_side").style.opacity = on;
+}
+const ST = { up: 0, wa: 0, dr: 0 };
+const upd = () => { door("upper", ST.up); door("ward", ST.wa); drawer(ST.dr); };
+upd();
+const UPMAX = RIG.doors.upper.open * Math.PI / 180, WAMAX = RIG.doors.ward.open * Math.PI / 180, DRMAX = RIG.drawer.pull;
+const swing = (key, to, at, dur, ease) => tl.to(ST, { [key]: to, duration: dur, ease, onUpdate: upd }, at);
+
 const card = (sel, at, out) => {
   tl.fromTo(sel + " span", { yPercent: 115 }, { yPercent: 0, duration: 0.45, stagger: 0.07, ease: "power3.out", immediateRender: false }, at);
   tl.to(sel + " span", { yPercent: -115, duration: 0.3, stagger: 0.04, ease: "power2.in" }, out);
 };
 gsap.set(".t span", { yPercent: 115 });
-gsap.set(["#LO", "#LD"], { opacity: 0 });
+gsap.set("#LD", { opacity: 0 });
 
-// A 0–7.35  ONE camera over the aligned closed/open pair: a steady push from the wall toward the tall cabinet
-const A0 = v(500, 750, 1.33), A1 = v(470, 690, 1.6);
-gsap.set(["#sC", "#sO"], A0);
-tl.fromTo(["#sC", "#sO"], A0, { ...A1, duration: 6.95, ease: "none", immediateRender: false }, 0);
-gsap.set(["#bC", "#bO"], { opacity: 0.2 });
-card("#t1", 0.3, 1.45);   // fully gone before the first cut at 2.0
-// the wall-trick: hard cuts on the beat (120 bpm), each switch faster; the camera never stops
-tl.set("#LO", { opacity: 1 }, 2.0);    // open
-tl.set("#LO", { opacity: 0 }, 3.0);    // closed
-tl.set("#LO", { opacity: 1 }, 3.5);    // open — and stay
-card("#t2", 3.62, 6.2);
-tl.to("#bO", { opacity: 0.6, duration: 1.0, ease: "sine.inOut" }, 4.6);   // the niche LED glows on the long look
+// A 0–1.9  frame 0: the whole wall, closed, already pushing (one continuous camera move until the close)
+const A0 = v(470, 748, 1.335), AIN = v(476, 690, 1.75), AW = v(760, 740, 1.36);
+gsap.set("#sC", A0);
+tl.fromTo("#sC", A0, { ...AIN, duration: 7.3, ease: "none", immediateRender: false }, 0);
+gsap.set("#bC", { opacity: 0.2 });
+tl.to("#bC", { opacity: 0.6, duration: 1.2, ease: "sine.inOut" }, 0.3);
+card("#t1", 0.3, 1.6);
 
-// D 6.95–12.9  ONE whip to the real close-up, done INSIDE the photos (the frame is always full): the camera on the wall
-// accelerates right with motion blur, the close-up arrives already moving right, blur 14 -> 0, then keeps gliding right
-const D0 = v(372, 720, 1.5), D1 = v(560, 700, 1.42), D2 = v(600, 735, 1.31);
-const AW = v(760, 690, 1.6);
-tl.to(["#sC", "#sO"], { ...AW, duration: 0.24, ease: "power2.in" }, 6.95);
-tl.fromTo("#LO", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, 6.95);
-tl.set("#LD", { opacity: 1, filter: "blur(14px)" }, 7.19);
-tl.set(["#LC", "#LO"], { opacity: 0 }, 7.19);
-tl.to("#LD", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 7.19);
-gsap.set("#sD", D0);
-tl.fromTo("#sD", D0, { ...D2, duration: 5.7, ease: "sine.out", immediateRender: false }, 7.19);   // ONE glide, slowing only toward the end
-gsap.set("#bD", { opacity: 0.15 });
-tl.to("#bD", { opacity: 0.75, duration: 1.1, ease: "sine.inOut" }, 8.3);
-tl.to("#bD", { opacity: 0.3, duration: 1.2, ease: "sine.inOut" }, 9.4);
-tl.to("#bD", { opacity: 0.7, duration: 1.0, ease: "sine.inOut" }, 11.0);
+// B 1.9–4.4  SIGNATURE: the real doors swing open one by one on the beat (120 bpm), the drawer glides out
+swing("up", UPMAX, 1.86, 1.35, "power2.inOut");
+swing("wa", WAMAX, 2.62, 1.6, "power2.inOut");
+swing("dr", DRMAX, 3.35, 1.1, "power2.inOut");
+// C 4.4–7.3  the camera keeps pushing INTO the open closet: real shelves, rod, drawer
+card("#t2", 4.6, 7.0);
+tl.to("#bC", { opacity: 0.3, duration: 1.0, ease: "sine.inOut" }, 4.4);
+// D 7.3–9.0  everything closes again in reverse while the camera pulls back: it is "just a wall" again
+// one accelerating move from inside the closet straight into the whip (no stop before it)
+tl.to("#sC", { ...AW, duration: 1.94, ease: "power2.in" }, 7.3);
+swing("dr", 0, 7.35, 0.8, "power2.out");
+swing("wa", 0, 7.5, 1.15, "power2.inOut");
+swing("up", 0, 7.8, 1.0, "power2.inOut");
+tl.to("#bC", { opacity: 0.65, duration: 0.8, ease: "sine.inOut" }, 8.5);
 
-// E 12.6–15.5  end card, her own line
-tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 12.6);
+// E 9.0–14.0  ONE whip (inside the photos) to the real close-up; glide along slats to the walnut + LED; lights breathe
+const D0 = v(520, 720, 1.55), D2 = v(610, 735, 1.31);
+tl.fromTo("#sC", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, 9.0);
+tl.set("#LD", { opacity: 1 }, 9.24);
+tl.set("#sD", { filter: "blur(14px)" }, 9.24);
+tl.set("#LC", { opacity: 0 }, 9.24);
+tl.to("#sD", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 9.24);
+// the close-up lands still travelling in the whip's direction, then continues the glide at the same speed
+const DIN = { ...D0, x: D0.x + 225 };
+gsap.set("#sD", DIN);
+tl.fromTo("#sD", DIN, { ...D0, duration: 0.6, ease: "power1.out", immediateRender: false }, 9.24);
+tl.fromTo("#sD", D0, { ...D2, duration: 4.4, ease: "none", immediateRender: false }, 9.84);
+gsap.set("#bD", { opacity: 0.05 });
+tl.to("#bD", { opacity: 1.0, duration: 1.4, ease: "sine.inOut" }, 9.8);
+tl.to("#bD", { opacity: 0.2, duration: 1.3, ease: "sine.inOut" }, 11.2);
+tl.to("#bD", { opacity: 0.9, duration: 1.3, ease: "sine.inOut" }, 12.5);
+
+// F 14.0–16.5  end card, her own line; the card keeps moving (slow push + warm light swelling behind the logo)
 gsap.set(["#end img", "#end .l1"], { opacity: 0 });
-tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 13.1);
-tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 13.4);
-tl.fromTo("#endin", { scale: 1 }, { scale: 1.07, duration: 2.4, ease: "none", immediateRender: false }, 12.6);
+tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 14.0);
+tl.fromTo("#endglow", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1.15, duration: 2.5, ease: "sine.out", immediateRender: false }, 14.0);
+tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 14.3);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 14.6);
+tl.fromTo("#endin", { scale: 1 }, { scale: 1.07, duration: 2.5, ease: "none", immediateRender: false }, 14.0);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
