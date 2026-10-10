@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- Walnut + slat wall post v1 (archetype: detail-first cover). Whole real photos, zero overlays.
+     S1 the close-up, headline on the calm white panels; S2 the whole wall closed; S3 the whole wall open. CTA in caption. -->
+<style>
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;font-family:"Heebo"}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden}
+.full{position:absolute;inset:0;width:1080px;height:1350px}
+#s1 .h{position:absolute;right:150px;top:150px;font:850 92px/1.05 "Heebo";letter-spacing:-.01em;color:#24170f;direction:rtl;text-align:right}
+#s1 .h em{display:block;font-style:normal;font-weight:800;font-size:60px;color:#4a2e12;margin-top:6px}
+#s1 .logo{position:absolute;left:52px;bottom:40px;width:104px}
+</style>
+</head>
+<body>
+<section class="slide" id="s1">
+  <img class="full" src="p_detail.png" alt="" />
+  <div class="h">מדויק<em>עד הקו האחרון.</em></div>
+  <img class="logo" src="logo_alpha.png" alt="אבן ועץ" />
+</section>
+<section class="slide" id="s2"><img class="full" src="p_closed.png" alt="" /></section>
+<section class="slide" id="s3"><img class="full" src="p_open.png" alt="" /></section>
+</body>
+</html>

@@ -54,7 +54,8 @@
 - **קרוסלה:** HTML, ואז צילום מסך עם `/opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell --no-sandbox --allow-file-access-from-files --virtual-time-budget=3000 --window-size=1080,<5×1350> --screenshot=...`, וחיתוך לשקפים.
 - **עיבוד תמונה** (`studio/tools/`, מריצים עם `python3 -I`):
   - `align.py`: יישור תמונה לתמונה (זוג סגור/פתוח, או מקור מול הרחבת AI).
-  - `patch.py`: הסרת סימני UI או לוגו ישן בהעתקת שטח אמיתי סמוך (Poisson).
+  - `unwatermark.py`: **הסרת הלוגו הישן** (התאמת תבנית ללוגו המותג, מילוי בטון ובטקסטורה אמיתית). מתאים לרצפה ולמשטחים חלקים.
+  - `patch.py`: הסרת סימני UI בהעתקת שטח אמיתי סמוך (Poisson).
   - `set_extension.py`: הרכבת הצילום האמיתי על הרחבת סביבה שנוצרה ב-AI.
   - `grade.py`: שיפור צילום (Levels, חום, Clarity, רוויה). חובה לפוסטים. ללוגו: `studio/assets/logo_light.png` (רקע כהה), `logo_alpha.png` (רקע בהיר).
 - **פתיחת דלתות או מגירות מונפשת** (אהובה, חייבת להיות ריאליסטית. רק כשלעבודה יש דלתות או מגירות, ויש צילום "פתוח" אמיתי): ראו `agents/creator.md` והדוגמה ב-`projects/2026-10-kids-closet/reel/index.html`.
