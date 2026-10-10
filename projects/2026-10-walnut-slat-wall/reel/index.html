@@ -36,7 +36,8 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
     <div id="LC" class="lay"><div class="st" id="sC">
       <img class="ph" src="assets/closed.png" alt="" />
       <img class="bl" id="bC" src="assets/closed_bloom.jpg" alt="" />
-      <img class="ph" id="inter" src="assets/interior.png" alt="" />
+      <img class="ph" id="in_upper" src="assets/interior_upper.png" alt="" style="opacity:0" />
+      <img class="ph" id="in_ward" src="assets/interior_ward.png" alt="" style="opacity:0" />
       <div class="q" id="sh_upper" style="width:100px;height:100px;background:#0e0b09"></div>
       <div class="q" id="sh_ward" style="width:100px;height:100px;background:#0e0b09"></div>
       <div class="q" id="dr_cav" style="width:100px;height:100px;background:#151312;opacity:0"></div>
@@ -56,7 +57,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
   </div>
 
   <div id="txt" class="clip" data-start="0" data-duration="14" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t" style="right:40px;top:1440px;font-size:80px"><div class="ln"><span>נראה</span> <span>כמו</span> <span><em>קיר.</em></span></div></div>
+    <div id="t1" class="t" style="right:150px;top:1440px;font-size:80px"><div class="ln"><span>נראה</span> <span>כמו</span> <span><em>קיר.</em></span></div></div>
     <div id="t2" class="t" style="left:448px;width:180px;text-align:center;top:780px;font-size:68px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)"><div class="ln"><span>עובד</span></div><div class="ln"><span>כמו</span></div><div class="ln"><span style="color:#ffd99a">ארון.</span></div></div>
   </div>
 
@@ -66,7 +67,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 </div>
 
 <script>
-const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-416.09243192286596, 10.496939450417477, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-415.31386732213537, 138.0697890334754, 0.0]], "tw": 400, "th": 308, "open": 150}, "ward": {"P": [[-130.07804641392778, 16.308258160575935, 0.0], [0.0, 0.0, 0.0], [4.682503072963184, 767.2584389770507, 0.0], [-125.55628450420161, 757.2282170420764, 0.0]], "tw": 260, "th": 1496, "open": 172}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
+const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-416.09243192286596, 10.496939450417477, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-415.31386732213537, 138.0697890334754, 0.0]], "tw": 400, "th": 308, "open": 102}, "ward": {"P": [[-131.1014522695481, 15.003054598103201, 0.0], [0.07212386249824772, 11.817961737798113, 0.0], [4.5659952950813985, 748.1678854006075, 0.0], [-126.63356864238304, 747.0947081205998, 0.0]], "tw": 260, "th": 1455, "open": 98}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
 const tl = gsap.timeline({ paused: true });
 const v = (cx, cy, s) => ({ scale: s, x: 540 - cx * s, y: 960 - cy * s });
 gsap.set(".st", { transformOrigin: "0 0" });
@@ -96,27 +97,31 @@ function door(name, phi) {
   const R = P.map(rot), q = R.map(proj);
   const n = [Math.sin(phi), 0, Math.cos(phi)];          // face normal (toward the camera when closed)
   const f = $("f_" + name), k = $("k_" + name), s = $("s_" + name), e = $("ed_" + name);
-  if (phi < Math.PI / 2) {
+  // which face the camera sees = sign of the projected area (not the angle): no wrong-face frames, no pop
+  const area = q2 => { let a = 0; for (let i = 0; i < 4; i++) { const p = q2[i], r = q2[(i + 1) % 4]; a += p[0] * r[1] - r[0] * p[1]; } return a; };
+  const s0 = Math.sign(area(P.map(proj)));
+  if (Math.sign(area(q)) === s0) {
     put(f, D.tw, D.th, q); f.style.opacity = 1; k.style.opacity = 0;
-    put(s, D.tw, D.th, q); s.style.opacity = 0.2 * Math.sin(phi);              // turning away from the room light
+    put(s, D.tw, D.th, q); s.style.opacity = 0.22 * Math.sin(Math.min(phi, 1.4));
   } else {
     const qb = [q[1], q[0], q[3], q[2]];
     put(k, D.tw, D.th, qb); k.style.opacity = 1; f.style.opacity = 0;
-    put(s, D.tw, D.th, qb); s.style.opacity = 0.16 * Math.max(0, Math.sin(phi)) * (phi < 2.6 ? 1 : 0.5);
+    put(s, D.tw, D.th, qb); s.style.opacity = 0.12 * Math.max(0, 1 - phi / 1.9);
   }
+  $("in_" + name).style.opacity = phi > 0.004 ? 1 : 0;
   // the free edge shows the door's real thickness while it swings
   const e0 = R[0], e3 = R[3], back = [-T * n[0], 0, -T * n[2]];
   put(e, 10, 100, [proj(e0), proj(add(e0, back)), proj(add(e3, back)), proj(e3)]);
-  e.style.opacity = phi > 0.02 && phi < 3.0 ? 1 : 0;
+  e.style.opacity = phi > 0.02 ? 1 : 0;
   // the revealed interior sits in the door's shadow until it swings away
   const qi = P.map(proj); put($("sh_" + name), 100, 100, qi);
-  $("sh_" + name).style.opacity = phi < 0.001 ? 0 : 0.6 * Math.max(0, 1 - phi / 1.25);
+  $("sh_" + name).style.opacity = phi < 0.004 ? 0 : 0.6 * Math.max(0, 1 - phi / 1.25);
 }
 function drawer(d) {
   const D = RIG.drawer, P = D.P, z = [0, 0, d];
   const F = P.map(p => add(p, z));
   put($("dr_front"), D.tw, D.th, F.map(proj));
-  const on = d > 0.5 ? 1 : 0;
+  const on = Math.min(1, d / 10);
   put($("dr_cav"), 100, 100, P.map(proj)); $("dr_cav").style.opacity = on;
   put($("dr_top"), 400, 120, [P[0], P[1], F[1], F[0]].map(proj)); $("dr_top").style.opacity = on;
   put($("dr_side"), 60, 160, [P[0], F[0], F[3], P[3]].map(proj)); $("dr_side").style.opacity = on;
@@ -135,7 +140,7 @@ gsap.set(".t span", { yPercent: 115 });
 gsap.set("#LD", { opacity: 0 });
 
 // A 0–2.0  frame 0: the whole wall, closed, already pushing; the niche LED breathes
-const A0 = v(470, 760, 1.33), A1 = v(455, 700, 1.52), A2 = v(470, 760, 1.33);
+const A0 = v(470, 748, 1.335), A1 = v(455, 700, 1.52), A2 = v(470, 748, 1.335);
 gsap.set("#sC", A0);
 tl.fromTo("#sC", A0, { ...A1, duration: 6.2, ease: "none", immediateRender: false }, 0);
 gsap.set("#bC", { opacity: 0.2 });
@@ -143,9 +148,9 @@ tl.to("#bC", { opacity: 0.6, duration: 1.2, ease: "sine.inOut" }, 0.3);
 card("#t1", 0.3, 1.5);
 
 // B 2.0–3.9  SIGNATURE: the real doors swing open in a cascade on the beat (120 bpm), the drawer glides out
-swing("up", UPMAX, 2.0, 1.25, "power2.inOut");
-swing("wa", WAMAX, 2.5, 1.5, "power2.inOut");
-swing("dr", DRMAX, 3.0, 0.9, "power3.out");
+swing("up", UPMAX, 1.86, 1.15, "power2.inOut");
+swing("wa", WAMAX, 2.36, 1.35, "power2.inOut");
+swing("dr", DRMAX, 2.92, 0.9, "power3.out");
 // C 3.9–6.3  long look into the open closet
 card("#t2", 4.05, 6.0);
 tl.to("#bC", { opacity: 0.25, duration: 1.0, ease: "sine.inOut" }, 4.2);
@@ -160,10 +165,11 @@ tl.to("#bC", { opacity: 0.65, duration: 0.8, ease: "sine.inOut" }, 7.5);
 const AW = v(760, 760, 1.33);
 const D0 = v(372, 720, 1.5), D2 = v(600, 735, 1.31);
 tl.to("#sC", { ...AW, duration: 0.24, ease: "power2.in" }, 7.95);
-tl.fromTo("#LC", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, 7.95);
-tl.set("#LD", { opacity: 1, filter: "blur(14px)" }, 8.19);
+tl.fromTo("#sC", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, 7.95);
+tl.set("#LD", { opacity: 1 }, 8.19);
+tl.set("#sD", { filter: "blur(14px)" }, 8.19);
 tl.set("#LC", { opacity: 0 }, 8.19);
-tl.to("#LD", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 8.19);
+tl.to("#sD", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 8.19);
 gsap.set("#sD", D0);
 tl.fromTo("#sD", D0, { ...D2, duration: 3.4, ease: "sine.out", immediateRender: false }, 8.19);
 gsap.set("#bD", { opacity: 0.15 });

@@ -25,8 +25,8 @@ def proj(Pw):
 
 # closed-photo door quads (TL, TR, BR, BL), hinge on the RIGHT edge for all doors (seen open in the open photo)
 DOORS = {
-    "upper": {"quad": [(40, 78), (271, 178), (271, 345), (40, 279)], "open": 150},
-    "ward":  {"quad": [(405, 238), (521, 268), (521, 1112), (405, 1138)], "open": 172},
+    "upper": {"quad": [(40, 78), (271, 178), (271, 345), (40, 279)], "open": 102},
+    "ward":  {"quad": [(404, 236), (521, 281), (521, 1091), (404, 1126)], "open": 98},
 }
 DRAWER = {"quad": [(0, 975), (272, 935), (272, 1053), (0, 1113)], "pull": 0.0}
 # open-photo interior quads (TL, TR, BR, BL) to fit into the openings

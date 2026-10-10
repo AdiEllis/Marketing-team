@@ -16,15 +16,15 @@ for n, d in DOORS.items():
     cv2.imwrite(A + f"door_{n}_front.png", rect(closed, d["quad"], tw, th))
     cv2.imwrite(A + f"door_{n}_back.png", rect(openi, BACKQ[n], tw, th))
     rig["doors"][n] = {"P": [p.tolist() for p in P], "tw": tw, "th": th, "open": d["open"]}
-# interior layer: real interiors fitted into the openings
+# interior layers (one per door): the real interior fitted into each opening, shown only while that door is open
 H_, W_ = closed.shape[:2]
-lay = np.zeros((H_, W_, 4), np.uint8)
 for n, d in DOORS.items():
+    lay = np.zeros((H_, W_, 4), np.uint8)
     Hm = cv2.getPerspectiveTransform(np.float32(INTERIOR[n]), np.float32(d["quad"]))
     w = cv2.warpPerspective(openi, Hm, (W_, H_), flags=cv2.INTER_LANCZOS4)
     m = np.zeros((H_, W_), np.uint8); cv2.fillConvexPoly(m, np.int32(np.round(d["quad"])), 255)
-    lay[m > 0, :3] = w[m > 0]; lay[..., 3] = np.maximum(lay[..., 3], m)
-cv2.imwrite(A + "interior.png", lay)
+    lay[m > 0, :3] = w[m > 0]; lay[..., 3] = m
+    cv2.imwrite(A + f"interior_{n}.png", lay)
 # drawer
 Pd = [back(*p) for p in DRAWER["quad"]]
 dw = np.linalg.norm(Pd[1] - Pd[0]); dh = np.linalg.norm(Pd[3] - Pd[0])
