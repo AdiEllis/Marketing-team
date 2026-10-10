@@ -2,26 +2,40 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8" />
-<!-- Walnut + slat wall post v1 (archetype: detail-first cover). Whole real photos, zero overlays.
-     S1 the close-up, headline on the calm white panels; S2 the whole wall closed; S3 the whole wall open. CTA in caption. -->
+<!-- Walnut + slat wall post v2. IDEA: "some of the lines in this wall are doors". S1 the closed wall with the REAL door
+     seams traced in fine gold + "שימו לב לקווים. / חלק מהם נפתחים."; S2 swipe: the same wall open (the answer), no text;
+     S3 the lit close-up: "ובין הדלתות, / עץ ואור." + logo. Whole photos, no bands. CTA in the caption. -->
 <style>
 @font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px;font-family:"Heebo"}
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden}
 .full{position:absolute;inset:0;width:1080px;height:1350px}
-#s1 .h{position:absolute;right:150px;top:150px;font:850 92px/1.05 "Heebo";letter-spacing:-.01em;color:#24170f;direction:rtl;text-align:right}
-#s1 .h em{display:block;font-style:normal;font-weight:800;font-size:60px;color:#4a2e12;margin-top:6px}
-#s1 .logo{position:absolute;left:52px;bottom:40px;width:104px}
+svg.lines{position:absolute;inset:0;width:1080px;height:1350px}
+svg.lines polygon{fill:none;stroke:#e9c98a;stroke-width:3.2;stroke-linejoin:round;filter:drop-shadow(0 0 5px rgba(255,214,140,.9)) drop-shadow(0 0 14px rgba(255,196,110,.55))}
+.h{position:absolute;direction:rtl;text-align:right;font:850 78px/1.08 "Heebo";letter-spacing:-.01em;color:#24170f}
+.h em{display:block;font-style:normal;color:#6b4515}
+#s1 .h{right:64px;top:1108px}
+#s3 .h{right:150px;top:150px;font-size:76px}
+#s3 .h em{color:#4a2e12}
+#s3 .logo{position:absolute;left:52px;bottom:30px;width:100px}
 </style>
 </head>
 <body>
 <section class="slide" id="s1">
+  <img class="full" src="p_closed.png" alt="" />
+  <svg class="lines" viewBox="0 0 1080 1350"><polygon points="5.5,58.6 248.2,163.1 248.2,316.0 5.5,245.5" />
+<polygon points="371.0,218.0 477.3,245.5 477.3,1018.6 371.0,1042.4" />
+<polygon points="0.0,806.1 249.2,787.8 249.2,856.5 0.0,893.1" />
+<polygon points="0.0,893.1 249.2,856.5 249.2,964.6 0.0,1019.5" />
+<polygon points="0.0,1019.5 249.2,964.6 249.2,1069.0 0.0,1140.5" /></svg>
+  <div class="h">שימו לב לקווים.<em>חלק מהם נפתחים.</em></div>
+</section>
+<section class="slide" id="s2"><img class="full" src="p_open.png" alt="" /></section>
+<section class="slide" id="s3">
   <img class="full" src="p_detail.png" alt="" />
-  <div class="h">מדויק<em>עד הקו האחרון.</em></div>
+  <div class="h">ובין הדלתות,<em>עץ ואור.</em></div>
   <img class="logo" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
-<section class="slide" id="s2"><img class="full" src="p_closed.png" alt="" /></section>
-<section class="slide" id="s3"><img class="full" src="p_open.png" alt="" /></section>
 </body>
 </html>
