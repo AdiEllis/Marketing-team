@@ -29,20 +29,20 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="15.5" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
 
-  <div id="scene" class="clip" data-start="0" data-duration="15.5" data-track-index="0" style="position:absolute;inset:0">
+  <div id="scene" class="clip" data-start="0" data-duration="15" data-track-index="0" style="position:absolute;inset:0">
     <div id="LC" class="lay"><div class="st" id="sC"><img src="assets/closed.png" alt="" /><img class="bl" id="bC" src="assets/closed_bloom.jpg" alt="" /></div></div>
     <div id="LO" class="lay"><div class="st" id="sO"><img src="assets/open.png" alt="" /><img class="bl" id="bO" src="assets/open_bloom.jpg" alt="" /></div></div>
     <div id="LD" class="lay"><div class="st" id="sD"><img src="assets/detail.png" alt="" /><img class="bl" id="bD" src="assets/detail_bloom.jpg" alt="" /></div></div>
   </div>
 
-  <div id="txt" class="clip" data-start="0" data-duration="15.5" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t" style="left:0;right:0;text-align:center;top:1350px;font-size:96px"><div class="ln"><span>נראה</span> <span>כמו</span></div><div class="ln"><span><em>קיר.</em></span></div></div>
+  <div id="txt" class="clip" data-start="0" data-duration="15" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t" style="left:0;right:0;text-align:center;top:1418px;font-size:92px"><div class="ln"><span>נראה</span> <span>כמו</span> <span><em>קיר.</em></span></div></div>
     <div id="t2" class="t" style="left:385px;width:240px;text-align:center;top:930px;font-size:86px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)"><div class="ln"><span>עובד</span></div><div class="ln"><span>כמו</span></div><div class="ln"><span style="color:#ffd99a">ארון.</span></div></div>
   </div>
 
-  <div id="endwrap" class="clip" data-start="0" data-duration="15.5" data-track-index="2" style="position:absolute;inset:0">
+  <div id="endwrap" class="clip" data-start="0" data-duration="15" data-track-index="2" style="position:absolute;inset:0">
     <div id="end"><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">כל קיר יכול לעשות<br /><em>הרבה יותר.</em></div></div></div>
   </div>
 </div>
@@ -63,7 +63,7 @@ const A0 = v(500, 750, 1.33), A1 = v(470, 690, 1.6);
 gsap.set(["#sC", "#sO"], A0);
 tl.fromTo(["#sC", "#sO"], A0, { ...A1, duration: 6.95, ease: "none", immediateRender: false }, 0);
 gsap.set(["#bC", "#bO"], { opacity: 0.2 });
-card("#t1", 0.3, 1.75);
+card("#t1", 0.3, 1.45);   // fully gone before the first cut at 2.0
 // the wall-trick: hard cuts on the beat (120 bpm), each switch faster; the camera never stops
 tl.set("#LO", { opacity: 1 }, 2.0);    // open
 tl.set("#LO", { opacity: 0 }, 3.0);    // closed
@@ -81,8 +81,7 @@ tl.set("#LD", { opacity: 1, filter: "blur(14px)" }, 7.19);
 tl.set(["#LC", "#LO"], { opacity: 0 }, 7.19);
 tl.to("#LD", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 7.19);
 gsap.set("#sD", D0);
-tl.fromTo("#sD", D0, { ...D1, duration: 3.31, ease: "power1.out", immediateRender: false }, 7.19);
-tl.to("#sD", { ...D2, duration: 2.4, ease: "sine.out" }, 10.5);          // ease out to the wider view, a slow end
+tl.fromTo("#sD", D0, { ...D2, duration: 5.7, ease: "sine.out", immediateRender: false }, 7.19);   // ONE glide, slowing only toward the end
 gsap.set("#bD", { opacity: 0.15 });
 tl.to("#bD", { opacity: 0.75, duration: 1.1, ease: "sine.inOut" }, 8.3);
 tl.to("#bD", { opacity: 0.3, duration: 1.2, ease: "sine.inOut" }, 9.4);
@@ -90,9 +89,10 @@ tl.to("#bD", { opacity: 0.7, duration: 1.0, ease: "sine.inOut" }, 11.0);
 
 // E 12.6–15.5  end card, her own line
 tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 12.6);
-tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 12.65);
-tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 13.0);
-tl.fromTo("#endin", { scale: 1 }, { scale: 1.04, duration: 2.9, ease: "none", immediateRender: false }, 12.6);
+gsap.set(["#end img", "#end .l1"], { opacity: 0 });
+tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 13.1);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 13.4);
+tl.fromTo("#endin", { scale: 1 }, { scale: 1.07, duration: 2.4, ease: "none", immediateRender: false }, 12.6);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
