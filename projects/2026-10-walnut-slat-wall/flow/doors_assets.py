@@ -7,7 +7,7 @@ closed = cv2.imread("reel/assets/closed.png"); openi = cv2.imread("work/open_g.p
 A = "reel/assets/"
 def rect(src, quad, w, h):
     return cv2.warpPerspective(src, cv2.getPerspectiveTransform(np.float32(quad), np.float32([(0, 0), (w, 0), (w, h), (0, h)])), (w, h), flags=cv2.INTER_LANCZOS4)
-BACKQ = {"upper": [(268, 158), (375, 83), (375, 276), (268, 326)], "ward": [(553, 232), (665, 232), (665, 1108), (553, 1095)]}
+BACKQ = {"upper": [(268, 158), (375, 83), (375, 276), (268, 326)], "ward": [(557, 273), (666, 233), (666, 1107), (557, 1071)]}
 rig = {"K": K.tolist(), "rx": rx.tolist(), "ry": ry.tolist(), "rz": rz.tolist(), "O": O.tolist(), "doors": {}}
 for n, d in DOORS.items():
     P = door_world(n)
@@ -31,5 +31,8 @@ dw = np.linalg.norm(Pd[1] - Pd[0]); dh = np.linalg.norm(Pd[3] - Pd[0])
 tw = 400; th = int(round(tw * dh / dw))
 cv2.imwrite(A + "drawer_front.png", rect(closed, DRAWER["quad"], tw, th))
 rig["drawer"] = {"P": [p.tolist() for p in Pd], "tw": tw, "th": th, "pull": 0.62 * dw}
+# the real open drawer: its dark open top (seen from above) and its left side, from the open photo
+cv2.imwrite(A + "drawer_top.png", rect(openi, [(6, 958), (300, 931), (350, 941), (57, 986)], 400, 120))
+cv2.imwrite(A + "drawer_side.png", rect(openi, [(8, 960), (57, 986), (57, 1110), (10, 1082)], 60, 160))
 json.dump(rig, open(A + "rig.json", "w"))
 print(json.dumps({k: (v if k != "doors" else {n: {kk: vv for kk, vv in dd.items() if kk != "P"} for n, dd in v.items()}) for k, v in rig.items() if k in ("doors", "drawer")}, default=str)[:400])

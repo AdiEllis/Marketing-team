@@ -30,9 +30,9 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="14" data-width="1080" data-height="1920">
 
-  <div id="scene" class="clip" data-start="0" data-duration="15" data-track-index="0" style="position:absolute;inset:0">
+  <div id="scene" class="clip" data-start="0" data-duration="14" data-track-index="0" style="position:absolute;inset:0">
     <div id="LC" class="lay"><div class="st" id="sC">
       <img class="ph" src="assets/closed.png" alt="" />
       <img class="bl" id="bC" src="assets/closed_bloom.jpg" alt="" />
@@ -40,11 +40,11 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
       <div class="q" id="sh_upper" style="width:100px;height:100px;background:#0e0b09"></div>
       <div class="q" id="sh_ward" style="width:100px;height:100px;background:#0e0b09"></div>
       <div class="q" id="dr_cav" style="width:100px;height:100px;background:#151312;opacity:0"></div>
-      <div class="q" id="dr_side" style="width:100px;height:100px;background:linear-gradient(90deg,#8d877f,#b9b2a8);opacity:0"></div>
-      <div class="q" id="dr_top" style="width:100px;height:100px;background:linear-gradient(180deg,#2b2927,#3d3a37);opacity:0"></div>
+      <img class="q" id="dr_side" src="assets/drawer_side.png" alt="" style="opacity:0" />
+      <img class="q" id="dr_top" src="assets/drawer_top.png" alt="" style="opacity:0" />
       <img class="q" id="dr_front" src="assets/drawer_front.png" alt="" />
-      <div class="q" id="ed_upper" style="width:10px;height:100px;background:linear-gradient(90deg,#cfc7bb,#e8e1d6)"></div>
-      <div class="q" id="ed_ward" style="width:10px;height:100px;background:linear-gradient(90deg,#cfc7bb,#e8e1d6)"></div>
+      <div class="q" id="ed_upper" style="width:10px;height:100px;background:linear-gradient(90deg,#a59c90,#bdb4a7)"></div>
+      <div class="q" id="ed_ward" style="width:10px;height:100px;background:linear-gradient(90deg,#a59c90,#bdb4a7)"></div>
       <img class="q" id="f_upper" src="assets/door_upper_front.png" alt="" />
       <img class="q" id="k_upper" src="assets/door_upper_back.png" alt="" />
       <div class="q" id="s_upper" style="width:400px;height:274px;background:#120d09"></div>
@@ -55,18 +55,18 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
     <div id="LD" class="lay"><div class="st" id="sD"><img class="ph" src="assets/detail.png" alt="" /><img class="bl" id="bD" src="assets/detail_bloom.jpg" alt="" /></div></div>
   </div>
 
-  <div id="txt" class="clip" data-start="0" data-duration="15" data-track-index="1" style="position:absolute;inset:0">
+  <div id="txt" class="clip" data-start="0" data-duration="14" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t" style="right:40px;top:1440px;font-size:80px"><div class="ln"><span>נראה</span> <span>כמו</span> <span><em>קיר.</em></span></div></div>
     <div id="t2" class="t" style="left:448px;width:180px;text-align:center;top:780px;font-size:68px;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.45)"><div class="ln"><span>עובד</span></div><div class="ln"><span>כמו</span></div><div class="ln"><span style="color:#ffd99a">ארון.</span></div></div>
   </div>
 
-  <div id="endwrap" class="clip" data-start="0" data-duration="15" data-track-index="2" style="position:absolute;inset:0">
+  <div id="endwrap" class="clip" data-start="0" data-duration="14" data-track-index="2" style="position:absolute;inset:0">
     <div id="end"><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">כל קיר יכול לעשות<br /><em>הרבה יותר.</em></div></div></div>
   </div>
 </div>
 
 <script>
-const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-436.20025656242785, 10.650156611719083, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-435.4265780060234, 137.42239620391615, 0.0]], "tw": 400, "th": 274, "open": 150}, "ward": {"P": [[-130.07804641392778, 16.308258160575935, 0.0], [0.0, 0.0, 0.0], [4.682503072963184, 767.2584389770507, 0.0], [-125.55628450420161, 757.2282170420764, 0.0]], "tw": 260, "th": 1496, "open": 172}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
+const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-416.09243192286596, 10.496939450417477, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-415.31386732213537, 138.0697890334754, 0.0]], "tw": 400, "th": 308, "open": 150}, "ward": {"P": [[-130.07804641392778, 16.308258160575935, 0.0], [0.0, 0.0, 0.0], [4.682503072963184, 767.2584389770507, 0.0], [-125.55628450420161, 757.2282170420764, 0.0]], "tw": 260, "th": 1496, "open": 172}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
 const tl = gsap.timeline({ paused: true });
 const v = (cx, cy, s) => ({ scale: s, x: 540 - cx * s, y: 960 - cy * s });
 gsap.set(".st", { transformOrigin: "0 0" });
@@ -118,8 +118,8 @@ function drawer(d) {
   put($("dr_front"), D.tw, D.th, F.map(proj));
   const on = d > 0.5 ? 1 : 0;
   put($("dr_cav"), 100, 100, P.map(proj)); $("dr_cav").style.opacity = on;
-  put($("dr_top"), 100, 100, [P[0], P[1], F[1], F[0]].map(proj)); $("dr_top").style.opacity = on;
-  put($("dr_side"), 100, 100, [P[0], F[0], F[3], P[3]].map(proj)); $("dr_side").style.opacity = on;
+  put($("dr_top"), 400, 120, [P[0], P[1], F[1], F[0]].map(proj)); $("dr_top").style.opacity = on;
+  put($("dr_side"), 60, 160, [P[0], F[0], F[3], P[3]].map(proj)); $("dr_side").style.opacity = on;
 }
 const ST = { up: 0, wa: 0, dr: 0 };
 const upd = () => { door("upper", ST.up); door("ward", ST.wa); drawer(ST.dr); };
@@ -165,18 +165,18 @@ tl.set("#LD", { opacity: 1, filter: "blur(14px)" }, 8.19);
 tl.set("#LC", { opacity: 0 }, 8.19);
 tl.to("#LD", { filter: "blur(0px)", duration: 0.3, ease: "power2.out" }, 8.19);
 gsap.set("#sD", D0);
-tl.fromTo("#sD", D0, { ...D2, duration: 4.4, ease: "sine.out", immediateRender: false }, 8.19);
+tl.fromTo("#sD", D0, { ...D2, duration: 3.4, ease: "sine.out", immediateRender: false }, 8.19);
 gsap.set("#bD", { opacity: 0.15 });
 tl.to("#bD", { opacity: 0.8, duration: 1.1, ease: "sine.inOut" }, 9.0);
 tl.to("#bD", { opacity: 0.3, duration: 1.1, ease: "sine.inOut" }, 10.1);
-tl.to("#bD", { opacity: 0.7, duration: 0.9, ease: "sine.inOut" }, 11.2);
+
 
 // F 12.2–15  end card, her own line
 gsap.set(["#end img", "#end .l1"], { opacity: 0 });
-tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 12.2);
-tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 12.7);
-tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 13.0);
-tl.fromTo("#endin", { scale: 1 }, { scale: 1.06, duration: 2.8, ease: "none", immediateRender: false }, 12.2);
+tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, 11.2);
+tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, 11.7);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, 12.0);
+tl.fromTo("#endin", { scale: 1 }, { scale: 1.06, duration: 2.8, ease: "none", immediateRender: false }, 11.2);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
