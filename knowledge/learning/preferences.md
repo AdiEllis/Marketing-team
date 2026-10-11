@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-knowledge/playbook.md + knowledge/learning/client-voice.md. עותק: docs/archive/2026-10-before-streamline/.
+
 # העדפות שנלמדו ממשוב (Learning Agent)
 
 > כל העדפה מתועדת עם מקורה. שינויים בכללי סוכנים נעשים רק אחרי אישור. ההעדפות כאן אושרו במפורש במשוב.

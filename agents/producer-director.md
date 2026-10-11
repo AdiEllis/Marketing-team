@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-agents/reel.md. עותק: docs/archive/2026-10-before-streamline/.
+
 # Producer / Creative Director — מנהל ההפקה
 
 ## דמות וחשיבה

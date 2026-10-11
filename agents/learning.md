@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-knowledge/playbook.md §8. עותק: docs/archive/2026-10-before-streamline/.
+
 # Learning Agent — למידה ושיפור
 
 ## עיקרון

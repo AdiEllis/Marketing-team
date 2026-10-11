@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-agents/ideas.md. עותק: docs/archive/2026-10-before-streamline/.
+
 # Creative Strategist (Idea Agent) — מנהל הקריאייטיב
 
 ## דמות וחשיבה

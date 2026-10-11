@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<script src="assets/reel-kit.js"></script>
+<link rel="stylesheet" href="assets/reel-kit.css" />
+<!-- SKELETON ONLY (studio/tools/new_project.sh copies it to reel/index.html). Replace the stages, times and words with
+     this project's approved beat sheet. The example wiring below = kit smoke test (latte push + card -> whip ->
+     white wall light fill -> flash -> warm library dusk -> end card), using sample assets under assets/sample/. -->
+<style>
+/* per-project: stage sizes (photo size), card positions */
+.w{width:1179px;height:1472px}
+#t1{right:64px;top:300px;text-align:right;font-size:92px;color:#33221a}
+#t1 em{color:#7a5228}
+#t2{left:0;width:1080px;top:250px;text-align:center;font-size:92px;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.55)}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="12" data-track-index="0" style="position:absolute;inset:0">
+    <!-- later stages first (underneath), frame-0 stage last (on top) -->
+    <div id="LW" class="lay"><div class="st w" id="sW">
+      <img src="assets/sample/day.png" alt="" /><img id="warm" src="assets/sample/warm.png" alt="" /><img class="bl" id="bW" src="assets/sample/warm_bloom.jpg" alt="" />
+    </div></div>
+    <div id="LU" class="lay"><div class="st w" id="sU"><img src="assets/sample/unlit.png" alt="" /><img id="lit" src="assets/sample/lit.jpg" alt="" /></div></div>
+    <div id="LA" class="lay"><div class="st w" id="sA"><img src="assets/sample/front_g.png" alt="" /><img class="bl" id="bA" src="assets/sample/front_bloom.jpg" alt="" /></div></div>
+    <div id="flash"></div>
+  </div>
+  <div id="txt" class="clip" data-start="0" data-duration="12" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>שום</span> <span>דבר</span> <span>כאן</span></div><div class="ln"><span><em>לא</em></span> <span><em>מקטלוג.</em></span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>קו</span></div><div class="ln"><span><em>במקום.</em></span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">פגישת ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
+  </div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+const K = RK.kit(tl);
+gsap.set(["#LU", "#LW"], { opacity: 0 });
+
+// A 0-3.1: frame 0 is the whole photo, already pushing; real LEDs breathe
+K.path("#sA", [[0, 642, 686, 1.40], [3.1, 612, 640, 1.6]]);
+K.breathe("#bA", [[0, 0.1], [1.3, 0.85], [2.5, 0.3]]);
+K.card("#t1", 0.2, 2.5);
+// whip: hand over inside the blur
+K.blurOut("#LA", 3.1);
+K.swap("#LA", "#LU", 3.1);
+K.blurIn("#LU", 3.1);
+// U 3.1-6.2: the vitrine fills with its REAL light
+K.path("#sU", [[3.1, 830, 760, 1.68], [6.2, 812, 760, 1.64]]);
+K.maskFill("#lit", 3.6, 1.5);
+// flash -> W 6.2-9.2: the library at dusk (light moment: whole lit element, 2+ s)
+K.flash("#flash", 6.2);
+K.swap("#LU", "#LW", 6.2);
+K.path("#sW", [[6.2, 345, 700, 1.62], [9.2, 338, 640, 1.66]]);
+K.maskFill("#warm", 6.5, 1.6, { soft: 25, ease: "power1.inOut" });
+K.breathe("#bW", [[6.8, 0], [8.2, 0.9], [9.2, 0.6]]);
+K.card("#t2", 7.4, 8.9);
+// end card
+K.endCard(9.2, 2.8);
+K.done(12);
+</script>
+</body>
+</html>

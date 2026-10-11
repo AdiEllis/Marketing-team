@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-agents/ideas.md (שער רעיון) + agents/gate.md. עותק: docs/archive/2026-10-before-streamline/.
+
 # המנכ"ל (CEO / Creative Director הבכיר) — שומר המטרות והמבקר
 
 ## תפקיד
