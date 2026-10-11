@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- Warm-light wall post v1. IDEA (zoom sequence): the headline is split by what each slide shows (her note 11.10): S1 far "נקי מרחוק.", S3 near "מוקפד מקרוב."
+     S1 the whole wall, frontal (far) + headline on the plain ceiling; S2 the warm angle, whole unit, no text, zero layers;
+     S3 the low close-up along the sideboard (near): "עד הפרט האחרון." on the plain panel + logo and a soft CTA line on the floor.
+     Whole photos (sources are already 4:5), no bands, no scrims. -->
+<style>
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;font-family:"Heebo"}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden}
+.full{position:absolute;inset:0;width:1080px;height:1350px}
+.h{position:absolute;direction:rtl;text-align:right;font:850 84px/1.06 "Heebo";letter-spacing:-.015em;color:#1f1813}
+.h em{display:block;font-style:normal;color:#8a5a26}
+#s1 .h{right:70px;top:96px;font-size:96px}
+#s3 .h{right:244px;top:64px;font-size:58px;line-height:1.08}
+#s3 .h em{color:#8a5a26}
+#s3 .sign{position:absolute;right:70px;bottom:58px;display:flex;align-items:center;gap:22px;direction:rtl}
+#s3 .sign img{width:92px}
+#s3 .sign span{font:500 30px/1.25 "Heebo";color:#3a2c22}
+</style>
+</head>
+<body>
+<section class="slide" id="s1">
+  <img class="full" src="p_front.png" alt="" />
+  <div class="h">נקי מרחוק.</div>
+</section>
+<section class="slide" id="s2"><img class="full" src="p_warm.png" alt="" /></section>
+<section class="slide" id="s3">
+  <img class="full" src="p_detail.png" alt="" />
+  <div class="h">מוקפד<em>מקרוב.</em></div>
+  <div class="sign"><span>לתכנון אישי,<br>דברו איתנו</span><img src="logo_alpha.png" alt="אבן ועץ" /></div>
+</section>
+</body>
+</html>
