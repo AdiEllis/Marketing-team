@@ -37,8 +37,8 @@
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
-  <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
+<div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="18" data-track-index="0" style="position:absolute;inset:0">
     <!-- later stages first (underneath), frame-0 stage last (on top) -->
     <div id="LT" class="lay"><div class="st n" id="sT"><img src="assets/tv.png" alt="" /><img class="bl" id="bT" src="assets/tv_bloom.jpg" alt="" /></div></div>
     <div id="LW" class="lay"><div class="st n" id="sW" data-rig="white"></div></div>
@@ -48,7 +48,7 @@
     <div id="LM" class="lay"><div class="st m" id="sM"><img src="assets/mauve.png" alt="" /></div></div>
     <div id="flash"></div>
   </div>
-  <div id="txt" class="clip" data-start="0" data-duration="20" data-track-index="1" style="position:absolute;inset:0">
+  <div id="txt" class="clip" data-start="0" data-duration="18" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t"><div class="ln"><span>נכנסים</span></div><div class="ln"><span>לבית</span></div><div class="ln"><span><em>חדש?</em></span></div></div>
     <div id="t2" class="t"><div class="ln"><span>כל</span> <span>חדר,</span></div><div class="ln"><span><em>תכנון</em></span> <span><em>משלו.</em></span></div></div>
     <div id="t3" class="t"><div class="ln"><span>מתוכנן</span></div><div class="ln"><span><em>גם</em></span> <span><em>מבפנים.</em></span></div></div>
@@ -145,25 +145,25 @@ rig("oak");                                  // places the real closed doors at 
 // OAK v5 (her notes 11.10 + gate): the open photo was shot from another spot, so any "opening" between the two photos
 // reads as fake. A plain, honest EDIT instead: push on the closed wardrobe -> one WHIP that lands on the real white
 // drawers inside the open wardrobe -> PULL-OUT that reveals the whole open wardrobe (the reveal is the pull-out).
-K.path("#sO", [[9 * B, 392, 572, 1.68], [5.6, 388, 572, 1.72], [6.1, 400, 574, 1.76], [6.45, 430, 576, 1.80]]);
-K.blurOut("#LO", 6.45, 18, 0.22);
-K.swap("#LO", "#LOo", 6.45);
-K.blurIn("#LOo", 6.45, 18, 0.32);
-K.path("#sOo", [[6.45, 560, 690, 2.35], [6.9, 610, 694, 2.3], [7.6, 590, 660, 2.05], [8.5, 520, 610, 1.80], [9.4, 476, 584, 1.70]]);
+K.path("#sO", [[9 * B, 392, 572, 1.68], [5.3, 391, 573, 1.73], [5.7, 404, 575, 1.79], [11 * B, 432, 577, 1.85]]);
+K.blurOut("#LO", 11 * B, 18, 0.22);
+K.swap("#LO", "#LOo", 11 * B);
+K.blurIn("#LOo", 11 * B, 18, 0.32);
+K.path("#sOo", [[11 * B, 560, 690, 2.35], [6.4, 602, 692, 2.26], [7.0, 582, 656, 2.0], [7.7, 520, 612, 1.80], [8.7, 478, 585, 1.70]]);
 // motion dissolve → white wardrobe (the reel's only whip is the oak one above)
-K.dissolve("#LOo", "#LW", 17 * B, 0.45);
+K.dissolve("#LOo", "#LW", 15 * B, 0.45);
 const WH = rig("white");
-K.path("#sW", [[17 * B - 0.1, 326, 576, 1.70], [9.9, 392, 576, 1.70], [11.0, 418, 580, 1.72], [12.0, 434, 586, 1.76], [13.0, 446, 590, 1.80], [25 * B, 458, 594, 1.85]]);
-WH.open("dl", 9.98); WH.open("dr", 10.12);
-K.card("#t3", 11.85, 13.25);
+K.path("#sW", [[15 * B - 0.1, 326, 576, 1.70], [8.81, 392, 576, 1.70], [9.91, 418, 580, 1.72], [10.91, 434, 586, 1.76], [11.91, 446, 590, 1.80], [23 * B, 458, 594, 1.85]]);
+WH.open("dl", 8.89); WH.open("dr", 9.03);
+K.card("#t3", 10.76, 12.16);
 // FLASH → the TV wall: the lit shelving unit whole, held and breathing (R12)
-K.flash("#flash", 25 * B);
-K.swap("#LW", "#LT", 25 * B);
-K.path("#sT", [[25 * B, 652, 500, 2.02], [15.0, 646, 512, 1.97], [16.0, 636, 530, 1.90], [30 * B + 0.5, 625, 545, 1.85]]);
-K.breathe("#bT", [[25 * B, 0.2], [14.5, 0.9], [15.4, 0.45], [16.2, 0.85], [16.9, 0.5]]);
+K.flash("#flash", 23 * B);
+K.swap("#LW", "#LT", 23 * B);
+K.path("#sT", [[23 * B, 652, 500, 2.02], [13.6, 644, 515, 1.95], [14.5, 630, 536, 1.87], [28 * B + 0.5, 615, 556, 1.80]]);
+K.breathe("#bT", [[23 * B, 0.2], [13.4, 0.9], [14.3, 0.45], [15.1, 0.85], [15.8, 0.5]]);
 // end card
-K.endCard(30 * B, 20 - 30 * B);
-K.done(20);
+K.endCard(28 * B, 18 - 28 * B);
+K.done(18);
 </script>
 </body>
 </html>
