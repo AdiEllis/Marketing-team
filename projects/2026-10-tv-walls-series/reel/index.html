@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<!-- TV walls series reel v2 — copy sells the company (her note 11.10): "תכנון מדויק." / "חומרים מהשורה הראשונה." / "ביצוע מקצועי." -> free consultation
+     (v1 copy "ארבעה בתים. / ארבעה קירות. / אין שניים זהים." replaced; visuals unchanged, she loved the grid)
+     Beat grid 110 bpm (0.5455 s). One camera that keeps travelling right -> left through four living rooms.
+     A 0–3.6    frame 0 = the panels wall, whole, already gliding.           card "תכנון מדויק." on the plain upper panels
+     LOUVRE     the next wall opens through vertical slats (the walls' own motif), staggered right -> left, both moving
+     B 3.3–     the full-slat wall                                            (no card: the wall speaks)
+     C 6.55–    the white wall: its two real LED lines swell (bloom of the photo's own bright pixels)
+     D 9.8–     the dark wall: push to the lit panel, its halo flares; card "חומרים מהשורה הראשונה." on the plain ceiling
+     SIGNATURE 12.55 "four in one frame": the dark wall pulls back into its cell while the three others slide in;
+                all four walls' lights flare together. The rows part like slats -> "ביצוע מקצועי." in the gap
+     E 16.4–    the rows close out; logo + "פגישת ייעוץ והדמיה / ללא עלות". -->
+<style>
+@font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
+#root{width:100%;height:100%;position:relative;overflow:hidden;background:#1c1816}
+.lay{position:absolute;inset:0;overflow:hidden}
+.st{position:absolute;left:0;top:0;transform-origin:0 0}
+.st > img{position:absolute;left:0;top:0;display:block;width:100%;height:100%}
+.st > img.bl{mix-blend-mode:screen;opacity:0}
+.t{position:absolute;left:0;width:1080px;text-align:center;direction:rtl;font-family:"Heebo";font-weight:850;line-height:1.02;letter-spacing:-.01em;white-space:nowrap}
+.t .ln{display:block;overflow:hidden;padding:0 6px 12px}
+.t span{display:inline-block}
+.t em{font-style:normal}
+#t1{top:470px;font-size:104px;color:#1f1813}
+#t1 em{color:#8a5a26}
+#t2{top:186px;font-size:76px;color:#1f1813}
+#t2 em{color:#8a5a26}
+#t3{top:892px;font-size:96px;color:#fff}
+#t3 em{color:#e8c48a}
+#sign{position:absolute;left:0;width:1080px;top:690px;text-align:center;direction:rtl}
+#sign img{width:210px;display:block;margin:0 auto}
+#sign div{margin-top:40px;font-family:"Heebo";font-weight:600;font-size:46px;line-height:1.25;color:#efe3cf;letter-spacing:.01em}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="19.09" data-width="1080" data-height="1920">
+
+  <div id="scene" class="clip" data-start="0" data-duration="19.09" data-track-index="0" style="position:absolute;inset:0">
+    <div id="LP" class="lay"><div class="st" id="sP" style="width:1178px;height:1258px"><img src="assets/panels.png" alt="" /><img class="bl" id="bP" src="assets/panels_bloom.jpg" alt="" /></div></div>
+    <div id="LS" class="lay"><div class="st" id="sS" style="width:977px;height:1110px"><img src="assets/slats.png" alt="" /><img class="bl" id="bS" src="assets/slats_bloom.jpg" alt="" /></div></div>
+    <div id="LW" class="lay"><div class="st" id="sW" style="width:934px;height:1147px"><img src="assets/white.png" alt="" /><img class="bl" id="bW" src="assets/white_bloom.jpg" alt="" /></div></div>
+    <div id="LD" class="lay"><div class="st" id="sD" style="width:1178px;height:1210px"><img src="assets/dark.png" alt="" /><img class="bl" id="bD" src="assets/dark_bloom.jpg" alt="" /></div></div>
+    <div id="sign"><img src="assets/logo_light.png" alt="אבן ועץ" /><div>פגישת ייעוץ והדמיה<br />ללא עלות</div></div>
+  </div>
+
+  <div id="txt" class="clip" data-start="0" data-duration="19.09" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>תכנון</span> <span><em>מדויק.</em></span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>חומרים</span> <span><em>מהשורה הראשונה.</em></span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>ביצוע</span> <span><em>מקצועי.</em></span></div></div>
+  </div>
+</div>
+
+<script>
+const tl = gsap.timeline({ paused: true });
+const B = 60 / 110;                                   // one beat
+const $ = id => document.getElementById(id);
+// stage transform: raw point (cx,cy) at screen anchor (ox,oy), scale s
+const v = (cx, cy, s, ox = 540, oy = 960) => ({ scale: s, x: ox - cx * s, y: oy - cy * s });
+gsap.set(".t span", { yPercent: 115 });
+gsap.set(["#LS", "#LW", "#LD"], { opacity: 0 });
+gsap.set(["#sign img", "#sign div"], { opacity: 0 });
+
+const card = (sel, at, out) => {
+  tl.fromTo(sel + " span", { yPercent: 115 }, { yPercent: 0, duration: 0.45, stagger: 0.08, ease: "power3.out", immediateRender: false }, at);
+  if (out) tl.to(sel + " span", { yPercent: -115, duration: 0.3, stagger: 0.04, ease: "power2.in" }, out);
+};
+
+// one camera path per stage: Catmull-Rom through keyframes (time, cx, cy, s) -> continuous velocity, no stop-go
+function path(el, keys) {
+  const P = { t: keys[0][0] };
+  const at = t => {
+    let i = 0; while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+    const k0 = keys[Math.max(i - 1, 0)], k1 = keys[i], k2 = keys[i + 1], k3 = keys[Math.min(i + 2, keys.length - 1)];
+    const u = Math.min(1, Math.max(0, (t - k1[0]) / (k2[0] - k1[0])));
+    const cr = j => {
+      const m1 = (k2[j] - k0[j]) / (k2[0] - k0[0] || 1) * (k2[0] - k1[0]);
+      const m2 = (k3[j] - k1[j]) / (k3[0] - k1[0] || 1) * (k2[0] - k1[0]);
+      const u2 = u * u, u3 = u2 * u;
+      return (2 * u3 - 3 * u2 + 1) * k1[j] + (u3 - 2 * u2 + u) * m1 + (-2 * u3 + 3 * u2) * k2[j] + (u3 - u2) * m2;
+    };
+    return v(cr(1), cr(2), cr(3));
+  };
+  gsap.set(el, at(keys[0][0]));
+  tl.fromTo(P, { t: keys[0][0] }, { t: keys[keys.length - 1][0], duration: keys[keys.length - 1][0] - keys[0][0], ease: "none",
+    immediateRender: false, onUpdate: () => gsap.set(el, at(P.t)) }, keys[0][0]);
+}
+
+// LOUVRE: the incoming wall opens through 9 vertical slats, each slat widening from its centre, staggered right -> left
+const N = 9, SW = 1080 / N, G = 0.11;
+const setMask = (el, css) => { el.style.webkitMaskImage = css; el.style.maskImage = css; };
+function louvre(layer, at, dur) {
+  const el = $(layer), L = { p: 0 };
+  const draw = () => {
+    if (L.p >= 1) { setMask(el, "none"); return; }
+    const stops = [];
+    for (let k = 0; k < N; k++) {                       // k = 0 is the leftmost slat
+      const i = N - 1 - k;                              // order from the right
+      const q = Math.min(1, Math.max(0, (L.p * (1 + (N - 1) * G) - i * G)));
+      const e = q * q * (3 - 2 * q), c = k * SW + SW / 2, hw = e * (SW / 2 + 0.6);
+      stops.push(`rgba(0,0,0,0) ${(c - hw).toFixed(1)}px`, `#000 ${(c - hw).toFixed(1)}px`, `#000 ${(c + hw).toFixed(1)}px`, `rgba(0,0,0,0) ${(c + hw).toFixed(1)}px`);
+    }
+    setMask(el, `linear-gradient(90deg, ${stops.join(", ")})`);
+  };
+  draw();
+  tl.set(el, { opacity: 1 }, at);
+  tl.to(L, { p: 1, duration: dur, ease: "none", onUpdate: draw }, at);
+}
+
+// A 0–3.6  frame 0: the panels wall, already gliding (camera right -> left)
+path("#sP", [[0, 770, 640, 1.56], [3.9, 600, 630, 1.60]]);
+gsap.set("#bP", { opacity: 0.25 });
+tl.to("#bP", { opacity: 0.6, duration: 1.4, ease: "sine.inOut" }, 0.5);
+card("#t1", 0.15, 2.55);
+
+// B 3.0–  louvre into the full-slat wall
+const T1 = 5.5 * B, T2 = 11.5 * B, T3 = 17.5 * B, LD = 0.62;
+louvre("LS", T1, LD);
+path("#sS", [[T1, 650, 556, 1.74], [T2 + LD, 570, 556, 1.765]]);
+tl.set("#LP", { opacity: 0 }, T1 + LD);
+
+
+// C  louvre into the white wall; its two real LED lines swell
+louvre("LW", T2, LD);
+path("#sW", [[T2, 565, 573, 1.69], [T3 + LD, 450, 573, 1.74]]);
+tl.set("#LS", { opacity: 0 }, T2 + LD);
+gsap.set("#bW", { opacity: 0.2 });
+tl.to("#bW", { opacity: 0.95, duration: 1.1, ease: "sine.inOut" }, T2 + 0.9);
+tl.to("#bW", { opacity: 0.35, duration: 1.0, ease: "sine.inOut" }, T2 + 2.1);
+
+// D  louvre into the dark wall: push to the lit panel, its halo flares
+louvre("LD", T3, LD);
+const GT = 23 * B;                                    // 12.55: the grid
+path("#sD", [[T3, 700, 612, 1.60], [GT, 650, 650, 1.75]]);
+tl.set("#LW", { opacity: 0 }, T3 + LD);
+card("#t2", T3 + 0.6, GT - 0.35);                    // on the plain ceiling under the lamp (not on the sideboard: gate fix)
+gsap.set("#bD", { opacity: 0.2 });
+tl.to("#bD", { opacity: 1, duration: 1.0, ease: "sine.in" }, T3 + 1.0);
+tl.to("#bD", { opacity: 0.4, duration: 0.8, ease: "sine.out" }, T3 + 2.05);
+
+// SIGNATURE: four walls, one frame. Cells 536 x 956, 8px dark gaps.
+const CELLS = {
+  D: { el: "#sD", lay: "LD", r: [544, 0, 536, 956], cam: [640, 605, 0.79] },
+  P: { el: "#sP", lay: "LP", r: [0, 0, 536, 956], cam: [655, 629, 0.76], from: [-560, 0] },
+  W: { el: "#sW", lay: "LW", r: [544, 964, 536, 956], cam: [610, 573, 0.833], from: [560, 0] },
+  S: { el: "#sS", lay: "LS", r: [0, 964, 536, 956], cam: [640, 555, 0.861], from: [0, 980] },
+};
+const Z = { z: 0 }, OFF = { P: [0, 0], W: [0, 0], S: [0, 0], D: [0, 0] }, LIVE = new Set();
+const cellSet = (c, dx, dy) => {
+  const [x, y, w, h] = c.r, [cx, cy, s] = c.cam;
+  $(c.lay).style.clipPath = `inset(${y + dy}px ${1080 - x - w - dx}px ${1920 - y - h - dy}px ${x + dx}px)`;
+  gsap.set(c.el, v(cx, cy, s * (1 + Z.z), x + w / 2 + dx, y + h / 2 + dy));
+};
+const grid = () => { for (const n of LIVE) cellSet(CELLS[n], OFF[n][0], OFF[n][1]); };
+// D pulls back from full frame into its cell
+{
+  const c = CELLS.D, Q = { k: 0 };
+  const [x, y, w, h] = c.r, [cx, cy, s] = c.cam;
+  const lerp = (a, b, k) => a + (b - a) * k;
+  const draw = () => { const k = Q.k;
+    if (k >= 1) { LIVE.add("D"); grid(); return; }
+    LIVE.delete("D");
+    $("LD").style.clipPath = `inset(${lerp(0, y, k)}px ${lerp(0, 1080 - x - w, k)}px ${lerp(0, 1920 - y - h, k)}px ${lerp(0, x, k)}px)`;
+    // log-space scale keeps the pull-back even
+    const sc = Math.exp(lerp(Math.log(1.75), Math.log(s), k));
+    gsap.set("#sD", v(lerp(650, cx, k), lerp(650, cy, k), sc, lerp(540, x + w / 2, k), lerp(960, y + h / 2, k)));
+  };
+  tl.to(Q, { k: 1, duration: 1.0, ease: "power3.inOut", onUpdate: draw }, GT);
+}
+// the three others slide in, each already moving
+["P", "W", "S"].forEach((n, j) => {
+  const c = CELLS[n], Q = { k: 0 }, at = GT + 0.18 + j * 0.1;
+  const draw = () => { if (Q.k > 0) LIVE.add(n); else LIVE.delete(n);
+    OFF[n] = [c.from[0] * (1 - Q.k), c.from[1] * (1 - Q.k)]; grid(); };
+  tl.set("#L" + n, { opacity: 1 }, at);
+  tl.set($("L" + n), { maskImage: "none", webkitMaskImage: "none" }, at);
+  tl.fromTo(Q, { k: 0 }, { k: 1, duration: 0.82, ease: "power3.out", immediateRender: false, onUpdate: draw }, at);
+});
+// all cells keep breathing in (one slow push for the whole grid)
+const OP = 26 * B, CL = 30 * B;                        // 14.18, 16.36
+tl.fromTo(Z, { z: 0 }, { z: 0.07, duration: CL + 0.6 - GT, ease: "none", immediateRender: false, onUpdate: grid }, GT);
+// all four lights flare together, then settle
+const BL = ["#bP", "#bS", "#bW", "#bD"];
+tl.to(BL, { opacity: 1, duration: 0.45, ease: "power2.in" }, GT + 1.05);
+tl.to(BL, { opacity: 0.35, duration: 0.9, ease: "sine.out" }, GT + 1.5);
+
+// rows part like slats -> the line sits in the gap
+const RO = { d: 0 };
+const rows = () => { OFF.D = [0, -RO.d]; OFF.P = [0, -RO.d]; OFF.W = [0, RO.d]; OFF.S = [0, RO.d]; grid(); };
+tl.to(RO, { d: 125, duration: 0.55, ease: "power3.inOut", onUpdate: rows }, OP);
+card("#t3", OP + 0.3, CL - 0.25);
+tl.to(RO, { d: 300, duration: 1.1, ease: "sine.in", onUpdate: rows }, CL);
+tl.to(["#LP", "#LS", "#LW", "#LD"], { opacity: 0, duration: 0.75, ease: "sine.inOut" }, CL + 0.2);
+
+// E  logo + line on the brand dark
+tl.fromTo("#sign img", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, CL + 0.6);
+tl.fromTo("#sign div", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, CL + 0.9);
+tl.set({}, {}, 35 * B);
+
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

@@ -15,6 +15,11 @@ if command -v npx >/dev/null 2>&1; then
   timeout 240 npx --yes hyperframes@0.8.141 --version >/dev/null 2>&1 || log "WARN: hyperframes prefetch failed (will retry on first render)"
 fi
 
+# Official HyperFrames skills (hyperframes-animation, hyperframes-creative, ...): required for every reel (CLAUDE.md #7)
+if [ ! -d "$HOME/.claude/skills/hyperframes-animation" ] && command -v npx >/dev/null 2>&1; then
+  (cd /tmp && timeout 180 npx --yes hyperframes@0.8.141 skills update hyperframes-animation >/dev/null 2>&1) || log "WARN: hyperframes skills install failed"
+fi
+
 command -v ffmpeg >/dev/null 2>&1 || log "WARN: ffmpeg missing"
 ls /opt/pw-browsers/chromium_headless_shell-*/chrome-linux/headless_shell >/dev/null 2>&1 || log "WARN: headless Chromium not found (needed for carousel PNGs)"
 log "ready"
