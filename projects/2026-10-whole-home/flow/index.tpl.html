@@ -105,7 +105,7 @@ function rig(name) {
     const bk = [-T * nrm[0], -T * nrm[1], -T * nrm[2]], a = Rr[0], b = Rr[3];
     const eq = [proj(a), proj([a[0] + bk[0], a[1] + bk[1], a[2] + bk[2]]), proj([b[0] + bk[0], b[1] + bk[1], b[2] + bk[2]]), proj(b)];
     const ea = Math.abs(area(eq)), eh = Math.hypot(eq[3][0] - eq[0][0], eq[3][1] - eq[0][1]);
-    if (phi > 0.03 && ea > 2.5 * eh) { RK.put(e, 10, 100, eq); e.style.opacity = 1; } else e.style.opacity = 0;
+    if (phi > 0.03 && ea > 5 * eh) { RK.put(e, 10, 100, eq); e.style.opacity = 1; } else e.style.opacity = 0;
     // soft contact shadow where the open door stands on the glossy floor
     const cs = $(`${name}_cs_${n}`), fb = q[3], hb = q[2];
     RK.put(cs, 100, 100, [[fb[0], fb[1] - 4], [hb[0], hb[1] - 4], [hb[0], hb[1] + 10], [fb[0], fb[1] + 18]]);
@@ -142,34 +142,18 @@ K.card("#t2", 3.05, 4.3);
 K.dissolve("#LG", "#LO", 9 * B, 0.45);
 // O: whole oak wardrobe, gentle push; the two pairs open (centre pair first), then a punch-in hands over to the real photo
 rig("oak");                                  // places the real closed doors at rest (no swing)
-// OAK v4 (her notes 11.10): the open photo was shot from another spot, so neither a swing nor a light trick can be
-// truthful (gate). HONEST GRAPHIC REVEAL: the frame parts along the wardrobe's real centre seam and the two halves slide
-// apart (a pair of doors as an editing gesture); behind them the REAL open photo is already moving.
-// No invented light, no pretence of one continuous shot.
-const OK = [[9 * B, 392, 572, 1.68], [5.9, 388, 572, 1.72], [6.75, 384, 574, 1.78]];
-K.path("#sO", OK);
-// the frame itself parts along the wardrobe's real centre seam (x 388) like a pair of doors: two halves slide apart
-const CS = (() => { const d = RIGS.oak.doors.d3.q; const t = d[1], bt = d[2];                  // d3's hinge edge = the centre seam
-  const ext = y => t[0] + (bt[0] - t[0]) * (y - t[1]) / (bt[1] - t[1]); return [ext(0), ext(1152)]; })();
-const halves = [[`0 0,${CS[0]}px 0,${CS[1]}px 1152px,0 1152px`, -1], [`${CS[0]}px 0,922px 0,922px 1152px,${CS[1]}px 1152px`, 1]].map(([poly, dir], i) => {
-  const lay = document.createElement("div"); lay.className = "lay"; lay.id = "LH" + i;
-  lay.innerHTML = `<div class="st n" id="sH${i}" style="clip-path:polygon(${poly})"><img src="assets/oak/closed.png" alt="" /></div>`;
-  $("LO").after(lay); return [lay, dir]; });
-halves.forEach(([lay], i) => { K.path("#sH" + i, OK); gsap.set(lay, { opacity: 0 }); });
-const T0 = 6.25;                                  // the cut: the halves replace the (identical) closed layer, then part
-halves.forEach(([lay]) => tl.set(lay, { opacity: 1 }, T0));
-tl.set("#LO", { opacity: 0 }, T0); tl.set("#LOo", { opacity: 1 }, T0);
-halves.forEach(([lay, dir]) => {
-  tl.to(lay, { x: dir * 1150, duration: 0.62, ease: "power3.inOut" }, T0);
-  tl.fromTo(lay, { filter: "blur(0px)" }, { filter: "blur(9px)", duration: 0.4, ease: "power2.in", immediateRender: false }, T0 + 0.12);
-});
-K.path("#sOo", [[T0, 462, 576, 1.70], [6.9, 467, 579, 1.74], [7.6, 476, 584, 1.80], [8.5, 492, 594, 1.92], [17 * B, 512, 600, 2.0]]);
-// WHIP → white wardrobe, landing still in motion in the same direction
-K.blurOut("#LOo", 17 * B, 18, 0.2);
-K.swap("#LOo", "#LW", 17 * B);
-K.blurIn("#LW", 17 * B, 18, 0.32);
+// OAK v5 (her notes 11.10 + gate): the open photo was shot from another spot, so any "opening" between the two photos
+// reads as fake. A plain, honest EDIT instead: push on the closed wardrobe -> one WHIP that lands on the real white
+// drawers inside the open wardrobe -> PULL-OUT that reveals the whole open wardrobe (the reveal is the pull-out).
+K.path("#sO", [[9 * B, 392, 572, 1.68], [5.6, 388, 572, 1.72], [6.1, 400, 574, 1.76], [6.45, 430, 576, 1.80]]);
+K.blurOut("#LO", 6.45, 18, 0.22);
+K.swap("#LO", "#LOo", 6.45);
+K.blurIn("#LOo", 6.45, 18, 0.32);
+K.path("#sOo", [[6.45, 560, 690, 2.35], [6.9, 610, 694, 2.3], [7.6, 590, 660, 2.05], [8.5, 520, 610, 1.80], [9.4, 476, 584, 1.70]]);
+// motion dissolve → white wardrobe (the reel's only whip is the oak one above)
+K.dissolve("#LOo", "#LW", 17 * B, 0.45);
 const WH = rig("white");
-K.path("#sW", [[17 * B, 330, 576, 1.70], [9.9, 392, 576, 1.70], [11.0, 418, 580, 1.72], [12.0, 434, 586, 1.76], [13.0, 446, 590, 1.80], [25 * B, 458, 594, 1.85]]);
+K.path("#sW", [[17 * B - 0.1, 326, 576, 1.70], [9.9, 392, 576, 1.70], [11.0, 418, 580, 1.72], [12.0, 434, 586, 1.76], [13.0, 446, 590, 1.80], [25 * B, 458, 594, 1.85]]);
 WH.open("dl", 9.98); WH.open("dr", 10.12);
 K.card("#t3", 11.85, 13.25);
 // FLASH → the TV wall: the lit shelving unit whole, held and breathing (R12)
