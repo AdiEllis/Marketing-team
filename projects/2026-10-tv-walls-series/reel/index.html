@@ -4,16 +4,17 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=1080, height=1920" />
 <script src="assets/gsap.min.js"></script>
-<!-- TV walls series reel v1 — "ארבעה בתים." / "ארבעה קירות." / "אין שניים זהים."
+<!-- TV walls series reel v2 — copy sells the company (her note 11.10): "תכנון מדויק." / "חומרים מהשורה הראשונה." / "ביצוע מקצועי." -> free consultation
+     (v1 copy "ארבעה בתים. / ארבעה קירות. / אין שניים זהים." replaced; visuals unchanged, she loved the grid)
      Beat grid 110 bpm (0.5455 s). One camera that keeps travelling right -> left through four living rooms.
-     A 0–3.6    frame 0 = the panels wall, whole, already gliding.           card "ארבעה בתים." on the plain upper panels
+     A 0–3.6    frame 0 = the panels wall, whole, already gliding.           card "תכנון מדויק." on the plain upper panels
      LOUVRE     the next wall opens through vertical slats (the walls' own motif), staggered right -> left, both moving
-     B 3.3–     the full-slat wall                                            card "ארבעה קירות." on the floor
+     B 3.3–     the full-slat wall                                            (no card: the wall speaks)
      C 6.55–    the white wall: its two real LED lines swell (bloom of the photo's own bright pixels)
-     D 9.8–     the dark wall: push to the lit panel, its halo flares
+     D 9.8–     the dark wall: push to the lit panel, its halo flares; card "חומרים מהשורה הראשונה." on the plain ceiling
      SIGNATURE 12.55 "four in one frame": the dark wall pulls back into its cell while the three others slide in;
-                all four walls' lights flare together. The rows part like slats -> "אין שניים זהים." in the gap
-     E 16.4–    the rows close out; logo + "קירות טלוויזיה / בהתאמה אישית". -->
+                all four walls' lights flare together. The rows part like slats -> "ביצוע מקצועי." in the gap
+     E 16.4–    the rows close out; logo + "פגישת ייעוץ והדמיה / ללא עלות". -->
 <style>
 @font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -29,7 +30,7 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
 .t em{font-style:normal}
 #t1{top:470px;font-size:104px;color:#1f1813}
 #t1 em{color:#8a5a26}
-#t2{top:1540px;font-size:104px;color:#1f1813}
+#t2{top:186px;font-size:76px;color:#1f1813}
 #t2 em{color:#8a5a26}
 #t3{top:892px;font-size:96px;color:#fff}
 #t3 em{color:#e8c48a}
@@ -46,13 +47,13 @@ html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
     <div id="LS" class="lay"><div class="st" id="sS" style="width:977px;height:1110px"><img src="assets/slats.png" alt="" /><img class="bl" id="bS" src="assets/slats_bloom.jpg" alt="" /></div></div>
     <div id="LW" class="lay"><div class="st" id="sW" style="width:934px;height:1147px"><img src="assets/white.png" alt="" /><img class="bl" id="bW" src="assets/white_bloom.jpg" alt="" /></div></div>
     <div id="LD" class="lay"><div class="st" id="sD" style="width:1178px;height:1210px"><img src="assets/dark.png" alt="" /><img class="bl" id="bD" src="assets/dark_bloom.jpg" alt="" /></div></div>
-    <div id="sign"><img src="assets/logo_light.png" alt="אבן ועץ" /><div>קירות טלוויזיה<br />בהתאמה אישית</div></div>
+    <div id="sign"><img src="assets/logo_light.png" alt="אבן ועץ" /><div>פגישת ייעוץ והדמיה<br />ללא עלות</div></div>
   </div>
 
   <div id="txt" class="clip" data-start="0" data-duration="19.09" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t"><div class="ln"><span>ארבעה</span> <span><em>בתים.</em></span></div></div>
-    <div id="t2" class="t"><div class="ln"><span>ארבעה</span> <span><em>קירות.</em></span></div></div>
-    <div id="t3" class="t"><div class="ln"><span>אין</span> <span>שניים</span> <span><em>זהים.</em></span></div></div>
+    <div id="t1" class="t"><div class="ln"><span>תכנון</span> <span><em>מדויק.</em></span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>חומרים</span> <span><em>מהשורה הראשונה.</em></span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>ביצוע</span> <span><em>מקצועי.</em></span></div></div>
   </div>
 </div>
 
@@ -123,7 +124,7 @@ const T1 = 5.5 * B, T2 = 11.5 * B, T3 = 17.5 * B, LD = 0.62;
 louvre("LS", T1, LD);
 path("#sS", [[T1, 650, 556, 1.74], [T2 + LD, 570, 556, 1.765]]);
 tl.set("#LP", { opacity: 0 }, T1 + LD);
-card("#t2", T1 + 0.55, T2 - 0.4);
+
 
 // C  louvre into the white wall; its two real LED lines swell
 louvre("LW", T2, LD);
@@ -138,6 +139,7 @@ louvre("LD", T3, LD);
 const GT = 23 * B;                                    // 12.55: the grid
 path("#sD", [[T3, 700, 612, 1.60], [GT, 650, 650, 1.75]]);
 tl.set("#LW", { opacity: 0 }, T3 + LD);
+card("#t2", T3 + 0.6, GT - 0.35);                    // on the plain ceiling under the lamp (not on the sideboard: gate fix)
 gsap.set("#bD", { opacity: 0.2 });
 tl.to("#bD", { opacity: 1, duration: 1.0, ease: "sine.in" }, T3 + 1.0);
 tl.to("#bD", { opacity: 0.4, duration: 0.8, ease: "sine.out" }, T3 + 2.05);
