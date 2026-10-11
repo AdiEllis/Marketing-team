@@ -58,7 +58,8 @@ img.bl{mix-blend-mode:screen;opacity:0}
 .t .ln{display:block;overflow:hidden;padding:0 6px 10px}
 .t span{display:inline-block}
 .t em{font-style:normal;color:#f0c987}
-#t1{left:604px;width:360px;top:505px;text-align:center;font-size:54px;color:#fff}
+#t1{right:64px;top:300px;text-align:right;font-size:92px;color:#33221a}
+#t1 em{color:#7a5228}
 #t2{left:72px;right:72px;top:1450px;text-align:right;font-size:100px;color:#2a211b}
 #t2 em{color:#8a5a2b}
 #t3{left:0;width:1080px;top:560px;text-align:center;font-size:92px;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.55)}
@@ -72,9 +73,9 @@ img.bl{mix-blend-mode:screen;opacity:0}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+<div id="root" data-composition-id="main" data-start="0" data-duration="24.8" data-width="1080" data-height="1920">
 
-  <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
+  <div id="scene" class="clip" data-start="0" data-duration="24.8" data-track-index="0" style="position:absolute;inset:0">
     <!-- X: warm wall close-up -->
     <div id="LX" class="lay"><div class="st w" id="sX"><img src="assets/warm/detail.png" alt="" /><img class="bl" id="bX" src="assets/warm/detail_bloom.jpg" alt="" /></div></div>
     <!-- K: kids closet -->
@@ -109,20 +110,23 @@ img.bl{mix-blend-mode:screen;opacity:0}
       <img class="q" id="f_ward" src="assets/walnut/door_ward_front.png" alt="" />
       <img class="q" id="k_ward" src="assets/walnut/door_ward_back.png" alt="" />
       <div class="q" id="s_ward" style="width:260px;height:1496px;background:#120d09"></div>
+      <img class="ph" id="openReal" src="assets/walnut/open.png" alt="" style="opacity:0" />
     </div></div>
-    <!-- W: warm wall, day -> sunset -->
+    <!-- H: white wall, the vitrine fills with light -->
+    <div id="LU" class="lay"><div class="st w" id="sU"><img src="assets/white/unlit.png" alt="" /><img id="lit" src="assets/white/lit.jpg" alt="" /></div></div>
+    <!-- W: warm wall library, evening falls and the library glows -->
     <div id="LW" class="lay"><div class="st w" id="sW">
       <img src="assets/warm/day.png" alt="" />
       <img id="warm" src="assets/warm/warm.png" alt="" />
       <img class="bl" id="bW" src="assets/warm/warm_bloom.jpg" alt="" />
-      <div class="fx" id="wcol" style="left:0;top:0;width:160px;height:1472px;background:linear-gradient(90deg,rgba(255,214,150,0) 0%,rgba(255,214,150,.28) 50%,rgba(255,214,150,0) 100%)"></div>
-      <div class="fx" id="whead" style="left:0;top:0;width:520px;height:90px;border-radius:50%;transform-origin:50% 50%;background:radial-gradient(closest-side,rgba(255,236,196,1) 0%,rgba(255,206,140,.55) 40%,rgba(255,190,110,0) 100%)"></div>
-      <div id="t1" class="t"><div class="ln"><span>שום</span> <span>דבר</span> <span>כאן</span></div><div class="ln"><span><em>לא</em></span> <span><em>מקטלוג.</em></span></div></div>
     </div></div>
+    <!-- L: latte wall, frame 0 -->
+    <div id="LL" class="lay"><div class="st" id="sL" style="width:1178px;height:1462px"><img src="assets/latte/front_g.png" alt="" style="position:absolute;left:0;top:0;width:1178px" /><img class="bl" id="bL" src="assets/latte/front_bloom.jpg" alt="" style="position:absolute;left:0;top:0;width:1178px" /></div></div>
     <div id="flash" style="position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 45%,rgba(255,232,190,1) 0%,rgba(255,214,160,.85) 45%,rgba(255,206,150,.55) 100%);mix-blend-mode:screen;opacity:0"></div>
   </div>
 
-  <div id="txt" class="clip" data-start="0" data-duration="20" data-track-index="1" style="position:absolute;inset:0">
+  <div id="txt" class="clip" data-start="0" data-duration="24.8" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>שום</span> <span>דבר</span> <span>כאן</span></div><div class="ln"><span><em>לא</em></span> <span><em>מקטלוג.</em></span></div></div>
     <div id="t2" class="t"><div class="ln"><span>תוכנן</span></div><div class="ln"><span><em>לבית</em></span> <span><em>אחד.</em></span></div></div>
     <div id="t3" class="t"><div class="ln"><span>חומרים</span></div><div class="ln"><span><em>מהשורה</em></span> <span><em>הראשונה.</em></span></div></div>
     <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">פגישת ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
@@ -162,32 +166,18 @@ function path(el, keys) {
     immediateRender: false, onUpdate: () => gsap.set(el, at(P.t)) }, keys[0][0]);
 }
 
-/* ================= W 0–3.9  warm wall: push toward the screen, sunset along the sideboard, portal ================= */
-path("#sW", [[0, 700, 736, 1.34], [2.5, 760, 690, 1.5], [3.4, 782, 650, 2.05], [4.1, 786, 636, 2.9]]);
-card("#t1", 0.2, 2.3);
-const cove = x => 1190 - 0.32 * (x - 140);
-const SW = { p: 1000 };
-const warmEl = $("warm"), bW = $("bW"), wcol = $("wcol"), whead = $("whead");
-const setMask = (el, css) => { el.style.webkitMaskImage = css; el.style.maskImage = css; };
-const sweep = () => {
-  const p = SW.p;
-  setMask(warmEl, `linear-gradient(90deg, rgba(0,0,0,0) ${p - 70}px, #000 ${p + 110}px)`);
-  setMask(bW, `linear-gradient(90deg, rgba(0,0,0,0) ${p - 150}px, #000 ${p}px, rgba(0,0,0,.35) ${p + 240}px, rgba(0,0,0,.35) 100%)`);
-  gsap.set(wcol, { x: p - 80 }); gsap.set(whead, { x: p - 260, y: cove(p) - 45, rotation: -17.7 });
-};
-sweep();
-const S0 = 1.15, S1 = 2.75;
-tl.to(SW, { p: -160, duration: S1 - S0, ease: "power1.inOut", onUpdate: sweep }, S0);
-tl.fromTo([wcol, whead], { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "sine.out", immediateRender: false }, S0);
-tl.to(wcol, { opacity: 0, duration: 0.35, ease: "sine.in" }, S1 - 0.3);
-tl.to(whead, { opacity: 0, duration: 0.45, ease: "sine.in" }, S1 - 0.25);
-tl.fromTo(bW, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "sine.out", immediateRender: false }, S0);
-tl.to(bW, { opacity: 0.45, duration: 0.8, ease: "sine.inOut" }, S1);
-// PORTAL: into the dark screen (motion blur grows), hand-over inside the blur
-const PT = 3.9;
-tl.fromTo("#sW", { filter: "blur(0px)" }, { filter: "blur(10px)", duration: 0.45, ease: "power2.in", immediateRender: false }, PT - 0.5);
+/* ================= L 0–3.1  latte wall: frame 0 already pushing, real LEDs breathe ================= */
+gsap.set(["#LU", "#LW"], { opacity: 0 });
+path("#sL", [[0, 642, 686, 1.40], [3.1, 612, 640, 1.6]]);
+gsap.set("#bL", { opacity: 0.1 });
+tl.to("#bL", { opacity: 0.85, duration: 1.0, ease: "sine.inOut" }, 0.3);
+tl.to("#bL", { opacity: 0.3, duration: 1.2, ease: "sine.inOut" }, 1.4);
+card("#t1", 0.2, 2.5);
+// WHIP out (stage slides left = camera pans right), inside the blur
+const LT = 3.1;
+tl.fromTo("#LL", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, LT - 0.24);
 
-/* ================= N 3.9–8.84  walnut wall: out of the screen, the real doors swing open ================= */
+/* ================= N 3.1–8.6  walnut wall: lands in the whip, the real doors swing open ================= */
 const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-416.09243192286596, 10.496939450417477, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-415.31386732213537, 138.0697890334754, 0.0]], "tw": 400, "th": 308, "open": 102}, "ward": {"P": [[-131.1014522695481, 15.003054598103201, 0.0], [0.07212386249824772, 11.817961737798113, 0.0], [4.5659952950813985, 748.1678854006075, 0.0], [-126.63356864238304, 747.0947081205998, 0.0]], "tw": 260, "th": 1455, "open": 98}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
 const Kf = RIG.K[0][0], Kcx = RIG.K[0][2], Kcy = RIG.K[1][2];
 const proj = P => { const c = [0, 1, 2].map(i => RIG.O[i] + P[0] * RIG.rx[i] + P[1] * RIG.ry[i] + P[2] * RIG.rz[i]);
@@ -244,28 +234,34 @@ const UPMAX = RIG.doors.upper.open * Math.PI / 180, WAMAX = RIG.doors.ward.open 
 const swing = (key, to, at, dur, ease) => tl.to(ST, { [key]: to, duration: dur, ease, onUpdate: upd }, at);
 
 // zoom-through: the walnut wall pulls back out of its own screen while the warm wall dives in (motion dissolve)
-tl.set("#LN", { opacity: 1 }, PT - 0.3);
-tl.fromTo("#LW", { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "sine.inOut", immediateRender: false }, PT - 0.3);
-tl.fromTo("#sN", { filter: "blur(10px)" }, { filter: "blur(0px)", duration: 0.55, ease: "power2.out", immediateRender: false }, PT - 0.15);
-// out of the screen (the walnut wall's own TV), decelerating into the slow push that carries the door opening
-path("#sN", [[PT - 0.3, 780, 690, 2.7], [PT + 0.5, 660, 712, 1.85], [PT + 1.35, 500, 738, 1.4], [6.6, 476, 722, 1.5], [8.6, 476, 690, 1.75]]);
+tl.set("#LN", { opacity: 1 }, LT);
+tl.set("#LL", { opacity: 0 }, LT);
+tl.fromTo("#LN", { filter: "blur(14px)" }, { filter: "blur(0px)", duration: 0.3, ease: "power2.out", immediateRender: false }, LT);
+// lands still travelling in the whip's direction, settles into the slow push that carries the doors, then drifts to the screen and dives
+path("#sN", [[LT, 330, 742, 1.4], [LT + 0.6, 462, 742, 1.36], [5.6, 476, 721, 1.47], [5.95, 494, 712, 1.6], [7.2, 530, 705, 1.66], [8.0, 700, 690, 1.95], [8.6, 780, 690, 2.8]]);
 gsap.set("#bN", { opacity: 0.25 });
-tl.to("#bN", { opacity: 0.6, duration: 1.0, ease: "sine.inOut" }, PT + 0.4);
-swing("up", UPMAX, 5.3, 1.35, "power2.inOut");
-swing("wa", WAMAX, 5.95, 1.6, "power2.inOut");
-swing("dr", DRMAX, 6.65, 1.1, "power2.inOut");
-tl.to("#bN", { opacity: 0.3, duration: 1.0, ease: "sine.inOut" }, 7.6);
-// WHIP out (camera pans right = stage slides left) inside the blur
-const WT = 8.84;
-tl.fromTo("#sN", { x: 540 - 476 * 1.75 }, { x: 540 - 476 * 1.75 - 260, duration: 0.24, ease: "power2.in", immediateRender: false }, WT - 0.24);
-tl.fromTo("#LN", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, WT - 0.24);
+tl.to("#bN", { opacity: 0.6, duration: 1.0, ease: "sine.inOut" }, LT + 0.3);
+swing("up", UPMAX, 3.95, 1.35, "power2.inOut");
+swing("wa", WAMAX, 4.4, 1.6, "power2.inOut");
+swing("dr", DRMAX, 4.9, 1.05, "power2.inOut");
+// the open photo's real structure differs from the closed one (wider closet, no slat strip): the rig alone leaves the
+// closet looking warped, so as the doors settle the frame hands over to the REAL open photo (soft dissolve, camera moving)
+// hidden inside a short punch-in with motion blur, right after the doors come to rest
+tl.set("#openReal", { opacity: 1 }, 5.76);
+tl.fromTo("#sN", { filter: "blur(0px)" }, { filter: "blur(12px)", duration: 0.14, ease: "power2.in", immediateRender: false }, 5.62);
+tl.to("#sN", { filter: "blur(0px)", duration: 0.26, ease: "power2.out" }, 5.76);
+tl.to("#bN", { opacity: 0.3, duration: 1.0, ease: "sine.inOut" }, 6.2);
+// PORTAL: dive into the screen (blur grows), the kids' room pulls out of the blur (motion dissolve)
+const PT = 8.6;
+tl.fromTo("#sN", { filter: "blur(0px)" }, { filter: "blur(10px)", duration: 0.45, ease: "power2.in", immediateRender: false }, PT - 0.5);
 
-/* ================= K 8.84–14  kids' closet: lands in the whip, four doors open in a cascade ================= */
-tl.set("#LK", { opacity: 1 }, WT);
-tl.set("#LN", { opacity: 0 }, WT);
-tl.fromTo("#LK", { filter: "blur(14px)" }, { filter: "blur(0px)", duration: 0.3, ease: "power2.out", immediateRender: false }, WT);
+/* ================= K 8.3–13.2  kids' closet: out of the blur, four doors open in a cascade ================= */
+const WT = PT;
+tl.set("#LK", { opacity: 1 }, PT - 0.3);
+tl.fromTo("#LN", { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "sine.inOut", immediateRender: false }, PT - 0.3);
+tl.fromTo("#LK", { filter: "blur(10px)" }, { filter: "blur(0px)", duration: 0.55, ease: "power2.out", immediateRender: false }, PT - 0.15);
 const kp = (t, cx, cy, z) => [t, cx, cy, KS * z];
-path("#sK", [kp(WT, 600, 1215, 1.16), kp(WT + 0.6, 668, 1205, 1.04), kp(11.0, 680, 1180, 1.06), kp(14.0, 680, 1120, 1.2)]);
+path("#sK", [kp(PT - 0.3, 680, 1080, 1.7), kp(PT + 0.5, 680, 1170, 1.12), kp(10.4, 680, 1185, 1.05), kp(13.2, 680, 1130, 1.18)]);
 const dswing = (id, sign, at, dur, handover) => {
   tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * 92, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
   const on = { ".shade": 0.28, ".fs": 0.5, ".bot": 1 };
@@ -278,32 +274,61 @@ const cast = (id, at, dur) => { tl.fromTo(id, { opacity: 0 }, { opacity: 1, dura
   tl.to(id, { opacity: 0, duration: dur * 0.5, ease: "sine.in" }, at + dur * 0.5); };
 gsap.set(["#d1", "#d2", "#d3", "#d4"], { rotationY: 0, opacity: 1 });
 gsap.set(["#bL", "#bR"], { opacity: 1 });
-const KD = 9.75;
+const KD = 9.35;
 dswing("#d4", 1, KD, 1.3, false);
 bayLight("#bR", KD, KD + 1.85);
 bayLight("#bL", KD + 1.1, KD + 2.95);
 dswing("#d3", -1, KD + 0.55, 1.3, true);  cast("#sh3", KD + 0.55, 1.3);
 dswing("#d2", 1, KD + 1.1, 1.3, true);    cast("#sh2", KD + 1.1, 1.3);
 dswing("#d1", -1, KD + 1.65, 1.3, false);
-card("#t2", 12.0, 13.6);
-// the niche light flares -> flash -> close-up
-const XT = 14.0;
-tl.to("#kspill", { opacity: 1, duration: 0.6, ease: "power2.in" }, XT - 0.6);
-tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.3, ease: "power2.in", immediateRender: false }, XT - 0.3);
+card("#t2", 11.5, 12.9);
+// the niche light flares -> flash -> the white wall
+const UT = 13.2;
+tl.to("#kspill", { opacity: 1, duration: 0.6, ease: "power2.in" }, UT - 0.6);
+tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.3, ease: "power2.in", immediateRender: false }, UT - 0.3);
+
+/* ================= U 13.2–16.0  white wall: the glass vitrine fills with light, bottom to top ================= */
+tl.set("#LU", { opacity: 1 }, UT);
+tl.set("#LK", { opacity: 0 }, UT);
+tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, UT);
+// framing keeps the screenshot badge (top) and mute icon (bottom right) out of frame at every moment
+path("#sU", [[UT, 830, 760, 1.68], [16.4, 812, 760, 1.64]]);
+const fill = { p: -20 };
+const setFill = () => { const m = fill.p >= 118 ? "none" : `linear-gradient(to top,#000 ${fill.p}%,transparent ${fill.p + 15}%)`;
+  $("lit").style.webkitMaskImage = m; $("lit").style.maskImage = m; };
+setFill();
+tl.fromTo(fill, { p: -20 }, { p: 120, duration: 1.5, ease: "power2.inOut", onUpdate: setFill, immediateRender: false }, UT + 0.5);
+
+/* ================= W 15.9–19.8  HERO light: the warm wall's library, evening falls and the library glows ================= */
+const HT = 15.9;
+tl.fromTo("#LW", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, HT);
+tl.set("#LU", { opacity: 0 }, HT + 0.52);
+const warmEl = $("warm"), bW = $("bW");
+path("#sW", [[HT, 345, 700, 1.62], [19.9, 338, 600, 1.66]]);
+const dusk = { p: -20 };
+const setDusk = () => { const m = dusk.p >= 118 ? "none" : `linear-gradient(to top,#000 ${dusk.p}%,transparent ${dusk.p + 25}%)`;
+  warmEl.style.webkitMaskImage = m; warmEl.style.maskImage = m; };
+setDusk();
+gsap.set(bW, { opacity: 0 });
+tl.fromTo(dusk, { p: -20 }, { p: 120, duration: 1.6, ease: "power1.inOut", onUpdate: setDusk, immediateRender: false }, HT + 0.7);
+tl.fromTo(bW, { opacity: 0 }, { opacity: 0.9, duration: 1.4, ease: "sine.inOut", immediateRender: false }, HT + 1.2);
+tl.to(bW, { opacity: 0.55, duration: 1.2, ease: "sine.inOut" }, HT + 2.7);
+const XT = 19.8;
+tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.7, duration: 0.3, ease: "power2.in", immediateRender: false }, XT - 0.3);
 
 /* ================= X 14–17  the warm wall's sideboard up close, LEDs breathing ================= */
 tl.set("#LX", { opacity: 1 }, XT);
-tl.set("#LK", { opacity: 0 }, XT);
+tl.set("#LW", { opacity: 0 }, XT);
 tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, XT);
-path("#sX", [[XT, 400, 784, 1.42], [17.5, 580, 750, 1.49]]);
+path("#sX", [[XT, 400, 784, 1.42], [22.3, 560, 755, 1.48]]);
 gsap.set("#bX", { opacity: 0.9 });
 tl.to("#bX", { opacity: 0.35, duration: 0.9, ease: "sine.out" }, XT);
 tl.to("#bX", { opacity: 0.85, duration: 1.2, ease: "sine.inOut" }, XT + 1.0);
 tl.to("#bX", { opacity: 0.4, duration: 1.0, ease: "sine.inOut" }, XT + 2.2);
-card("#t3", XT + 0.35, 16.6);
+card("#t3", XT + 0.3, 21.5);
 
 /* ================= E 17–20  living end card ================= */
-const ET = 17.0;
+const ET = 21.8;
 gsap.set(["#end img", "#end .l1", "#end .l2"], { opacity: 0 });
 tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, ET);
 tl.fromTo("#endglow", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1.15, duration: 3.0, ease: "sine.out", immediateRender: false }, ET);
@@ -311,7 +336,7 @@ tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, 
 tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, ET + 0.65);
 tl.fromTo("#end .l2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, ET + 1.0);
 tl.fromTo("#endin", { scale: 1 }, { scale: 1.06, duration: 3.0, ease: "none", immediateRender: false }, ET);
-tl.set({}, {}, 20);
+tl.set({}, {}, 24.8);
 
 window.__timelines = window.__timelines || {};
 window.__timelines["main"] = tl;
