@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<!-- Brand showreel v1 — "שום דבר כאן / לא מקטלוג." → "תוכנן / לבית אחד." → "חומרים / מהשורה הראשונה." → free consultation.
+     One continuous journey through three homes, each showing its real strength:
+     W 0–3.9   warm wall (day) already pushing toward the TV; card on the plain screen; the REAL warm photo is revealed by a
+               light front running the sideboard (sunset). PORTAL: the camera accelerates INTO the dark screen.
+     N 3.9–8.84 out of the blur we pull back from the walnut wall's screen; the REAL doors swing open in true 3D (calibrated
+               rig from the walnut project), the drawer glides out, the camera keeps pushing into the open closet. WHIP →
+     K 8.84–14 the kids' closet lands in the whip's direction; four doors open in a cascade (CSS 3D, real faces/interiors).
+               "תוכנן / לבית אחד." The niche light flares → FLASH →
+     X 14–17   low close-up along the warm wall's sideboard, LEDs breathing. "חומרים / מהשורה הראשונה."
+     E 17–20   living end card: logo, free consultation + visualisation (approved fact), "נגרות בהתאמה אישית". -->
+<style>
+@font-face{font-family:"Heebo";src:url(assets/heebo.ttf);font-weight:100 900}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#1c1816}
+#root{width:100%;height:100%;position:relative;overflow:hidden;background:#1c1816}
+.lay{position:absolute;inset:0;overflow:hidden}
+.st{position:absolute;left:0;top:0;transform-origin:0 0}
+.w{width:1179px;height:1472px}
+.w > img{position:absolute;left:0;top:0;display:block;width:1179px;height:1472px}
+img.bl{mix-blend-mode:screen;opacity:0}
+.fx{position:absolute;pointer-events:none;mix-blend-mode:screen;opacity:0}
+/* walnut rig */
+#sN{width:1179px;height:1473px}
+#sN img.ph{position:absolute;left:0;top:0;display:block;width:1179px}
+#sN img.bl{position:absolute;left:0;top:0;width:1179px}
+.q{position:absolute;left:0;top:0;transform-origin:0 0;backface-visibility:visible}
+/* kids closet stage = her AI room extension with the real closet pixels; 1357x2411 */
+#sK{width:1357px;height:2411px;perspective:1800px;perspective-origin:680px 1030px}
+#sK > img{position:absolute;left:0;top:0;width:1357px;height:2411px;display:block}
+.door{position:absolute;top:282px;height:1491px;transform-style:preserve-3d}
+.door .face{position:absolute;inset:0;background-image:url(assets/kids/room_closed_fix.jpg);background-size:1357px 2411px;backface-visibility:hidden}
+.door .back{position:absolute;inset:0;background-image:url(assets/kids/room_closed_fix.jpg);background-size:1357px 2411px;transform:rotateY(180deg) translateZ(1px);backface-visibility:hidden;filter:brightness(.86)}
+.door .shade{position:absolute;inset:0;opacity:0}
+.door .fs{position:absolute;left:0;top:100%;width:100%;height:70px;transform-origin:50% 0;transform:rotateX(90deg);background:linear-gradient(180deg,rgba(20,14,9,.7) 0,rgba(20,14,9,.35) 10px,rgba(20,14,9,0) 100%);filter:blur(4px);opacity:0}
+.door .refl{position:absolute;left:0;top:100%;width:100%;height:420px;background-image:url(assets/kids/room_closed_fix.jpg);background-size:1357px 2411px;transform:scaleY(-1);transform-origin:50% 0;filter:blur(6px);opacity:0;-webkit-mask-image:linear-gradient(0deg,#000 0,transparent 100%)}
+.door .bot{position:absolute;left:0;bottom:0;width:100%;height:22px;background-image:url(assets/kids/room_closed_fix.jpg);background-size:1357px 2411px;opacity:0}
+.bay{position:absolute;top:282px;height:1491px;opacity:0}
+.door .edge{position:absolute;top:0;width:11px;height:100%;transform-origin:0 50%;transform:rotateY(90deg);background:linear-gradient(90deg,#8f8476 0,#8f8476 1px,#ddd4c7 2px,#c6bbab)}
+#d1{left:41px;width:265px;transform-origin:0 50%}    #d1 .face,#d1 .back{background-position:-41px -282px} #d1 .refl{background-position:-41px -1353px} #d1 .bot{background-position:-41px -1727px}   #d1 .edge{left:100%}   #d1 .shade{background:linear-gradient(90deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#d2{left:306px;width:275px;transform-origin:100% 50%} #d2 .face,#d2 .back{background-position:-306px -282px} #d2 .refl{background-position:-306px -1353px} #d2 .bot{background-position:-306px -1727px}  #d2 .edge{left:0}   #d2 .shade{background:linear-gradient(270deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#d3{left:776px;width:266px;transform-origin:0 50%}   #d3 .face,#d3 .back{background-position:-776px -282px} #d3 .refl{background-position:-776px -1353px} #d3 .bot{background-position:-776px -1727px}  #d3 .edge{left:100%}   #d3 .shade{background:linear-gradient(90deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#d4{left:1042px;width:272px;transform-origin:100% 50%} #d4 .face,#d4 .back{background-position:-1042px -282px} #d4 .refl{background-position:-1042px -1353px} #d4 .bot{background-position:-1042px -1727px} #d4 .edge{left:0}   #d4 .shade{background:linear-gradient(270deg,rgba(70,50,32,1),rgba(70,50,32,.35))}
+#bL{left:41px;width:540px;background:rgba(24,17,11,.62);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 60px,#000 480px,transparent 540px)}
+#bR{left:776px;width:538px;background:rgba(24,17,11,.62);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 60px,#000 478px,transparent 538px)}
+#kcol{position:absolute;left:583px;top:282px;width:191px;height:1491px;background-image:url(assets/kids/room_closed_fix.jpg);background-size:1357px 2411px;background-position:-583px -282px}
+.cast{position:absolute;top:282px;height:1491px;width:220px;opacity:0}
+#sh2{left:361px;background:linear-gradient(270deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
+#sh3{left:776px;background:linear-gradient(90deg,rgba(30,22,15,.45),rgba(30,22,15,0))}
+#kspill{position:absolute;inset:0;background:radial-gradient(ellipse 280px 560px at 680px 1076px,rgba(255,170,85,.22),rgba(255,170,85,0) 75%);mix-blend-mode:screen;opacity:.35}
+/* text */
+.t{position:absolute;direction:rtl;font-family:"Heebo";font-weight:850;line-height:1.02;letter-spacing:-.01em;white-space:nowrap}
+.t .ln{display:block;overflow:hidden;padding:0 6px 10px}
+.t span{display:inline-block}
+.t em{font-style:normal;color:#f0c987}
+#t1{left:604px;width:360px;top:505px;text-align:center;font-size:54px;color:#fff}
+#t2{left:72px;right:72px;top:1450px;text-align:right;font-size:100px;color:#2a211b}
+#t2 em{color:#8a5a2b}
+#t3{left:0;width:1080px;top:560px;text-align:center;font-size:92px;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.55)}
+#end{position:absolute;inset:0;background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+#endglow{position:absolute;left:190px;top:470px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%);opacity:0}
+#endin{position:relative;display:flex;flex-direction:column;align-items:center}
+#end img{width:280px}
+#end .l1{margin-top:64px;font-family:"Heebo";font-weight:800;font-size:66px;line-height:1.15;color:#fff;text-align:center}
+#end .l1 em{font-style:normal;color:#d8b878}
+#end .l2{margin-top:30px;font-family:"Heebo";font-weight:400;font-size:38px;color:#e3d3bf;letter-spacing:.02em}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+
+  <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
+    <!-- X: warm wall close-up -->
+    <div id="LX" class="lay"><div class="st w" id="sX"><img src="assets/warm/detail.png" alt="" /><img class="bl" id="bX" src="assets/warm/detail_bloom.jpg" alt="" /></div></div>
+    <!-- K: kids closet -->
+    <div id="LK" class="lay"><div class="st" id="sK" data-layout-allow-overflow>
+      <img src="assets/kids/room_open.jpg" alt="" />
+      <div id="kcol"></div>
+      <div class="bay" id="bL"></div><div class="bay" id="bR"></div>
+      <div class="cast" id="sh2"></div><div class="cast" id="sh3"></div>
+      <div class="door" id="d1"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div class="door" id="d2"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div class="door" id="d3"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div class="door" id="d4"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="bot"></div><div class="fs"></div><div class="refl"></div></div>
+      <div id="kspill"></div>
+    </div></div>
+    <!-- N: walnut wall with the 3D door rig -->
+    <div id="LN" class="lay"><div class="st" id="sN">
+      <img class="ph" src="assets/walnut/closed.png" alt="" />
+      <img class="bl" id="bN" src="assets/walnut/closed_bloom.jpg" alt="" />
+      <img class="ph" id="in_upper" src="assets/walnut/interior_upper.png" alt="" style="opacity:0" />
+      <img class="ph" id="in_ward" src="assets/walnut/interior_ward.png" alt="" style="opacity:0" />
+      <div class="q" id="sh_upper" style="width:100px;height:100px;background:#0e0b09"></div>
+      <div class="q" id="sh_ward" style="width:100px;height:100px;background:#0e0b09"></div>
+      <div class="q" id="dr_cav" style="width:100px;height:100px;background:#151312;opacity:0"></div>
+      <img class="q" id="dr_side" src="assets/walnut/drawer_side.png" alt="" style="opacity:0" />
+      <img class="q" id="dr_top" src="assets/walnut/drawer_top.png" alt="" style="opacity:0" />
+      <img class="q" id="dr_front" src="assets/walnut/drawer_front.png" alt="" />
+      <div class="q" id="ed_upper" style="width:10px;height:100px;background:linear-gradient(90deg,#a59c90,#bdb4a7)"></div>
+      <div class="q" id="ed_ward" style="width:10px;height:100px;background:linear-gradient(90deg,#a59c90,#bdb4a7)"></div>
+      <img class="q" id="f_upper" src="assets/walnut/door_upper_front.png" alt="" />
+      <img class="q" id="k_upper" src="assets/walnut/door_upper_back.png" alt="" />
+      <div class="q" id="s_upper" style="width:400px;height:274px;background:#120d09"></div>
+      <img class="q" id="f_ward" src="assets/walnut/door_ward_front.png" alt="" />
+      <img class="q" id="k_ward" src="assets/walnut/door_ward_back.png" alt="" />
+      <div class="q" id="s_ward" style="width:260px;height:1496px;background:#120d09"></div>
+    </div></div>
+    <!-- W: warm wall, day -> sunset -->
+    <div id="LW" class="lay"><div class="st w" id="sW">
+      <img src="assets/warm/day.png" alt="" />
+      <img id="warm" src="assets/warm/warm.png" alt="" />
+      <img class="bl" id="bW" src="assets/warm/warm_bloom.jpg" alt="" />
+      <div class="fx" id="wcol" style="left:0;top:0;width:160px;height:1472px;background:linear-gradient(90deg,rgba(255,214,150,0) 0%,rgba(255,214,150,.28) 50%,rgba(255,214,150,0) 100%)"></div>
+      <div class="fx" id="whead" style="left:0;top:0;width:520px;height:90px;border-radius:50%;transform-origin:50% 50%;background:radial-gradient(closest-side,rgba(255,236,196,1) 0%,rgba(255,206,140,.55) 40%,rgba(255,190,110,0) 100%)"></div>
+      <div id="t1" class="t"><div class="ln"><span>שום</span> <span>דבר</span> <span>כאן</span></div><div class="ln"><span><em>לא</em></span> <span><em>מקטלוג.</em></span></div></div>
+    </div></div>
+    <div id="flash" style="position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 45%,rgba(255,232,190,1) 0%,rgba(255,214,160,.85) 45%,rgba(255,206,150,.55) 100%);mix-blend-mode:screen;opacity:0"></div>
+  </div>
+
+  <div id="txt" class="clip" data-start="0" data-duration="20" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t2" class="t"><div class="ln"><span>תוכנן</span></div><div class="ln"><span><em>לבית</em></span> <span><em>אחד.</em></span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>חומרים</span></div><div class="ln"><span><em>מהשורה</em></span> <span><em>הראשונה.</em></span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">פגישת ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
+  </div>
+</div>
+
+<script>
+const tl = gsap.timeline({ paused: true });
+const $ = id => document.getElementById(id);
+const v = (cx, cy, s) => ({ scale: s, x: 540 - cx * s, y: 960 - cy * s });
+const KS = 1080 / 1357, kv = (cx, cy, z) => v(cx, cy, KS * z);   // kids stage: z=1 -> full width
+gsap.set(".st", { transformOrigin: "0 0" });
+gsap.set(".t span", { yPercent: 115 });
+gsap.set(["#LN", "#LK", "#LX"], { opacity: 0 });
+
+const card = (sel, at, out) => {
+  tl.fromTo(sel + " span", { yPercent: 115 }, { yPercent: 0, duration: 0.45, stagger: 0.07, ease: "power3.out", immediateRender: false }, at);
+  if (out) tl.to(sel + " span", { yPercent: -115, duration: 0.3, stagger: 0.04, ease: "power2.in" }, out);
+};
+// one camera path per stage: Catmull-Rom through (time, cx, cy, scale) keys -> continuous velocity, no stop-go
+function path(el, keys) {
+  const P = { t: keys[0][0] };
+  const at = t => {
+    let i = 0; while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+    const k0 = keys[Math.max(i - 1, 0)], k1 = keys[i], k2 = keys[i + 1], k3 = keys[Math.min(i + 2, keys.length - 1)];
+    const u = Math.min(1, Math.max(0, (t - k1[0]) / (k2[0] - k1[0])));
+    const cr = j => {
+      const m1 = (k2[j] - k0[j]) / (k2[0] - k0[0] || 1) * (k2[0] - k1[0]);
+      const m2 = (k3[j] - k1[j]) / (k3[0] - k1[0] || 1) * (k2[0] - k1[0]);
+      const u2 = u * u, u3 = u2 * u;
+      return (2 * u3 - 3 * u2 + 1) * k1[j] + (u3 - 2 * u2 + u) * m1 + (-2 * u3 + 3 * u2) * k2[j] + (u3 - u2) * m2;
+    };
+    return v(cr(1), cr(2), cr(3));
+  };
+  gsap.set(el, at(keys[0][0]));
+  tl.fromTo(P, { t: keys[0][0] }, { t: keys[keys.length - 1][0], duration: keys[keys.length - 1][0] - keys[0][0], ease: "none",
+    immediateRender: false, onUpdate: () => gsap.set(el, at(P.t)) }, keys[0][0]);
+}
+
+/* ================= W 0–3.9  warm wall: push toward the screen, sunset along the sideboard, portal ================= */
+path("#sW", [[0, 700, 736, 1.34], [2.5, 760, 690, 1.5], [3.4, 782, 650, 2.05], [4.1, 786, 636, 2.9]]);
+card("#t1", 0.2, 2.3);
+const cove = x => 1190 - 0.32 * (x - 140);
+const SW = { p: 1000 };
+const warmEl = $("warm"), bW = $("bW"), wcol = $("wcol"), whead = $("whead");
+const setMask = (el, css) => { el.style.webkitMaskImage = css; el.style.maskImage = css; };
+const sweep = () => {
+  const p = SW.p;
+  setMask(warmEl, `linear-gradient(90deg, rgba(0,0,0,0) ${p - 70}px, #000 ${p + 110}px)`);
+  setMask(bW, `linear-gradient(90deg, rgba(0,0,0,0) ${p - 150}px, #000 ${p}px, rgba(0,0,0,.35) ${p + 240}px, rgba(0,0,0,.35) 100%)`);
+  gsap.set(wcol, { x: p - 80 }); gsap.set(whead, { x: p - 260, y: cove(p) - 45, rotation: -17.7 });
+};
+sweep();
+const S0 = 1.15, S1 = 2.75;
+tl.to(SW, { p: -160, duration: S1 - S0, ease: "power1.inOut", onUpdate: sweep }, S0);
+tl.fromTo([wcol, whead], { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "sine.out", immediateRender: false }, S0);
+tl.to(wcol, { opacity: 0, duration: 0.35, ease: "sine.in" }, S1 - 0.3);
+tl.to(whead, { opacity: 0, duration: 0.45, ease: "sine.in" }, S1 - 0.25);
+tl.fromTo(bW, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "sine.out", immediateRender: false }, S0);
+tl.to(bW, { opacity: 0.45, duration: 0.8, ease: "sine.inOut" }, S1);
+// PORTAL: into the dark screen (motion blur grows), hand-over inside the blur
+const PT = 3.9;
+tl.fromTo("#sW", { filter: "blur(0px)" }, { filter: "blur(10px)", duration: 0.45, ease: "power2.in", immediateRender: false }, PT - 0.5);
+
+/* ================= N 3.9–8.84  walnut wall: out of the screen, the real doors swing open ================= */
+const RIG = {"K": [[1100.0, 0.0, 589.5], [0.0, 1100.0, 736.5], [0.0, 0.0, 1.0]], "rx": [0.6884341904296277, 0.006102788365236377, 0.7252731357369252], "ry": [-0.0042014464077026244, 0.9999813778136917, -0.004426270881234812], "rz": [0.7252866421599025, -4.336808689942018e-19, -0.6884470108181265], "O": [-62.27272727272726, -425.9090909090909, 1000.0], "doors": {"upper": {"P": [[-416.09243192286596, 10.496939450417477, 0.0], [-252.88689742720436, 12.877625241049616, 0.0], [-252.1303699010844, 136.83955750020885, 0.0], [-415.31386732213537, 138.0697890334754, 0.0]], "tw": 400, "th": 308, "open": 102}, "ward": {"P": [[-131.1014522695481, 15.003054598103201, 0.0], [0.07212386249824772, 11.817961737798113, 0.0], [4.5659952950813985, 748.1678854006075, 0.0], [-126.63356864238304, 747.0947081205998, 0.0]], "tw": 260, "th": 1455, "open": 98}}, "drawer": {"P": [[-436.21015975522846, 576.2519796988349, 0.0], [-248.6301550067065, 574.8920648433262, 0.0], [-248.09521003955223, 662.5462604822583, 0.0], [-435.68871120746866, 661.6946996558376, 0.0]], "tw": 400, "th": 182, "pull": 116.30265922226342}};
+const Kf = RIG.K[0][0], Kcx = RIG.K[0][2], Kcy = RIG.K[1][2];
+const proj = P => { const c = [0, 1, 2].map(i => RIG.O[i] + P[0] * RIG.rx[i] + P[1] * RIG.ry[i] + P[2] * RIG.rz[i]);
+  return [Kf * c[0] / c[2] + Kcx, Kf * c[1] / c[2] + Kcy]; };
+function homog(w, ht, q) {
+  const src = [[0, 0], [w, 0], [w, ht], [0, ht]], A = [], b = [];
+  for (let i = 0; i < 4; i++) { const [x, y] = src[i], [X, Y] = q[i];
+    A.push([x, y, 1, 0, 0, 0, -x * X, -y * X]); b.push(X); A.push([0, 0, 0, x, y, 1, -x * Y, -y * Y]); b.push(Y); }
+  for (let c = 0; c < 8; c++) { let p = c; for (let r = c + 1; r < 8; r++) if (Math.abs(A[r][c]) > Math.abs(A[p][c])) p = r;
+    [A[c], A[p]] = [A[p], A[c]]; [b[c], b[p]] = [b[p], b[c]];
+    for (let r = 0; r < 8; r++) if (r !== c) { const f = A[r][c] / A[c][c]; for (let k = c; k < 8; k++) A[r][k] -= f * A[c][k]; b[r] -= f * b[c]; } }
+  const h = b.map((v, i) => v / A[i][i]); return [h[0], h[1], h[2], h[3], h[4], h[5], h[6], h[7], 1];
+}
+const m3d = H => `matrix3d(${H[0]},${H[3]},0,${H[6]},${H[1]},${H[4]},0,${H[7]},0,0,1,0,${H[2]},${H[5]},0,${H[8]})`;
+const put = (el, w, h, q) => { el.style.transform = m3d(homog(w, h, q)); };
+const add = (P, d) => [P[0] + d[0], P[1] + d[1], P[2] + d[2]];
+const T = 3.2;
+function door(name, phi) {
+  const D = RIG.doors[name], P = D.P, hx = P[1][0];
+  const rot = p => { const dx = p[0] - hx; return [hx + dx * Math.cos(phi), p[1], -dx * Math.sin(phi)]; };
+  const R = P.map(rot), q = R.map(proj);
+  const n = [Math.sin(phi), 0, Math.cos(phi)];
+  const f = $("f_" + name), k = $("k_" + name), s = $("s_" + name), e = $("ed_" + name);
+  const area = q2 => { let a = 0; for (let i = 0; i < 4; i++) { const p = q2[i], r = q2[(i + 1) % 4]; a += p[0] * r[1] - r[0] * p[1]; } return a; };
+  const s0 = Math.sign(area(P.map(proj)));
+  if (Math.sign(area(q)) === s0) {
+    put(f, D.tw, D.th, q); f.style.opacity = 1; k.style.opacity = 0;
+    put(s, D.tw, D.th, q); s.style.opacity = 0.22 * Math.sin(Math.min(phi, 1.4));
+  } else {
+    const qb = [q[1], q[0], q[3], q[2]];
+    put(k, D.tw, D.th, qb); k.style.opacity = 1; f.style.opacity = 0;
+    put(s, D.tw, D.th, qb); s.style.opacity = 0.12 * Math.max(0, 1 - phi / 1.9);
+  }
+  $("in_" + name).style.opacity = phi > 0.004 ? 1 : 0;
+  const e0 = R[0], e3 = R[3], back = [-T * n[0], 0, -T * n[2]];
+  put(e, 10, 100, [proj(e0), proj(add(e0, back)), proj(add(e3, back)), proj(e3)]);
+  e.style.opacity = phi > 0.02 ? 1 : 0;
+  const qi = P.map(proj); put($("sh_" + name), 100, 100, qi);
+  $("sh_" + name).style.opacity = phi < 0.004 ? 0 : 0.6 * Math.max(0, 1 - phi / 1.25);
+}
+function drawer(d) {
+  const D = RIG.drawer, P = D.P, z = [0, 0, d];
+  const F = P.map(p => add(p, z));
+  put($("dr_front"), D.tw, D.th, F.map(proj));
+  const on = Math.min(1, d / 10);
+  put($("dr_cav"), 100, 100, P.map(proj)); $("dr_cav").style.opacity = on;
+  put($("dr_top"), 400, 120, [P[0], P[1], F[1], F[0]].map(proj)); $("dr_top").style.opacity = on;
+  put($("dr_side"), 60, 160, [P[0], F[0], F[3], P[3]].map(proj)); $("dr_side").style.opacity = on;
+}
+const ST = { up: 0, wa: 0, dr: 0 };
+const upd = () => { door("upper", ST.up); door("ward", ST.wa); drawer(ST.dr); };
+upd();
+const UPMAX = RIG.doors.upper.open * Math.PI / 180, WAMAX = RIG.doors.ward.open * Math.PI / 180, DRMAX = RIG.drawer.pull;
+const swing = (key, to, at, dur, ease) => tl.to(ST, { [key]: to, duration: dur, ease, onUpdate: upd }, at);
+
+// zoom-through: the walnut wall pulls back out of its own screen while the warm wall dives in (motion dissolve)
+tl.set("#LN", { opacity: 1 }, PT - 0.3);
+tl.fromTo("#LW", { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "sine.inOut", immediateRender: false }, PT - 0.3);
+tl.fromTo("#sN", { filter: "blur(10px)" }, { filter: "blur(0px)", duration: 0.55, ease: "power2.out", immediateRender: false }, PT - 0.15);
+// out of the screen (the walnut wall's own TV), decelerating into the slow push that carries the door opening
+path("#sN", [[PT - 0.3, 780, 690, 2.7], [PT + 0.5, 660, 712, 1.85], [PT + 1.35, 500, 738, 1.4], [6.6, 476, 722, 1.5], [8.6, 476, 690, 1.75]]);
+gsap.set("#bN", { opacity: 0.25 });
+tl.to("#bN", { opacity: 0.6, duration: 1.0, ease: "sine.inOut" }, PT + 0.4);
+swing("up", UPMAX, 5.3, 1.35, "power2.inOut");
+swing("wa", WAMAX, 5.95, 1.6, "power2.inOut");
+swing("dr", DRMAX, 6.65, 1.1, "power2.inOut");
+tl.to("#bN", { opacity: 0.3, duration: 1.0, ease: "sine.inOut" }, 7.6);
+// WHIP out (camera pans right = stage slides left) inside the blur
+const WT = 8.84;
+tl.fromTo("#sN", { x: 540 - 476 * 1.75 }, { x: 540 - 476 * 1.75 - 260, duration: 0.24, ease: "power2.in", immediateRender: false }, WT - 0.24);
+tl.fromTo("#LN", { filter: "blur(0px)" }, { filter: "blur(14px)", duration: 0.24, ease: "power2.in", immediateRender: false }, WT - 0.24);
+
+/* ================= K 8.84–14  kids' closet: lands in the whip, four doors open in a cascade ================= */
+tl.set("#LK", { opacity: 1 }, WT);
+tl.set("#LN", { opacity: 0 }, WT);
+tl.fromTo("#LK", { filter: "blur(14px)" }, { filter: "blur(0px)", duration: 0.3, ease: "power2.out", immediateRender: false }, WT);
+const kp = (t, cx, cy, z) => [t, cx, cy, KS * z];
+path("#sK", [kp(WT, 600, 1215, 1.16), kp(WT + 0.6, 668, 1205, 1.04), kp(11.0, 680, 1180, 1.06), kp(14.0, 680, 1120, 1.2)]);
+const dswing = (id, sign, at, dur, handover) => {
+  tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * 92, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
+  const on = { ".shade": 0.28, ".fs": 0.5, ".bot": 1 };
+  for (const [el, val] of Object.entries(on))
+    tl.fromTo(id + " " + el, { opacity: 0 }, { opacity: val, duration: el === ".bot" ? 0.12 : dur, ease: "power2.inOut", immediateRender: false }, at);
+  if (handover) tl.set(id, { opacity: 0 }, at + dur);
+};
+const bayLight = (bay, from, to) => { tl.set(bay, { opacity: 1 }, from); tl.to(bay, { opacity: 0, duration: to - from, ease: "power1.inOut" }, from); };
+const cast = (id, at, dur) => { tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: dur * 0.5, ease: "sine.out", immediateRender: false }, at);
+  tl.to(id, { opacity: 0, duration: dur * 0.5, ease: "sine.in" }, at + dur * 0.5); };
+gsap.set(["#d1", "#d2", "#d3", "#d4"], { rotationY: 0, opacity: 1 });
+gsap.set(["#bL", "#bR"], { opacity: 1 });
+const KD = 9.75;
+dswing("#d4", 1, KD, 1.3, false);
+bayLight("#bR", KD, KD + 1.85);
+bayLight("#bL", KD + 1.1, KD + 2.95);
+dswing("#d3", -1, KD + 0.55, 1.3, true);  cast("#sh3", KD + 0.55, 1.3);
+dswing("#d2", 1, KD + 1.1, 1.3, true);    cast("#sh2", KD + 1.1, 1.3);
+dswing("#d1", -1, KD + 1.65, 1.3, false);
+card("#t2", 12.0, 13.6);
+// the niche light flares -> flash -> close-up
+const XT = 14.0;
+tl.to("#kspill", { opacity: 1, duration: 0.6, ease: "power2.in" }, XT - 0.6);
+tl.fromTo("#flash", { opacity: 0 }, { opacity: 0.85, duration: 0.3, ease: "power2.in", immediateRender: false }, XT - 0.3);
+
+/* ================= X 14–17  the warm wall's sideboard up close, LEDs breathing ================= */
+tl.set("#LX", { opacity: 1 }, XT);
+tl.set("#LK", { opacity: 0 }, XT);
+tl.to("#flash", { opacity: 0, duration: 0.6, ease: "power2.out" }, XT);
+path("#sX", [[XT, 400, 784, 1.42], [17.5, 580, 750, 1.49]]);
+gsap.set("#bX", { opacity: 0.9 });
+tl.to("#bX", { opacity: 0.35, duration: 0.9, ease: "sine.out" }, XT);
+tl.to("#bX", { opacity: 0.85, duration: 1.2, ease: "sine.inOut" }, XT + 1.0);
+tl.to("#bX", { opacity: 0.4, duration: 1.0, ease: "sine.inOut" }, XT + 2.2);
+card("#t3", XT + 0.35, 16.6);
+
+/* ================= E 17–20  living end card ================= */
+const ET = 17.0;
+gsap.set(["#end img", "#end .l1", "#end .l2"], { opacity: 0 });
+tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", immediateRender: false }, ET);
+tl.fromTo("#endglow", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1.15, duration: 3.0, ease: "sine.out", immediateRender: false }, ET);
+tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, ET + 0.3);
+tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, ET + 0.65);
+tl.fromTo("#end .l2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, ET + 1.0);
+tl.fromTo("#endin", { scale: 1 }, { scale: 1.06, duration: 3.0, ease: "none", immediateRender: false }, ET);
+tl.set({}, {}, 20);
+
+window.__timelines = window.__timelines || {};
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
