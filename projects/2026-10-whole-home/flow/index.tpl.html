@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<script src="assets/reel-kit.js"></script>
+<link rel="stylesheet" href="assets/reel-kit.css" />
+<!-- Whole-home reel v1 — "נכנסים / לבית / חדש?" → "כל חדר, / תכנון משלו." → "מתוכנן / גם מבפנים." → "נגרות לכל הבית." + free consultation
+     Beat grid 110 bpm (0.5455 s). Approved card 11.10 with her change: NO ceiling lamp (only carpentry on screen, R13).
+     M 0–2.18     frame 0 = the mauve wardrobe, whole, already pushing toward its round oak handle. Hook on the plain doors.
+     MATCH 2.18   SIGNATURE "the round handle travels": the push accelerates into the oak circle (blur) and lands on the grey
+                  wardrobe's round handle at the same size and place; pull back to the whole grey wardrobe + its dark column.
+     G 2.18–5.35  card "כל חדר, / תכנון משלו." on the plain grey doors
+     DISSOLVE 4.91 motion dissolve, both moving
+     O 4.91–7.75  the oak wardrobe (bedroom): four doors open as two real pairs (calibrated 3D rig from the closed photo,
+                  hinges/angles from the open photo, interior = the real open photo fitted to the opening)
+     PUNCH 7.75   punch-in blur hands over to the REAL open photo; the camera keeps going into the shelves and drawers
+     WHIP 9.27    one whip → the white wardrobe with the curved oak corner shelves; two doors open (rig), the real pull-down
+                  hanging rail is revealed; card "מתוכנן / גם מבפנים." on the plain white back panel
+     FLASH 13.64  light flash → the TV wall: the lit dark shelving unit WHOLE in frame for 2.7 s, its real light breathing (R12)
+     E 16.36–20   living end card: logo, "נגרות לכל הבית.", "ייעוץ והדמיה ללא עלות" -->
+<style>
+.m{width:770px;height:1152px}
+.n{width:922px;height:1152px}
+.st > img{width:auto;height:auto}
+.q{position:absolute;left:0;top:0;transform-origin:0 0;backface-visibility:visible}
+.t{color:#1f1813}
+.t em{color:#6b4a24}
+#t1{right:120px;top:300px;text-align:right;font-size:104px;color:#211a1c}
+#t1 em{color:#f3ece6}
+#t2{left:0;width:1080px;top:300px;text-align:center;font-size:96px}
+#t3{left:0;width:880px;top:1040px;text-align:center;font-size:88px}
+#end .l1{font-size:78px}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
+    <!-- later stages first (underneath), frame-0 stage last (on top) -->
+    <div id="LT" class="lay"><div class="st n" id="sT"><img src="assets/tv.png" alt="" /><img class="bl" id="bT" src="assets/tv_bloom.jpg" alt="" /></div></div>
+    <div id="LWo" class="lay"><div class="st n" id="sWo"><img src="assets/white/open.png" alt="" /></div></div>
+    <div id="LW" class="lay"><div class="st n" id="sW" data-rig="white"></div></div>
+    <div id="LOo" class="lay"><div class="st n" id="sOo"><img src="assets/oak/open.png" alt="" /></div></div>
+    <div id="LO" class="lay"><div class="st n" id="sO" data-rig="oak"></div></div>
+    <div id="LG" class="lay"><div class="st n" id="sG"><img src="assets/grey.png" alt="" /></div></div>
+    <div id="LM" class="lay"><div class="st m" id="sM"><img src="assets/mauve.png" alt="" /></div></div>
+    <div id="flash"></div>
+  </div>
+  <div id="txt" class="clip" data-start="0" data-duration="20" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>נכנסים</span></div><div class="ln"><span>לבית</span></div><div class="ln"><span><em>חדש?</em></span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>חדר,</span></div><div class="ln"><span><em>תכנון</em></span> <span><em>משלו.</em></span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>מתוכנן</span></div><div class="ln"><span><em>גם</em></span> <span><em>מבפנים.</em></span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">נגרות<br /><em>לכל הבית.</em></div><div class="l2">ייעוץ והדמיה ללא עלות</div></div></div>
+  </div>
+</div>
+<script>
+// rig data (flow/rig.py) inlined: no fetch at render time
+const RIGS = { oak: __OAK__, white: __WHITE__ };
+const $ = id => document.getElementById(id);
+
+// build a rig's DOM inside its stage: closed photo, real interior (hidden), opening shadows, then per door edge/front/back/shade
+function buildRig(name) {
+  const R = RIGS[name], st = document.querySelector(`[data-rig="${name}"]`), D = Object.keys(R.doors);
+  const add = (tag, id, attrs, style) => { const e = document.createElement(tag); e.id = id; Object.assign(e, attrs); if (style) e.style.cssText = style; st.appendChild(e); return e; };
+  add("img", name + "_closed", { src: `assets/${name}/closed.png` });
+  add("img", name + "_in", { src: `assets/${name}/interior.png` }, "opacity:0");
+  D.forEach(n => add("div", `${name}_sh_${n}`, { className: "q" }, "width:100px;height:100px;background:#0d0a08;opacity:0"));
+  D.forEach(n => {
+    const d = R.doors[n];
+    add("div", `${name}_ed_${n}`, { className: "q" }, `width:10px;height:100px;background:${name === "oak" ? "linear-gradient(90deg,#9a7a55,#c49a6a)" : "linear-gradient(90deg,#c9c6c1,#e9e6e1)"};opacity:0`);
+    add("img", `${name}_f_${n}`, { src: `assets/${name}/door_${n}_front.png`, className: "q" });
+    add("img", `${name}_k_${n}`, { src: `assets/${name}/door_${n}_back.png`, className: "q" }, "opacity:0");
+    add("div", `${name}_s_${n}`, { className: "q" }, `width:${d.tw}px;height:${d.th}px;background:#140e0a;opacity:0`);
+  });
+}
+// generalised rig (hinge on either side: P[1] is always the hinge edge; doors swing toward the camera)
+function rig(name) {
+  const R = RIGS[name], Kf = R.K[0][0], Kcx = R.K[0][2], Kcy = R.K[1][2];
+  const proj = P => { const c = [0, 1, 2].map(i => R.O[i] + P[0] * R.rx[i] + P[1] * R.ry[i] + P[2] * R.rz[i]);
+    return [Kf * c[0] / c[2] + Kcx, Kf * c[1] / c[2] + Kcy]; };
+  const area = q => { let a = 0; for (let i = 0; i < 4; i++) { const p = q[i], r = q[(i + 1) % 4]; a += p[0] * r[1] - r[0] * p[1]; } return a; };
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const ST = {}; const D = Object.keys(R.doors); D.forEach(n => (ST[n] = 0));
+  function door(n, phi) {
+    const d = R.doors[n], P = d.P, hx = P[1][0], T = d.T;
+    const Rr = P.map(p => { const dx = p[0] - hx; return [hx + dx * Math.cos(phi), p[1], Math.abs(dx) * Math.sin(phi)]; });
+    const q = Rr.map(proj), q0 = P.map(proj);
+    const f = $(`${name}_f_${n}`), k = $(`${name}_k_${n}`), s = $(`${name}_s_${n}`), e = $(`${name}_ed_${n}`), sh = $(`${name}_sh_${n}`);
+    const light = Math.sin(Math.min(phi, 1.45));
+    if (Math.sign(area(q)) === Math.sign(area(q0))) {
+      RK.put(f, d.tw, d.th, q); f.style.opacity = 1; k.style.opacity = 0;
+      RK.put(s, d.tw, d.th, q); s.style.opacity = 0.2 * light;
+    } else {
+      const qb = [q[1], q[0], q[3], q[2]];
+      RK.put(k, d.tw, d.th, qb); k.style.opacity = 1; f.style.opacity = 0;
+      RK.put(s, d.tw, d.th, qb); s.style.opacity = 0.1;
+    }
+    // thickness strip along the free edge, behind the face
+    let nrm = cross(sub(Rr[1], Rr[0]), sub(Rr[3], Rr[0])); const n0 = cross(sub(P[1], P[0]), sub(P[3], P[0]));
+    const sg = Math.sign(n0[2]) || 1, L = Math.hypot(...nrm); nrm = nrm.map(v => v * sg / L);
+    const bk = [-T * nrm[0], -T * nrm[1], -T * nrm[2]], a = Rr[0], b = Rr[3];
+    RK.put(e, 10, 100, [proj(a), proj([a[0] + bk[0], a[1] + bk[1], a[2] + bk[2]]), proj([b[0] + bk[0], b[1] + bk[1], b[2] + bk[2]]), proj(b)]);
+    e.style.opacity = phi > 0.03 ? 1 : 0;
+    RK.put(sh, 100, 100, q0); sh.style.opacity = phi < 0.004 ? 0 : 0.55 * Math.max(0, 1 - phi / 1.1);
+  }
+  const upd = () => { D.forEach(n => door(n, ST[n])); $(`${name}_in`).style.opacity = D.some(n => ST[n] > 0.004) ? 1 : 0; };
+  upd();
+  const open = (n, at, dur = 1.5, ease = "power2.inOut") =>
+    tl.to(ST, { [n]: R.doors[n].open * Math.PI / 180, duration: dur, ease, onUpdate: upd }, at);
+  return { open, upd };
+}
+
+buildRig("oak"); buildRig("white");
+const tl = gsap.timeline({ paused: true });
+const K = RK.kit(tl);
+const B = 60 / 110;                      // one beat
+gsap.set(["#LG", "#LO", "#LOo", "#LW", "#LWo", "#LT"], { opacity: 0 });
+
+// M 0–2.18: frame 0 = whole wardrobe, already pushing; the push accelerates into the right oak handle (557,587, r 63)
+K.path("#sM", [[0, 385, 576, 1.70], [1.0, 410, 578, 1.78], [1.64, 470, 582, 2.02], [1.96, 532, 585, 2.62], [4 * B, 557, 587, 3.30]]);
+K.card("#t1", 0.1, 1.55);
+K.blurOut("#LM", 4 * B, 12, 0.22);
+K.swap("#LM", "#LG", 4 * B);
+K.blurIn("#LG", 4 * B, 8, 0.2);
+// G: lands on the grey round handle (527,613, r 62.4) at the same size/place, pulls back to the whole wardrobe
+K.path("#sG", [[4 * B, 527, 613, 3.34], [2.38, 523, 609, 2.4], [3.0, 505, 594, 1.95], [4.4, 482, 580, 1.76], [5.4, 470, 576, 1.70]]);
+K.card("#t2", 3.0, 4.55);
+// motion dissolve to the oak wardrobe (both moving)
+K.dissolve("#LG", "#LO", 9 * B, 0.45);
+// O: whole oak wardrobe, gentle push; the two pairs open (centre pair first), then a punch-in hands over to the real photo
+const OAK = rig("oak");
+K.path("#sO", [[9 * B, 392, 572, 1.68], [6.5, 382, 570, 1.73], [7.3, 376, 568, 1.80], [7.75, 372, 566, 2.0]]);
+OAK.open("d3", 5.45, 1.5); OAK.open("d4", 5.45, 1.5);
+OAK.open("d2", 5.72, 1.45); OAK.open("d5", 5.72, 1.45);
+K.blurOut("#LO", 7.75, 14, 0.26);
+K.swap("#LO", "#LOo", 7.75);
+K.blurIn("#LOo", 7.75, 14, 0.3);
+K.path("#sOo", [[7.75, 460, 568, 1.74], [8.5, 468, 590, 1.84], [8.95, 492, 600, 1.95], [17 * B, 522, 602, 2.0]]);
+// WHIP → white wardrobe, landing still in motion in the same direction
+K.blurOut("#LOo", 17 * B, 18, 0.2);
+K.swap("#LOo", "#LW", 17 * B);
+K.blurIn("#LW", 17 * B, 18, 0.32);
+const WH = rig("white");
+K.path("#sW", [[17 * B, 330, 576, 1.70], [9.9, 392, 576, 1.70], [11.0, 418, 580, 1.72], [11.75, 430, 584, 1.74]]);
+WH.open("dl", 10.0, 1.45); WH.open("dr", 10.12, 1.45);
+K.dissolve("#LW", "#LWo", 11.6, 0.4);
+K.path("#sWo", [[11.6, 427, 583, 1.735], [11.75, 430, 584, 1.74], [13.0, 446, 590, 1.80], [25 * B, 458, 594, 1.85]]);
+K.card("#t3", 11.85, 13.25);
+// FLASH → the TV wall: the lit shelving unit whole, held and breathing (R12)
+K.flash("#flash", 25 * B);
+K.swap("#LWo", "#LT", 25 * B);
+K.path("#sT", [[25 * B, 652, 500, 2.02], [15.0, 646, 512, 1.97], [16.0, 636, 530, 1.90], [30 * B + 0.5, 625, 545, 1.85]]);
+K.breathe("#bT", [[25 * B, 0.2], [14.5, 0.9], [15.4, 0.45], [16.2, 0.85], [16.9, 0.5]]);
+// end card
+K.endCard(30 * B, 20 - 30 * B);
+K.done(20);
+</script>
+</body>
+</html>

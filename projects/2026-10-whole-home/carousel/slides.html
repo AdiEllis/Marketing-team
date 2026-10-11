@@ -2,10 +2,11 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8" />
-<!-- SKELETON ONLY. Before designing write: "הפוסט הזה מראה ש..." (incl. a business value) and pick the archetype
-     (agents/post-designer.md; not one of the last two in content-log). Slide count is dynamic: min 3 work photos + a
-     DESIGNED closing slide with the logo. Photos: graded PNG (grade.py), whole work unless a content reason to crop.
-     No bands/boxes/darkening; a slide without text = zero layers. Render: bash studio/tools/render_post.sh carousel/slides.html <N> -->
+<!-- Whole-home post v1 — QUIET family (set 2), "room by room" guide.
+     "הפוסט הזה מראה ש..." בנגרות לכל הבית כל חדר מקבל פתרון משלו, באותה רמת דיוק, ולכן כדאי לתכנן את כל הבית במקום אחד.
+     Every photo whole (4:5 photos = exact fit; the mauve one widened with its own plain wall, wardrobe untouched).
+     Text: thin dark topic + insight after a thin bronze L, on a calm surface (floor / plain door / plain panel), never on
+     a niche, handle or shelf. No layers anywhere. Closing: oak-tone field + mauve wardrobe + logo. -->
 <style>
 @font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
 @font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
@@ -16,40 +17,52 @@
 body{width:1080px}
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--dark)}
 .full{position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover}
-/* keep headline, logo and focus inside the central 1012px (profile grid crops 3:4) */
-/* LOUD family (set 1): bold two lines, white + gold on a calm dark area */
-.loud{position:absolute;direction:rtl;text-align:right;font:600 96px/1.04 "Plex";letter-spacing:-.015em;color:#fff}
-.loud em{display:block;font-style:normal;color:var(--gold)}
-/* QUIET family (set 2): thin dark topic + insight after a thin L bracket, on a calm light surface */
 .quiet{position:absolute;direction:rtl;text-align:right;color:#2a2420}
-.quiet h2{font:300 76px/1.05 "Plex"}
-.quiet p{margin-top:16px;padding:10px 22px 0 0;font:400 36px/1.3 "Plex";border-right:2px solid var(--bronze);border-top:2px solid var(--bronze);max-width:640px}
-/* quiet label (portfolio style) */
-.lab{position:absolute;direction:rtl;display:flex;align-items:center;gap:18px;font:600 31px/1.2 "Plex";color:#2b211a}
-.lab i{display:block;width:46px;height:2px;background:var(--bronze)}
-.lab b{font-weight:600;color:#8a5a26}
-.logo{position:absolute;width:150px}
-/* closing slide example: half colour field sampled from the photo + photo + logo + short brand line */
-.field{position:absolute;top:0;bottom:0;right:0;width:46%;background:#7d6a58}
-.field .logo{position:static;display:block;width:230px;margin:120px auto 0}
-.field .line{direction:rtl;text-align:center;margin-top:80px;font:300 54px/1.25 "Plex";color:#fff}
+.quiet h2{font:300 78px/1.05 "Plex";letter-spacing:-.01em}
+.quiet p{margin-top:18px;padding:12px 22px 0 0;font:400 36px/1.32 "Plex";border-right:2px solid var(--bronze);border-top:2px solid var(--bronze)}
+.quiet.big h2{font-size:92px}
+.field{position:absolute;top:0;bottom:0;right:0;width:46%;background:#7a5a42;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+.field .logo{width:240px}
+.field .line{text-align:center;margin-top:76px;font:300 60px/1.22 "Plex";color:#fff}
+.field .line em{font-style:normal;color:var(--gold)}
+.field .sub{margin-top:56px;font:400 30px/1.3 "Plex";color:#efe1cf;text-align:center}
+.corner{position:absolute;width:44px;height:44px;border-color:var(--gold);border-style:solid;border-width:0}
 </style>
 </head>
 <body>
 <section class="slide" id="s1">
-  <img class="full" src="p1.png" alt="" />
-  <div class="loud" style="right:56px;top:70px">שורה ראשונה.<em>שורה שנייה.</em></div>
+  <img class="full" src="p_tv.png" alt="" />
+  <div class="quiet big" style="right:70px;bottom:60px"><h2>נגרות לכל הבית</h2><p>חדר-חדר, לפי מה שקורה בו.</p></div>
 </section>
 <section class="slide" id="s2">
-  <img class="full" src="p2.png" alt="" />
+  <img class="full" src="p_mauve.png" alt="" />
+  <div class="quiet" style="right:190px;top:840px;width:250px"><h2>הידית</h2><p>גם היא חלק<br />מהעיצוב.</p></div>
 </section>
 <section class="slide" id="s3">
-  <img class="full" src="p3.png" alt="" />
-  <div class="quiet" style="right:70px;bottom:120px"><h2>נושא קצר</h2><p>תובנה אל הצופה, לא לפי X, לפי Y</p></div>
+  <img class="full" src="p_grey.png" alt="" />
+  <div class="quiet" style="right:140px;top:840px;width:300px"><h2>עמודה פתוחה</h2><p>ליד הארון,<br />מקום למה<br />שאוהבים להציג.</p></div>
 </section>
 <section class="slide" id="s4">
-  <img class="full" src="p4.png" alt="" style="width:584px;object-fit:cover" />
-  <div class="field"><img class="logo" src="logo_light.png" alt="אבן ועץ" /><div class="line">משפט<br>מותג<br>קצר.</div></div>
+  <img class="full" src="p_white_c.png" alt="" />
+  <div class="quiet" style="right:150px;top:760px;width:210px"><h2>מבחוץ</h2><p>חזית לבנה<br />ושקטה.</p></div>
+</section>
+<section class="slide" id="s5">
+  <img class="full" src="p_white_o.png" alt="" />
+  <div class="quiet" style="right:150px;top:760px;width:210px"><h2>בפנים</h2><p>מוט תלייה<br />שיורד<br />אליכם.</p></div>
+</section>
+<section class="slide" id="s6">
+  <img class="full" src="p_oak_c.png" alt="" />
+  <div class="quiet" style="right:70px;bottom:70px"><h2>רצף אחד</h2><p>הארון ממשיך אל הקיר.</p></div>
+</section>
+<section class="slide" id="s7">
+  <img class="full" src="p_oak_o.png" alt="" />
+  <div class="quiet" style="right:70px;bottom:60px"><h2>החלוקה הפנימית</h2><p>לפי מה שאתם שומרים.</p></div>
+</section>
+<section class="slide" id="s8">
+  <img class="full" src="p_mauve.png" alt="" style="width:584px;object-position:62% 50%" />
+  <div class="field"><img class="logo" src="logo_light.png" alt="אבן ועץ" /><div class="line">כל הבית,<br /><em>במקום אחד.</em></div><div class="sub">ייעוץ והדמיה ללא עלות</div></div>
+  <div class="corner" style="right:40px;top:40px;border-top-width:2px;border-right-width:2px"></div>
+  <div class="corner" style="left:620px;bottom:40px;border-bottom-width:2px;border-left-width:2px"></div>
 </section>
 </body>
 </html>
