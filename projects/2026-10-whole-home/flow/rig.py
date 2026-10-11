@@ -10,7 +10,7 @@ def L(p, q): return np.cross([p[0], p[1], 1.0], [q[0], q[1], 1.0])
 def meet(a, b): v = np.cross(a, b); return v / v[2] if abs(v[2]) > 1e-9 else v
 
 CFG = {
-  "oak": dict(closed="input/03_oak_closet_closed.jpg", open="input/05_oak_closet_open.jpg",
+  "oak": dict(closed="work/clean_03.png", open="work/clean_05.png",
     top=((46, 218), (684, 150)), bot=((50, 843), (672, 914)), vert=(((45, 250), (54, 820)), ((669, 250), (660, 820))),
     # open photo -> closed photo homography on the front plane (corner pairs measured on the frame)
     H=(((65, 175), (797, 150), (791, 926), (64, 885)), ((46, 218), (684, 150), (672, 914), (50, 843))),
