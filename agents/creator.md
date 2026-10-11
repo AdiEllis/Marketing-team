@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-agents/reel.md + studio/lib/reel-kit.js. עותק: docs/archive/2026-10-before-streamline/.
+
 # Creator — ייצור המדיה (שירותים, לא סוכן)
 
 ## החלטה הנדסית

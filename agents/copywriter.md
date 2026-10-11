@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-agents/reel.md §2, agents/post-designer.md §6, knowledge/playbook.md §5. עותק: docs/archive/2026-10-before-streamline/.
+
 # Copywriter & Marketing Agent — קופירייטר
 
 ## דמות וחשיבה

@@ -1,3 +1,5 @@
+> ⛔ ארכיון (11.10): לא קוראים את הקובץ הזה בעבודה. מה שבתוקף ממנו נמצא ב-knowledge/playbook.md §7. עותק: docs/archive/2026-10-before-streamline/.
+
 # Orchestrator — מנהל זרימת העבודה
 
 ## מה זה (החלטה הנדסית)
