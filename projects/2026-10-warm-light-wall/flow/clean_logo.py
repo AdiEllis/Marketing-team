@@ -85,3 +85,21 @@ if os.path.exists("work/detail_uw.png"):
     src = np.roll(d, 70, axis=0)   # src(y) = d(y - 70)
     cv2.imwrite("work/detail_uw.png", np.clip(src * mm + d * (1 - mm), 0, 255).astype(np.uint8))
     print("detail edge object removed")
+
+# front.png (after unwatermark.py -> work/front_uw.png): the stamp left faint rust-coloured letter ghosts on the marble
+# (screenshot JPEG chroma). Replace the chroma inside the stamp box with the chroma interpolated from around it (Lab a/b),
+# and pull lightness outliers (letter rims) back toward a local median. Marble veins/tile joints stay (lightness is kept).
+if os.path.exists("work/front_uw.png") and not os.path.exists("work/front_uw.done"):
+    fr = cv2.imread("work/front_uw.png")
+    lab = cv2.cvtColor(fr, cv2.COLOR_BGR2LAB).astype(np.float32)
+    bm = np.zeros(fr.shape[:2], bool); bm[1146:1446, 78:288] = True
+    for c in (1, 2):
+        lab[..., c] = harmonic(np.ascontiguousarray(lab[..., c]), bm, 2500)
+    L = lab[..., 0]; med = cv2.medianBlur(fr, 9); Lm = cv2.cvtColor(med, cv2.COLOR_BGR2LAB)[..., 0].astype(np.float32)
+    dev = L - Lm; fix = bm & (np.abs(dev) > 6) & (np.abs(dev) < 40)   # rims, not the bright LED reflection line
+    L[fix] = Lm[fix] + dev[fix] * 0.35
+    out = cv2.cvtColor(np.clip(lab, 0, 255).astype(np.uint8), cv2.COLOR_LAB2BGR)
+    fe = cv2.GaussianBlur(bm.astype(np.float32), (0, 0), 3)[..., None]
+    cv2.imwrite("work/front_uw.png", np.clip(out * fe + fr * (1 - fe), 0, 255).astype(np.uint8))
+    open("work/front_uw.done", "w").write("1")
+    print("front ghost cleaned")
