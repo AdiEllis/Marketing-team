@@ -4,7 +4,8 @@
 <meta charset="UTF-8" />
 <!-- SKELETON ONLY. Before designing write: "הפוסט הזה מראה ש..." (incl. a business value) and pick the archetype
      (agents/post-designer.md; not one of the last two in content-log). Slide count is dynamic: min 3 work photos + a
-     DESIGNED closing slide with the logo. Photos: graded PNG (grade.py), whole work unless a content reason to crop.
+     closing logo slide = the reel's end card in 4:5 (P11). Photos: graded PNG (grade.py). Every work appears whole;
+     crop only to highlight a detail the headline talks about (niche, light, special solution), straight and centred (P4).
      No bands/boxes/darkening; a slide without text = zero layers. Render: bash studio/tools/render_post.sh carousel/slides.html <N> -->
 <style>
 @font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
@@ -29,10 +30,13 @@ body{width:1080px}
 .lab i{display:block;width:46px;height:2px;background:var(--bronze)}
 .lab b{font-weight:600;color:#8a5a26}
 .logo{position:absolute;width:150px}
-/* closing slide example: half colour field sampled from the photo + photo + logo + short brand line */
-.field{position:absolute;top:0;bottom:0;right:0;width:46%;background:#7d6a58}
-.field .logo{position:static;display:block;width:230px;margin:120px auto 0}
-.field .line{direction:rtl;text-align:center;margin-top:80px;font:300 54px/1.25 "Plex";color:#fff}
+/* closing slide (P11): the reel end card (#end in reel-kit.css) at 4:5. Full slide, logo is the hero; no split, no collage.
+   Optional: one short line under the logo, like the reel. */
+.end{background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.end .glow{position:absolute;left:165px;top:300px;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%)}
+.end .logo{position:relative;width:340px}
+.end .line{position:relative;direction:rtl;text-align:center;margin-top:64px;font:600 58px/1.2 "Plex";color:#fff}
+.end .line em{font-style:normal;color:var(--gold)}
 </style>
 </head>
 <body>
@@ -47,9 +51,10 @@ body{width:1080px}
   <img class="full" src="p3.png" alt="" />
   <div class="quiet" style="right:70px;bottom:120px"><h2>נושא קצר</h2><p>תובנה אל הצופה, לא לפי X, לפי Y</p></div>
 </section>
-<section class="slide" id="s4">
-  <img class="full" src="p4.png" alt="" style="width:584px;object-fit:cover" />
-  <div class="field"><img class="logo" src="logo_light.png" alt="אבן ועץ" /><div class="line">משפט<br>מותג<br>קצר.</div></div>
+<section class="slide end" id="s4">
+  <div class="glow"></div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+  <!-- optional, max one short line: <div class="line">שורה<br /><em>קצרה.</em></div> -->
 </section>
 </body>
 </html>
