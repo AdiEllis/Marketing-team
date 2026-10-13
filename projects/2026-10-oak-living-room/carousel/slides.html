@@ -28,11 +28,20 @@ body{width:1080px}
 .d img{display:block;width:100%;box-shadow:0 14px 34px rgba(60,40,20,.16)}
 .d figcaption{margin-top:16px;font:400 25px/1.4 "Plex";color:var(--ink)}
 .d b{display:block;font:500 31px/1.2 "Plex";color:var(--gold);margin-bottom:5px}
-.end{background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.end .glow{position:absolute;left:165px;top:300px;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%)}
-.end .lg{position:relative;width:340px}
-.end .line{position:relative;direction:rtl;text-align:center;margin-top:64px;font:400 52px/1.2 "Plex";color:var(--cream);letter-spacing:.01em}
-.end .rule{position:relative;width:90px;height:2px;background:var(--gold-l);margin-top:26px}
+/* closing slide v2 (P11, her request 13.10: "מעוצב יותר מרשים מקצועי ואלגנטי") — the brand standard for EVERY post:
+   dark wall of three real oak fronts (studio/brand/end_oak_wall.png, from her work), soft light washing down onto the logo
+   (the brand's lit-carpentry signature), hairline gold frame, Plex Light line + small gold sub-line. No split, no collage.
+   Change only the .line text per post (one short brand sentence); keep everything else. */
+@font-face{font-family:"PlexL";src:url(plex-Light.ttf);font-weight:300}
+.end{background:#140d08 url(end_oak_wall.png) center/cover}
+.end .wash{position:absolute;inset:0;background:radial-gradient(34% 46% at 50% 26%,rgba(255,200,130,.34) 0%,rgba(230,170,100,.16) 45%,rgba(0,0,0,0) 75%);mix-blend-mode:screen}
+.end .vig{position:absolute;inset:0;background:radial-gradient(90% 75% at 50% 42%,rgba(0,0,0,0) 45%,rgba(10,6,3,.55) 100%)}
+.end .frame{position:absolute;inset:38px;border:1px solid rgba(216,184,120,.38)}
+.end .in{position:absolute;left:0;right:0;top:0;bottom:70px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.end .lg{width:318px;filter:drop-shadow(0 10px 28px rgba(0,0,0,.45))}
+.end .rule{width:72px;height:1px;background:#d8b878;margin-top:58px}
+.end .line{direction:rtl;margin-top:34px;font:300 46px/1.2 "PlexL";color:#f1e7da;letter-spacing:.04em}
+.end .sub{position:absolute;left:0;right:0;bottom:92px;direction:rtl;text-align:center;font:400 24px/1 "Plex";color:#c9a46a;letter-spacing:.18em}
 </style>
 </head>
 <body>
@@ -59,10 +68,9 @@ body{width:1080px}
   <img class="logo" src="logo_alpha.png" alt="אבן ועץ" style="right:auto;left:48px" />
 </section>
 <section class="slide end" id="s5">
-  <div class="glow"></div>
-  <img class="lg" src="logo_light.png" alt="אבן ועץ" />
-  <div class="rule"></div>
-  <div class="line">תכנון אישי לכל חלל</div>
+  <div class="wash"></div><div class="vig"></div><div class="frame"></div>
+  <div class="in"><img class="lg" src="logo_light.png" alt="אבן ועץ" /><div class="rule"></div><div class="line">תכנון אישי לכל חלל</div></div>
+  <div class="sub">נגרות בהתאמה אישית</div>
 </section>
 </body>
 </html>
