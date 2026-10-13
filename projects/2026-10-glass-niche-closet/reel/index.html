@@ -6,7 +6,8 @@
 <script src="assets/gsap.min.js"></script>
 <script src="assets/reel-kit.js"></script>
 <link rel="stylesheet" href="assets/reel-kit.css" />
-<!-- Glass niche closet v2 (approved draft, 13.10). ~115 BPM (beat 0.52 s). One continuous camera on one stage.
+<!-- Glass niche closet v3 (13.10, redo): v2 (loved) kept 0-12 s; new ending = dive into the real niche close-up and back out.
+  v2 beat sheet (0-12 s unchanged):  ~115 BPM (beat 0.52 s). One continuous camera on one stage.
   0.0–2.3   frame 0 = whole closet, niche dark; speed-ramp push (fast→slow)        "מקיר לקיר, / עד התקרה."
   2.6–3.7   signature: each niche cube lights on the beat (real lit pixels only), beat punch per cube; room brightens
   3.7–5.3   push to the whole lit niche, hold (no text)
@@ -14,12 +15,18 @@
   6.0–8.9   the 4 doors open in a wave around the lit niche (approved), hand-over to the real open photo at rest   "ובפנים, / כל סנטימטר עובד."
   9.0–10.4  beat snaps: pull-down rail → glass drawers (motion blur)
  10.5–11.9  doors close together, camera back to centre
- 12.0–14.3  same frame dissolves to her styled photo: the niche is now lived-in       "תוכנן / בשבילכם."
- 14.3–16.6  invitation                                                                   "רוצים כזה אצלכם? / דברו איתנו בוואטסאפ."
- 16.6–19.6  end card: logo, ייעוץ והדמיה ללא עלות
+ v3:
+ 11.8–13.5  same frame dissolves to the new styled photo (09, aligned + light-matched to 05)   "תוכנן / בשבילכם."
+ 13.6–14.3  zoom-through: speed-ramp push into the niche, blur peak, land on the real close-up (10, light-matched)
+ 14.0–16.0  hero: the whole lit niche, big and sharp, slow push (R12, 2 s, no text)
+ 16.0–17.75 ramp into the upper cubes, slow tilt down the lit shelves (LED profiles, oak)
+ 17.75–18.5 reverse zoom-through back out to the whole closet (blur peak 18.05)
+ 18.7–20.6  invitation                                                                   "רוצים כזה אצלכם? / דברו איתנו בוואטסאפ."
+ 20.8–23.8  end card: logo, ייעוץ והדמיה ללא עלות
  Stage = rectified photo x2 (1792x2400); scale 0.8 = x1.6 of the source, max 0.875 (x1.75). Text: one colour. -->
 <style>
 .w{width:1792px;height:2400px}
+.wc{width:1932px;height:2576px}
 /* front stage: doors from the lit closed photo, bays from the real open photo */
 #sF{perspective:1620px;perspective-origin:896px 1400px}
 .bay{position:absolute;top:456px;height:1748px;background-image:url(assets/open.png);background-size:1792px 2400px}
@@ -53,14 +60,14 @@
 #t1{top:1330px;font-size:92px}
 #t2{top:150px;font-size:84px}
 #t3{top:332px;font-size:96px}
-#t4{top:1350px;font-size:76px}
+#t4{top:1330px;font-size:76px}
 #end .l1{color:#efe6da}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="19.6" data-width="1080" data-height="1920">
-  <div id="scene" class="clip" data-start="0" data-duration="19.6" data-track-index="0" style="position:absolute;inset:0">
-    <div id="LS" class="lay"><div class="st w" id="sS"><img class="w" src="assets/styled.png" alt="" /></div></div>
+<div id="root" data-composition-id="main" data-start="0" data-duration="23.8" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="23.8" data-track-index="0" style="position:absolute;inset:0">
+    <div id="LS" class="lay"><div class="st w" id="sS"><img class="w" src="assets/styled2.png" alt="" /></div></div>
     <div id="LF" class="lay"><div class="st w" id="sF">
       <img class="w" src="assets/lit.png" alt="" />
       <div class="bay" id="bL"></div><div class="bay" id="bR"></div>
@@ -73,8 +80,9 @@
       <img class="w" id="offAll" src="assets/off.png" alt="" />
       <div class="cmp" id="k3"></div><div class="cmp" id="k2"></div><div class="cmp" id="k1"></div>
     </div></div>
+    <div id="LC" class="lay"><div class="st wc" id="sC"><img class="wc" src="assets/close.png" alt="" /></div></div>
   </div>
-  <div id="txt" class="clip" data-start="0" data-duration="19.6" data-track-index="1" style="position:absolute;inset:0">
+  <div id="txt" class="clip" data-start="0" data-duration="23.8" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t"><div class="ln"><span>מקיר</span> <span>לקיר,</span></div><div class="ln"><span>עד</span> <span>התקרה.</span></div></div>
     <div id="t2" class="t"><div class="ln"><span>ובפנים,</span></div><div class="ln"><span>כל</span> <span>סנטימטר</span> <span>עובד.</span></div></div>
     <div id="t3" class="t"><div class="ln"><span>תוכנן</span></div><div class="ln"><span>בשבילכם.</span></div></div>
@@ -85,7 +93,7 @@
 <script>
 const tl = gsap.timeline({ paused: true });
 const K = RK.kit(tl);
-gsap.set("#LS", { opacity: 0 });
+gsap.set(["#LS", "#LC"], { opacity: 0 });
 gsap.set("#LF", { transformOrigin: "540px 960px" });
 
 // one camera for the whole front story: speed-ramp push, hold on the lit niche, speed-ramp pull-out, snaps, back to centre
@@ -130,15 +138,29 @@ close("#d2", 1, 10.75, 0.95, "#c2"); close("#d4", -1, 10.8, 0.92, "#c4");
 close("#d1", -1, 10.78, 0.97, "#c1"); close("#d5", 1, 10.83, 0.95, "#c5");
 tl.to(["#hL", "#hR"], { opacity: 1, duration: 0.9, ease: "power1.in" }, 10.8);
 
-// same frame: the niche becomes lived-in (her styled photo, aligned to the same pixels)
-tl.set("#LS", { opacity: 1 }, 12.0);
-K.path("#sS", [[12.0, 910, 1200, 0.85], [14.3, 905, 1190, 0.87], [16.6, 918, 1185, 0.885]]);
-tl.fromTo("#LF", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "sine.inOut", immediateRender: false }, 12.0);
-K.card("#t3", 12.45, 14.15);
-K.card("#t4", 14.35, 16.45);
+// same frame: the niche becomes lived-in (new styled photo, aligned + light-matched to the same pixels)
+tl.set("#LS", { opacity: 1 }, 11.8);
+tl.fromTo("#LF", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "sine.inOut", immediateRender: false }, 11.8);
+// front niche frame centre (914,1192) in stage px; close-up niche is x2.79 bigger -> front scale 2.12 = close scale 0.76
+K.path("#sS", [[11.8, 910, 1200, 0.85], [12.9, 911, 1198, 0.875], [13.5, 913, 1194, 0.95], [14.0, 914, 1192, 2.12],
+  [18.05, 914, 1192, 2.12], [18.45, 912, 1196, 1.0], [19.0, 910, 1198, 0.87], [20.8, 906, 1192, 0.89]]);
+K.card("#t3", 11.95, 13.0); // fully gone (~13.4) before the zoom-through starts (13.5)
+// zoom-through in: blur peak at 14.0, short crossfade hidden in the blur
+tl.fromTo("#LS", { filter: "blur(0px)" }, { filter: "blur(12px)", duration: 0.32, ease: "power2.in", immediateRender: false }, 13.68);
+tl.fromTo("#LC", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "sine.inOut", immediateRender: false }, 13.9);
+tl.fromTo("#LC", { filter: "blur(12px)" }, { filter: "blur(0px)", duration: 0.34, ease: "power2.out", immediateRender: false }, 14.0);
+// close-up camera: land still moving, hero hold on the whole niche (2 s), ramp into the upper cubes, slow tilt down, rush back out
+K.path("#sC", [[13.9, 915, 1292, 0.74], [14.0, 915, 1290, 0.76], [14.4, 915, 1290, 0.80], [16.0, 915, 1290, 0.84],
+  [16.6, 915, 1000, 1.22], [17.75, 915, 1580, 1.27], [18.05, 915, 1290, 0.76], [18.15, 915, 1292, 0.74]]);
+// zoom-through out: blur peak at 18.05
+tl.to("#LC", { filter: "blur(12px)", duration: 0.3, ease: "power2.in" }, 17.75);
+tl.set("#LS", { filter: "blur(12px)" }, 17.9);
+tl.to("#LC", { opacity: 0, duration: 0.2, ease: "sine.inOut" }, 17.95);
+tl.to("#LS", { filter: "blur(0px)", duration: 0.36, ease: "power2.out" }, 18.05);
+K.card("#t4", 18.7, 20.6);
 
-K.endCard(16.6, 3.0);
-K.done(19.6);
+K.endCard(20.8, 3.0);
+K.done(23.8);
 </script>
 </body>
 </html>

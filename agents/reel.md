@@ -41,6 +41,8 @@
 - **רטוש רצפת אריחים:** `projects/2026-10-tv-wall/post3/clean_open.py`, `floor_fix.py` (חיבור מחדש של קווי הפוגות). על עץ או פס תאורה לא עובד.
 - ספריית המהלכים המלאה (25 מהלכים מסטילס: Slices, פורטל, איריס, Speed ramp, Photo-dump ועוד): `docs/archive/2026-10-before-streamline/agents/creator.md`. פותחים רק כשמחפשים מהלך חדש.
 
+- **צלילה דרך נישה (Zoom-through) לתקריב אמיתי (ארון סהרה v3):** מודדים את מסגרת הנישה בשני הצילומים; יחס הגדלים נותן סקאלות תואמות בשיא (במה קדמית ×2.12 = תקריב ×0.76), והתקריב חייב לכסות 1080×1920 בשיא. blur עד 12px, crossfade של 0.2 שנ' בשיא. **כרטיס טקסט יוצא לגמרי לפני שהצלילה מתחילה** (אחרת שאריות אותיות נחתכות על הנישה). גלישה על מדפים: עד ~600px לשנייה על המסך, אחרת reel_qa מסמן חיתוכים.
+
 ## 5. בדיקה עצמית לפני השער (זולה)
 1. רינדור: `cd reel && npx --yes hyperframes@0.8.141 render --quality delivery -o ../output/reel_<name>.mp4 > ../work/render.log 2>&1; tail -3 ../work/render.log`
 2. `python3 -I studio/tools/reel_qa.py <mp4> projects/<p>/work/qa --planned-cuts ... --rest-from ...` ← **PASS חובה**. WARN קפיצת מהירות = חוסם, אלא אם החיתוך בשיא אור (בהירות +25%) או פרץ מוצהר.

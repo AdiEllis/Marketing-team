@@ -2,54 +2,56 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8" />
-<!-- v3 (13.10): טיפוגרפיה לפי הדוגמאות שלה (knowledge/inspiration/post-examples-3): שתי שורות Heebo 800 באותו משקל,
-     פחם + זהב-קרמל, שורת משנה Heebo 400 בין קווים זהובים, לוגו בפינה, גלולת פנייה בשקף השאלה. -->
+<!-- v4 (13.10, redo): typography option ג she chose: IBM Plex Sans Hebrew Regular, small, two lines charcoal + caramel-gold,
+     right-aligned to the edge of the work (not centred), short thin gold rule under. Photos: originals (grade.py moved the
+     material colour by dE>2, P15). Slide 2 = the new hi-res niche close-up, slide 4 = the new styled front. -->
 <style>
-@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
-:root{--ink:#2b2926;--gold:#9e6a2c;--gold2:#b8894f}
+@font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
+@font-face{font-family:"Plex";src:url(plex-Medium.ttf);font-weight:500}
+:root{--ink:#2b2926;--gold:#9a6a32;--cream:#efe6da;--gold-l:#d8b878}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px}
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:#d9d0c6}
 .full{position:absolute;inset:0;width:1080px;height:1350px}
-.h{position:absolute;left:60px;right:60px;direction:rtl;text-align:center;font:800 108px/1.06 "Heebo";letter-spacing:-.018em;color:var(--ink)}
-.h .g{display:block;background:linear-gradient(180deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none}
-.sub{position:absolute;left:0;right:0;direction:rtl;display:flex;align-items:center;justify-content:center;gap:26px;font:500 34px/1.2 "Heebo";color:var(--ink)}
-.sub i{display:block;width:110px;height:2px;background:#9a6326}
-
-.logo{position:absolute;left:44px;bottom:42px;width:150px}
-.pill{position:absolute;right:46px;bottom:56px;direction:rtl;padding:22px 40px;border-radius:60px;background:linear-gradient(180deg,#b8894f,#966226);color:#fff;font:700 40px/1 "Heebo";box-shadow:0 6px 18px rgba(60,36,12,.25)}
+.h{position:absolute;direction:rtl;text-align:right;font:400 64px/1.18 "Plex";color:var(--ink)}
+.h span{display:block;color:var(--gold)}
+.h i{display:block;width:90px;height:2px;background:var(--gold);margin:22px 0 0 auto}
+.h.dk{color:var(--cream)} .h.dk span{color:var(--gold-l)} .h.dk i{background:var(--gold-l)}
+.sub{display:block;margin-top:16px;font:400 30px/1.3 "Plex";color:var(--ink);letter-spacing:.01em}
+.cta{position:absolute;direction:rtl;text-align:right;font:500 32px/1 "Plex";color:var(--gold);letter-spacing:.01em}
+.cta:after{content:"";display:block;height:2px;margin-top:12px;background:var(--gold)}
+.logo{position:absolute;left:44px;bottom:42px;width:140px}
 .end{background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .end .glow{position:absolute;left:165px;top:300px;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%)}
 .end .lg{position:relative;width:340px}
-.end .line{position:relative;direction:rtl;text-align:center;margin-top:70px;font:800 66px/1.15 "Heebo";color:#fff}
-.end .line em{font-style:normal;color:#d8b878}
+.end .line{position:relative;direction:rtl;text-align:center;margin-top:64px;font:400 52px/1.2 "Plex";color:var(--cream);letter-spacing:.01em}
+.end .rule{position:relative;width:90px;height:2px;background:var(--gold-l);margin-top:26px}
 </style>
 </head>
 <body>
 <section class="slide" id="s1">
   <img class="full" src="p1.png" alt="" />
-  <div class="h" style="top:28px">רוב הארונות<span class="g">רק מסתירים.</span></div>
+  <div class="h" style="right:150px;top:92px">רוב הארונות<span>רק מסתירים.</span><i></i></div>
   <img class="logo" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide" id="s2">
   <img class="full" src="p2.png" alt="" />
-  <div class="h" style="top:44px;font-size:112px">זה<span class="g">גם מציג.</span></div>
+  <div class="h dk" style="right:72px;top:100px">זה<span>גם מציג.</span><i></i></div>
 </section>
 <section class="slide" id="s3">
   <img class="full" src="p3.png" alt="" />
-  <div class="h" style="top:40px;font-size:84px">ומה שמוסתר,<span class="g">מתוכנן באותה הקפדה.</span></div>
+  <div class="h" style="right:134px;top:16px;font-size:56px">ומה שמוסתר,<span>מתוכנן באותה הקפדה.</span><i style="margin-top:14px"></i></div>
 </section>
 <section class="slide" id="s4">
   <img class="full" src="p4.png" alt="" />
-  <div class="h" style="top:14px;font-size:92px">מה אתם רוצים<span class="g">לראות?</span></div>
-  <div class="sub" style="top:222px"><i></i>תכנון אישי מתחיל בשאלה אחת<i></i></div>
+  <div class="h" style="right:150px;top:8px;font-size:56px">מה אתם רוצים<span>לראות?</span><i style="margin-top:14px"></i><em class="sub" style="font-style:normal;margin-top:12px">תכנון אישי מתחיל בשאלה אחת</em><em class="sub" style="font-style:normal;margin-top:6px;font-weight:500;color:#6b4519">דברו איתנו בוואטסאפ</em></div>
   <img class="logo" src="logo_alpha.png" alt="אבן ועץ" />
-  <div class="pill">דברו איתנו בוואטסאפ</div>
 </section>
 <section class="slide end" id="s5">
   <div class="glow"></div>
   <img class="lg" src="logo_light.png" alt="אבן ועץ" />
-  <div class="line">נתכנן<br /><em>את שלכם.</em></div>
+  <div class="rule"></div>
+  <div class="line">תכנון אישי לכל חלל</div>
 </section>
 </body>
 </html>
