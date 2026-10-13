@@ -16,9 +16,11 @@ room = cv2.imread(H + '01_room_wide.png'); tv = cv2.imread(H + '04_tv_wall_front
 fit(room, 300, 2220, 'p1.png')          # 1536x1920 = exact 4:5 at full width
 fit(tv, 330, 2580, 'p2.png')            # 1800x2250 = exact 4:5
 fit(ni, 250, 2530, 'p4.png')            # whole wall incl. plinth, sides extended ~40px of plain wall/floor
-# dictionary windows (hq px): oak = console end + grooves, light = niche, line = LED slats + floor reflections
-def win(im, x0, y0, w, h, out, W=300, Hh=560):
-    c = cv2.resize(im[y0:y0+h, x0:x0+w], (W, Hh), interpolation=cv2.INTER_LANCZOS4); cv2.imwrite(C + out, c); print(out, 'x%.2f' % (2*W/w))
-win(tv, 1250, 1760, 480, 896, 'd_oak.png')
-win(ni, 640, 900, 520, 971, 'd_light.png')
-win(room, 340, 1060, 480, 896, 'd_line.png')
+# detail rows (slide 3, v2 after her note): each crop composed on purpose, subject whole and centred (hq px)
+def crop(im, x0, y0, x1, y1, out, W=500, Hh=340):
+    c = im[y0:y1, x0:x1]; s = W / c.shape[1]
+    c = cv2.resize(c, (W, Hh), interpolation=cv2.INTER_AREA if s < 1 else cv2.INTER_LANCZOS4); cv2.imwrite(C + out, c); print(out, 'x%.2f' % (2*s))
+fr = cv2.imread(H + '03_niche_wall_front_install.png')   # frontal niche only (no legs in this crop)
+crop(tv, 30, 1850, 1750, 2387, 'd_console.png', 960, 300)    # the whole floating console, grooves above and below, floor gap
+crop(fr, 386, 970, 1140, 1684, 'd_niche.png', 465, 440)      # lit niche, frontal and centred, oak fronts around
+crop(room, 178, 1116, 922, 1820, 'd_slats.png', 465, 440)    # the joint: niche wall + vitrine | lit slat column | TV wall + console

@@ -2,7 +2,9 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8" />
-<!-- Oak living room post v1 (13.10). "הפוסט הזה מראה ש..." in a well-planned living room every wall continues the one
+<!-- Oak living room post v2 (13.10): slide 3 rebuilt after her note ("סתם מילים... אין פה מקצועיות"; oak crop "כאילו בטעות"):
+     named details + one professional line each (docs/research/2026-10-detail-callouts.md), crops composed on purpose.
+     v1 (13.10). "הפוסט הזה מראה ש..." in a well-planned living room every wall continues the one
      before it: the same oak, the same light, the same lines. Typography = option ג she chose (Plex Regular, small,
      charcoal + caramel-gold, aligned to the work, thin gold rule). Logo small at the bottom of every photo (P11א).
      Photos: her originals cleaned + x2 (work/hq); no grade (dE>2 on the oak, P15). -->
@@ -20,11 +22,12 @@ body{width:1080px}
 .logo{position:absolute;right:48px;bottom:56px;width:84px}
 /* dictionary slide: oak-tone field, three real details, one word each */
 .dict{background:linear-gradient(180deg,#d6c4aa 0%,#cbb497 100%)}
-.dict .k{position:absolute;direction:rtl;right:60px;top:110px;font:400 40px/1.3 "Plex";color:var(--ink);letter-spacing:.01em}
+/* .k unused */ .dict .k{position:absolute;direction:rtl;right:60px;top:110px;font:400 40px/1.3 "Plex";color:var(--ink);letter-spacing:.01em}
 .dict .k i{display:block;width:70px;height:2px;background:var(--gold);margin:18px 0 0 auto}
-.w{position:absolute;top:350px;width:300px;height:560px;box-shadow:0 18px 40px rgba(60,40,20,.18)}
-.w img{width:300px;height:560px;display:block}
-.w b{position:absolute;left:0;right:0;top:604px;direction:rtl;text-align:center;font:400 48px/1 "Plex";color:var(--gold)}
+.d{position:absolute;direction:rtl;text-align:right}
+.d img{display:block;width:100%;box-shadow:0 14px 34px rgba(60,40,20,.16)}
+.d figcaption{margin-top:16px;font:400 25px/1.4 "Plex";color:var(--ink)}
+.d b{display:block;font:500 31px/1.2 "Plex";color:var(--gold);margin-bottom:5px}
 .end{background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .end .glow{position:absolute;left:165px;top:300px;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%)}
 .end .lg{position:relative;width:340px}
@@ -44,11 +47,11 @@ body{width:1080px}
   <img class="logo" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide dict" id="s3">
-  <div class="k">שלושה פרטים,<br />סלון אחד.<i></i></div>
-  <div class="w" style="right:60px"><img src="d_oak.png" alt="" /><b>אלון</b></div>
-  <div class="w" style="right:390px"><img src="d_light.png" alt="" /><b>אור</b></div>
-  <div class="w" style="right:720px"><img src="d_line.png" alt="" /><b>קו</b></div>
-  <img class="logo" src="logo_alpha.png" alt="אבן ועץ" style="right:498px" />
+  <div class="h" style="right:60px;top:36px;font-size:48px">שלושה פרטים,<span>סלון אחד.</span><i style="margin-top:14px"></i></div>
+  <figure class="d" style="right:60px;top:206px;width:960px"><img src="d_console.png" style="height:300px" alt="" /><figcaption><b>מזנון צף</b>תלוי על הקיר, והחריצים בחיפוי ממשיכים בקו אחד מעליו ומתחתיו.</figcaption></figure>
+  <figure class="d" style="right:60px;top:616px;width:465px"><img src="d_niche.png" style="height:440px" alt="" /><figcaption><b>נישה מוארת</b>תאורה חמה משולבת בתוך הנישה ומאירה את מה שמוצג בה, בלי מנורה גלויה.</figcaption></figure>
+  <figure class="d" style="right:555px;top:616px;width:465px"><img src="d_slats.png" style="height:440px" alt="" /><figcaption><b>עמוד פסים מואר</b>חיפוי פסים עם שני פסי לד, בדיוק בנקודה שבה קיר הטלוויזיה פוגש את קיר הנישה.</figcaption></figure>
+  <img class="logo" src="logo_alpha.png" alt="אבן ועץ" style="right:505px;bottom:18px;width:70px" />
 </section>
 <section class="slide" id="s4">
   <img class="full" src="p4.png" alt="" />
