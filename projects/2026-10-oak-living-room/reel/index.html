@@ -6,60 +6,116 @@
 <script src="assets/gsap.min.js"></script>
 <script src="assets/reel-kit.js"></script>
 <link rel="stylesheet" href="assets/reel-kit.css" />
-<!-- SKELETON ONLY (studio/tools/new_project.sh copies it to reel/index.html). Replace the stages, times and words with
-     this project's approved beat sheet. The example wiring below = kit smoke test (latte push + card -> whip ->
-     white wall light fill -> flash -> warm library dusk -> end card), using sample assets under assets/sample/. -->
+<!-- Oak living room v1 (13.10). Approved card: "קיר טלוויזיה? זה רק ההתחלה" → whole room → evening falls → niche wall lit.
+  Her note at approval: little content → impressive editing, the camera never stands still, never slow.
+  ~110 BPM (beat 0.545 s). Stages = her photos cleaned + x2 (work/hq), scale <= 0.875 (= x1.75 source) except inside blur.
+  Evening versions (flow/night.py): room darkened, the REAL lit pixels (niche, vitrine, LED strips, reflections) untouched.
+  0.00–2.30  A  TV wall (day), frame 0 moving: speed-ramp push → accelerating pan left to the LED slats   "קיר טלוויזיה? / זה רק ההתחלה."
+  2.30       whip (blur hand-over, the only whip)
+  2.30–7.15  R  whole room (day): lands moving, pull-out to both walls                                  "כל החלל / בתכנון אחד."
+  4.40–5.45                                                                                             "בערב, / האור עושה את השאר."
+  5.00–6.40  signature "evening falls": the evening photo rises from the floor up, lights stay as shot
+  6.30–7.15  push to the niche wall, speed ramp into a dive-through (blur peak 7.15)
+  7.15–10.30 N  niche wall at evening: lands on the lit niche, pulls out to the whole wall (light moment, whole, 2.3 s)
+  10.30–12.50 burst: 4 windows on the beat (slats, vitrine, niche, console) sliding right→left over the blurred wall
+  12.50–16.90 A2 the last window opens to the TV wall at evening → room lights come back top→down (2nd light event)
+  14.80–16.70                                                                                           "דברו איתנו / בוואטסאפ"
+  16.90–20.00 end card: logo, ייעוץ והדמיה ללא עלות
+  Transition families: whip/dive blur (2), light wave (2), window slide/open (burst). -->
 <style>
-/* per-project: stage sizes (photo size), card positions */
-.w{width:1179px;height:1472px}
-#t1{right:64px;top:300px;text-align:right;font-size:92px;color:#33221a}
-#t1 em{color:#7a5228}
-#t2{left:0;width:1080px;top:250px;text-align:center;font-size:92px;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.55)}
+.ta{width:1800px;height:3200px}
+.tr{width:1536px;height:2728px}
+#bg{position:absolute;inset:0;background:url(assets/niche_bg.jpg) center/cover}
+/* logo tones on every card: line 1 logo grey, line 2 logo wood (same scheme everywhere, her note 13.10) */
+.t{left:0;width:1080px;text-align:center;color:#57565b}
+.t .ln + .ln{color:#8a6a43}
+#t1{top:190px;font-size:88px}
+#t2{top:190px;font-size:88px}
+#t3{top:190px;font-size:80px}
+#t4{top:175px;font-size:84px}
+#end .l1{color:#efe6da}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
-  <div id="scene" class="clip" data-start="0" data-duration="12" data-track-index="0" style="position:absolute;inset:0">
-    <!-- later stages first (underneath), frame-0 stage last (on top) -->
-    <div id="LW" class="lay"><div class="st w" id="sW">
-      <img src="assets/sample/day.png" alt="" /><img id="warm" src="assets/sample/warm.png" alt="" /><img class="bl" id="bW" src="assets/sample/warm_bloom.jpg" alt="" />
-    </div></div>
-    <div id="LU" class="lay"><div class="st w" id="sU"><img src="assets/sample/unlit.png" alt="" /><img id="lit" src="assets/sample/lit.jpg" alt="" /></div></div>
-    <div id="LA" class="lay"><div class="st w" id="sA"><img src="assets/sample/front_g.png" alt="" /><img class="bl" id="bA" src="assets/sample/front_bloom.jpg" alt="" /></div></div>
-    <div id="flash"></div>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
+    <!-- later shots underneath, frame-0 stage last (on top) -->
+    <div id="LB" class="lay"><div id="bg"></div></div>
+    <div id="A2" class="lay"><div class="st ta" id="sA2"><img class="ta" src="assets/tv_n.png" alt="" /><img class="ta" id="dayA" src="assets/tv.png" alt="" /></div></div>
+    <div id="W3" class="lay"><div class="st tr" id="sW3"><img class="tr" src="assets/niche_n.png" alt="" /></div></div>
+    <div id="W2" class="lay"><div class="st tr" id="sW2"><img class="tr" src="assets/niche_n.png" alt="" /></div></div>
+    <div id="W1" class="lay"><div class="st tr" id="sW1"><img class="tr" src="assets/room_n.png" alt="" /></div></div>
+    <div id="LN" class="lay"><div class="st tr" id="sN"><img class="tr" src="assets/niche_n.png" alt="" /></div></div>
+    <div id="LR" class="lay"><div class="st tr" id="sR"><img class="tr" src="assets/room.png" alt="" /><img class="tr" id="nR" src="assets/room_n.png" alt="" /></div></div>
+    <div id="LA" class="lay"><div class="st ta" id="sA"><img class="ta" src="assets/tv.png" alt="" /></div></div>
   </div>
-  <div id="txt" class="clip" data-start="0" data-duration="12" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t"><div class="ln"><span>שום</span> <span>דבר</span> <span>כאן</span></div><div class="ln"><span><em>לא</em></span> <span><em>מקטלוג.</em></span></div></div>
-    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>קו</span></div><div class="ln"><span><em>במקום.</em></span></div></div>
-    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">פגישת ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
+  <div id="txt" class="clip" data-start="0" data-duration="20" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>קיר</span> <span>טלוויזיה?</span></div><div class="ln"><span>זה</span> <span>רק</span> <span>ההתחלה.</span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>החלל</span></div><div class="ln"><span>בתכנון</span> <span>אחד.</span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>בערב,</span></div><div class="ln"><span>האור</span> <span>עושה</span> <span>את</span> <span>השאר.</span></div></div>
+    <div id="t4" class="t"><div class="ln"><span>דברו</span> <span>איתנו</span></div><div class="ln"><span>בוואטסאפ</span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
   </div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
 const K = RK.kit(tl);
-gsap.set(["#LU", "#LW"], { opacity: 0 });
+gsap.set(["#LN", "#W1", "#W2", "#W3", "#A2", "#LB"], { opacity: 0 });
+gsap.set(".lay", { transformOrigin: "540px 960px" });
 
-// A 0-3.1: frame 0 is the whole photo, already pushing; real LEDs breathe
-K.path("#sA", [[0, 642, 686, 1.40], [3.1, 612, 640, 1.6]]);
-K.breathe("#bA", [[0, 0.1], [1.3, 0.85], [2.5, 0.3]]);
-K.card("#t1", 0.2, 2.5);
-// whip: hand over inside the blur
-K.blurOut("#LA", 3.1);
-K.swap("#LA", "#LU", 3.1);
-K.blurIn("#LU", 3.1);
-// U 3.1-6.2: the vitrine fills with its REAL light
-K.path("#sU", [[3.1, 830, 760, 1.68], [6.2, 812, 760, 1.64]]);
-K.maskFill("#lit", 3.6, 1.5);
-// flash -> W 6.2-9.2: the library at dusk (light moment: whole lit element, 2+ s)
-K.flash("#flash", 6.2);
-K.swap("#LU", "#LW", 6.2);
-K.path("#sW", [[6.2, 345, 700, 1.62], [9.2, 338, 640, 1.66]]);
-K.maskFill("#warm", 6.5, 1.6, { soft: 25, ease: "power1.inOut" });
-K.breathe("#bW", [[6.8, 0], [8.2, 0.9], [9.2, 0.6]]);
-K.card("#t2", 7.4, 8.9);
-// end card
-K.endCard(9.2, 2.8);
-K.done(12);
+// beat punch on a layer (small, fast, returns): energy without a cut
+const punch = (sel, t, s = 1.035) => {
+  tl.fromTo(sel, { scale: 1 }, { scale: s, duration: 0.09, ease: "power2.out", immediateRender: false }, t);
+  tl.to(sel, { scale: 1, duration: 0.3, ease: "power2.inOut" }, t + 0.09);
+};
+// window: the layer is clipped to a centred W x H rect and slides in from the right / out to the left with its content
+const rect = (w, h, cy = 900) => `polygon(${540 - w / 2}px ${cy - h / 2}px,${540 + w / 2}px ${cy - h / 2}px,${540 + w / 2}px ${cy + h / 2}px,${540 - w / 2}px ${cy + h / 2}px)`;
+const win = (sel, t0, t1, w, h, exit = true) => {
+  gsap.set(sel, { clipPath: rect(w, h) });
+  tl.set(sel, { opacity: 1 }, t0);
+  tl.fromTo(sel, { x: 1000 }, { x: 40, duration: 0.24, ease: "power3.out", immediateRender: false }, t0);
+  tl.to(sel, { x: exit ? -10 : 0, duration: t1 - t0 - 0.24 - (exit ? 0.2 : 0), ease: "none" }, t0 + 0.24);
+  if (exit) { tl.to(sel, { x: -1000, duration: 0.22, ease: "power2.in" }, t1 - 0.2); tl.set(sel, { opacity: 0 }, t1 + 0.02); }
+};
+
+// A 0-2.3: frame 0 = the whole TV wall, already pushing; ramps into a fast pan left to the LED slats
+K.path("#sA", [[0, 1000, 1500, 0.62], [1.2, 880, 1460, 0.70], [2.3, 700, 1440, 0.84]]);
+K.card("#t1", 0.15, 1.9);
+punch("#LA", 1.09);
+// whip into the room
+K.blurOut("#LA", 2.3, 18, 0.22);
+K.swap("#LA", "#LR", 2.3);
+K.blurIn("#LR", 2.3, 18, 0.28);
+// R 2.3-7.15: lands moving, pulls out to both walls; evening rises from the floor; ramps into the niche
+K.path("#sR", [[2.3, 900, 1500, 0.86], [3.4, 800, 1420, 0.75], [4.6, 768, 1380, 0.712], [5.6, 760, 1370, 0.73], [6.6, 640, 1355, 0.87], [7.15, 430, 1342, 1.3]]);
+K.card("#t2", 2.6, 4.2);
+punch("#LR", 3.27);
+K.card("#t3", 4.4, 5.45);
+K.maskFill("#nR", 5.0, 1.4, { dir: "to top", soft: 30, ease: "sine.inOut" });
+// dive through the niche into the niche wall
+K.blurOut("#LR", 7.15, 16, 0.3);
+K.swap("#LR", "#LN", 7.15);
+K.blurIn("#LN", 7.15, 16, 0.3);
+// N 7.15-10.3: the light moment, whole wall in evening
+K.path("#sN", [[7.15, 900, 1380, 1.2], [7.6, 860, 1375, 0.86], [8.3, 768, 1370, 0.73], [10.3, 800, 1345, 0.76]]);
+// burst 10.3-12.5: windows on the beat over the blurred wall
+tl.set("#LB", { opacity: 1 }, 10.25);
+tl.fromTo("#bg", { scale: 1.05 }, { scale: 1.15, duration: 2.4, ease: "none", immediateRender: false }, 10.25);
+tl.to("#LN", { opacity: 0, duration: 0.2, ease: "sine.in" }, 10.15);
+win("#W1", 10.3, 10.95, 620, 1040); K.path("#sW1", [[10.3, 550, 1560, 1.0], [10.95, 550, 1430, 1.0]]);
+win("#W2", 10.8, 11.5, 520, 1100); K.path("#sW2", [[10.8, 1300, 1240, 1.15], [11.5, 1300, 1460, 1.15]]);
+win("#W3", 11.35, 12.05, 700, 820); K.path("#sW3", [[11.35, 900, 1425, 1.0], [12.05, 900, 1355, 0.95]]);
+win("#A2", 11.9, 12.5, 760, 640, false);
+// A2: the console window opens into the whole TV wall at evening, then the room lights come back top→down
+K.path("#sA2", [[11.95, 420, 2120, 1.0], [12.5, 520, 2080, 0.98], [13.4, 780, 1640, 0.74], [16.9, 790, 1395, 0.70]]);
+const clip = { w: 760, h: 640, cy: 900 };
+tl.to(clip, { w: 1300, h: 2300, cy: 960, duration: 0.45, ease: "power3.inOut", onUpdate: () => gsap.set("#A2", { clipPath: rect(clip.w, clip.h, clip.cy) }) }, 12.5);
+tl.set("#LB", { opacity: 0 }, 13.0);
+K.maskFill("#dayA", 14.0, 1.0, { dir: "to bottom", soft: 30, ease: "sine.inOut" });
+K.card("#t4", 14.8, 16.6);
+punch("#A2", 14.8, 1.025);
+K.endCard(16.9, 3.1);
+K.done(20);
 </script>
 </body>
 </html>
