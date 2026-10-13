@@ -8,6 +8,7 @@ BOX = {  # x0,y0,x1,y1 in hq (2x) pixels
  '02_niche_wall_angle': [(656,1080,1144,1680), (1308,668,1472,2062)],
  '04_tv_wall_front': [],
 }
+DROP = {'01_room_wide': [(200,2060,280,2140)]}
 def night(n, k=0.26, spill=0.45):
     im = cv2.imread(f'work/hq/{n}.png').astype(np.float32) / 255
     hsv = cv2.cvtColor((im*255).astype(np.uint8), cv2.COLOR_BGR2HSV).astype(np.float32)
@@ -17,6 +18,7 @@ def night(n, k=0.26, spill=0.45):
     th = cv2.morphologyEx(v, cv2.MORPH_TOPHAT, cv2.getStructuringElement(cv2.MORPH_RECT, (21, 21)))
     lines = np.clip((th-0.10)/0.12, 0, 1) * np.clip((v-0.6)/0.2, 0, 1)
     m = np.maximum(lit, lines)
+    for x0,y0,x1,y1 in DROP.get(n, []): m[y0:y1, x0:x1] = 0   # reflections of ceiling lights that go dark at evening
     for x0,y0,x1,y1 in BOX[n]:
         b = np.zeros_like(m); b[y0:y1, x0:x1] = 1; m = np.maximum(m, b)
     m = cv2.GaussianBlur(m, (0,0), 2.5)

@@ -15,7 +15,7 @@ def fit(im, y0, y1, out):
 room = cv2.imread(H + '01_room_wide.png'); tv = cv2.imread(H + '04_tv_wall_front.png'); ni = cv2.imread(H + '02_niche_wall_angle.png')
 fit(room, 300, 2220, 'p1.png')          # 1536x1920 = exact 4:5 at full width
 fit(tv, 330, 2580, 'p2.png')            # 1800x2250 = exact 4:5
-fit(ni, 400, 2520, 'p4.png')            # whole wall incl. plinth, sides extended ~40px of plain wall/floor
+fit(ni, 250, 2530, 'p4.png')            # whole wall incl. plinth, sides extended ~40px of plain wall/floor
 # dictionary windows (hq px): oak = console end + grooves, light = niche, line = LED slats + floor reflections
 def win(im, x0, y0, w, h, out, W=300, Hh=560):
     c = cv2.resize(im[y0:y0+h, x0:x0+w], (W, Hh), interpolation=cv2.INTER_LANCZOS4); cv2.imwrite(C + out, c); print(out, 'x%.2f' % (2*W/w))
