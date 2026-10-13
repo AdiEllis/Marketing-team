@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- הפוסט הזה מראה ש: ארון שמתוכנן אישית יודע גם להסתיר וגם להראות, והתכנון מתחיל ממה שאתם רוצים לראות (ערך: תכנון אישי).
+     ארכיטיפ: כותרת מפוצלת על שני שקפים (P9) בשפה טיפוגרפית אחת: שורה דקה קלה (Plex Light) + שורה כבדה ענקית (Heebo 850),
+     דיו כהה על משטחים בהירים, ההדגשה בגוון האלון המואר. ללא שכבות. -->
+<style>
+@font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
+@font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+:root{--ink:#2a1f17;--oak:#a8641f;--bronze:#A8763E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:#d9d0c6}
+.full{position:absolute;inset:0;width:1080px;height:1350px}
+.h{position:absolute;right:72px;direction:rtl;text-align:right;color:var(--ink)}
+.h .a{display:block;font:300 60px/1.15 "Plex";letter-spacing:.005em;color:#3a2e25}
+.h .b{display:block;font:850 156px/.98 "Heebo";letter-spacing:-.025em;margin-top:6px}
+.h .b em{font-style:normal;color:var(--oak)}
+.h .rule{display:block;width:84px;height:3px;background:var(--bronze);margin:0 0 20px auto}
+.end{background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.end .glow{position:absolute;left:165px;top:300px;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%)}
+.end .logo{position:relative;width:340px}
+.end .line{position:relative;direction:rtl;text-align:center;margin-top:70px;font:300 56px/1.2 "Plex";color:#efe4d6}
+.end .line em{font:800 60px/1.2 "Heebo";font-style:normal;color:#D8B878}
+</style>
+</head>
+<body>
+<section class="slide" id="s1">
+  <img class="full" src="p1.png" alt="" />
+  <div class="h" style="top:30px;right:130px"><span class="a">רוב הארונות</span><span class="b">רק <em>מסתירים.</em></span></div>
+</section>
+<section class="slide" id="s2">
+  <img class="full" src="p2.png" alt="" />
+  <div class="h" style="top:56px;right:356px"><span class="a">זה</span><span class="b"><em>גם מציג.</em></span></div>
+</section>
+<section class="slide" id="s3">
+  <img class="full" src="p3.png" alt="" />
+  <div class="h" style="top:18px"><span class="a" style="font-size:38px">ומה שמוסתר,</span><span class="b" style="font-size:94px">מתוכנן באותה <em>הקפדה.</em></span></div>
+</section>
+<section class="slide" id="s4">
+  <img class="full" src="p4.png" alt="" />
+</section>
+<section class="slide" id="s5">
+  <img class="full" src="p5.png" alt="" />
+  <div class="h" style="bottom:70px"><span class="rule"></span><span class="a" style="font-size:46px">תכנון אישי מתחיל בשאלה אחת:</span><span class="b" style="font-size:116px;margin-top:8px">מה אתם רוצים<br /><em>לראות?</em></span></div>
+</section>
+<section class="slide end" id="s6">
+  <div class="glow"></div>
+  <img class="logo" src="logo_light.png" alt="אבן ועץ" />
+  <div class="line">נתכנן<br /><em>את שלכם.</em></div>
+</section>
+</body>
+</html>
