@@ -2,59 +2,54 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8" />
-<!-- SKELETON ONLY. Before designing write: "הפוסט הזה מראה ש..." (incl. a business value) and pick the archetype
-     (agents/post-designer.md; not one of the last two in content-log). Slide count is dynamic: min 3 work photos + a
-     closing logo slide = the reel's end card in 4:5 (P11). Photos: graded PNG (grade.py). Every work appears whole;
-     crop only to highlight a detail the headline talks about (niche, light, special solution), straight and centred (P4).
-     No bands/boxes/darkening; a slide without text = zero layers. Render: bash studio/tools/render_post.sh carousel/slides.html <N> -->
+<!-- הפוסט הזה מראה ש: ארון שמתוכנן אישית יודע גם להסתיר וגם להראות, והתכנון מתחיל ממה שאתם רוצים לראות (ערך: תכנון אישי).
+     ארכיטיפ: כותרת מפוצלת על שני שקפים (P9) בשפה טיפוגרפית אחת: שורה דקה קלה (Plex Light) + שורה כבדה ענקית (Heebo 850),
+     דיו כהה על משטחים בהירים, ההדגשה בגוון האלון המואר. ללא שכבות. -->
 <style>
 @font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
 @font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
-@font-face{font-family:"Plex";src:url(plex-Medium.ttf);font-weight:500}
-@font-face{font-family:"Plex";src:url(plex-SemiBold.ttf);font-weight:600}
-:root{--gold:#D8B878;--bronze:#A8763E;--dark:#1C1816}
+@font-face{font-family:"Heebo";src:url(heebo.ttf);font-weight:100 900}
+:root{--ink:#2a1f17;--oak:#a8641f;--bronze:#A8763E}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px}
-.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--dark)}
-.full{position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover}
-/* keep headline, logo and focus inside the central 1012px (profile grid crops 3:4) */
-/* LOUD family (set 1): bold two lines, white + gold on a calm dark area */
-.loud{position:absolute;direction:rtl;text-align:right;font:600 96px/1.04 "Plex";letter-spacing:-.015em;color:#fff}
-.loud em{display:block;font-style:normal;color:var(--gold)}
-/* QUIET family (set 2): thin dark topic + insight after a thin L bracket, on a calm light surface */
-.quiet{position:absolute;direction:rtl;text-align:right;color:#2a2420}
-.quiet h2{font:300 76px/1.05 "Plex"}
-.quiet p{margin-top:16px;padding:10px 22px 0 0;font:400 36px/1.3 "Plex";border-right:2px solid var(--bronze);border-top:2px solid var(--bronze);max-width:640px}
-/* quiet label (portfolio style) */
-.lab{position:absolute;direction:rtl;display:flex;align-items:center;gap:18px;font:600 31px/1.2 "Plex";color:#2b211a}
-.lab i{display:block;width:46px;height:2px;background:var(--bronze)}
-.lab b{font-weight:600;color:#8a5a26}
-.logo{position:absolute;width:150px}
-/* closing slide (P11): the reel end card (#end in reel-kit.css) at 4:5. Full slide, logo is the hero; no split, no collage.
-   Optional: one short line under the logo, like the reel. */
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:#d9d0c6}
+.full{position:absolute;inset:0;width:1080px;height:1350px}
+.h{position:absolute;right:72px;direction:rtl;text-align:right;color:var(--ink)}
+.h .a{display:block;font:300 72px/1.1 "Plex";letter-spacing:.005em;color:#3a2e25}
+.h .b{display:block;font:850 150px/1.0 "Heebo";letter-spacing:-.025em;margin-top:2px}
+.h .b em{font-style:normal;color:var(--oak)}
+.h .rule{display:block;width:84px;height:3px;background:var(--bronze);margin:0 0 20px auto}
 .end{background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);display:flex;flex-direction:column;align-items:center;justify-content:center}
 .end .glow{position:absolute;left:165px;top:300px;width:750px;height:750px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%)}
 .end .logo{position:relative;width:340px}
-.end .line{position:relative;direction:rtl;text-align:center;margin-top:64px;font:600 58px/1.2 "Plex";color:#fff}
-.end .line em{font-style:normal;color:var(--gold)}
+.end .line{position:relative;direction:rtl;text-align:center;margin-top:70px;font:300 56px/1.2 "Plex";color:#efe4d6}
+.end .line em{font:800 60px/1.2 "Heebo";font-style:normal;color:#D8B878}
 </style>
 </head>
 <body>
 <section class="slide" id="s1">
   <img class="full" src="p1.png" alt="" />
-  <div class="loud" style="right:56px;top:70px">שורה ראשונה.<em>שורה שנייה.</em></div>
+  <div class="h" style="top:34px"><span class="a">רוב הארונות</span><span class="b">רק מסתירים.</span></div>
 </section>
 <section class="slide" id="s2">
   <img class="full" src="p2.png" alt="" />
+  <div class="h" style="top:34px"><span class="a">זה</span><span class="b"><em>גם מציג.</em></span></div>
 </section>
 <section class="slide" id="s3">
   <img class="full" src="p3.png" alt="" />
-  <div class="quiet" style="right:70px;bottom:120px"><h2>נושא קצר</h2><p>תובנה אל הצופה, לא לפי X, לפי Y</p></div>
+  <div class="h" style="top:18px"><span class="a" style="font-size:50px">ומה שמוסתר,</span><span class="b" style="font-size:90px">מתוכנן <em>באותה הקפדה.</em></span></div>
 </section>
-<section class="slide end" id="s4">
+<section class="slide" id="s4">
+  <img class="full" src="p4.png" alt="" />
+</section>
+<section class="slide" id="s5">
+  <img class="full" src="p5.png" alt="" />
+  <div class="h" style="bottom:70px"><span class="rule"></span><span class="a" style="font-size:48px">תכנון אישי מתחיל בשאלה אחת:</span><span class="b" style="font-size:116px;margin-top:10px">מה אתם רוצים<br /><em>לראות?</em></span></div>
+</section>
+<section class="slide end" id="s6">
   <div class="glow"></div>
   <img class="logo" src="logo_light.png" alt="אבן ועץ" />
-  <!-- optional, max one short line: <div class="line">שורה<br /><em>קצרה.</em></div> -->
+  <div class="line">נתכנן<br /><em>את שלכם.</em></div>
 </section>
 </body>
 </html>

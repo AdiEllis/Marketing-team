@@ -6,60 +6,135 @@
 <script src="assets/gsap.min.js"></script>
 <script src="assets/reel-kit.js"></script>
 <link rel="stylesheet" href="assets/reel-kit.css" />
-<!-- SKELETON ONLY (studio/tools/new_project.sh copies it to reel/index.html). Replace the stages, times and words with
-     this project's approved beat sheet. The example wiring below = kit smoke test (latte push + card -> whip ->
-     white wall light fill -> flash -> warm library dusk -> end card), using sample assets under assets/sample/. -->
+<!-- Glass niche closet (approved card 4, 13.10). ~100 BPM grid (0.6 s).
+  0.0–2.6  O  the whole closet, niche dark, slow push up            "מהרצפה / עד התקרה."
+  2.6–4.6  O  signature: the niche lights shelf by shelf (bottom→top, on the beat), room brightens (real off/on pair)
+  4.6–7.3  C  warm light flash to the real close-up of the lit niche, whole niche, hold   "רק אור / במקום הנכון."
+  7.3–9.6  V  dive through the middle shelf (blur) into her clip: glide down the lit oak shelves
+  9.4–15.4 F  motion dissolve + pull-out to the lit front; 4 doors open in a wave (inner → outer), niche stays lit;
+              hand-over to the real open photo at rest (0.25 s crossfade); slow survey: rail → drawers  "ובפנים, / כל סנטימטר עובד."
+ 15.4–18.1 S  whip to the styled niche (her photo), slow push           "תוכנן / בשבילכם."
+ 18.1–21.0    end card: logo, ייעוץ והדמיה ללא עלות
+ Stage space = rectified photo x2 (1792x2400); camera scale 0.8 = x1.6 of the source, max 0.875 (x1.75). -->
 <style>
-/* per-project: stage sizes (photo size), card positions */
-.w{width:1179px;height:1472px}
-#t1{right:64px;top:300px;text-align:right;font-size:92px;color:#33221a}
-#t1 em{color:#7a5228}
-#t2{left:0;width:1080px;top:250px;text-align:center;font-size:92px;color:#fff;text-shadow:0 3px 18px rgba(0,0,0,.55)}
+.w{width:1792px;height:2400px}
+#sC{width:1932px;height:2576px}
+/* front stage: doors from the lit closed photo, bays from the real open photo */
+#sF{perspective:1620px;perspective-origin:896px 1400px}
+.bay{position:absolute;top:456px;height:1748px;background-image:url(assets/open.png);background-size:1792px 2400px}
+#bL{left:248px;width:500px;background-position:-248px -456px}
+#bR{left:1076px;width:500px;background-position:-1076px -456px}
+.bsh{position:absolute;top:456px;height:1748px;width:500px;background:rgba(28,20,13,.66)}
+#hL{left:248px} #hR{left:1076px}
+.cs{position:absolute;top:270px;height:2120px;background-image:url(assets/open.png);background-size:1792px 2400px;opacity:0}
+#c1{left:104px;width:160px;background-position:-104px -270px}
+#c2{left:700px;width:52px;background-position:-700px -270px}
+#c4{left:1074px;width:40px;background-position:-1074px -270px}
+#c5{left:1540px;width:190px;background-position:-1540px -270px}
+.door{top:456px;height:1748px}
+.door .face{background-image:url(assets/lit.png);background-size:1792px 2400px}
+.door .back{background-image:url(assets/lit.png);background-size:1792px 2400px}
+.door .edge{width:9px;background:linear-gradient(90deg,#8d8072 0,#8d8072 1px,#d9cdbd 2px,#c4b6a4)}
+#d1{left:248px;width:254px;transform-origin:0 50%}   #d1 .face,#d1 .back{background-position:-248px -456px} #d1 .edge{left:100%} #d1 .shade{background:linear-gradient(90deg,rgba(60,44,30,1),rgba(60,44,30,.35))}
+#d2{left:502px;width:246px;transform-origin:100% 50%} #d2 .face,#d2 .back{background-position:-502px -456px} #d2 .edge{left:0}    #d2 .shade{background:linear-gradient(270deg,rgba(60,44,30,1),rgba(60,44,30,.35))}
+#d4{left:1076px;width:250px;transform-origin:0 50%}  #d4 .face,#d4 .back{background-position:-1076px -456px} #d4 .edge{left:100%} #d4 .shade{background:linear-gradient(90deg,rgba(60,44,30,1),rgba(60,44,30,.35))}
+#d5{left:1326px;width:250px;transform-origin:100% 50%} #d5 .face,#d5 .back{background-position:-1326px -456px} #d5 .edge{left:0}  #d5 .shade{background:linear-gradient(270deg,rgba(60,44,30,1),rgba(60,44,30,.35))}
+/* light-on stage: lit photo over the dark one, niche cut out; the niche fills shelf by shelf */
+#litAll{opacity:0;clip-path:path(evenodd,"M0 0H1792V2400H0Z M746 798H1078V1596H746Z")}
+.cmp{position:absolute;left:746px;width:332px;background-image:url(assets/lit.png);background-size:1792px 2400px;opacity:0}
+#k3{top:1306px;height:290px;background-position:-746px -1306px}
+#k2{top:1054px;height:252px;background-position:-746px -1054px}
+#k1{top:798px;height:256px;background-position:-746px -798px}
+#vid{position:absolute;inset:0;opacity:0;overflow:hidden}
+#vid video{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.t{left:0;width:1080px;text-align:center;color:#2b211a}
+.t em{color:#8a5a2b}
+#t1{top:1330px;font-size:88px}
+#t2{top:160px;font-size:88px}
+#t3{top:150px;font-size:84px}
+#t4{top:330px;font-size:96px}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="12" data-width="1080" data-height="1920">
-  <div id="scene" class="clip" data-start="0" data-duration="12" data-track-index="0" style="position:absolute;inset:0">
-    <!-- later stages first (underneath), frame-0 stage last (on top) -->
-    <div id="LW" class="lay"><div class="st w" id="sW">
-      <img src="assets/sample/day.png" alt="" /><img id="warm" src="assets/sample/warm.png" alt="" /><img class="bl" id="bW" src="assets/sample/warm_bloom.jpg" alt="" />
+<div id="root" data-composition-id="main" data-start="0" data-duration="21" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="21" data-track-index="0" style="position:absolute;inset:0">
+    <div id="LS" class="lay"><div class="st w" id="sS"><img class="w" src="assets/styled.png" alt="" /></div></div>
+    <div id="LF" class="lay"><div class="st w" id="sF">
+      <img class="w" src="assets/lit.png" alt="" />
+      <div class="bay" id="bL"></div><div class="bay" id="bR"></div>
+      <div class="bsh" id="hL"></div><div class="bsh" id="hR"></div>
+      <div class="cs" id="c1"></div><div class="cs" id="c2"></div><div class="cs" id="c4"></div><div class="cs" id="c5"></div>
+      <div class="door" id="d1"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
+      <div class="door" id="d2"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
+      <div class="door" id="d4"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
+      <div class="door" id="d5"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
     </div></div>
-    <div id="LU" class="lay"><div class="st w" id="sU"><img src="assets/sample/unlit.png" alt="" /><img id="lit" src="assets/sample/lit.jpg" alt="" /></div></div>
-    <div id="LA" class="lay"><div class="st w" id="sA"><img src="assets/sample/front_g.png" alt="" /><img class="bl" id="bA" src="assets/sample/front_bloom.jpg" alt="" /></div></div>
+    <div id="LC" class="lay"><div class="st" id="sC"><img src="assets/close.png" alt="" /></div></div>
+    <div id="LO" class="lay"><div class="st w" id="sO">
+      <img class="w" src="assets/off.png" alt="" /><img class="w" id="litAll" src="assets/lit.png" alt="" />
+      <div class="cmp" id="k3"></div><div class="cmp" id="k2"></div><div class="cmp" id="k1"></div>
+    </div></div>
     <div id="flash"></div>
   </div>
-  <div id="txt" class="clip" data-start="0" data-duration="12" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t"><div class="ln"><span>שום</span> <span>דבר</span> <span>כאן</span></div><div class="ln"><span><em>לא</em></span> <span><em>מקטלוג.</em></span></div></div>
-    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>קו</span></div><div class="ln"><span><em>במקום.</em></span></div></div>
-    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">פגישת ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
+  <div id="vid"><video id="clipv" class="clip" src="assets/clip.mp4" muted playsinline data-start="7.0" data-duration="2.8" data-track-index="2"></video></div>
+  <div id="txt" class="clip" data-start="0" data-duration="21" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>מהרצפה</span></div><div class="ln"><span><em>עד</em></span> <span><em>התקרה.</em></span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>רק</span> <span>אור</span></div><div class="ln"><span><em>במקום</em></span> <span><em>הנכון.</em></span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>ובפנים,</span></div><div class="ln"><span><em>כל</em></span> <span><em>סנטימטר</em></span> <span><em>עובד.</em></span></div></div>
+    <div id="t4" class="t"><div class="ln"><span>תוכנן</span></div><div class="ln"><span><em>בשבילכם.</em></span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
   </div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
 const K = RK.kit(tl);
-gsap.set(["#LU", "#LW"], { opacity: 0 });
+gsap.set(["#LC", "#LF", "#LS"], { opacity: 0 });
 
-// A 0-3.1: frame 0 is the whole photo, already pushing; real LEDs breathe
-K.path("#sA", [[0, 642, 686, 1.40], [3.1, 612, 640, 1.6]]);
-K.breathe("#bA", [[0, 0.1], [1.3, 0.85], [2.5, 0.3]]);
-K.card("#t1", 0.2, 2.5);
-// whip: hand over inside the blur
-K.blurOut("#LA", 3.1);
-K.swap("#LA", "#LU", 3.1);
-K.blurIn("#LU", 3.1);
-// U 3.1-6.2: the vitrine fills with its REAL light
-K.path("#sU", [[3.1, 830, 760, 1.68], [6.2, 812, 760, 1.64]]);
-K.maskFill("#lit", 3.6, 1.5);
-// flash -> W 6.2-9.2: the library at dusk (light moment: whole lit element, 2+ s)
-K.flash("#flash", 6.2);
-K.swap("#LU", "#LW", 6.2);
-K.path("#sW", [[6.2, 345, 700, 1.62], [9.2, 338, 640, 1.66]]);
-K.maskFill("#warm", 6.5, 1.6, { soft: 25, ease: "power1.inOut" });
-K.breathe("#bW", [[6.8, 0], [8.2, 0.9], [9.2, 0.6]]);
-K.card("#t2", 7.4, 8.9);
-// end card
-K.endCard(9.2, 2.8);
-K.done(12);
+// O 0–4.9: frame 0 = the whole closet, niche dark, already pushing up toward the ceiling line
+K.path("#sO", [[0, 896, 1200, 0.80], [2.4, 900, 1170, 0.835], [4.0, 910, 1250, 0.87], [4.95, 912, 1290, 0.875]]);
+K.card("#t1", 0.2, 2.25);
+// signature: the niche lights shelf by shelf on the beat (real lit pixels), the room brightens with it
+tl.to("#litAll", { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 2.6);
+[["#k3", 2.6], ["#k2", 3.2], ["#k1", 3.8]].forEach(([k, t]) => tl.to(k, { opacity: 1, duration: 0.32, ease: "power2.out" }, t));
+
+// C 4.5–7.3: motion dissolve to the real close-up of the lit niche (same place on screen), hold the whole niche
+K.path("#sC", [[4.6, 755, 1100, 0.88], [6.8, 755, 1060, 0.95], [7.3, 760, 1020, 1.5]]);
+K.flash("#flash", 4.6, 0.8);
+K.swap("#LO", "#LC", 4.6);
+K.card("#t2", 4.9, 6.75);
+
+// V 7.3–9.6: dive through the middle shelf into her clip (blur hand-over), glide down the shelves
+K.blurOut("#LC", 7.3, 16);
+tl.set("#vid", { opacity: 1 }, 7.3); tl.set("#LC", { opacity: 0 }, 7.3);
+K.blurIn("#vid", 7.3, 16);
+tl.fromTo("#clipv", { scale: 1.06 }, { scale: 1.0, duration: 2.5, ease: "none", immediateRender: false }, 7.3);
+
+// F 9.4–15.4: dissolve + pull-out to the lit front; the doors open in a wave around the glowing niche
+K.path("#sF", [[9.4, 912, 1196, 0.95], [10.2, 904, 1200, 0.80], [12.4, 900, 1205, 0.82], [13.8, 1150, 1170, 0.86], [15.4, 700, 1240, 0.86]]);
+tl.set("#LF", { opacity: 1 }, 9.4);
+tl.fromTo("#vid", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "sine.inOut", immediateRender: false }, 9.4);
+const swing = (id, sign, at, dur, strip) => {
+  tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * 90, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
+  tl.fromTo(id + " .shade", { opacity: 0 }, { opacity: 0.26, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
+  tl.fromTo(id + " .fs", { opacity: 0 }, { opacity: 0.45, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
+  // at rest: soft hand-over to the same door in the real open photo
+  tl.to(id, { opacity: 0, duration: 0.25, ease: "sine.inOut" }, at + dur);
+  tl.to(strip, { opacity: 1, duration: 0.25, ease: "sine.inOut" }, at + dur);
+};
+swing("#d2", 1, 10.0, 1.4, "#c2");  swing("#d4", -1, 10.0, 1.4, "#c4");
+swing("#d1", -1, 10.4, 1.45, "#c1"); swing("#d5", 1, 10.4, 1.45, "#c5");
+tl.fromTo(["#hL", "#hR"], { opacity: 1 }, { opacity: 0, duration: 1.7, ease: "power1.inOut", immediateRender: false }, 10.1);
+K.card("#t3", 10.7, 13.0);
+
+// S 15.4–18.1: whip to the styled niche, slow push
+K.blurOut("#LF", 15.4, 16);
+K.swap("#LF", "#LS", 15.4);
+K.blurIn("#LS", 15.4, 16);
+K.path("#sS", [[15.4, 1140, 1250, 0.84], [16.0, 945, 1205, 0.87], [18.1, 912, 1190, 0.9]]);
+K.card("#t4", 15.85, 17.85);
+
+K.endCard(18.1, 2.9);
+K.done(21);
 </script>
 </body>
 </html>
