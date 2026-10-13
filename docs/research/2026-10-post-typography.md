@@ -11,3 +11,11 @@
 **חובה לפני הפוסט הבא (לא בוצע):** להסתכל על פוסטים אמיתיים של עסקים מצליחים עם הרבה עוקבים בתחום (עיצוב פנים, מטבחים, נגרות ויוקרה בארץ ובעולם), דרך Pinterest, Behance או אתרי המותגים, ולרשום כאן 3–5 תצפיות מוחשיות: גופן, משקל, גודל ביחס לשקף, מיקום וצבע. אחר כך דגימת שקף 1 בשתיים-שלוש אפשרויות בכרטיס ההצעה.
 
 מקורות: overlaytext.com/blog/instagram-text-effects-typography-social-media, colorkuler.com (typography for Instagram), attentionclaw.com (carousel design principles), instacarousel.com (interior designer carousels), adobe.com (common graphic design mistakes).
+
+## תצפיות (13.10, לפני ההפקה החוזרת של ארון סהרה)
+מקורות: חיפוש על טיפוגרפיה ב"יוקרה שקטה" ועל מותגי ריהוט ועיצוב (ym-graphix "aesthetic Instagram fonts", madegooddesigns "fonts for luxury brands", designyourway "best fonts for Instagram posts", creativemarket "luxury fonts"), ובנוסף מה שידוע על הפוסטים של מותגי ריהוט ומטבחים מובילים (Poliform, Molteni, B&B Italia, Bulthaup). החיפוש לא החזיר ניתוח פוסטים של מותג ספציפי, ולכן התצפיות כלליות.
+1. **משקל:** יוקרה = אותיות רגילות עד בינוניות (400–500), אף פעם לא Black. מה שנראה "יקר" הוא שהגופן לא מתאמץ ("looks expensive because it doesn't try to be loud").
+2. **גודל:** הכותרת קטנה ביחס לשקף (בערך 5–7% מגובה השקף בפוסט 4:5, כלומר 64–90px ב-1350), והרבה אוויר סביבה. הצילום הוא הכוכב.
+3. **גופן:** סריף מעודן קלאסי (דידו, גרמונד; בעברית: Frank Ruhl) או סנס נקי עם פתחים רחבים (בעברית: IBM Plex Sans Hebrew). גופן אחד בכל הקרוסלה, שני משקלים לכל היותר.
+4. **מיקום:** הכותרת נשענת על קו בתמונה (תקרה, קצה הארון), ויישור אחד קבוע בכל השקפים. ריווח אותיות מעט פתוח רק בשורות קטנות (שורת משנה).
+5. **צבע:** כהה אחד ומבטא חם אחד, בלי מעברי צבע ובלי צל. כאן: פחם #2b2926 וזהב-קרמל אחיד #9a6a32, בגוון האלון שבנישה.
