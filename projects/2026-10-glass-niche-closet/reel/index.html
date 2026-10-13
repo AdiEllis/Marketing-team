@@ -55,8 +55,9 @@
 #k3{top:1306px;height:290px;background-position:-746px -1306px}
 #k2{top:1054px;height:252px;background-position:-746px -1054px}
 #k1{top:798px;height:256px;background-position:-746px -798px}
-/* one text colour for every card (charcoal from the logo), no accent words */
-.t{left:0;width:1080px;text-align:center;color:#34302c}
+/* logo tones on every card (her note 13.10): line 1 logo grey, line 2 logo wood; same scheme everywhere, no accent words */
+.t{left:0;width:1080px;text-align:center;color:#57565b}
+.t .ln + .ln{color:#8a6a43}
 #t1{top:1330px;font-size:92px}
 #t2{top:150px;font-size:84px}
 #t3{top:332px;font-size:96px}
@@ -111,21 +112,22 @@ tl.to("#offAll", { opacity: 0, duration: 1.4, ease: "sine.inOut" }, 2.6);
 });
 
 // doors open in a wave around the glowing niche (approved), soft hand-over to the real open photo at rest
-const open = (id, sign, at, dur, strip) => {
-  tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * 90, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
+// end angles solved (perspective 1620 @ x 896): the door's free edge lands exactly on the real open door's edge in photo 07
+const open = (id, sign, at, dur, strip, ang = 90) => {
+  tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * ang, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
   tl.fromTo(id + " .shade", { opacity: 0 }, { opacity: 0.26, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
   tl.fromTo(id + " .fs", { opacity: 0 }, { opacity: 0.45, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
-  tl.to(id, { opacity: 0, duration: 0.25, ease: "sine.inOut" }, at + dur);
-  tl.to(strip, { opacity: 1, duration: 0.25, ease: "sine.inOut" }, at + dur);
+  tl.to(id, { opacity: 0, duration: 0.18, ease: "sine.inOut" }, at + dur - 0.1);
+  tl.to(strip, { opacity: 1, duration: 0.18, ease: "sine.inOut" }, at + dur - 0.1);
 };
-const close = (id, sign, at, dur, strip) => {
+const close = (id, sign, at, dur, strip, ang = 90) => {
   tl.to(id, { opacity: 1, duration: 0.2, ease: "sine.inOut" }, at - 0.2);
   tl.to(strip, { opacity: 0, duration: 0.2, ease: "sine.inOut" }, at - 0.2);
-  tl.fromTo(id, { rotationY: sign * 90 }, { rotationY: 0, duration: dur, ease: "power2.in", immediateRender: false }, at);
+  tl.fromTo(id, { rotationY: sign * ang }, { rotationY: 0, duration: dur, ease: "power2.in", immediateRender: false }, at);
   tl.to([id + " .shade", id + " .fs"], { opacity: 0, duration: dur, ease: "power2.in" }, at);
 };
-open("#d2", 1, 6.05, 1.4, "#c2");  open("#d4", -1, 6.05, 1.4, "#c4");
-open("#d1", -1, 6.45, 1.45, "#c1"); open("#d5", 1, 6.45, 1.45, "#c5");
+open("#d2", 1, 6.05, 1.4, "#c2", 85.7);  open("#d4", -1, 6.05, 1.4, "#c4", 89);
+open("#d1", -1, 6.45, 1.45, "#c1", 94.6); open("#d5", 1, 6.45, 1.45, "#c5", 96);
 tl.fromTo(["#hL", "#hR"], { opacity: 1 }, { opacity: 0, duration: 1.7, ease: "power1.inOut", immediateRender: false }, 6.15);
 K.card("#t2", 7.85, 9.5);
 // beat snaps between details: motion blur only while the camera snaps
@@ -134,29 +136,29 @@ K.card("#t2", 7.85, 9.5);
   tl.to("#LF", { filter: "blur(0px)", duration: (b - a) / 2, ease: "power2.out" }, a + (b - a) / 2);
 });
 // doors close together, like real hands (slight stagger), soft landing on the beat
-close("#d2", 1, 10.75, 0.95, "#c2"); close("#d4", -1, 10.8, 0.92, "#c4");
-close("#d1", -1, 10.78, 0.97, "#c1"); close("#d5", 1, 10.83, 0.95, "#c5");
+close("#d2", 1, 10.75, 0.95, "#c2", 85.7); close("#d4", -1, 10.8, 0.92, "#c4", 89);
+close("#d1", -1, 10.78, 0.97, "#c1", 94.6); close("#d5", 1, 10.83, 0.95, "#c5", 96);
 tl.to(["#hL", "#hR"], { opacity: 1, duration: 0.9, ease: "power1.in" }, 10.8);
 
 // same frame: the niche becomes lived-in (new styled photo, aligned + light-matched to the same pixels)
 tl.set("#LS", { opacity: 1 }, 11.8);
-tl.fromTo("#LF", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "sine.inOut", immediateRender: false }, 11.8);
+tl.fromTo("#LF", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "sine.inOut", immediateRender: false }, 11.8);
 // front niche frame centre (914,1192) in stage px; close-up niche is x2.79 bigger -> front scale 2.12 = close scale 0.76
-K.path("#sS", [[11.8, 910, 1200, 0.85], [12.9, 911, 1198, 0.875], [13.5, 913, 1194, 0.95], [14.0, 914, 1192, 2.12],
-  [18.05, 914, 1192, 2.12], [18.45, 912, 1196, 1.0], [19.0, 910, 1198, 0.87], [20.8, 906, 1192, 0.89]]);
+K.path("#sS", [[11.8, 910, 1200, 0.85], [12.9, 911, 1198, 0.875], [13.6, 913, 1194, 0.96], [14.0, 914, 1192, 2.12],
+  [18.05, 914, 1192, 2.12], [18.42, 912, 1196, 1.05], [18.95, 910, 1197, 0.91], [20.8, 906, 1194, 0.865]]);
 K.card("#t3", 11.95, 13.0); // fully gone (~13.4) before the zoom-through starts (13.5)
 // zoom-through in: blur peak at 14.0, short crossfade hidden in the blur
-tl.fromTo("#LS", { filter: "blur(0px)" }, { filter: "blur(12px)", duration: 0.32, ease: "power2.in", immediateRender: false }, 13.68);
-tl.fromTo("#LC", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "sine.inOut", immediateRender: false }, 13.9);
-tl.fromTo("#LC", { filter: "blur(12px)" }, { filter: "blur(0px)", duration: 0.34, ease: "power2.out", immediateRender: false }, 14.0);
+tl.fromTo("#LS", { filter: "blur(0px)" }, { filter: "blur(12px)", duration: 0.22, ease: "power2.in", immediateRender: false }, 13.78);
+tl.fromTo("#LC", { opacity: 0 }, { opacity: 1, duration: 0.14, ease: "sine.inOut", immediateRender: false }, 13.93);
+tl.fromTo("#LC", { filter: "blur(12px)" }, { filter: "blur(0px)", duration: 0.24, ease: "power2.out", immediateRender: false }, 14.0);
 // close-up camera: land still moving, hero hold on the whole niche (2 s), ramp into the upper cubes, slow tilt down, rush back out
-K.path("#sC", [[13.9, 915, 1292, 0.74], [14.0, 915, 1290, 0.76], [14.4, 915, 1290, 0.80], [16.0, 915, 1290, 0.84],
-  [16.6, 915, 1000, 1.22], [17.75, 915, 1580, 1.27], [18.05, 915, 1290, 0.76], [18.15, 915, 1292, 0.74]]);
+K.path("#sC", [[13.93, 915, 1292, 0.745], [14.0, 915, 1290, 0.76], [14.3, 915, 1290, 0.80], [16.0, 915, 1290, 0.84],
+  [16.6, 915, 1000, 1.22], [17.8, 915, 1580, 1.27], [18.05, 915, 1290, 0.76], [18.12, 915, 1292, 0.745]]);
 // zoom-through out: blur peak at 18.05
-tl.to("#LC", { filter: "blur(12px)", duration: 0.3, ease: "power2.in" }, 17.75);
-tl.set("#LS", { filter: "blur(12px)" }, 17.9);
-tl.to("#LC", { opacity: 0, duration: 0.2, ease: "sine.inOut" }, 17.95);
-tl.to("#LS", { filter: "blur(0px)", duration: 0.36, ease: "power2.out" }, 18.05);
+tl.to("#LC", { filter: "blur(12px)", duration: 0.22, ease: "power2.in" }, 17.83);
+tl.set("#LS", { filter: "blur(12px)" }, 17.95);
+tl.to("#LC", { opacity: 0, duration: 0.14, ease: "sine.inOut" }, 17.98);
+tl.to("#LS", { filter: "blur(0px)", duration: 0.24, ease: "power2.out" }, 18.05);
 K.card("#t4", 18.7, 20.6);
 
 K.endCard(20.8, 3.0);
