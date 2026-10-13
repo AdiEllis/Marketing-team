@@ -19,6 +19,7 @@
   7.15–9.60  N  niche wall at evening: lands on the lit niche, pulls out to the whole wall (light moment, whole, 2 s)
   9.60–12.70 speed-ramp up to the top of the lit vitrine, then the camera DESCENDS along the lit shelves to the floor
              (v2, her note 13.10: the window burst was "not professional"; she loved the descending camera in the sahara reel)
+             v3: the niche wall is her new sharp photo (05) — the vitrine is big and crisp, so the descent is closer (x2 source)
   12.30–16.90 A2 motion dissolve into the TV wall at evening, still descending → room lights come back top→down
   14.80–16.70                                                                                           "דברו איתנו / בוואטסאפ"
   16.90–20.00 end card: logo, ייעוץ והדמיה ללא עלות
@@ -26,7 +27,7 @@
 <style>
 .ta{width:1800px;height:3200px}
 .tr{width:1536px;height:2728px}
-.tn{width:1856px;height:2728px}  /* evening niche wall + 320px plain dark wall extended right of the vitrine (flow/extend_right.py) */
+.tn{width:1882px;height:3344px}  /* v3: her sharp angled photo of the niche wall (05), evening version */
 /* logo tones on every card: line 1 logo grey, line 2 logo wood (same scheme everywhere, her note 13.10) */
 .t{left:0;width:1080px;text-align:center;color:#57565b}
 .t .ln + .ln{color:#8a6a43}
@@ -42,7 +43,7 @@
   <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
     <!-- later shots underneath, frame-0 stage last (on top) -->
     <div id="A2" class="lay"><div class="st ta" id="sA2"><img class="ta" src="assets/tv_n.png" alt="" /><img class="ta" id="dayA" src="assets/tv.png" alt="" /></div></div>
-    <div id="LN" class="lay"><div class="st tn" id="sN"><img class="tn" src="assets/niche_n.png" alt="" /></div></div>
+    <div id="LN" class="lay"><div class="st tn" id="sN"><img class="tn" src="assets/niche5_n.png" alt="" /></div></div>
     <div id="LR" class="lay"><div class="st tr" id="sR"><img class="tr" src="assets/room.png" alt="" /><img class="tr" id="nR" src="assets/room_n.png" alt="" /></div></div>
     <div id="LA" class="lay"><div class="st ta" id="sA"><img class="ta" src="assets/tv.png" alt="" /></div></div>
   </div>
@@ -85,8 +86,8 @@ K.swap("#LR", "#LN", 7.15);
 K.blurIn("#LN", 7.15, 16, 0.3);
 // N 7.15-12.7: lands on the lit niche, pulls out to the whole wall (light moment, 2 s), speed-ramps up to the top
 // of the lit vitrine and DESCENDS along its shelves (her note 13.10: the descending camera she loved), down to the floor
-K.path("#sN", [[7.15, 900, 1380, 1.05], [7.7, 860, 1375, 0.84], [8.3, 795, 1365, 0.75], [9.0, 805, 1362, 0.755], [9.5, 850, 1320, 0.80],
-               [10.05, 1290, 880, 1.2], [11.4, 1310, 1400, 1.25], [12.7, 1320, 1955, 1.25]]);
+K.path("#sN", [[7.15, 860, 1620, 0.75], [7.8, 935, 1640, 0.61], [8.8, 945, 1615, 0.62], [9.35, 1020, 1470, 0.71],
+               [10.25, 1318, 1000, 1.0], [11.45, 1326, 1700, 1.0], [12.7, 1330, 2380, 1.0]]);
 // motion dissolve into the TV wall at evening, still descending; the room lights come back top→down with the camera
 K.dissolve("#LN", "#A2", 12.35, 0.34);
 K.path("#sA2", [[12.3, 760, 1290, 0.76], [13.6, 785, 1400, 0.72], [16.9, 800, 1450, 0.70]]);

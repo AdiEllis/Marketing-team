@@ -7,7 +7,10 @@ BOX = {  # x0,y0,x1,y1 in hq (2x) pixels
  '01_room_wide': [(226,1246,430,1436), (428,1110,498,1592)],
  '02_niche_wall_angle': [(656,1080,1144,1680), (1308,668,1472,2062)],
  '04_tv_wall_front': [],
+ '05_niche_wall_angle_sharp': [],
 }
+# angled lit elements as polygons (source px of the 941x1672 photo, scaled x2 below)
+POLY = {'05_niche_wall_angle_sharp': [[(303,638),(545,623),(545,996),(303,957)], [(664,260),(910,378),(902,1336),(822,1384),(658,1324)]]}
 DROP = {'01_room_wide': [(200,2060,280,2140)]}
 def night(n, k=0.26, spill=0.45):
     im = cv2.imread(f'work/hq/{n}.png').astype(np.float32) / 255
@@ -21,6 +24,8 @@ def night(n, k=0.26, spill=0.45):
     for x0,y0,x1,y1 in DROP.get(n, []): m[y0:y1, x0:x1] = 0   # reflections of ceiling lights that go dark at evening
     for x0,y0,x1,y1 in BOX[n]:
         b = np.zeros_like(m); b[y0:y1, x0:x1] = 1; m = np.maximum(m, b)
+    for poly in POLY.get(n, []):
+        b = np.zeros_like(m); cv2.fillPoly(b, [np.array(poly, np.int32)*2], 1.0); m = np.maximum(m, b)
     m = cv2.GaussianBlur(m, (0,0), 2.5)
     halo = cv2.GaussianBlur(m, (0,0), 30)          # the photo's own light spill nearby stays partly visible
     keep = np.clip(np.maximum(m*1.1, halo*spill), 0, 1)[...,None]

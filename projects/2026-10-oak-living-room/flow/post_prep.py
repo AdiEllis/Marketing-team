@@ -15,7 +15,8 @@ def fit(im, y0, y1, out):
 room = cv2.imread(H + '01_room_wide.png'); tv = cv2.imread(H + '04_tv_wall_front.png'); ni = cv2.imread(H + '02_niche_wall_angle.png')
 fit(room, 300, 2220, 'p1.png')          # 1536x1920 = exact 4:5 at full width
 fit(tv, 330, 2580, 'p2.png')            # 1800x2250 = exact 4:5
-fit(ni, 250, 2530, 'p4.png')            # whole wall incl. plinth, sides extended ~40px of plain wall/floor
+n5 = cv2.imread(H + '05_niche_wall_angle_sharp.png')
+fit(n5, 250, 2822, 'p4.png')            # v3: her sharp angled photo, whole wall incl. plinth, ceiling above for the line; sides +~45px plain wall
 # detail rows (slide 3, v2 after her note): each crop composed on purpose, subject whole and centred (hq px)
 def crop(im, x0, y0, x1, y1, out, W=500, Hh=340):
     c = im[y0:y1, x0:x1]; s = W / c.shape[1]
