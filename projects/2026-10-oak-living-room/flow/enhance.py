@@ -1,15 +1,11 @@
-# Quality pass for compressed phone/screenshot JPEGs (her note 13.10, T10):
-# chroma-only cleanup (colour blotches from JPEG), luma untouched (wood grain is the product),
-# then x2 Lanczos so later scaling in the reel/post never upsamples twice. No sharpening.
-import cv2, os, glob
+# Quality pass (her notes 13.10: "אם אתה יכול לשפר איכות" / "תשפר את רזולוציית התמונות"):
+# AI x4 super-resolution (UpscalerJS ESRGAN-thick on tfjs-node, flow/upscale_ai.js -> work/ai/) then area-downscale to x2
+# (work/hq/), which keeps the recovered edges/grain without the x4 artefacts. Colour checked against the source (P15).
+import cv2, os, glob, numpy as np
 os.makedirs('work/hq', exist_ok=True)
 for f in sorted(glob.glob('input/0*.jpg')):
-    im = cv2.imread(f)
-    ycc = cv2.cvtColor(im, cv2.COLOR_BGR2YCrCb)
-    y, cr, cb = cv2.split(ycc)
-    cr = cv2.bilateralFilter(cr, 7, 6, 5); cb = cv2.bilateralFilter(cb, 7, 6, 5)
-    W, H = im.shape[1]*2, im.shape[0]*2
-    y = cv2.resize(y, (W, H), interpolation=cv2.INTER_LANCZOS4)
-    cr = cv2.resize(cr, (W, H), interpolation=cv2.INTER_CUBIC); cb = cv2.resize(cb, (W, H), interpolation=cv2.INTER_CUBIC)
-    out = cv2.cvtColor(cv2.merge([y, cr, cb]), cv2.COLOR_YCrCb2BGR)
-    p = 'work/hq/' + os.path.basename(f).replace('.jpg', '.png'); cv2.imwrite(p, out); print(p, out.shape[:2])
+    n = os.path.basename(f)[:-4]; src = cv2.imread(f); ai = cv2.imread(f'work/ai/{n}.png')
+    out = cv2.resize(ai, (src.shape[1]*2, src.shape[0]*2), interpolation=cv2.INTER_AREA)
+    a = cv2.cvtColor(cv2.resize(out, src.shape[1::-1], interpolation=cv2.INTER_AREA), cv2.COLOR_BGR2LAB).astype(float).mean((0, 1))
+    b = cv2.cvtColor(src, cv2.COLOR_BGR2LAB).astype(float).mean((0, 1))
+    cv2.imwrite(f'work/hq/{n}.png', out); print(n, out.shape[:2], 'mean Lab shift', np.round(a - b, 2))
