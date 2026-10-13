@@ -12,7 +12,7 @@ A="$root/studio/assets"; L="$root/studio/lib"
 cp "$A/gsap.min.js" "$A/heebo.ttf" "$A/logo_light.png" "$L/reel-kit.js" "$L/reel-kit.css" "$p/reel/assets/"
 cp "$L/reel-template.html" "$p/reel/index.html"
 cp "$L/hyperframes.json" "$p/reel/hyperframes.json"
-cp "$A"/plex-*.ttf "$A/Karantina-300-hebrew.woff2" "$A/heebo.ttf" "$A/logo_light.png" "$A/logo_alpha.png" "$p/carousel/"
+cp "$root/studio/brand/end_oak_wall.png" "$A"/plex-*.ttf "$A/Karantina-300-hebrew.woff2" "$A/heebo.ttf" "$A/logo_light.png" "$A/logo_alpha.png" "$p/carousel/"
 cp "$L/post-template.html" "$p/carousel/slides.html"
 cat > "$p/PROJECT.md" <<EOF
 # $name
