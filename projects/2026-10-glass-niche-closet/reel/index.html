@@ -6,19 +6,20 @@
 <script src="assets/gsap.min.js"></script>
 <script src="assets/reel-kit.js"></script>
 <link rel="stylesheet" href="assets/reel-kit.css" />
-<!-- Glass niche closet (approved card 4, 13.10). ~100 BPM grid (0.6 s).
-  0.0–2.6  O  the whole closet, niche dark, slow push up            "מהרצפה / עד התקרה."
-  2.6–4.6  O  signature: the niche lights shelf by shelf (bottom→top, on the beat), room brightens (real off/on pair)
-  4.6–7.3  C  warm light flash to the real close-up of the lit niche, whole niche, hold   "רק אור / במקום הנכון."
-  7.3–9.6  V  dive through the middle shelf (blur) into her clip: glide down the lit oak shelves
-  9.4–15.4 F  motion dissolve + pull-out to the lit front; 4 doors open in a wave (inner → outer), niche stays lit;
-              hand-over to the real open photo at rest (0.25 s crossfade); slow survey: rail → drawers  "ובפנים, / כל סנטימטר עובד."
- 15.4–18.1 S  whip to the styled niche (her photo), slow push           "תוכנן / בשבילכם."
- 18.1–21.0    end card: logo, ייעוץ והדמיה ללא עלות
- Stage space = rectified photo x2 (1792x2400); camera scale 0.8 = x1.6 of the source, max 0.875 (x1.75). -->
+<!-- Glass niche closet v2 (approved draft, 13.10). ~115 BPM (beat 0.52 s). One continuous camera on one stage.
+  0.0–2.3   frame 0 = whole closet, niche dark; speed-ramp push (fast→slow)        "מקיר לקיר, / עד התקרה."
+  2.6–3.7   signature: each niche cube lights on the beat (real lit pixels only), beat punch per cube; room brightens
+  3.7–5.3   push to the whole lit niche, hold (no text)
+  5.3–5.9   speed-ramp pull-out to the whole closet
+  6.0–8.9   the 4 doors open in a wave around the lit niche (approved), hand-over to the real open photo at rest   "ובפנים, / כל סנטימטר עובד."
+  9.0–10.4  beat snaps: pull-down rail → glass drawers (motion blur)
+ 10.5–11.9  doors close together, camera back to centre
+ 12.0–14.3  same frame dissolves to her styled photo: the niche is now lived-in       "תוכנן / בשבילכם."
+ 14.3–16.6  invitation                                                                   "רוצים כזה אצלכם? / שלחו לנו תמונה של הקיר."
+ 16.6–19.6  end card: logo, ייעוץ והדמיה ללא עלות
+ Stage = rectified photo x2 (1792x2400); scale 0.8 = x1.6 of the source, max 0.875 (x1.75). Text: one colour. -->
 <style>
 .w{width:1792px;height:2400px}
-#sC{width:1932px;height:2576px}
 /* front stage: doors from the lit closed photo, bays from the real open photo */
 #sF{perspective:1620px;perspective-origin:896px 1400px}
 .bay{position:absolute;top:456px;height:1748px;background-image:url(assets/open.png);background-size:1792px 2400px}
@@ -40,24 +41,25 @@
 #d4{left:1076px;width:250px;transform-origin:0 50%}  #d4 .face,#d4 .back{background-position:-1076px -456px} #d4 .edge{left:100%} #d4 .shade{background:linear-gradient(90deg,rgba(60,44,30,1),rgba(60,44,30,.35))}
 #d5{left:1326px;width:250px;transform-origin:100% 50%} #d5 .face,#d5 .back{background-position:-1326px -456px} #d5 .edge{left:0}  #d5 .shade{background:linear-gradient(270deg,rgba(60,44,30,1),rgba(60,44,30,.35))}
 /* light-on stage: lit photo over the dark one, niche cut out; the niche fills shelf by shelf */
-#litAll{opacity:0;clip-path:path(evenodd,"M0 0H1792V2400H0Z M746 798H1078V1596H746Z")}
-.cmp{position:absolute;left:746px;width:332px;background-image:url(assets/lit.png);background-size:1792px 2400px;opacity:0}
+
+/* light-on overlays (dark photo on top of the lit stage); the niche goes dark→lit cube by cube */
+#offAll{opacity:1;clip-path:path(evenodd,"M0 0H1792V2400H0Z M746 798H1078V1596H746Z")}
+.cmp{position:absolute;left:746px;width:332px;background-image:url(assets/off.png);background-size:1792px 2400px}
 #k3{top:1306px;height:290px;background-position:-746px -1306px}
 #k2{top:1054px;height:252px;background-position:-746px -1054px}
 #k1{top:798px;height:256px;background-position:-746px -798px}
-#vid{position:absolute;inset:0;opacity:0;overflow:hidden}
-#vid video{position:absolute;left:0;top:0;width:1080px;height:1920px}
-.t{left:0;width:1080px;text-align:center;color:#2b211a}
-.t em{color:#8a5a2b}
-#t1{top:1330px;font-size:88px}
-#t2{top:160px;font-size:88px}
-#t3{top:150px;font-size:84px}
-#t4{top:330px;font-size:96px}
+/* one text colour for every card (charcoal from the logo), no accent words */
+.t{left:0;width:1080px;text-align:center;color:#34302c}
+#t1{top:1330px;font-size:92px}
+#t2{top:150px;font-size:84px}
+#t3{top:332px;font-size:96px}
+#t4{top:1370px;font-size:66px}
+#end .l1{color:#efe6da}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="21" data-width="1080" data-height="1920">
-  <div id="scene" class="clip" data-start="0" data-duration="21" data-track-index="0" style="position:absolute;inset:0">
+<div id="root" data-composition-id="main" data-start="0" data-duration="19.6" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="19.6" data-track-index="0" style="position:absolute;inset:0">
     <div id="LS" class="lay"><div class="st w" id="sS"><img class="w" src="assets/styled.png" alt="" /></div></div>
     <div id="LF" class="lay"><div class="st w" id="sF">
       <img class="w" src="assets/lit.png" alt="" />
@@ -68,73 +70,75 @@
       <div class="door" id="d2"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
       <div class="door" id="d4"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
       <div class="door" id="d5"><div class="face"></div><div class="back"></div><div class="shade"></div><div class="edge"></div><div class="fs"></div></div>
-    </div></div>
-    <div id="LC" class="lay"><div class="st" id="sC"><img src="assets/close.png" alt="" /></div></div>
-    <div id="LO" class="lay"><div class="st w" id="sO">
-      <img class="w" src="assets/off.png" alt="" /><img class="w" id="litAll" src="assets/lit.png" alt="" />
+      <img class="w" id="offAll" src="assets/off.png" alt="" />
       <div class="cmp" id="k3"></div><div class="cmp" id="k2"></div><div class="cmp" id="k1"></div>
     </div></div>
-    <div id="flash"></div>
   </div>
-  <div id="vid"><video id="clipv" class="clip" src="assets/clip.mp4" muted playsinline data-start="7.0" data-duration="2.8" data-track-index="2"></video></div>
-  <div id="txt" class="clip" data-start="0" data-duration="21" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t"><div class="ln"><span>מהרצפה</span></div><div class="ln"><span><em>עד</em></span> <span><em>התקרה.</em></span></div></div>
-    <div id="t2" class="t"><div class="ln"><span>רק</span> <span>אור</span></div><div class="ln"><span><em>במקום</em></span> <span><em>הנכון.</em></span></div></div>
-    <div id="t3" class="t"><div class="ln"><span>ובפנים,</span></div><div class="ln"><span><em>כל</em></span> <span><em>סנטימטר</em></span> <span><em>עובד.</em></span></div></div>
-    <div id="t4" class="t"><div class="ln"><span>תוכנן</span></div><div class="ln"><span><em>בשבילכם.</em></span></div></div>
-    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">ייעוץ והדמיה<br /><em>ללא עלות.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
+  <div id="txt" class="clip" data-start="0" data-duration="19.6" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>מקיר</span> <span>לקיר,</span></div><div class="ln"><span>עד</span> <span>התקרה.</span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>ובפנים,</span></div><div class="ln"><span>כל</span> <span>סנטימטר</span> <span>עובד.</span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>תוכנן</span></div><div class="ln"><span>בשבילכם.</span></div></div>
+    <div id="t4" class="t"><div class="ln"><span>רוצים</span> <span>כזה</span> <span>אצלכם?</span></div><div class="ln"><span>שלחו</span> <span>לנו</span> <span>תמונה</span> <span>של</span> <span>הקיר.</span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">ייעוץ והדמיה<br />ללא עלות.</div><div class="l2">נגרות בהתאמה אישית</div></div></div>
   </div>
 </div>
 <script>
 const tl = gsap.timeline({ paused: true });
 const K = RK.kit(tl);
-gsap.set(["#LC", "#LF", "#LS"], { opacity: 0 });
+gsap.set("#LS", { opacity: 0 });
+gsap.set("#LF", { transformOrigin: "540px 960px" });
 
-// O 0–4.9: frame 0 = the whole closet, niche dark, already pushing up toward the ceiling line
-K.path("#sO", [[0, 896, 1200, 0.80], [2.4, 900, 1170, 0.835], [4.0, 910, 1250, 0.87], [4.95, 912, 1290, 0.875]]);
-K.card("#t1", 0.2, 2.25);
-// signature: the niche lights shelf by shelf on the beat (real lit pixels), the room brightens with it
-tl.to("#litAll", { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 2.6);
-[["#k3", 2.6], ["#k2", 3.2], ["#k1", 3.8]].forEach(([k, t]) => tl.to(k, { opacity: 1, duration: 0.32, ease: "power2.out" }, t));
+// one camera for the whole front story: speed-ramp push, hold on the lit niche, speed-ramp pull-out, snaps, back to centre
+K.path("#sF", [[0, 896, 1200, 0.80], [0.55, 900, 1188, 0.83], [2.3, 906, 1178, 0.858], [3.7, 912, 1188, 0.86], [5.3, 912, 1208, 0.875],
+  [5.9, 902, 1203, 0.812], [8.9, 904, 1200, 0.83], [9.5, 1110, 1125, 0.87], [9.85, 1125, 1150, 0.875], [10.15, 700, 1270, 0.87],
+  [10.5, 680, 1285, 0.875], [11.2, 905, 1205, 0.83], [12.1, 910, 1200, 0.85]]);
+K.card("#t1", 0.15, 2.15);
 
-// C 4.5–7.3: motion dissolve to the real close-up of the lit niche (same place on screen), hold the whole niche
-K.path("#sC", [[4.6, 755, 1100, 0.88], [6.8, 755, 1060, 0.95], [7.3, 760, 1020, 1.5]]);
-K.flash("#flash", 4.6, 0.8);
-K.swap("#LO", "#LC", 4.6);
-K.card("#t2", 4.9, 6.75);
+// signature: each cube lights on the beat (the dark photo lifts cube by cube), room brightens with it; beat punch per cube
+tl.to("#offAll", { opacity: 0, duration: 1.4, ease: "sine.inOut" }, 2.6);
+[["#k3", 2.6], ["#k2", 3.12], ["#k1", 3.64]].forEach(([k, t]) => {
+  tl.to(k, { opacity: 0, duration: 0.22, ease: "power2.out" }, t);
+  tl.fromTo("#LF", { scale: 1 }, { scale: 1.022, duration: 0.09, ease: "power2.out", immediateRender: false }, t);
+  tl.to("#LF", { scale: 1, duration: 0.38, ease: "power2.inOut" }, t + 0.09);
+});
 
-// V 7.3–9.6: dive through the middle shelf into her clip (blur hand-over), glide down the shelves
-K.blurOut("#LC", 7.3, 16);
-tl.set("#vid", { opacity: 1 }, 7.3); tl.set("#LC", { opacity: 0 }, 7.3);
-K.blurIn("#vid", 7.3, 16);
-tl.fromTo("#clipv", { scale: 1.06 }, { scale: 1.0, duration: 2.5, ease: "none", immediateRender: false }, 7.3);
-
-// F 9.4–15.4: dissolve + pull-out to the lit front; the doors open in a wave around the glowing niche
-K.path("#sF", [[9.4, 912, 1196, 0.95], [10.2, 904, 1200, 0.80], [12.4, 900, 1205, 0.82], [13.8, 1150, 1170, 0.86], [15.4, 700, 1240, 0.86]]);
-tl.set("#LF", { opacity: 1 }, 9.4);
-tl.fromTo("#vid", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "sine.inOut", immediateRender: false }, 9.4);
-const swing = (id, sign, at, dur, strip) => {
+// doors open in a wave around the glowing niche (approved), soft hand-over to the real open photo at rest
+const open = (id, sign, at, dur, strip) => {
   tl.fromTo(id, { rotationY: 0 }, { rotationY: sign * 90, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
   tl.fromTo(id + " .shade", { opacity: 0 }, { opacity: 0.26, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
   tl.fromTo(id + " .fs", { opacity: 0 }, { opacity: 0.45, duration: dur, ease: "power2.inOut", immediateRender: false }, at);
-  // at rest: soft hand-over to the same door in the real open photo
   tl.to(id, { opacity: 0, duration: 0.25, ease: "sine.inOut" }, at + dur);
   tl.to(strip, { opacity: 1, duration: 0.25, ease: "sine.inOut" }, at + dur);
 };
-swing("#d2", 1, 10.0, 1.4, "#c2");  swing("#d4", -1, 10.0, 1.4, "#c4");
-swing("#d1", -1, 10.4, 1.45, "#c1"); swing("#d5", 1, 10.4, 1.45, "#c5");
-tl.fromTo(["#hL", "#hR"], { opacity: 1 }, { opacity: 0, duration: 1.7, ease: "power1.inOut", immediateRender: false }, 10.1);
-K.card("#t3", 10.7, 13.0);
+const close = (id, sign, at, dur, strip) => {
+  tl.to(id, { opacity: 1, duration: 0.2, ease: "sine.inOut" }, at - 0.2);
+  tl.to(strip, { opacity: 0, duration: 0.2, ease: "sine.inOut" }, at - 0.2);
+  tl.fromTo(id, { rotationY: sign * 90 }, { rotationY: 0, duration: dur, ease: "power2.in", immediateRender: false }, at);
+  tl.to([id + " .shade", id + " .fs"], { opacity: 0, duration: dur, ease: "power2.in" }, at);
+};
+open("#d2", 1, 6.05, 1.4, "#c2");  open("#d4", -1, 6.05, 1.4, "#c4");
+open("#d1", -1, 6.45, 1.45, "#c1"); open("#d5", 1, 6.45, 1.45, "#c5");
+tl.fromTo(["#hL", "#hR"], { opacity: 1 }, { opacity: 0, duration: 1.7, ease: "power1.inOut", immediateRender: false }, 6.15);
+K.card("#t2", 7.85, 9.5);
+// beat snaps between details: motion blur only while the camera snaps
+[[9.85, 10.15]].forEach(([a, b]) => {
+  tl.fromTo("#LF", { filter: "blur(0px)" }, { filter: "blur(7px)", duration: (b - a) / 2, ease: "power2.in", immediateRender: false }, a);
+  tl.to("#LF", { filter: "blur(0px)", duration: (b - a) / 2, ease: "power2.out" }, a + (b - a) / 2);
+});
+// doors close together, like real hands (slight stagger), soft landing on the beat
+close("#d2", 1, 10.75, 0.95, "#c2"); close("#d4", -1, 10.8, 0.92, "#c4");
+close("#d1", -1, 10.78, 0.97, "#c1"); close("#d5", 1, 10.83, 0.95, "#c5");
+tl.to(["#hL", "#hR"], { opacity: 1, duration: 0.9, ease: "power1.in" }, 10.8);
 
-// S 15.4–18.1: whip to the styled niche, slow push
-K.blurOut("#LF", 15.4, 16);
-K.swap("#LF", "#LS", 15.4);
-K.blurIn("#LS", 15.4, 16);
-K.path("#sS", [[15.4, 1140, 1250, 0.84], [16.0, 945, 1205, 0.87], [18.1, 912, 1190, 0.9]]);
-K.card("#t4", 15.85, 17.85);
+// same frame: the niche becomes lived-in (her styled photo, aligned to the same pixels)
+tl.set("#LS", { opacity: 1 }, 12.0);
+K.path("#sS", [[12.0, 910, 1200, 0.85], [14.3, 905, 1190, 0.87], [16.6, 918, 1185, 0.885]]);
+tl.fromTo("#LF", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "sine.inOut", immediateRender: false }, 12.0);
+K.card("#t3", 12.45, 14.15);
+K.card("#t4", 14.35, 16.45);
 
-K.endCard(18.1, 2.9);
-K.done(21);
+K.endCard(16.6, 3.0);
+K.done(19.6);
 </script>
 </body>
 </html>
