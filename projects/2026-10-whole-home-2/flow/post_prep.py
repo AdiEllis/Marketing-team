@@ -12,10 +12,12 @@ m = src("02_mauve_closet"); cv2.imwrite("work/mauve_src.png", m)
 subprocess.run(["python3", "-I", "flow/extend_mauve.py", "work/mauve_src.png", "work/mauve_ext.png"], check=True)
 cv2.imwrite(C + "p_mauve.png", cv2.resize(cv2.imread("work/mauve_ext.png"), (1080, 1350), interpolation=cv2.INTER_AREA))
 # material samples (x0, y0, x1, y1 in 1122-unit photo coords; mauve in its 949 crop): plain front surfaces only
-S = {"mauve": ("02_mauve_closet", 250, 300, 370, 620), "oak": ("03_oak_closet_closed", 340, 330, 455, 800),
+S = {"mauve": ("02_mauve_closet", 70, 100, 380, 1200), "oak": ("03_oak_closet_closed", 340, 330, 455, 800),
      "white": ("07_white_closet_closed", 760, 180, 960, 1000), "grey": ("06_grey_closet", 330, 150, 540, 600),
      "tvwood": ("01_tv_wall_lit", 360, 140, 600, 420), "tvdark": ("01_tv_wall_lit", 130, 1010, 330, 1150)}
 for k, (n, x0, y0, x1, y1) in S.items():
     im = src(n); f = im.shape[0] / 1402
-    cv2.imwrite(C + f"m_{k}.png", im[int(y0 * f):int(y1 * f), int(x0 * f):int(x1 * f)])
+    # her note 14.10 "no crops": the palette shows each front's real colour as a flat swatch (median of a plain area)
+    med = np.median(im[int(y0 * f):int(y1 * f), int(x0 * f):int(x1 * f)].reshape(-1, 3), 0).astype(int)
+    print(k, "#%02x%02x%02x" % (med[2], med[1], med[0]))
 print("post photos ok")

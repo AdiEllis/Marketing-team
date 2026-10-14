@@ -30,7 +30,7 @@
 .t .ln + .ln{color:#8a6a43}
 #t1,#t4,#t5{left:auto;right:110px;width:auto;text-align:right;top:1372px;font-size:70px}
 #t2{top:1170px;font-size:92px;left:-70px}
-#t3{top:330px;font-size:96px;left:30px}
+#t3{top:330px;font-size:92px;left:110px;width:400px}
 #end .l1{color:#efe6da;font-size:70px}
 </style>
 </head>
@@ -152,7 +152,7 @@ beat("#LO", "#LW", 7 * B);
 const WH = rig("white");
 P("#sW", 1122, 1402, [[7 * B - 0.1, 540, 640, Hs(7 * B - 0.1) / 1200], [4.3, 520, 640, 1.47], [5.0, 495, 630, 1.50], [5.8, 475, 612, 1.56], [6.9, 465, 600, 1.62]]);
 WH.open("dl", 4.12); WH.open("dr", 4.28);
-K.card("#t2", 5.55, 6.6);
+K.card("#t2", 5.45, 6.3);   // fully gone before the whip blur starts (gate 14.10)
 
 // WHIP 6.9 → mauve: tilt down along the open oak column
 K.blurOut("#LW", 6.9, 16, 0.22);
@@ -171,7 +171,7 @@ P("#sO2", 1122, 1402, [[10.9, 380, 700, 1.48], [12.0, 560, 702, 1.48], [13.3, 74
 
 // DISS 13.0 → TV wall: pull back from the lit unit to the whole wall; two invitation cards on the floor
 K.dissolve("#LO2", "#LT2", 13.0, 0.4);
-P("#sT2", 1122, 1402, [[13.0, 790, 760, 1.58], [14.6, 760, 735, 1.48], [17.6, 700, 705, 1.37]]);
+P("#sT2", 1122, 1402, [[13.0, 790, 760, 1.58], [14.6, 760, 735, 1.48], [17.6, 640, 705, 1.37]]);   // ends wider-left than frame 0 (no repeat of frame 0)
 K.breathe("#bT2", [[13.0, 0.5], [14.2, 0.2], [15.6, 0.5], [17.4, 0.3]]);
 K.card("#t4", 13.6, 15.1);
 K.card("#t5", 15.45, 17.1);
