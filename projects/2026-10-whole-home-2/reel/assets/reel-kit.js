@@ -168,7 +168,7 @@
       tl.fromTo("#end img", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, t + 0.3);
       tl.fromTo("#end .l1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, t + 0.65);
       tl.fromTo("#end .l2", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, immediateRender: false }, t + 1.0);
-      tl.fromTo("#endin", { scale: 1 }, { scale: 1.06, duration: hold, ease: "none", immediateRender: false }, t);
+      tl.fromTo("#endin", { scale: 1 }, { scale: 1.03, duration: hold, ease: "none", immediateRender: false }, t);
     };
 
     const done = duration => {

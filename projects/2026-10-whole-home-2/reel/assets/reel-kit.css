@@ -27,11 +27,17 @@ img.bl{mix-blend-mode:screen;opacity:0}                  /* bloom from the photo
 .t .ln{display:block;overflow:hidden;padding:0 6px 10px}
 .t span{display:inline-block}
 .t em{font-style:normal;color:#f0c987}
-/* living end card */
-#end{position:absolute;inset:0;background:radial-gradient(110% 80% at 50% 45%,#3b2617 0%,#1f140c 75%);opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
-#endglow{position:absolute;left:190px;top:470px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(216,170,100,.32) 0%,rgba(216,170,100,.12) 40%,rgba(216,170,100,0) 70%);opacity:0}
+/* living end card v3 (her standard 14.10, "מעכשיו זה יהיה הסיומת של הרילס והפוסטים"): the brown brand card —
+   flat warm brown, gold corner brackets top-right + bottom-left, logo, "כל הבית, / במקום אחד." (Plex Light, cream + gold),
+   "ייעוץ והדמיה ללא עלות". Same card as the post's last slide (studio/brand/endcard_reel_1080x1920.png = reference). */
+@font-face{font-family:"PlexL";src:url(plex-Light.ttf);font-weight:300}
+#end{position:absolute;inset:0;background:#7a5a43;opacity:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+#end::before,#end::after{content:"";position:absolute;width:76px;height:76px;border:0 solid #d8b878}
+#end::before{top:64px;right:64px;border-top-width:3px;border-right-width:3px}
+#end::after{bottom:64px;left:64px;border-bottom-width:3px;border-left-width:3px}
+#endglow{display:none}
 #endin{position:relative;display:flex;flex-direction:column;align-items:center}
-#end img{width:280px}
-#end .l1{margin-top:64px;font-family:"Heebo";font-weight:800;font-size:66px;line-height:1.15;color:#fff;text-align:center}
-#end .l1 em{font-style:normal;color:#d8b878}
-#end .l2{margin-top:30px;font-family:"Heebo";font-weight:400;font-size:38px;color:#e3d3bf;letter-spacing:.02em}
+#end img{width:380px}
+#end .l1{margin-top:150px;font-family:"PlexL";font-weight:300;font-size:108px;line-height:1.18;color:#f3ede4;text-align:center}
+#end .l1 em{display:block;font-style:normal;color:#d8b878}
+#end .l2{margin-top:96px;font-family:"PlexL";font-weight:300;font-size:50px;color:#efe6da}

@@ -6,55 +6,54 @@
 <script src="assets/gsap.min.js"></script>
 <script src="assets/reel-kit.js"></script>
 <link rel="stylesheet" href="assets/reel-kit.css" />
-<!-- Whole home 2 — "מהסלון / ועד הארון האחרון." Approved card 14.10 (her change: no "צוות אחד").
-     Beat grid 110 bpm (B = 0.5455 s). Stage units = photo pixels 1122x1402 (mauve 949x1402); images are AI x2.
-     T  0–2.3    frame 0 = the TV wall, whole height, already pushing; the lit shelving unit WHOLE in frame (R12),
-                 its real light breathing. Hook on the calm floor (right half, clear of the console).
-     DISS 2.0    motion dissolve into the FLIP RUN (signature): one continuous push while the home's wardrobes swap under
-                 it on the beat, each framed at the same height and centre: mauve 2.18 · grey 2.73 · oak 3.27 · white 3.82
-                 (micro blur on each beat cut, the push never stops)
-     W  3.82–6.9 the run STOPS on the white wardrobe: its two doors open (calibrated rig from whole-home 11.10, ported
-                 x1.217; hinge-side ease like a hand), the camera goes in to the real pull-down rail. "גם הגובה / מנוצל."
-     WHIP 6.9    the reel's one whip → mauve: tilt DOWN along the open oak column (R11 detail through camera motion)
-     DISS 8.9    → grey: push to the split round handle; "נמדד / לקיר הזה." on the plain upper doors
-     DISS 10.9   → oak: glide along the wall-to-wall wardrobe into the cladding and floating vanity (no text)
-     DISS 13.0   → TV wall: pull-back from the lit unit to the whole wall; "ייעוץ והדמיה / ללא עלות." → "דברו איתנו / בוואטסאפ"
-     END 17.4–20 living end card -->
+<!-- Whole home 2, reel v2 "CARD DECK" — approved 14.10 (her ask: the wardrobes pass "like a real card or a scroll";
+     card 3 = "חלוקה פנימית / מותאמת בשבילכם"). 110 bpm, B = 0.5455 s. Background = the brand end-card brown (#7a5a43),
+     so the ending melts into the standard end card (R15). Every card is a full-screen layer clipped to a rounded card
+     (inset 480/120/390/120, 840x1050 = the whole 4:5 photo at s 0.7487) — no image swaps: the same layer grows/shrinks.
+     0–2.18   frame 0 = TV wall, full screen, pushing to the lit unit (whole, R12, real light breathing); "נגרות / לכל הבית"
+              on the dark TV screen.
+     2.18–2.9 the TV photo shrinks into a card; the deck appears behind it on the brown. "כל ארון / בעיצוב אחר"
+     3.82 · 4.91 · 6.0 · 7.09  swipes on the beat (top card flies left with a tilt, the next one rises): TV → mauve → grey
+              → oak (closed) → white
+     7.6–10.2 the white card grows to full screen, its two doors open (calibrated rig), push to the pull-down rail
+     10.2–10.75 it shrinks back to a card (now open); "חלוקה פנימית / מותאמת בשבילכם"
+     12.0     swipe → oak open
+     13.1–13.9 all six cards are dealt into a fan (the whole home in one frame); "תכנון, ייצור / והתקנה" → "דברו איתנו / בוואטסאפ"
+     17.3     the fan gathers, the standard brown end card (R15) -->
 <style>
-.ph{position:absolute;left:0;top:0;width:1122px;height:1402px}
-.st > img.ph.m{width:949px}
+#bg{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 52%,#86644b 0%,#7a5a43 55%,#6c4f3a 100%)}
+.wrap{position:absolute;inset:0;transform-origin:540px 1005px}
+.sh{position:absolute;left:120px;top:480px;width:840px;height:1050px;border-radius:28px;box-shadow:0 34px 70px rgba(30,18,10,.45),0 6px 16px rgba(30,18,10,.3)}
+.card{position:absolute;inset:0;overflow:hidden;clip-path:inset(480px 120px 390px 120px round 28px)}
 .st > img{width:auto;height:auto}
-.st > img.ph{width:1122px;height:1402px}
-.st > img.ph.m{width:949px;height:1402px}
-.t{left:0;width:1080px;text-align:center;color:#57565b}
-.t .ln + .ln{color:#8a6a43}
-#t1,#t4,#t5{left:auto;right:110px;width:auto;text-align:right;top:1372px;font-size:70px}
-#t2{top:1170px;font-size:92px;left:-70px}
-#t3{top:330px;font-size:92px;left:110px;width:400px}
-#end .l1{color:#efe6da;font-size:70px}
+.st > img.ph,.ph{position:absolute;left:0;top:0;width:1122px;height:1402px}
+.t{left:0;width:1080px;text-align:center;color:#f3ede4}
+.t .ln + .ln{color:#d8b878}
+.t em{color:#d8b878}
+#t1{left:110px;width:380px;top:700px;font-size:92px;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+#t2,#t3,#t4,#t5{top:205px;font-size:96px}
+#t3{font-size:88px}
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-duration="20" data-width="1080" data-height="1920">
-  <div id="scene" class="clip" data-start="0" data-duration="20" data-track-index="0" style="position:absolute;inset:0">
-    <!-- later stages first (underneath), frame-0 stage last (on top) -->
-    <div id="LT2" class="lay"><div class="st" id="sT2"><img class="ph" src="assets/tv.png" alt="" /><img class="ph bl" id="bT2" src="assets/tv_bloom.jpg" alt="" /></div></div>
-    <div id="LO2" class="lay"><div class="st" id="sO2"><img class="ph" src="assets/oak.png" alt="" /></div></div>
-    <div id="LG2" class="lay"><div class="st" id="sG2"><img class="ph" src="assets/grey.png" alt="" /></div></div>
-    <div id="LM2" class="lay"><div class="st" id="sM2"><img class="ph m" src="assets/mauve.png" alt="" /></div></div>
-    <div id="LW" class="lay"><div class="st" id="sW" data-rig="white"></div></div>
-    <div id="LO" class="lay"><div class="st" id="sO"><img class="ph" src="assets/oak.png" alt="" /></div></div>
-    <div id="LG" class="lay"><div class="st" id="sG"><img class="ph" src="assets/grey.png" alt="" /></div></div>
-    <div id="LM" class="lay"><div class="st" id="sM"><img class="ph m" src="assets/mauve.png" alt="" /></div></div>
-    <div id="LT" class="lay"><div class="st" id="sT"><img class="ph" src="assets/tv.png" alt="" /><img class="ph bl" id="bT" src="assets/tv_bloom.jpg" alt="" /></div></div>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20.6" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="20.6" data-track-index="0" style="position:absolute;inset:0">
+    <div id="bg"></div>
+    <!-- deck: bottom of the pile first; c1 (TV) last = on top -->
+    <div class="wrap" id="w6"><div class="sh" id="h6"></div><div class="card" id="c6"><div class="st" id="s6"><img class="ph" src="assets/oak_open.png" alt="" /></div></div></div>
+    <div class="wrap" id="w5"><div class="sh" id="h5"></div><div class="card" id="c5"><div class="st" id="s5" data-rig="white"></div></div></div>
+    <div class="wrap" id="w4"><div class="sh" id="h4"></div><div class="card" id="c4"><div class="st" id="s4"><img class="ph" src="assets/oak.png" alt="" /></div></div></div>
+    <div class="wrap" id="w3"><div class="sh" id="h3"></div><div class="card" id="c3"><div class="st" id="s3"><img class="ph" src="assets/grey.png" alt="" /></div></div></div>
+    <div class="wrap" id="w2"><div class="sh" id="h2"></div><div class="card" id="c2"><div class="st" id="s2"><img class="ph" src="assets/mauve_ext.png" alt="" /></div></div></div>
+    <div class="wrap" id="w1"><div class="sh" id="h1"></div><div class="card" id="c1"><div class="st" id="s1"><img class="ph" src="assets/tv.png" alt="" /><img class="ph bl" id="bT" src="assets/tv_bloom.jpg" alt="" /></div></div></div>
   </div>
-  <div id="txt" class="clip" data-start="0" data-duration="20" data-track-index="1" style="position:absolute;inset:0">
-    <div id="t1" class="t"><div class="ln"><span>מהסלון</span></div><div class="ln"><span>ועד</span> <span>הארון</span> <span>האחרון.</span></div></div>
-    <div id="t2" class="t"><div class="ln"><span>גם</span> <span>הגובה</span></div><div class="ln"><span>מנוצל.</span></div></div>
-    <div id="t3" class="t"><div class="ln"><span>נמדד</span></div><div class="ln"><span>לקיר</span> <span>הזה.</span></div></div>
-    <div id="t4" class="t"><div class="ln"><span>ייעוץ</span> <span>והדמיה</span></div><div class="ln"><span>ללא</span> <span>עלות.</span></div></div>
+  <div id="txt" class="clip" data-start="0" data-duration="20.6" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>נגרות</span></div><div class="ln"><span>לכל</span> <span>הבית</span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>ארון</span></div><div class="ln"><span>בעיצוב</span> <span>אחר</span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>חלוקה</span> <span>פנימית</span></div><div class="ln"><span>מותאמת</span> <span>בשבילכם</span></div></div>
+    <div id="t4" class="t"><div class="ln"><span>תכנון,</span> <span>ייצור</span></div><div class="ln"><span>והתקנה</span></div></div>
     <div id="t5" class="t"><div class="ln"><span>דברו</span> <span>איתנו</span></div><div class="ln"><span>בוואטסאפ</span></div></div>
-    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">מתכננים<br /><em>את כל הבית.</em></div><div class="l2">נגרות בהתאמה אישית</div></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">כל הבית,<em>במקום אחד.</em></div><div class="l2">ייעוץ והדמיה ללא עלות</div></div></div>
   </div>
 </div>
 <script>
@@ -125,58 +124,80 @@ buildRig("white");
 const tl = gsap.timeline({ paused: true });
 const K = RK.kit(tl);
 const B = 60 / 110;
-gsap.set(["#LM", "#LG", "#LO", "#LW", "#LM2", "#LG2", "#LO2", "#LT2"], { opacity: 0 });
 
-// cover-safe view: clamp the centre so the photo always fills 1080x1920
-const fit = (w, h, cx, cy, s) => [Math.min(Math.max(cx, 540 / s), w - 540 / s), Math.min(Math.max(cy, 960 / s), h - 960 / s), s];
-const P = (el, w, h, keys) => K.path(el, keys.map(([t, cx, cy, s]) => [t, ...fit(w, h, cx, cy, Math.max(s, 1920 / h))]));
+// ---- card geometry -------------------------------------------------------------------------------------------
+const CARD = [480, 120, 390, 120], FULL = [0, 0, 0, 0];             // clip insets (top right bottom left)
+const CS = 840 / 1122 * 1.03, CV = [561, 701 - 45 / CS, CS];          // the whole photo inside the card (+3% so a
+                                                                      // spline settle can never open a gap at the edge)
+const clipSet = (el, v, r) => { el.style.clipPath = `inset(${v[0]}px ${v[1]}px ${v[2]}px ${v[3]}px round ${r}px)`; };
+function clipTo(id, t, dur, from, to, rf, rt, ease = "power2.inOut") {
+  const el = document.getElementById(id), P = { p: 0 };
+  const ap = () => clipSet(el, from.map((a, i) => a + (to[i] - a) * P.p), rf + (rt - rf) * P.p);
+  tl.fromTo(P, { p: 0 }, { p: 1, duration: dur, ease, onUpdate: ap, immediateRender: false }, t);
+}
+// stack positions behind the top card (peeking below it)
+const LV = [{ scale: 1, y: 0 }, { scale: 0.95, y: 62 }, { scale: 0.9, y: 116 }, { scale: 0.85, y: 162 }];
+const W = ["#w1", "#w2", "#w3", "#w4", "#w5", "#w6"];
+W.forEach((w, i) => gsap.set(w, { ...LV[Math.min(i, 3)], opacity: i > 3 ? 0 : 1 }));
+// shadows only exist once there is a card (frame 0 is a plain full photo)
+gsap.set("#h1", { opacity: 0 });
+clipSet(document.getElementById("c1"), FULL, 0);
 
-// T 0–2.3: frame 0, whole wall height, pushing toward the lit unit (x 760–960, y 260–800 stays whole)
-P("#sT", 1122, 1402, [[0, 690, 705, 1.37], [1.2, 722, 718, 1.44], [2.35, 752, 735, 1.53]]);
-K.breathe("#bT", [[0, 0.15], [1.2, 0.55], [2.3, 0.3]]);
-K.card("#t1", 0.12, 1.8);
+// swipe: card i leaves to the left with a tilt; the cards behind move up one level
+function swipe(i, t) {
+  tl.to(W[i], { x: -1250, rotation: -16, duration: 0.5, ease: "power2.in" }, t - 0.3);
+  for (let j = i + 1; j < W.length; j++) {
+    const lv = Math.min(j - i - 1, 3);
+    tl.to(W[j], { ...LV[lv], opacity: 1, duration: 0.45, ease: "power3.out" }, t - 0.12);
+  }
+}
+// card views: gentle drift inside every card so nothing is ever still
+const P = (el, keys) => K.path(el, keys);
 
-// FLIP RUN 2.0–3.82: one continuous push; each wardrobe at the same on-screen height (Hs) and centre
-const Hs = t => 1640 + (t - 2.0) * 70;           // closet height on screen grows while the run lasts
-const flip = (el, w, h, cx, mid, hc, t0, t1, extra = []) => P(el, w, h, [[t0, cx, mid, Hs(t0) / hc], [(t0 + t1) / 2, cx, mid, Hs((t0 + t1) / 2) / hc], [t1, cx, mid, Hs(t1) / hc], ...extra]);
-K.dissolve("#LT", "#LM", 2.0, 0.3);
-flip("#sM", 949, 1402, 460, 648, 1185, 2.0, 5 * B + 0.1);
-const beat = (a, b, t) => { K.blurOut(a, t, 7, 0.08); K.swap(a, b, t); K.blurIn(b, t, 7, 0.12); };
-beat("#LM", "#LG", 5 * B);
-flip("#sG", 1122, 1402, 595, 650, 1150, 5 * B - 0.1, 6 * B + 0.1);
-beat("#LG", "#LO", 6 * B);
-flip("#sO", 1122, 1402, 440, 705, 1000, 6 * B - 0.1, 7 * B + 0.1);
-beat("#LO", "#LW", 7 * B);
+// ---- 0–2.9: frame 0 full-screen TV push, then it shrinks into the top card --------------------------------------
+P("#s1", [[0, 690, 705, 1.37], [1.0, 718, 717, 1.44], [1.7, 742, 730, 1.505], [2.18, 750, 734, 1.52], [2.9, CV[0], CV[1], CV[2]], [3.9, CV[0], CV[1] - 8, CV[2] * 1.025]]);
+K.breathe("#bT", [[0, 0.15], [1.1, 0.55], [2.2, 0.25]]);
+K.card("#t1", 0.12, 1.75);
+clipTo("c1", 2.18, 0.72, FULL, CARD, 0, 28);
+tl.fromTo("#h1", { opacity: 0 }, { opacity: 1, duration: 0.5, immediateRender: false }, 2.4);
+K.card("#t2", 2.95, 5.45);
 
-// W 3.82–6.9: the run decelerates and stops on the white wardrobe; the two doors open; in to the pull-down rail
+// cards 2–4: whole photo, slow drift
+P("#s2", [[0, CV[0], CV[1], CV[2]], [3.5, CV[0], CV[1], CV[2]], [5.0, CV[0], CV[1] - 8, CV[2] * 1.03]]);
+P("#s3", [[0, CV[0], CV[1], CV[2]], [4.6, CV[0], CV[1], CV[2]], [6.1, CV[0], CV[1] - 8, CV[2] * 1.03]]);
+P("#s4", [[0, CV[0], CV[1], CV[2]], [5.7, CV[0], CV[1], CV[2]], [7.2, CV[0], CV[1] - 8, CV[2] * 1.03]]);
+swipe(0, 7 * B); swipe(1, 9 * B); swipe(2, 11 * B); swipe(3, 13 * B);
+
+// ---- white: card → full screen (rig view) → doors open → in to the rail → back to a card ------------------------
 const WH = rig("white");
-P("#sW", 1122, 1402, [[7 * B - 0.1, 540, 640, Hs(7 * B - 0.1) / 1200], [4.3, 520, 640, 1.47], [5.0, 495, 630, 1.50], [5.8, 475, 612, 1.56], [6.9, 465, 600, 1.62]]);
-WH.open("dl", 4.12); WH.open("dr", 4.28);
-K.card("#t2", 5.45, 6.3);   // fully gone before the whip blur starts (gate 14.10)
+P("#s5", [[0, CV[0], CV[1], CV[2]], [7.1, CV[0], CV[1], CV[2]], [7.6, 545, 702, 1.38], [8.4, 528, 694, 1.44], [9.3, 495, 650, 1.54],
+          [10.2, 472, 614, 1.61], [10.75, CV[0], CV[1], CV[2]], [11.1, CV[0], CV[1], CV[2] * 1.004], [12.0, CV[0], CV[1] - 6, CV[2] * 1.02]]);
+clipTo("c5", 7.12, 0.5, CARD, FULL, 28, 0);
+tl.to("#h5", { opacity: 0, duration: 0.3 }, 7.12);
+WH.open("dl", 8.05); WH.open("dr", 8.21);
+clipTo("c5", 10.2, 0.55, FULL, CARD, 0, 28);
+tl.to("#h5", { opacity: 1, duration: 0.4 }, 10.4);
+K.card("#t3", 10.7, 11.75);
+P("#s6", [[0, CV[0], CV[1], CV[2]], [11.8, CV[0], CV[1], CV[2]], [13.8, CV[0], CV[1] - 12, CV[2] * 1.05]]);
+swipe(4, 22 * B);
 
-// WHIP 6.9 → mauve: tilt down along the open oak column
-K.blurOut("#LW", 6.9, 16, 0.22);
-K.swap("#LW", "#LM2", 6.9);
-K.blurIn("#LM2", 6.9, 16, 0.3);
-P("#sM2", 949, 1402, [[6.9, 455, 470, 1.75], [7.9, 455, 640, 1.75], [9.3, 455, 840, 1.72]]);
-
-// DISS 8.9 → grey: push to the split round handle (638,744)
-K.dissolve("#LM2", "#LG2", 8.9, 0.36);
-P("#sG2", 1122, 1402, [[8.9, 600, 680, 1.45], [9.9, 612, 692, 1.55], [11.2, 626, 705, 1.70]]);
-K.card("#t3", 9.2, 10.6);
-
-// DISS 10.9 → oak: glide along the wall-to-wall wardrobe into the cladding and the floating vanity
-K.dissolve("#LG2", "#LO2", 10.9, 0.36);
-P("#sO2", 1122, 1402, [[10.9, 380, 700, 1.48], [12.0, 560, 702, 1.48], [13.3, 745, 705, 1.50]]);
-
-// DISS 13.0 → TV wall: pull back from the lit unit to the whole wall; two invitation cards on the floor
-K.dissolve("#LO2", "#LT2", 13.0, 0.4);
-P("#sT2", 1122, 1402, [[13.0, 790, 760, 1.58], [14.6, 760, 735, 1.48], [17.6, 640, 705, 1.37]]);   // ends wider-left than frame 0 (no repeat of frame 0)
-K.breathe("#bT2", [[13.0, 0.5], [14.2, 0.2], [15.6, 0.5], [17.4, 0.3]]);
-K.card("#t4", 13.6, 15.1);
-K.card("#t5", 15.45, 17.1);
-K.endCard(17.4, 2.6);
-K.done(20);
+// ---- 13.1: the fan — all six cards dealt back in, the whole home in one frame -----------------------------------
+const FAN = [[-300, 1000, -14], [-180, 970, -8.5], [-60, 955, -2.8], [60, 955, 2.8], [180, 970, 8.5], [300, 1000, 14]];
+const order = [0, 1, 2, 3, 4, 5];                                    // TV, mauve, grey, oak, white (open), oak open
+order.forEach((i, k) => {
+  const [dx, cy, rot] = FAN[k];
+  tl.to(W[i], { x: dx, y: cy - 1005, scale: 0.36, rotation: rot, opacity: 1, duration: 0.62, ease: "power3.out" }, 24 * B + k * 0.07);
+});
+// the fan never stands still: a slow push-in + lift while it holds (camera-like, R4a)
+order.forEach((i, k) => { const [dx, cy, rot] = FAN[k];
+  tl.to(W[i], { x: dx * 1.13, y: cy - 1005 - 70, scale: 0.41, rotation: rot * 1.1, duration: 17.25 - (24 * B + 0.62 + k * 0.07), ease: "none" }, 24 * B + 0.62 + k * 0.07); });
+K.card("#t4", 13.95, 15.35);
+K.card("#t5", 15.55, 17.1);
+// gather into one pile, then the standard brown end card (R15)
+order.forEach((i, k) => tl.to(W[i], { x: 0, y: -20, rotation: 0, scale: 0.36, duration: 0.45, ease: "power2.inOut" }, 17.25 + k * 0.03));
+tl.to(W, { opacity: 0, duration: 0.35 }, 17.6);
+K.endCard(17.55, 3.05);
+K.done(20.6);
 </script>
 </body>
 </html>
