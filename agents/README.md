@@ -4,7 +4,7 @@
 |---|---|---|
 | [`ideas.md`](ideas.md) | שלב 2: ניתוח, רעיונות, שער רעיון, כרטיס הצעה | creative-strategist, ceo (שער רעיון) |
 | [`reel.md`](reel.md) | אחרי "מאשרת": תוכנית, בנייה מ-`studio/lib/reel-kit.js`, בדיקה עצמית | producer-director, creator, copywriter (רילס) |
-| [`post-designer.md`](post-designer.md) | אחרי "מאשרת": פוסט (חובה לכל פוסט) | post-designer v8, copywriter (כותרות) |
+| [`post-designer.md`](post-designer.md) | אחרי "מאשרת": פוסט (חובה לכל פוסט) | post-designer v10: תמונות בלבד + הכנת תמונות (P16–P17); v9 עם כותרות בארכיון |
 | [`gate.md`](gate.md) | השער הסופי, כסוכן נפרד | ceo (שער תוכנית), qa |
 
 כללים משותפים, מותג, עברית, כיתובים וזרימת העבודה: `knowledge/playbook.md`. מקור האמת: `knowledge/learning/client-voice.md`.
