@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<script src="assets/gsap.min.js"></script>
+<script src="assets/reel-kit.js"></script>
+<link rel="stylesheet" href="assets/reel-kit.css" />
+<!-- Whole home 2, reel v2 "CARD DECK" — approved 14.10 (her ask: the wardrobes pass "like a real card or a scroll";
+     card 3 = "חלוקה פנימית / מותאמת בשבילכם"). 110 bpm, B = 0.5455 s. Background = the brand end-card brown (#7a5a43),
+     so the ending melts into the standard end card (R15). Every card is a full-screen layer clipped to a rounded card
+     (inset 480/120/390/120, 840x1050 = the whole 4:5 photo at s 0.7487) — no image swaps: the same layer grows/shrinks.
+     0–2.18   frame 0 = TV wall, full screen, pushing to the lit unit (whole, R12, real light breathing); "נגרות / לכל הבית"
+              on the dark TV screen.
+     2.18–2.9 the TV photo shrinks into a card; the deck appears behind it on the brown. "כל ארון / בעיצוב אחר"
+     3.82 · 4.91 · 6.0 · 7.09  swipes on the beat (top card flies left with a tilt, the next one rises): TV → mauve → grey
+              → oak (closed) → white
+     7.6–10.2 the white card grows to full screen, its two doors open (calibrated rig), push to the pull-down rail
+     10.2–10.75 it shrinks back to a card (now open); "חלוקה פנימית / מותאמת בשבילכם"
+     12.0     swipe → oak open
+     13.1–17.2 VARIANT: the six cards dealt into a fan (ending only — each work was already shown large); "תכנון, ייצור / והתקנה" → "דברו איתנו / בוואטסאפ"
+     17.3     the feed fades back, the standard brown end card (R15) -->
+<style>
+#bg{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 52%,#86644b 0%,#7a5a43 55%,#6c4f3a 100%)}
+.wrap{position:absolute;inset:0;transform-origin:540px 1005px}
+.sh{position:absolute;left:120px;top:480px;width:840px;height:1050px;border-radius:28px;box-shadow:0 34px 70px rgba(30,18,10,.45),0 6px 16px rgba(30,18,10,.3)}
+.card{position:absolute;inset:0;overflow:hidden;clip-path:inset(480px 120px 390px 120px round 28px)}
+.st > img{width:auto;height:auto}
+.st > img.ph,.ph{position:absolute;left:0;top:0;width:1122px;height:1402px}
+.t{left:0;width:1080px;text-align:center;color:#f3ede4}
+.t .ln + .ln{color:#d8b878}
+.t em{color:#d8b878}
+#t1{left:16px;width:330px;top:735px;font-size:62px;text-shadow:0 2px 16px rgba(0,0,0,.55)}
+#t2,#t3,#t4,#t5{top:205px;font-size:96px}
+#t3{font-size:88px}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="20.6" data-width="1080" data-height="1920">
+  <div id="scene" class="clip" data-start="0" data-duration="20.6" data-track-index="0" style="position:absolute;inset:0">
+    <div id="bg"></div>
+    <!-- deck: bottom of the pile first; c1 (TV) last = on top -->
+    <div id="deck" style="position:absolute;inset:0">
+    <div class="wrap" id="w6"><div class="sh" id="h6"></div><div class="card" id="c6"><div class="st" id="s6"><img class="ph" src="assets/oak_open.png" alt="" /></div></div></div>
+    <div class="wrap" id="w5"><div class="sh" id="h5"></div><div class="card" id="c5"><div class="st" id="s5" data-rig="white"></div></div></div>
+    <div class="wrap" id="w4"><div class="sh" id="h4"></div><div class="card" id="c4"><div class="st" id="s4"><img class="ph" src="assets/oak.png" alt="" /></div></div></div>
+    <div class="wrap" id="w3"><div class="sh" id="h3"></div><div class="card" id="c3"><div class="st" id="s3"><img class="ph" src="assets/grey.png" alt="" /></div></div></div>
+    <div class="wrap" id="w2"><div class="sh" id="h2"></div><div class="card" id="c2"><div class="st" id="s2"><img class="ph" src="assets/mauve_ext.png" alt="" /></div></div></div>
+    <div class="wrap" id="w1"><div class="sh" id="h1"></div><div class="card" id="c1"><div class="st" id="s1"><img class="ph" src="assets/tv.png" alt="" /><img class="ph bl" id="bT" src="assets/tv_bloom.jpg" alt="" /></div></div></div>
+    </div>
+  </div>
+  <div id="txt" class="clip" data-start="0" data-duration="20.6" data-track-index="1" style="position:absolute;inset:0">
+    <div id="t1" class="t"><div class="ln"><span>נגרות</span></div><div class="ln"><span>לכל</span> <span>הבית</span></div></div>
+    <div id="t2" class="t"><div class="ln"><span>כל</span> <span>ארון</span></div><div class="ln"><span>בעיצוב</span> <span>אחר</span></div></div>
+    <div id="t3" class="t"><div class="ln"><span>חלוקה</span> <span>פנימית</span></div><div class="ln"><span>מותאמת</span> <span>בשבילכם</span></div></div>
+    <div id="t4" class="t"><div class="ln"><span>תכנון,</span> <span>ייצור</span></div><div class="ln"><span>והתקנה</span></div></div>
+    <div id="t5" class="t"><div class="ln"><span>דברו</span> <span>איתנו</span></div><div class="ln"><span>בוואטסאפ</span></div></div>
+    <div id="end"><div id="endglow"></div><div id="endin"><img src="assets/logo_light.png" alt="אבן ועץ" /><div class="l1">כל הבית,<em>במקום אחד.</em></div><div class="l2">ייעוץ והדמיה ללא עלות</div></div></div>
+  </div>
+</div>
+<script>
+const RIGS = { white: __WHITE__ };
+const $ = id => document.getElementById(id);
+const HS = 2;   // texture density of the hq images vs the 1122 stage units
+
+function buildRig(name) {
+  const R = RIGS[name], st = document.querySelector(`[data-rig="${name}"]`), D = Object.keys(R.doors);
+  const add = (tag, id, attrs, style) => { const e = document.createElement(tag); e.id = id; Object.assign(e, attrs); if (style) e.style.cssText = style; st.appendChild(e); return e; };
+  add("img", name + "_closed", { src: `assets/${name}/closed.png`, className: "ph" });
+  add("img", name + "_in", { src: `assets/${name}/interior.png`, className: "ph" }, "opacity:0");
+  D.forEach(n => add("div", `${name}_sh_${n}`, { className: "q" }, "width:100px;height:100px;background:#0d0a08;opacity:0;filter:blur(10px)"));
+  D.forEach(n => add("div", `${name}_cs_${n}`, { className: "q" }, "width:100px;height:100px;background:#3a2f26;opacity:0;filter:blur(7px)"));
+  D.forEach(n => {
+    const d = R.doors[n];
+    add("div", `${name}_ed_${n}`, { className: "q" }, "width:10px;height:100px;background:linear-gradient(90deg,#c9c6c1,#e9e6e1);opacity:0");
+    add("img", `${name}_f_${n}`, { src: `assets/${name}/door_${n}_front.png`, className: "q" });
+    add("img", `${name}_k_${n}`, { src: `assets/${name}/door_${n}_back.png`, className: "q" }, "opacity:0");
+    add("div", `${name}_s_${n}`, { className: "q" }, `width:${d.tw}px;height:${d.th}px;background:#140e0a;opacity:0`);
+  });
+}
+// calibrated rig (whole-home 11.10, approved): P[1] is the hinge edge; doors swing toward the camera
+function rig(name) {
+  const R = RIGS[name], Kf = R.K[0][0], Kcx = R.K[0][2], Kcy = R.K[1][2];
+  const proj = P => { const c = [0, 1, 2].map(i => R.O[i] + P[0] * R.rx[i] + P[1] * R.ry[i] + P[2] * R.rz[i]);
+    return [Kf * c[0] / c[2] + Kcx, Kf * c[1] / c[2] + Kcy]; };
+  const area = q => { let a = 0; for (let i = 0; i < 4; i++) { const p = q[i], r = q[(i + 1) % 4]; a += p[0] * r[1] - r[0] * p[1]; } return a; };
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+  const cross = (a, b) => [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+  const ST = {}; const D = Object.keys(R.doors); D.forEach(n => (ST[n] = 0));
+  function door(n, phi) {
+    const d = R.doors[n], P = d.P, hx = P[1][0], T = d.T;
+    const Rr = P.map(p => { const dx = p[0] - hx; return [hx + dx * Math.cos(phi), p[1], Math.abs(dx) * Math.sin(phi)]; });
+    const q = Rr.map(proj), q0 = P.map(proj);
+    const f = $(`${name}_f_${n}`), k = $(`${name}_k_${n}`), s = $(`${name}_s_${n}`), e = $(`${name}_ed_${n}`), sh = $(`${name}_sh_${n}`);
+    const light = Math.sin(Math.min(phi, 1.45));
+    if (Math.sign(area(q)) === Math.sign(area(q0))) {
+      RK.put(f, d.tw, d.th, q); f.style.opacity = 1; k.style.opacity = 0;
+      RK.put(s, d.tw, d.th, q); s.style.opacity = 0.2 * light;
+    } else {
+      const qb = [q[1], q[0], q[3], q[2]];
+      RK.put(k, d.tw, d.th, qb); k.style.opacity = 1; f.style.opacity = 0;
+      RK.put(s, d.tw, d.th, qb); s.style.opacity = 0.1;
+    }
+    let nrm = cross(sub(Rr[1], Rr[0]), sub(Rr[3], Rr[0])); const n0 = cross(sub(P[1], P[0]), sub(P[3], P[0]));
+    const sg = Math.sign(n0[2]) || 1, L = Math.hypot(...nrm); nrm = nrm.map(v => v * sg / L);
+    const bk = [-T * nrm[0], -T * nrm[1], -T * nrm[2]], a = Rr[0], b = Rr[3];
+    const eq = [proj(a), proj([a[0] + bk[0], a[1] + bk[1], a[2] + bk[2]]), proj([b[0] + bk[0], b[1] + bk[1], b[2] + bk[2]]), proj(b)];
+    const ea = Math.abs(area(eq)), eh = Math.hypot(eq[3][0] - eq[0][0], eq[3][1] - eq[0][1]);
+    if (phi > 0.03 && ea > 5 * eh) { RK.put(e, 10, 100, eq); e.style.opacity = 1; } else e.style.opacity = 0;
+    const cs = $(`${name}_cs_${n}`), fb = q[3], hb = q[2];
+    RK.put(cs, 100, 100, [[fb[0], fb[1] - 4], [hb[0], hb[1] - 4], [hb[0], hb[1] + 10], [fb[0], fb[1] + 18]]);
+    cs.style.opacity = phi > 0.05 ? 0.38 * Math.sin(Math.min(phi, 1.5)) : 0;
+    RK.put(sh, 100, 100, q0); sh.style.opacity = phi < 0.004 ? 0 : 0.32 * Math.max(0, 1 - phi / 0.9);
+  }
+  const upd = () => { D.forEach(n => door(n, ST[n])); $(`${name}_in`).style.opacity = D.some(n => ST[n] > 0.004) ? 1 : 0; };
+  upd();
+  const open = (n, at, dur = 1.35) => {
+    const to = R.doors[n].open * Math.PI / 180, k = 0.12, ramp = 0.18;
+    tl.to(ST, { [n]: to * k, duration: ramp, ease: "power1.in", onUpdate: upd }, at);
+    tl.to(ST, { [n]: to, duration: dur, ease: "power2.out", onUpdate: upd }, at + ramp);
+  };
+  return { open, upd };
+}
+
+buildRig("white");
+const tl = gsap.timeline({ paused: true });
+const K = RK.kit(tl);
+const B = 60 / 110;
+
+// ---- card geometry -------------------------------------------------------------------------------------------
+const CARD = [480, 120, 390, 120], FULL = [0, 0, 0, 0];             // clip insets (top right bottom left)
+const CS = 840 / 1122 * 1.03, CV = [561, 701 - 45 / CS, CS];          // the whole photo inside the card (+3% so a
+                                                                      // spline settle can never open a gap at the edge)
+const clipSet = (el, v, r) => { el.style.clipPath = `inset(${v[0]}px ${v[1]}px ${v[2]}px ${v[3]}px round ${r}px)`; };
+function clipTo(id, t, dur, from, to, rf, rt, ease = "power2.inOut") {
+  const el = document.getElementById(id), P = { p: 0 };
+  const ap = () => clipSet(el, from.map((a, i) => a + (to[i] - a) * P.p), rf + (rt - rf) * P.p);
+  tl.fromTo(P, { p: 0 }, { p: 1, duration: dur, ease, onUpdate: ap, immediateRender: false }, t);
+}
+// stack positions behind the top card (peeking below it)
+const LV = [{ scale: 1, y: 0 }, { scale: 0.95, y: 62 }, { scale: 0.9, y: 116 }, { scale: 0.85, y: 162 }];
+const W = ["#w1", "#w2", "#w3", "#w4", "#w5", "#w6"];
+W.forEach((w, i) => gsap.set(w, { ...LV[Math.min(i, 3)], opacity: i > 3 ? 0 : 1 }));
+// shadows only exist once there is a card (frame 0 is a plain full photo)
+gsap.set("#h1", { opacity: 0 });
+clipSet(document.getElementById("c1"), FULL, 0);
+
+// swipe: card i leaves to the left with a tilt; the cards behind move up one level
+function swipe(i, t) {
+  tl.to(W[i], { x: -1250, rotation: -16, duration: 0.5, ease: "power2.in" }, t - 0.3);
+  for (let j = i + 1; j < W.length; j++) {
+    const lv = Math.min(j - i - 1, 3);
+    tl.to(W[j], { ...LV[lv], opacity: 1, duration: 0.45, ease: "power3.out" }, t - 0.12);
+  }
+}
+// card views: gentle drift inside every card so nothing is ever still
+const P = (el, keys) => K.path(el, keys);
+
+// ---- 0–2.9: frame 0 full-screen TV push, then it shrinks into the top card --------------------------------------
+P("#s1", [[0, 690, 701, 1.38], [1.0, 722, 697, 1.47], [1.7, 752, 692, 1.55], [2.18, 765, 690, 1.60], [2.9, CV[0], CV[1], CV[2]], [3.9, CV[0], CV[1] - 8, CV[2] * 1.025]]);
+K.breathe("#bT", [[0, 0.15], [1.1, 0.55], [2.2, 0.25]]);
+K.card("#t1", 0.12, 1.75);
+clipTo("c1", 2.18, 0.72, FULL, CARD, 0, 28);
+tl.fromTo("#h1", { opacity: 0 }, { opacity: 1, duration: 0.5, immediateRender: false }, 2.4);
+K.card("#t2", 2.95, 5.45);
+
+// cards 2–4: whole photo, slow drift
+P("#s2", [[0, CV[0], CV[1], CV[2]], [3.5, CV[0], CV[1], CV[2]], [5.0, CV[0], CV[1] - 8, CV[2] * 1.03]]);
+P("#s3", [[0, CV[0], CV[1], CV[2]], [4.6, CV[0], CV[1], CV[2]], [6.1, CV[0], CV[1] - 8, CV[2] * 1.03]]);
+P("#s4", [[0, CV[0], CV[1], CV[2]], [5.7, CV[0], CV[1], CV[2]], [7.2, CV[0], CV[1] - 8, CV[2] * 1.03]]);
+swipe(0, 7 * B); swipe(1, 9 * B); swipe(2, 11 * B); swipe(3, 13 * B);
+
+// ---- white: card → full screen (rig view) → doors open → in to the rail → back to a card ------------------------
+const WH = rig("white");
+P("#s5", [[0, CV[0], CV[1], CV[2]], [7.1, CV[0], CV[1], CV[2]], [7.6, 545, 702, 1.38], [8.4, 528, 694, 1.44], [9.3, 495, 650, 1.54],
+          [10.2, 472, 614, 1.61], [10.75, CV[0], CV[1], CV[2]], [11.1, CV[0], CV[1], CV[2] * 1.004], [12.0, CV[0], CV[1] - 6, CV[2] * 1.02]]);
+clipTo("c5", 7.12, 0.5, CARD, FULL, 28, 0);
+tl.to("#h5", { opacity: 0, duration: 0.3 }, 7.12);
+WH.open("dl", 8.05); WH.open("dr", 8.21);
+clipTo("c5", 10.2, 0.55, FULL, CARD, 0, 28);
+tl.to("#h5", { opacity: 1, duration: 0.4 }, 10.4);
+K.card("#t3", 10.7, 11.75);
+P("#s6", [[0, CV[0], CV[1], CV[2]], [11.8, CV[0], CV[1], CV[2]], [13.8, CV[0], CV[1] - 12, CV[2] * 1.05]]);
+swipe(4, 22 * B);
+
+// ---- 13.1: ENDING VARIANT "fan" (her request 14.10: small cards are fine as an ending once every work was already
+// shown large): the six cards are dealt into a tidy symmetric fan — the whole home in one frame — and it keeps moving.
+const FAN = [[-300, 985, -14], [-180, 955, -8.5], [-60, 940, -2.8], [60, 940, 2.8], [180, 955, 8.5], [300, 985, 14]];
+const order = [0, 1, 2, 3, 4, 5];                                    // TV, mauve, grey, oak, white (open), oak open
+order.forEach((i, k) => {
+  const [dx, cy, rot] = FAN[k], t0 = 24 * B + k * 0.07;
+  tl.to(W[i], { x: dx, y: cy - 1005, scale: 0.36, rotation: rot, opacity: 1, duration: 0.62, ease: "power3.out" }, t0);
+  tl.to(W[i], { x: dx * 1.05, y: cy - 1005 - 60, scale: 0.39, rotation: rot * 1.06, duration: 17.25 - (t0 + 0.62), ease: "none" }, t0 + 0.62);
+});
+K.card("#t4", 13.95, 15.35);
+K.card("#t5", 15.8, 17.1);
+// gather into one pile, then the standard brown end card (R15)
+order.forEach((i, k) => tl.to(W[i], { x: 0, y: -40, rotation: 0, scale: 0.36, duration: 0.45, ease: "power2.inOut" }, 17.25 + k * 0.03));
+tl.to(W, { opacity: 0, duration: 0.35 }, 17.6);
+K.endCard(17.55, 3.05);
+K.done(20.6);
+</script>
+</body>
+</html>
