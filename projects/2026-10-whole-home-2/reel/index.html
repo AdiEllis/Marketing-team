@@ -18,8 +18,8 @@
      7.6–10.2 the white card grows to full screen, its two doors open (calibrated rig), push to the pull-down rail
      10.2–10.75 it shrinks back to a card (now open); "חלוקה פנימית / מותאמת בשבילכם"
      12.0     swipe → oak open
-     13.1–13.9 all six cards are dealt into a fan (the whole home in one frame); "תכנון, ייצור / והתקנה" → "דברו איתנו / בוואטסאפ"
-     17.3     the fan gathers, the standard brown end card (R15) -->
+     13.1–17.2 a short feed: every work again as a large card scrolling up on the beat; "תכנון, ייצור / והתקנה" → "דברו איתנו / בוואטסאפ"
+     17.3     the feed fades back, the standard brown end card (R15) -->
 <style>
 #bg{position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 52%,#86644b 0%,#7a5a43 55%,#6c4f3a 100%)}
 .wrap{position:absolute;inset:0;transform-origin:540px 1005px}
@@ -30,7 +30,7 @@
 .t{left:0;width:1080px;text-align:center;color:#f3ede4}
 .t .ln + .ln{color:#d8b878}
 .t em{color:#d8b878}
-#t1{left:110px;width:380px;top:700px;font-size:92px;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+#t1{left:16px;width:330px;top:735px;font-size:62px;text-shadow:0 2px 16px rgba(0,0,0,.55)}
 #t2,#t3,#t4,#t5{top:205px;font-size:96px}
 #t3{font-size:88px}
 </style>
@@ -40,12 +40,14 @@
   <div id="scene" class="clip" data-start="0" data-duration="20.6" data-track-index="0" style="position:absolute;inset:0">
     <div id="bg"></div>
     <!-- deck: bottom of the pile first; c1 (TV) last = on top -->
+    <div id="deck" style="position:absolute;inset:0">
     <div class="wrap" id="w6"><div class="sh" id="h6"></div><div class="card" id="c6"><div class="st" id="s6"><img class="ph" src="assets/oak_open.png" alt="" /></div></div></div>
     <div class="wrap" id="w5"><div class="sh" id="h5"></div><div class="card" id="c5"><div class="st" id="s5" data-rig="white"></div></div></div>
     <div class="wrap" id="w4"><div class="sh" id="h4"></div><div class="card" id="c4"><div class="st" id="s4"><img class="ph" src="assets/oak.png" alt="" /></div></div></div>
     <div class="wrap" id="w3"><div class="sh" id="h3"></div><div class="card" id="c3"><div class="st" id="s3"><img class="ph" src="assets/grey.png" alt="" /></div></div></div>
     <div class="wrap" id="w2"><div class="sh" id="h2"></div><div class="card" id="c2"><div class="st" id="s2"><img class="ph" src="assets/mauve_ext.png" alt="" /></div></div></div>
     <div class="wrap" id="w1"><div class="sh" id="h1"></div><div class="card" id="c1"><div class="st" id="s1"><img class="ph" src="assets/tv.png" alt="" /><img class="ph bl" id="bT" src="assets/tv_bloom.jpg" alt="" /></div></div></div>
+    </div>
   </div>
   <div id="txt" class="clip" data-start="0" data-duration="20.6" data-track-index="1" style="position:absolute;inset:0">
     <div id="t1" class="t"><div class="ln"><span>נגרות</span></div><div class="ln"><span>לכל</span> <span>הבית</span></div></div>
@@ -155,7 +157,7 @@ function swipe(i, t) {
 const P = (el, keys) => K.path(el, keys);
 
 // ---- 0–2.9: frame 0 full-screen TV push, then it shrinks into the top card --------------------------------------
-P("#s1", [[0, 690, 705, 1.37], [1.0, 718, 717, 1.44], [1.7, 742, 730, 1.505], [2.18, 750, 734, 1.52], [2.9, CV[0], CV[1], CV[2]], [3.9, CV[0], CV[1] - 8, CV[2] * 1.025]]);
+P("#s1", [[0, 690, 701, 1.38], [1.0, 722, 697, 1.47], [1.7, 752, 692, 1.55], [2.18, 765, 690, 1.60], [2.9, CV[0], CV[1], CV[2]], [3.9, CV[0], CV[1] - 8, CV[2] * 1.025]]);
 K.breathe("#bT", [[0, 0.15], [1.1, 0.55], [2.2, 0.25]]);
 K.card("#t1", 0.12, 1.75);
 clipTo("c1", 2.18, 0.72, FULL, CARD, 0, 28);
@@ -181,21 +183,24 @@ K.card("#t3", 10.7, 11.75);
 P("#s6", [[0, CV[0], CV[1], CV[2]], [11.8, CV[0], CV[1], CV[2]], [13.8, CV[0], CV[1] - 12, CV[2] * 1.05]]);
 swipe(4, 22 * B);
 
-// ---- 13.1: the fan — all six cards dealt back in, the whole home in one frame -----------------------------------
-const FAN = [[-300, 1000, -14], [-180, 970, -8.5], [-60, 955, -2.8], [60, 955, 2.8], [180, 970, 8.5], [300, 1000, 14]];
-const order = [0, 1, 2, 3, 4, 5];                                    // TV, mauve, grey, oak, white (open), oak open
-order.forEach((i, k) => {
-  const [dx, cy, rot] = FAN[k];
-  tl.to(W[i], { x: dx, y: cy - 1005, scale: 0.36, rotation: rot, opacity: 1, duration: 0.62, ease: "power3.out" }, 24 * B + k * 0.07);
-});
-// the fan never stands still: a slow push-in + lift while it holds (camera-like, R4a)
-order.forEach((i, k) => { const [dx, cy, rot] = FAN[k];
-  tl.to(W[i], { x: dx * 1.13, y: cy - 1005 - 70, scale: 0.41, rotation: rot * 1.1, duration: 17.25 - (24 * B + 0.62 + k * 0.07), ease: "none" }, 24 * B + 0.62 + k * 0.07); });
+// ---- 13.1: a short FEED — every work again as a large card, scrolling up on the beat (her "גלילה"; gate 14.10:
+// cards stay big and whole, never a small pile). Viewport between the text and the IG UI; always moving.
+const FS = 0.8, PITCH = 880, FEED = [5, 0, 1, 2, 3, 4];             // oak open (on top now), TV, mauve, grey, oak, white
+tl.set("#deck", { clipPath: "inset(452px 0px 372px 0px)" }, 24 * B);
+tl.to(W[5], { scale: FS, duration: 0.45, ease: "power2.inOut" }, 24 * B);
+FEED.forEach((i, k) => { if (k) tl.set(W[i], { x: 0, rotation: 0, scale: FS, opacity: 1, y: k * PITCH }, 24 * B); });
+const SN = [25, 26, 27, 28, 29].map(n => n * B);                      // one card per beat
+// each beat: a quick scroll that LANDS on the next whole card (0.36 s), then a slow drift so the feed never stops
+SN.forEach((t, j) => FEED.forEach((i, k) => {
+  const y0 = (k - j - 1) * PITCH - 14 * j;
+  tl.to(W[i], { y: y0, duration: 0.36, ease: "power3.inOut" }, t);
+  tl.to(W[i], { y: y0 - 14, duration: B - 0.36, ease: "none" }, t + 0.36);
+}));
+FEED.forEach((i, k) => tl.to(W[i], { y: (k - 5) * PITCH - 120, duration: 17.25 - 30 * B, ease: "none" }, 30 * B));
 K.card("#t4", 13.95, 15.35);
-K.card("#t5", 15.55, 17.1);
+K.card("#t5", 15.8, 17.1);
 // gather into one pile, then the standard brown end card (R15)
-order.forEach((i, k) => tl.to(W[i], { x: 0, y: -20, rotation: 0, scale: 0.36, duration: 0.45, ease: "power2.inOut" }, 17.25 + k * 0.03));
-tl.to(W, { opacity: 0, duration: 0.35 }, 17.6);
+tl.to(W, { scale: 0.6, opacity: 0, duration: 0.45, ease: "power2.in" }, 17.25);
 K.endCard(17.55, 3.05);
 K.done(20.6);
 </script>
