@@ -2,14 +2,11 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8" />
-<!-- Whole home 2 post (approved 14.10, no crops): "הפוסט הזה מראה שנגרות לכל הבית מתכננים לפי עקרונות, לא ארון אחרי
-     ארון, ושאנחנו יודעים לתכנן כך בית שלם." Archetypes: palette (material board of the real fronts) + quiet guide by
-     principle; style ג type (Plex Regular, ink + caramel, small, aligned to the work), logo small at the bottom of every
-     photo (P11א), closing slide v2. SKELETON NOTE: Before designing write: "הפוסט הזה מראה ש..." (incl. a business value) and pick the archetype
-     (agents/post-designer.md; not one of the last two in content-log). Slide count is dynamic: min 3 work photos + a
-     closing logo slide = the reel's end card in 4:5 (P11). Photos: graded PNG (grade.py). Every work appears whole;
-     crop only to highlight a detail the headline talks about (niche, light, special solution), straight and centred (P4).
-     No bands/boxes/darkening; a slide without text = zero layers. Render: bash studio/tools/render_post.sh carousel/slides.html <N> -->
+<!-- Whole home 2, post v2 (her new format 14.10): 7 photos (TV wall, mauve, oak closed/open, white closed/open, grey) + brown end card. SKELETON NOTE: Post format v10 (her decision 14.10, client-voice P16): PHOTOS ONLY. No headline, no idea, no text
+     on the photos. Each slide = one prepared photo (straightened, surroundings cleaned, upscaled only if low-res, natural
+     colours untouched) + the small company logo at the bottom, SAME position and size on every slide. Pick: the photos
+     that show the whole project best + the close-up of the project's "wow" detail (e.g. the lit niche). Last slide =
+     the brown brand end card (#sEnd, do not change). Render: bash studio/tools/render_post.sh carousel/slides.html <N> -->
 <style>
 @font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
 @font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
@@ -20,98 +17,59 @@
 body{width:1080px}
 .slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--dark)}
 .full{position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover}
-/* keep headline, logo and focus inside the central 1012px (profile grid crops 3:4) */
-/* LOUD family (set 1): bold two lines, white + gold on a calm dark area */
-.loud{position:absolute;direction:rtl;text-align:right;font:600 96px/1.04 "Plex";letter-spacing:-.015em;color:#fff}
-.loud em{display:block;font-style:normal;color:var(--gold)}
-/* QUIET family (set 2): thin dark topic + insight after a thin L bracket, on a calm light surface */
-.quiet{position:absolute;direction:rtl;text-align:right;color:#2a2420}
-.quiet h2{font:300 76px/1.05 "Plex"}
-.quiet p{margin-top:16px;padding:10px 22px 0 0;font:400 36px/1.3 "Plex";border-right:2px solid var(--bronze);border-top:2px solid var(--bronze);max-width:640px}
-/* quiet label (portfolio style) */
-.lab{position:absolute;direction:rtl;display:flex;align-items:center;gap:18px;font:600 31px/1.2 "Plex";color:#2b211a}
-.lab i{display:block;width:46px;height:2px;background:var(--bronze)}
-.lab b{font-weight:600;color:#8a5a26}
-.logo{position:absolute;width:150px}
-/* closing slide v2 (P11, her request 13.10: "מעוצב יותר מרשים מקצועי ואלגנטי") — the brand standard for EVERY post:
-   dark wall of three real oak fronts (studio/brand/end_oak_wall.png, from her work), soft light washing down onto the logo
-   (the brand's lit-carpentry signature), hairline gold frame, Plex Light line + small gold sub-line. No split, no collage.
-   Change only the .line text per post (one short brand sentence); keep everything else. */
-@font-face{font-family:"PlexL";src:url(plex-Light.ttf);font-weight:300}
-.end{background:#140d08 url(end_oak_wall.png) center/cover}
-.end .wash{position:absolute;inset:0;background:radial-gradient(34% 46% at 50% 26%,rgba(255,200,130,.34) 0%,rgba(230,170,100,.16) 45%,rgba(0,0,0,0) 75%);mix-blend-mode:screen}
-.end .vig{position:absolute;inset:0;background:radial-gradient(90% 75% at 50% 42%,rgba(0,0,0,0) 45%,rgba(10,6,3,.55) 100%)}
-.end .frame{position:absolute;inset:38px;border:1px solid rgba(216,184,120,.38)}
-.end .in{position:absolute;left:0;right:0;top:0;bottom:70px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.end .lg{width:318px;filter:drop-shadow(0 10px 28px rgba(0,0,0,.45))}
-.end .rule{width:72px;height:1px;background:#d8b878;margin-top:58px}
-.end .line{direction:rtl;margin-top:34px;font:300 46px/1.2 "PlexL";color:#f1e7da;letter-spacing:.04em}
-.end .sub{position:absolute;left:0;right:0;bottom:92px;direction:rtl;text-align:center;font:400 24px/1 "Plex";color:#c9a46a;letter-spacing:.18em}
-
-:root{--ink:#2b2926;--car:#9a6a32;--gold-l:#d8b878}
-.h{position:absolute;direction:rtl;text-align:right;font:400 60px/1.18 "Plex";color:var(--ink)}
-.h span{display:block;color:var(--car)}
-.h i{display:block;width:84px;height:2px;background:var(--car);margin:20px 0 0 auto}
-.k{position:absolute;direction:rtl;text-align:right;color:var(--ink)}
-.k b{display:block;font:400 46px/1.12 "Plex"}
-.k i{display:block;width:64px;height:2px;background:var(--car);margin:12px 0 10px auto}
-.k span{display:block;font:400 30px/1.32 "Plex";color:#74491b}
-.lg{position:absolute;right:16px;bottom:30px;width:84px}
-.pal{background:#e9e1d6}
-.pal .sw{position:absolute;top:400px;height:720px;width:162px;background-size:cover;background-position:center;box-shadow:0 18px 40px rgba(60,40,20,.18)}
-.pal .cap{position:absolute;top:1142px;width:162px;direction:rtl;text-align:center;font:400 23px/1.3 "Plex";color:#5a4c3e}
+/* the only element on a photo slide: the logo, small, bottom, identical on all slides of the post (P11א/P16).
+   Default bottom-centre; if that spot sits on an important detail in any of the photos, use .mark.r or .mark.l
+   for the WHOLE post (inside the central 1012px: the profile grid crops 34px per side). */
+.mark{position:absolute;width:92px;left:494px;bottom:22px}
+.mark.r{left:auto;right:72px}
+.mark.l{left:72px}
+/* closing slide v3 = the brown brand end card (her standard 14.10: "מעכשיו זה יהיה הסיומת של הרילס והפוסטים").
+   Fixed for every post and identical to the reel's #end. Reference: studio/brand/endcard_post_1080x1350.png */
+.end{background:#7a5a43}
+.end .cr{position:absolute;width:76px;height:76px;border:0 solid var(--gold)}
+.end .tr{top:64px;right:64px;border-top-width:3px;border-right-width:3px}
+.end .bl{bottom:64px;left:64px;border-bottom-width:3px;border-left-width:3px}
+.end .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+.end .lg{width:320px}
+.end .h{margin-top:96px;font:300 92px/1.18 "Plex";color:#f3ede4;text-align:center}
+.end .h em{display:block;font-style:normal;color:var(--gold)}
+.end .s{margin-top:64px;font:300 44px/1 "Plex";color:#efe6da}
 </style>
 </head>
 <body>
+<!-- one <section> per chosen photo. Logo variant per photo for contrast (logo_alpha.png on light, logo_light.png on dark),
+     but the .mark position/size never changes inside a post. -->
 <section class="slide" id="s1">
-  <img class="full" src="p_oak_c.png" alt="" />
-  <div class="h" style="right:140px;bottom:46px;font-size:60px">נגרות לכל הבית?<span>ככה מתכננים נכון.</span><i style="margin-top:14px"></i></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+  <img class="full" src="p1.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
-<section class="slide pal" id="s2">
-  <div class="h" style="right:96px;top:96px;font-size:58px">גוונים שמדברים<span>זה עם זה.</span><i></i></div>
-  <div class="k" style="right:96px;top:292px"><span style="color:#5a4c3e;font-size:30px">כל חדר בגוון משלו, ויחד זה בית אחד.</span></div>
-  <div class="sw" style="right:96px;background:#ac9291"></div><div class="cap" style="right:96px">הארון הסגול</div>
-  <div class="sw" style="right:278px;background:#c7aa92"></div><div class="cap" style="right:278px">ארון העץ</div>
-  <div class="sw" style="right:460px;background:#cbc5c3"></div><div class="cap" style="right:460px">הארון הלבן</div>
-  <div class="sw" style="right:642px;background:#b4aaa1"></div><div class="cap" style="right:642px">הארון האפור</div>
-  <div class="sw" style="right:824px;background:#aa8456"><div style="position:absolute;left:0;right:0;bottom:0;height:34%;background:#59483a"></div></div><div class="cap" style="right:824px">קיר הטלוויזיה</div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+<section class="slide" id="s2">
+  <img class="full" src="p2.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide" id="s3">
-  <img class="full" src="p_oak_o.png" alt="" />
-  <div class="k" style="right:140px;bottom:32px"><b>לנצל כל קיר</b><i></i><span>מקיר לקיר, ומאחורי החזיתות<br />מדפים ומגירות פנימיות.</span></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+  <img class="full" src="p3.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide" id="s4">
-  <img class="full" src="p_white_o.png" alt="" />
-  <div class="k" style="right:140px;bottom:32px"><b>לפי מה ששומרים בפנים</b><i></i><span>מוט תלייה שיורד מהגובה אל היד.</span></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+  <img class="full" src="p4.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide" id="s5">
-  <img class="full" src="p_white_c.png" alt="" />
-  <div class="k" style="right:140px;bottom:32px"><b>גם הפינה עובדת</b><i></i><span>מדפים מעוגלים שממשיכים את הארון.</span></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+  <img class="full" src="p5.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide" id="s6">
-  <img class="full" src="p_mauve.png" alt="" />
-  <div class="k" style="right:140px;bottom:32px"><b>להשאיר מקום להציג</b><i></i><span>עמודת מדפים פתוחה בין הדלתות.</span></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+  <img class="full" src="p6.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide" id="s7">
-  <img class="full" src="p_grey.png" alt="" />
-  <div class="k" style="right:140px;bottom:32px"><b>פרט אחד שעושה את הארון</b><i></i><span>ידית עגולה אחת לשתי דלתות.</span></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
-</section>
-<section class="slide" id="s8">
-  <img class="full" src="p_tv.png" alt="" />
-  <div class="k" style="right:140px;bottom:32px"><b>לתכנן את האור מראש</b><i></i><span>מדפים מוארים ומזנון צף, כחלק מהקיר.</span></div>
-  <img class="lg" src="logo_alpha.png" alt="אבן ועץ" />
+  <img class="full" src="p7.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
 </section>
 <section class="slide end" id="sEnd">
-  <div class="wash"></div><div class="vig"></div><div class="frame"></div>
-  <div class="in"><img class="lg2" src="logo_light.png" alt="אבן ועץ" style="width:318px;filter:drop-shadow(0 10px 28px rgba(0,0,0,.45))" /><div class="rule"></div><div class="line">תכנון אישי לכל הבית</div></div>
-  <div class="sub">נגרות בהתאמה אישית</div>
+  <i class="cr tr"></i><i class="cr bl"></i>
+  <div class="in"><img class="lg" src="logo_light.png" alt="אבן ועץ" /><div class="h">כל הבית,<em>במקום אחד.</em></div><div class="s">ייעוץ והדמיה ללא עלות</div></div>
 </section>
 </body>
 </html>
