@@ -1,7 +1,7 @@
 """Every K.path in reel/index.html keeps the 1080x1920 window inside its photo (Catmull-Rom sampled every 0.05 s)."""
 import re
 html = open("reel/index.html").read()
-size = {"sA": (1178, 1210), "sA2": (1178, 1210), "sB": (1166, 1245), "sB2": (1166, 1245), "sC": (977, 1110), "sD": (934, 1348)}
+size = {"sA": (1178, 1780), "sA2": (1178, 1780), "sB": (1166, 1245), "sB2": (1166, 1245), "sC": (977, 1110), "sD": (934, 1448)}
 def cr(keys, t):
     i = 0
     while i < len(keys) - 2 and t > keys[i + 1][0]: i += 1
