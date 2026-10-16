@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="UTF-8" />
+<!-- SKELETON ONLY. Post format v10 (her decision 14.10, client-voice P16): PHOTOS ONLY. No headline, no idea, no text
+     on the photos. Each slide = one prepared photo (straightened, surroundings cleaned, upscaled only if low-res, natural
+     colours untouched) + the small company logo at the bottom, SAME position and size on every slide. Pick: the photos
+     that show the whole project best + the close-up of the project's "wow" detail (e.g. the lit niche). Last slide =
+     the brown brand end card (#sEnd, do not change). Render: bash studio/tools/render_post.sh carousel/slides.html <N> -->
+<style>
+@font-face{font-family:"Plex";src:url(plex-Light.ttf);font-weight:300}
+@font-face{font-family:"Plex";src:url(plex-Regular.ttf);font-weight:400}
+@font-face{font-family:"Plex";src:url(plex-Medium.ttf);font-weight:500}
+@font-face{font-family:"Plex";src:url(plex-SemiBold.ttf);font-weight:600}
+:root{--gold:#D8B878;--bronze:#A8763E;--dark:#1C1816}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--dark)}
+.full{position:absolute;inset:0;width:1080px;height:1350px;object-fit:cover}
+/* the only element on a photo slide: the logo, small, bottom, identical on all slides of the post (P11א/P16).
+   Default bottom-centre; if that spot sits on an important detail in any of the photos, use .mark.r or .mark.l
+   for the WHOLE post (inside the central 1012px: the profile grid crops 34px per side). */
+.mark{position:absolute;width:92px;left:494px;bottom:52px}
+.mark.r{left:auto;right:72px}
+.mark.l{left:72px}
+/* closing slide v3 = the brown brand end card (her standard 14.10: "מעכשיו זה יהיה הסיומת של הרילס והפוסטים").
+   Fixed for every post and identical to the reel's #end. Reference: studio/brand/endcard_post_1080x1350.png */
+.end{background:#7a5a43}
+.end .cr{position:absolute;width:76px;height:76px;border:0 solid var(--gold)}
+.end .tr{top:64px;right:64px;border-top-width:3px;border-right-width:3px}
+.end .bl{bottom:64px;left:64px;border-bottom-width:3px;border-left-width:3px}
+.end .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}
+.end .lg{width:320px}
+.end .h{margin-top:96px;font:300 92px/1.18 "Plex";color:#f3ede4;text-align:center}
+.end .h em{display:block;font-style:normal;color:var(--gold)}
+.end .s{margin-top:64px;font:300 44px/1 "Plex";color:#efe6da}
+</style>
+</head>
+<body>
+<section class="slide" id="s1">
+  <img class="full" src="p_dark.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
+</section>
+<section class="slide" id="s2">
+  <img class="full" src="p_panels.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
+</section>
+<section class="slide" id="s3">
+  <img class="full" src="p_white.png" alt="" />
+  <img class="mark l" src="logo_light.png" alt="אבן ועץ" />
+</section>
+<section class="slide" id="s4">
+  <img class="full" src="p_slats.png" alt="" />
+  <img class="mark l" src="logo_alpha.png" alt="אבן ועץ" />
+</section>
+<section class="slide end" id="sEnd">
+  <i class="cr tr"></i><i class="cr bl"></i>
+  <div class="in"><img class="lg" src="logo_light.png" alt="אבן ועץ" /><div class="h">כל הבית,<em>במקום אחד.</em></div><div class="s">ייעוץ והדמיה ללא עלות</div></div>
+</section>
+</body>
+</html>
